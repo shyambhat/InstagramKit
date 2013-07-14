@@ -1,4 +1,4 @@
-SBInstagramWrapper
+SBInstagramClient
 ==================
 
-An Objective C wrapper for the Instagram API. 
+An Objective C wrapper for the Instagram API in the making. 
