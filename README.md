@@ -1,4 +1,4 @@
-SBInstagramClient
+InstaKit
 ==================
  
-An Objective C wrapper for the Instagram API in the making. 
+A blocks based Objective C wrapper for the Instagram API, in the making. 
