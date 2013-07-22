@@ -47,6 +47,8 @@
 		5245CB0317963A610046BF96 /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245CAFB17963A610046BF96 /* InstagramMedia.m */; };
 		5245CB0417963A610046BF96 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245CAFD17963A610046BF96 /* InstagramUser.m */; };
 		5245CB0517963A610046BF96 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245CAFD17963A610046BF96 /* InstagramUser.m */; };
+		52944C18179DD9B100B0C093 /* IKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52944C17179DD9B100B0C093 /* IKNetworkManager.m */; };
+		52944C19179DD9B100B0C093 /* IKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52944C17179DD9B100B0C093 /* IKNetworkManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		5245CAFB17963A610046BF96 /* InstagramMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramMedia.m; sourceTree = "<group>"; };
 		5245CAFC17963A610046BF96 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUser.h; sourceTree = "<group>"; };
 		5245CAFD17963A610046BF96 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
+		52944C16179DD9B100B0C093 /* IKNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKNetworkManager.h; sourceTree = "<group>"; };
+		52944C17179DD9B100B0C093 /* IKNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKNetworkManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +252,8 @@
 				5245CAF417963A610046BF96 /* IKConstants.h */,
 				5245CAF517963A610046BF96 /* InstagramEngine.h */,
 				5245CAF617963A610046BF96 /* InstagramEngine.m */,
+				52944C16179DD9B100B0C093 /* IKNetworkManager.h */,
+				52944C17179DD9B100B0C093 /* IKNetworkManager.m */,
 				5245CAF717963A610046BF96 /* Models */,
 			);
 			path = InstaKit;
@@ -256,12 +262,12 @@
 		5245CAF717963A610046BF96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5245CAF817963A610046BF96 /* InstagramComment.h */,
-				5245CAF917963A610046BF96 /* InstagramComment.m */,
 				5245CAFA17963A610046BF96 /* InstagramMedia.h */,
 				5245CAFB17963A610046BF96 /* InstagramMedia.m */,
 				5245CAFC17963A610046BF96 /* InstagramUser.h */,
 				5245CAFD17963A610046BF96 /* InstagramUser.m */,
+				5245CAF817963A610046BF96 /* InstagramComment.h */,
+				5245CAF917963A610046BF96 /* InstagramComment.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -391,6 +397,7 @@
 				5245CB0017963A610046BF96 /* InstagramComment.m in Sources */,
 				5245CB0217963A610046BF96 /* InstagramMedia.m in Sources */,
 				5245CB0417963A610046BF96 /* InstagramUser.m in Sources */,
+				52944C18179DD9B100B0C093 /* IKNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +419,7 @@
 				5245CB0117963A610046BF96 /* InstagramComment.m in Sources */,
 				5245CB0317963A610046BF96 /* InstagramMedia.m in Sources */,
 				5245CB0517963A610046BF96 /* InstagramUser.m in Sources */,
+				52944C19179DD9B100B0C093 /* IKNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +586,7 @@
 				5245CAB617963A1A0046BF96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5245CAB717963A1A0046BF96 /* Build configuration list for PBXNativeTarget "InstaKitTests" */ = {
 			isa = XCConfigurationList;
@@ -586,6 +595,7 @@
 				5245CAB917963A1A0046BF96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

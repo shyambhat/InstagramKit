@@ -11,4 +11,5 @@
 
 @interface InstagramEngine : AFHTTPClient
 
+- (void)presentAuthenticationDialog;
 @end
