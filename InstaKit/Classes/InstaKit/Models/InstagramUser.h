@@ -20,4 +20,6 @@
 @property (readonly) NSInteger followersCount;
 @property (readonly) NSInteger mediaCount;
 
+- (id)initWithInfo:(NSDictionary *)info;
+
 @end

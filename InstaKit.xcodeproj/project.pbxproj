@@ -49,6 +49,8 @@
 		5245CB0517963A610046BF96 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245CAFD17963A610046BF96 /* InstagramUser.m */; };
 		52944C18179DD9B100B0C093 /* IKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52944C17179DD9B100B0C093 /* IKNetworkManager.m */; };
 		52944C19179DD9B100B0C093 /* IKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52944C17179DD9B100B0C093 /* IKNetworkManager.m */; };
+		5297401917A1B90600733581 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5297401817A1B90600733581 /* SystemConfiguration.framework */; };
+		5297401B17A1B90C00733581 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5297401A17A1B90C00733581 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		5245CAFD17963A610046BF96 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
 		52944C16179DD9B100B0C093 /* IKNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKNetworkManager.h; sourceTree = "<group>"; };
 		52944C17179DD9B100B0C093 /* IKNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKNetworkManager.m; sourceTree = "<group>"; };
+		5297401817A1B90600733581 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5297401A17A1B90C00733581 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5297401B17A1B90C00733581 /* MobileCoreServices.framework in Frameworks */,
+				5297401917A1B90600733581 /* SystemConfiguration.framework in Frameworks */,
 				5245CA8617963A1A0046BF96 /* UIKit.framework in Frameworks */,
 				5245CA8817963A1A0046BF96 /* Foundation.framework in Frameworks */,
 				5245CA8A17963A1A0046BF96 /* CoreGraphics.framework in Frameworks */,
@@ -159,6 +165,8 @@
 		5245CA8417963A1A0046BF96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5297401A17A1B90C00733581 /* MobileCoreServices.framework */,
+				5297401817A1B90600733581 /* SystemConfiguration.framework */,
 				5245CA8517963A1A0046BF96 /* UIKit.framework */,
 				5245CA8717963A1A0046BF96 /* Foundation.framework */,
 				5245CA8917963A1A0046BF96 /* CoreGraphics.framework */,

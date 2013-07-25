@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPClient.h"
 
-@interface IKNetworkManager : NSObject
+@interface IKNetworkManager : AFHTTPClient
+
+- (void)requestPopularMediaWithSuccess:(void (^)(NSArray *mediaInfo))success failure:(void (^)(NSError *error))failure;
 
 @end

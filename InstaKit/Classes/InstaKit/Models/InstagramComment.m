@@ -10,4 +10,14 @@
 
 @implementation InstagramComment
 
+- (id)initWithInfo:(NSDictionary *)info
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+
 @end

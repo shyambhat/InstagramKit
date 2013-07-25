@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPClient.h"
 
-@interface InstagramEngine : AFHTTPClient
+@interface InstagramEngine : NSObject
 
++ (InstagramEngine *)sharedEngine;
 - (void)presentAuthenticationDialog;
+
+
+- (void)requestPopularMediaWithSuccess:(void (^)(NSArray *media))success failure:(void (^)(NSError *error))failure;
+
+
 @end

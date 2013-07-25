@@ -10,4 +10,6 @@
 
 @interface InstagramComment : NSObject
 
+- (id)initWithInfo:(NSDictionary *)info;
+
 @end
