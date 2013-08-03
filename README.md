@@ -1,4 +1,4 @@
-InstaKit
+InstagramKit
 ==================
  
 A blocks-based Objective C wrapper for the Instagram API, in the making. 
