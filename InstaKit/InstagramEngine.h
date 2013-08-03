@@ -14,8 +14,11 @@
 + (InstagramEngine *)sharedEngine;
 - (void)presentAuthenticationDialog;
 
+- (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
+                           failure:(void (^)(NSError *error))failure;
 
-- (void)requestPopularMediaWithSuccess:(void (^)(NSArray *media))success failure:(void (^)(NSError *error))failure;
-
+- (void)requestUserDetails:(NSString *)userID
+               withSuccess:(void (^)(NSDictionary *userDetails))success
+                   failure:(void (^)(NSError *error))failure;
 
 @end

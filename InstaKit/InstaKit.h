@@ -11,7 +11,6 @@
 #endif
 
 #import "InstagramEngine.h"
-#import "InstagramEngine.h"
 #import "InstagramComment.h"
 #import "InstagramMedia.h"
 #import "InstagramUser.h"

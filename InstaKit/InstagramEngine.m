@@ -7,10 +7,15 @@
 //
 
 #import "InstagramEngine.h"
-#import "IKConstants.h"
-
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
+
+#define kInstagramAPIBaseURL @"https://api.instagram.com/v1/"
+#define kInstagramAuthorizationURL @"https://api.instagram.com/oauth/authorize/"
+
+#define kAppClientID CypressAppClientID
+#define kAppClientSecret CypressAppClientSecret
+
 
 @implementation InstagramEngine
 
@@ -18,13 +23,12 @@
 
 + (InstagramEngine *)sharedEngine
 {
-    return [super clientWithBaseURL:[NSURL URLWithString:kInstagramAPIBaseURL]];
-//    static InstagramEngine *_sharedEngine = nil;
-//    static dispatch_once_t oncePredicate;
-//    dispatch_once(&oncePredicate, ^{
-//        _sharedEngine = [[self alloc] initWithBaseURL:kInstagramAPIBaseURL];
-//    });
-//    return _sharedEngine;
+    static InstagramEngine *_sharedEngine = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedEngine = [[self alloc] initWithBaseURL:[NSURL URLWithString:kInstagramAPIBaseURL]];
+    });
+    return _sharedEngine;
 }
 
 #pragma mark - Authentication -
@@ -36,13 +40,11 @@
 
 #pragma mark - Base Call -
 
--(AFJSONRequestOperation*)bodyForPath:(NSString*)path
-                               method:(NSString*)method
-                                 body:(NSMutableDictionary*)body
+-(AFJSONRequestOperation *)requestOperationWithPath:(NSString *)path
+                                        parameters:(NSDictionary *)parameters
                          onCompletion:(void (^)( NSDictionary *responseBody))completionBlock
                               onError:(void (^)( NSError *error)) errorBlock
 {
-    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.baseURL,path]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:method];
@@ -56,33 +58,37 @@
     return op;
 }
 
+- (void)
 
+#pragma mark - Media -
 
-#pragma mark - Explore -
+- (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
+                           failure:(void (^)(NSError *error))failure
+{
+    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
+    [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        NSArray *mediaInfo = [responseDictionary objectForKey:@"data"];
+        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
+        for (NSDictionary *info in mediaInfo) {
+            InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
+            [objects addObject:media];
+        }
+        NSArray *mediaArray = [NSArray arrayWithArray:objects];
+        success(mediaArray);
 
-- (void)requestPopularMediaWithSuccess:(void (^)(NSArray *media))success failure:(void (^)(NSError *error))failure
-{    
-        NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
-        [self bodyForPath:path method:@"GET" body:nil onCompletion:^(NSDictionary *responseBody) {
-            NSArray *mediaInfo = [responseBody objectForKey:@"data"];
-            NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
-            for (NSDictionary *info in mediaInfo) {
-                InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-                [objects addObject:media];
-            }
-            NSArray *mediaArray = [NSArray arrayWithArray:objects];
-            success(mediaArray);
-
-        } onError:^(NSError *error) {
-            NSLog(@"Error : %@",error.description);
-            failure(error);
-        }];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error : %@",error.description);
+        failure(error);
+    }];
 }
 
 
 #pragma mark - Users -
 
-- (void)requestUserDetails:(NSString *)userID withSuccess:(void (^)(NSDictionary *userDetails))success failure:(void (^)(NSError *error))failure
+- (void)requestUserDetails:(NSString *)userID
+               withSuccess:(void (^)(NSDictionary *userDetails))success
+                   failure:(void (^)(NSError *error))failure
 {
 //    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
 //    [self bodyForPath:path method:@"GET" body:nil onCompletion:^(NSDictionary *responseBody) {
