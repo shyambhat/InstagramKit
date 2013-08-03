@@ -19,17 +19,29 @@
 
 @implementation InstagramEngine
 
-#pragma mark - Singleton -
+#pragma mark - Initializers -
 
-+ (InstagramEngine *)sharedEngine
-{
++ (InstagramEngine *)sharedEngine {
     static InstagramEngine *_sharedEngine = nil;
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
         _sharedEngine = [[self alloc] initWithBaseURL:[NSURL URLWithString:kInstagramAPIBaseURL]];
     });
     return _sharedEngine;
 }
+
+
+- (id)initWithBaseURL:(NSURL *)url {
+    self = [super initWithBaseURL:url];
+    if (!self) {
+        return nil;
+    }
+    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [self setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    return self;
+}
+
 
 #pragma mark - Authentication -
 
@@ -38,27 +50,8 @@
     
 }
 
-#pragma mark - Base Call -
+#pragma mark - URL -
 
--(AFJSONRequestOperation *)requestOperationWithPath:(NSString *)path
-                                        parameters:(NSDictionary *)parameters
-                         onCompletion:(void (^)( NSDictionary *responseBody))completionBlock
-                              onError:(void (^)( NSError *error)) errorBlock
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.baseURL,path]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:method];
-    AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        completionBlock(JSON);
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        errorBlock(error);
-    }];
-    [op start];
-    
-    return op;
-}
-
-- (void)
 
 #pragma mark - Media -
 
