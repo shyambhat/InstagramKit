@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
 
-@interface InstagramEngine : NSObject
+@interface InstagramEngine : AFHTTPClient
 
 + (InstagramEngine *)sharedEngine;
 - (void)presentAuthenticationDialog;
