@@ -13,9 +13,10 @@
 #define kInstagramAPIBaseURL @"https://api.instagram.com/v1/"
 #define kInstagramAuthorizationURL @"https://api.instagram.com/oauth/authorize/"
 
-#define kAppClientID CypressAppClientID
+#define kAppClientID @"fe23f3a4303d4970a52b1d2ab143f60c"
 #define kAppClientSecret CypressAppClientSecret
 
+#define kKeyClientID @"client_id"
 
 @implementation InstagramEngine
 
@@ -50,16 +51,14 @@
     
 }
 
-#pragma mark - URL -
-
-
 #pragma mark - Media -
 
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError *error))failure
 {
-    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
-    [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [super getPath:@"media/popular"
+        parameters:@{kKeyClientID: kAppClientID}
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
         NSArray *mediaInfo = [responseDictionary objectForKey:@"data"];
         NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
@@ -70,7 +69,8 @@
         NSArray *mediaArray = [NSArray arrayWithArray:objects];
         success(mediaArray);
 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error : %@",error.description);
         failure(error);
     }];
