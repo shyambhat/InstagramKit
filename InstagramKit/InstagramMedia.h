@@ -24,14 +24,13 @@
 @property (nonatomic, readonly) NSArray *likes;
 @property (nonatomic, readonly) NSInteger commentCount;
 @property (nonatomic, readonly) NSArray *comments;
+@property (nonatomic, readonly) NSArray *tags;
 
 @property (nonatomic, readonly) NSArray *imageInfos;
 @property (nonatomic, readonly) CLLocationCoordinate2D location;
 
 @property (nonatomic, readonly) NSString* filter;
 @property (nonatomic, readonly) NSDictionary* images;
-
-@property (nonatomic, readonly) CGSize *mediaFrameSize;
 
 @property (nonatomic, readonly) BOOL isVideo;
 @property (nonatomic, readonly) NSArray *videoInfos;

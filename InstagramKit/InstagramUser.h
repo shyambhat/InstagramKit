@@ -10,15 +10,12 @@
 
 @interface InstagramUser : NSObject
 
-@property (readonly) NSString* identifier;
-@property (readonly) NSString* fullname;
+@property (readonly) NSString* Id;
 @property (readonly) NSString* username;
+@property (readonly) NSString* fullname;
+@property (readonly) NSString* profilePicture;
 @property (readonly) NSString* bio;
-@property (readonly) NSString* website;
-@property (readonly) NSString* profilePictureUrl;
-@property (readonly) NSInteger followedByCount;
-@property (readonly) NSInteger followersCount;
-@property (readonly) NSInteger mediaCount;
+@property (readonly) NSURL* website;
 
 - (id)initWithInfo:(NSDictionary *)info;
 
