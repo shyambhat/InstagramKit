@@ -7,25 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class InstagramUser;
+@class InstagramComment;
 
 @interface InstagramMedia : NSObject
 
-@property (readonly) NSString* identifier;
-@property (strong) NSString* linkUrl; //temporarily strong
-@property (strong) NSString* caption;
-@property (readonly) NSInteger commentCount;
-@property (readonly) NSInteger likeCount;
-@property (readonly) NSString* filter;
-@property (readonly) InstagramUser* user;
-@property (readonly) NSString* locationIdentifier;
-@property (readonly) NSString* locationLatitude;
-@property (readonly) NSString* locationLongitude;
-@property (readonly) NSString* locationName;
-@property (readonly) NSDate* createdTime;
-@property (readonly) NSDictionary* images;
-@property (readonly) CGSize *mediaFrameSize;
+@property (nonatomic, readonly) NSString* Id;
+@property (nonatomic, readonly) InstagramUser* user;
+@property (nonatomic, readonly) NSDate *createdDate;
+@property (nonatomic, readonly) NSString* link;
+
+@property (nonatomic, readonly) InstagramComment* caption;
+@property (nonatomic, readonly) NSInteger likesCount;
+@property (nonatomic, readonly) NSArray *likes;
+@property (nonatomic, readonly) NSInteger commentCount;
+@property (nonatomic, readonly) NSArray *comments;
+
+@property (nonatomic, readonly) NSArray *imageInfos;
+@property (nonatomic, readonly) CLLocationCoordinate2D location;
+
+@property (nonatomic, readonly) NSString* filter;
+@property (nonatomic, readonly) NSDictionary* images;
+
+@property (nonatomic, readonly) CGSize *mediaFrameSize;
+
+@property (nonatomic, readonly) BOOL isVideo;
+@property (nonatomic, readonly) NSArray *videoInfos;
 
 - (id)initWithInfo:(NSDictionary *)info;
 

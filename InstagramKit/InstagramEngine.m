@@ -66,8 +66,7 @@
             InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
             [objects addObject:media];
         }
-        NSArray *mediaArray = [NSArray arrayWithArray:objects];
-        success(mediaArray);
+        success(objects);
 
     }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
