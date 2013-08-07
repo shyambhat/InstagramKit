@@ -1,10 +1,22 @@
 //
-//  InstagramKit.m
-//  InstagramKit
+//    Copyright (c) 2013 Shyam Bhat
 //
-//  Created by Shyam Bhat on 13/07/13.
-//  Copyright (c) 2013 Shyam Bhat. All rights reserved.
+//    Permission is hereby granted, free of charge, to any person obtaining a copy of
+//    this software and associated documentation files (the "Software"), to deal in
+//    the Software without restriction, including without limitation the rights to
+//    use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+//    the Software, and to permit persons to whom the Software is furnished to do so,
+//    subject to the following conditions:
 //
+//    The above copyright notice and this permission notice shall be included in all
+//    copies or substantial portions of the Software.
+//
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+//    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+//    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+//    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+//    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramEngine.h"
 #import "InstagramUser.h"
@@ -60,9 +72,9 @@
         parameters:@{kKeyClientID: kAppClientID}
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSArray *mediaInfo = [responseDictionary objectForKey:@"data"];
-        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
-        for (NSDictionary *info in mediaInfo) {
+        NSArray *mediaInfos = [responseDictionary objectForKey:@"data"];
+        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfos.count];
+        for (NSDictionary *info in mediaInfos) {
             InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
             [objects addObject:media];
         }
@@ -75,6 +87,28 @@
     }];
 }
 
+- (void)requestMediaDetails:(NSString *)mediaId
+               withSuccess:(void (^)(NSDictionary *mediaDetails))success
+                   failure:(void (^)(NSError *error))failure
+{
+    [super getPath:[NSString stringWithFormat:@"media/%@",mediaId]
+        parameters:@{kKeyClientID: kAppClientID}
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+               NSArray *mediaInfo = [responseDictionary objectForKey:@"data"];
+               NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
+               for (NSDictionary *info in mediaInfo) {
+                   InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
+                   [objects addObject:media];
+               }
+               success([objects copy]);
+               
+           }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               NSLog(@"Error : %@",error.description);
+               failure(error);
+           }];
+}
 
 #pragma mark - Users -
 
