@@ -26,14 +26,14 @@
 #define kBio @"bio"
 #define kWebsite @"website"
 
-#define VALID(obj) (obj && ![obj isEqual:[NSNull null]])
+#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation InstagramUser
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && VALID(info)) {
+    if (self && VALID_OBJECT(info)) {
         _Id = [[NSString alloc] initWithString:info[kID]];
         _username = [[NSString alloc] initWithString:info[kUsername]];
         _fullname = [[NSString alloc] initWithString:info[kFullName]];

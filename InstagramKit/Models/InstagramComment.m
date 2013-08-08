@@ -24,14 +24,14 @@
 #define kDate @"created_time"
 #define kCreator @"from"
 #define kText @"text"
-#define VALID(obj) (obj && ![obj isEqual:[NSNull null]])
+#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation InstagramComment
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && VALID(info)) {
+    if (self && VALID_OBJECT(info)) {
         _Id = [[NSString alloc] initWithString:info[kID]];
         _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
         _text = [[NSString alloc] initWithString:info[kText]];

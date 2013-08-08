@@ -23,18 +23,6 @@
 #import "InstagramComment.h"
 
 #define kID @"id"
-#define kUser @"user"
-#define kCreatedDate @"created_time"
-#define kLink @"link"
-#define kCaption @"caption"
-#define kLikes @"likes"
-#define kComments @"comments"
-#define kFilter @"filter"
-#define kTags @"tags"
-#define kImages @"images"
-#define kVideos @"videos"
-#define kLocation @"location"
-#define kType @"type"
 
 #define kCount @"count"
 #define kURL @"url"
@@ -51,7 +39,20 @@
 #define kMediaTypeImage @"image"
 #define kMediaTypeVideo @"videp"
 
-#define VALID(obj) (obj && ![obj isEqual:[NSNull null]])
+#define kUser @"user"
+#define kCreatedDate @"created_time"
+#define kLink @"link"
+#define kCaption @"caption"
+#define kLikes @"likes"
+#define kComments @"comments"
+#define kFilter @"filter"
+#define kTags @"tags"
+#define kImages @"images"
+#define kVideos @"videos"
+#define kLocation @"location"
+#define kType @"type"
+
+#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @interface InstagramMedia ()
 {
@@ -67,7 +68,7 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && VALID(info)) {
+    if (self && VALID_OBJECT(info)) {
         
         _Id = [[NSString alloc] initWithString:info[kID]];
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
@@ -90,7 +91,7 @@
         }
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
-        if (info[kLocation] != [NSNull null]) {
+        if (VALID_OBJECT(info[kLocation])) {
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
         }
         
