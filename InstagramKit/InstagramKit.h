@@ -27,5 +27,4 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "IKUserDetail.h"
-#import "IKMediaInfo.h"
 #import "IKUserInPhoto.h"

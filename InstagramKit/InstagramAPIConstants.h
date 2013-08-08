@@ -18,38 +18,10 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const NSString *InstagramFilterNone;
-const NSString *InstagramFilterNormal;
-const NSString *InstagramFilterHudson;
-const NSString *InstagramFilterVesper;
-
-const NSString *InstagramMediaTypeImage = @"image";
-const NSString *InstagramMediaTypeVideo = @"video";
+//const NSString *InstagramFilterNone;
+//const NSString *InstagramFilterNormal;
+//const NSString *InstagramFilterHudson;
+//const NSString *InstagramFilterVesper;
 
 // Generic
-#define kID @"id"
-#define kCount @"count"
-#define kURL @"url"
-#define kHeight @"height"
-#define kWidth @"width"
-#define kData @"data"
-#define kLatitude @"latitude"
-#define kLongitude @"longitude"
 
-#define kThumbnail @"thumbnail"
-#define kLowResolution @"low_resolution"
-#define kStandardResolution @"standard_resolution"
-
-// Media
-#define kMediaUser @"user"
-#define kMediaCreatedDate @"created_time"
-#define kMediaLink @"link"
-#define kMediaCaption @"caption"
-#define kMediaLikes @"likes"
-#define kMediaComments @"comments"
-#define kMediaFilter @"filter"
-#define kMediaTags @"tags"
-#define kMediaImages @"images"
-#define kMediaVideos @"videos"
-#define kMediaLocation @"location"
-#define kMediaType @"type"

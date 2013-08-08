@@ -30,6 +30,8 @@
 
 #define kKeyClientID @"client_id"
 
+#define kData @"data"
+
 @implementation InstagramEngine
 
 #pragma mark - Initializers -
@@ -72,7 +74,7 @@
         parameters:@{kKeyClientID: kAppClientID}
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSArray *mediaInfos = [responseDictionary objectForKey:@"data"];
+        NSArray *mediaInfos = responseDictionary[kData];
         NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfos.count];
         for (NSDictionary *info in mediaInfos) {
             InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
@@ -95,7 +97,7 @@
         parameters:@{kKeyClientID: kAppClientID}
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               NSArray *mediaInfo = [responseDictionary objectForKey:@"data"];
+               NSArray *mediaInfo = responseDictionary[kData];
                NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
                for (NSDictionary *info in mediaInfo) {
                    InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
@@ -120,7 +122,7 @@
 {
 //    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
 //    [self bodyForPath:path method:@"GET" body:nil onCompletion:^(NSDictionary *responseBody) {
-//        NSArray *mediaInfo = [responseBody objectForKey:@"data"];
+//        NSArray *mediaInfo = responseDictionary[kData];
 //        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
 //        for (NSDictionary *info in mediaInfo) {
 //            InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];

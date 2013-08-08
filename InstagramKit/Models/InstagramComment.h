@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSDate *createdDate;
-@property (nonatomic, strong) InstagramUser *creator;
+@property (nonatomic, strong) InstagramUser *user;
 @property (nonatomic, strong) NSString *text;
 
 - (id)initWithInfo:(NSDictionary *)info;

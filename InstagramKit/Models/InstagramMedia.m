@@ -19,10 +19,39 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramMedia.h"
-#import "InstagramAPIConstants.h"
 #import "InstagramUser.h"
 #import "InstagramComment.h"
-#import "IKMediaInfo.h"
+
+#define kID @"id"
+#define kUser @"user"
+#define kCreatedDate @"created_time"
+#define kLink @"link"
+#define kCaption @"caption"
+#define kLikes @"likes"
+#define kComments @"comments"
+#define kFilter @"filter"
+#define kTags @"tags"
+#define kImages @"images"
+#define kVideos @"videos"
+#define kLocation @"location"
+#define kType @"type"
+
+#define kCount @"count"
+#define kURL @"url"
+#define kHeight @"height"
+#define kWidth @"width"
+#define kData @"data"
+#define kLatitude @"latitude"
+#define kLongitude @"longitude"
+
+#define kThumbnail @"thumbnail"
+#define kLowResolution @"low_resolution"
+#define kStandardResolution @"standard_resolution"
+
+#define kMediaTypeImage @"image"
+#define kMediaTypeVideo @"videp"
+
+#define VALID(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @interface InstagramMedia ()
 {
@@ -38,40 +67,41 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self) {
+    if (self && VALID(info)) {
         
         _Id = [[NSString alloc] initWithString:info[kID]];
-        _user = [[InstagramUser alloc] initWithInfo:info[kMediaUser]];
-//        NSDate *createdDate = [[NSDate alloc] ];
-        _link = [[NSString alloc] initWithString:info[kMediaLink]];
-        _caption = [[InstagramComment alloc] initWithInfo:info[kMediaCaption]];
-        _likesCount = [(info[kMediaLikes])[kCount] integerValue];
+        _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
+#warning date conversion
+        _createdDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        _link = [[NSString alloc] initWithString:info[kLink]];
+        _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
+        _likesCount = [(info[kLikes])[kCount] integerValue];
         mLikes = [[NSMutableArray alloc] init];
-        for (NSDictionary *userInfo in (info[kMediaLikes])[kData]) {
+        for (NSDictionary *userInfo in (info[kLikes])[kData]) {
             InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
             [mLikes addObject:user];
         }
         
-        _commentCount = [(info[kMediaComments])[kCount] integerValue];
+        _commentCount = [(info[kComments])[kCount] integerValue];
         mComments = [[NSMutableArray alloc] init];
-        for (NSDictionary *commentInfo in (info[kMediaLikes])[kData]) {
+        for (NSDictionary *commentInfo in (info[kComments])[kData]) {
             InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
             [mComments addObject:comment];
         }
-        _tags = [[NSArray alloc] initWithArray:info[kMediaTags]];
+        _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
-        if (info[kMediaLocation] != [NSNull null]) {
-            _location = CLLocationCoordinate2DMake([(info[kMediaLocation])[kLatitude] doubleValue], [(info[kMediaLocation])[kLongitude] doubleValue]);
+        if (info[kLocation] != [NSNull null]) {
+            _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
         }
         
-        _filter = info[kMediaFilter];
+        _filter = info[kFilter];
         
-        [self initializeImages:info[kMediaImages]];
+        [self initializeImages:info[kImages]];
         
-        NSString* mediaType = info[kMediaType];
-        _isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",InstagramMediaTypeVideo]];
+        NSString* mediaType = info[kType];
+        _isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]];
         if (_isVideo) {
-            [self initializeVideos:info[kMediaVideos]];
+            [self initializeVideos:info[kVideos]];
         }
     }
     return self;

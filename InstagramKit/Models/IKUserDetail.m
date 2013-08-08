@@ -19,13 +19,14 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKUserDetail.h"
+#define VALID(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation IKUserDetail
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self) {
+    if (self && VALID(info)) {
         
     }
     return self;
