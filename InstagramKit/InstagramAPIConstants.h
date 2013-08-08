@@ -23,7 +23,8 @@ const NSString *InstagramFilterNormal;
 const NSString *InstagramFilterHudson;
 const NSString *InstagramFilterVesper;
 
-const NSString *InstagramMediaType = @"video";
+const NSString *InstagramMediaTypeImage = @"image";
+const NSString *InstagramMediaTypeVideo = @"video";
 
 // Generic
 #define kID @"id"
@@ -31,6 +32,13 @@ const NSString *InstagramMediaType = @"video";
 #define kURL @"url"
 #define kHeight @"height"
 #define kWidth @"width"
+#define kData @"data"
+#define kLatitude @"latitude"
+#define kLongitude @"longitude"
+
+#define kThumbnail @"thumbnail"
+#define kLowResolution @"low_resolution"
+#define kStandardResolution @"standard_resolution"
 
 // Media
 #define kMediaUser @"user"
