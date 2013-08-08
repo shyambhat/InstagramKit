@@ -32,6 +32,11 @@
 
 #define kData @"data"
 
+@interface InstagramEngine()
+{
+    dispatch_queue_t mBackgroundQueue;
+}
+@end
 @implementation InstagramEngine
 
 #pragma mark - Initializers -
@@ -51,6 +56,8 @@
     if (!self) {
         return nil;
     }
+    
+	mBackgroundQueue = dispatch_queue_create("background", NULL);
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
     
@@ -73,15 +80,19 @@
     [super getPath:@"media/popular"
         parameters:@{kKeyClientID: kAppClientID}
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSArray *mediaInfos = responseDictionary[kData];
-        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfos.count];
-        for (NSDictionary *info in mediaInfos) {
-            InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-            [objects addObject:media];
-        }
-        success(objects);
-
+               
+       dispatch_async(mBackgroundQueue, ^{
+           NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+           NSArray *mediaInfos = responseDictionary[kData];
+           NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfos.count];
+           for (NSDictionary *info in mediaInfos) {
+               InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
+               [objects addObject:media];
+           }
+           dispatch_async(dispatch_get_main_queue(), ^{
+               success(objects);
+           });
+       });
     }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error : %@",error.description);
@@ -98,13 +109,17 @@
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                NSArray *mediaInfo = responseDictionary[kData];
-               NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
-               for (NSDictionary *info in mediaInfo) {
-                   InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-                   [objects addObject:media];
-               }
-               success([objects copy]);
                
+               NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
+               dispatch_async(mBackgroundQueue, ^{
+                   for (NSDictionary *info in mediaInfo) {
+                       InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
+                       [objects addObject:media];
+                   }
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       success([objects copy]);
+                   });
+               });
            }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                NSLog(@"Error : %@",error.description);
@@ -130,14 +145,11 @@
 //        }
 //        NSArray *mediaArray = [NSArray arrayWithArray:objects];
 //        success(mediaArray);
-//        
+//
 //    } onError:^(NSError *error) {
 //        NSLog(@"Error : %@",error.description);
 //        failure(error);
 //    }];
 }
-
-
-
 
 @end
