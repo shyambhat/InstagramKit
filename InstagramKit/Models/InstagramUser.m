@@ -38,12 +38,12 @@
         _username = [[NSString alloc] initWithString:info[kUsername]];
         _fullname = [[NSString alloc] initWithString:info[kFullName]];
         _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (info[kBio]) {
+        if (VALID_OBJECT(info[kBio]))
             _bio = [[NSString alloc] initWithString:info[kBio]];;
-        }
-        if (info[kWebsite]) {
+        
+        if (VALID_OBJECT(info[kWebsite]))
             _website = [[NSURL alloc] initWithString:info[kWebsite]];
-        }
+        
     }
     return self;
 }
