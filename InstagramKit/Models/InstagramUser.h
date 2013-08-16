@@ -19,16 +19,14 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "InstagramModel.h"
 
-@interface InstagramUser : NSObject
+@interface InstagramUser : InstagramModel
 
-@property (readonly) NSString* Id;
 @property (readonly) NSString* username;
 @property (readonly) NSString* fullname;
 @property (readonly) NSURL* profilePictureURL;
 @property (readonly) NSString* bio;
 @property (readonly) NSURL* website;
-
-- (id)initWithInfo:(NSDictionary *)info;
 
 @end

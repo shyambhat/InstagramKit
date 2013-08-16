@@ -20,13 +20,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "InstagramModel.h"
 
 @class InstagramUser;
 @class InstagramComment;
 
-@interface InstagramMedia : NSObject
+@interface InstagramMedia : InstagramModel
 
-@property (nonatomic, readonly) NSString* Id;
 @property (nonatomic, readonly) InstagramUser* user;
 @property (nonatomic, readonly) NSDate *createdDate;
 @property (nonatomic, readonly) NSString* link;
@@ -52,8 +52,5 @@
 @property (nonatomic, readonly) CGSize lowResolutionVideoFrameSize;
 @property (nonatomic, readonly) NSURL *standardResolutionVideoURL;
 @property (nonatomic, readonly) CGSize standardResolutionVideoFrameSize;
-
-
-- (id)initWithInfo:(NSDictionary *)info;
 
 @end

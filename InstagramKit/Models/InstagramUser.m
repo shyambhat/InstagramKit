@@ -19,22 +19,13 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramUser.h"
-#define kID @"id"
-#define kUsername @"username"
-#define kFullName @"full_name"
-#define kProfilePictureURL @"profile_picture"
-#define kBio @"bio"
-#define kWebsite @"website"
-
-#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation InstagramUser
 
 - (id)initWithInfo:(NSDictionary *)info
 {
-    self = [super init];
+    self = [super initWithInfo:info];
     if (self && VALID_OBJECT(info)) {
-        _Id = [[NSString alloc] initWithString:info[kID]];
         _username = [[NSString alloc] initWithString:info[kUsername]];
         _fullname = [[NSString alloc] initWithString:info[kFullName]];
         _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];

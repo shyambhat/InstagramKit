@@ -22,37 +22,6 @@
 #import "InstagramUser.h"
 #import "InstagramComment.h"
 
-#define kID @"id"
-
-#define kCount @"count"
-#define kURL @"url"
-#define kHeight @"height"
-#define kWidth @"width"
-#define kData @"data"
-#define kLatitude @"latitude"
-#define kLongitude @"longitude"
-
-#define kThumbnail @"thumbnail"
-#define kLowResolution @"low_resolution"
-#define kStandardResolution @"standard_resolution"
-
-#define kMediaTypeImage @"image"
-#define kMediaTypeVideo @"videp"
-
-#define kUser @"user"
-#define kCreatedDate @"created_time"
-#define kLink @"link"
-#define kCaption @"caption"
-#define kLikes @"likes"
-#define kComments @"comments"
-#define kFilter @"filter"
-#define kTags @"tags"
-#define kImages @"images"
-#define kVideos @"videos"
-#define kLocation @"location"
-#define kType @"type"
-
-#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @interface InstagramMedia ()
 {
@@ -67,10 +36,9 @@
 
 - (id)initWithInfo:(NSDictionary *)info
 {
-    self = [super init];
+    self = [super initWithInfo:info];
     if (self && VALID_OBJECT(info)) {
         
-        _Id = [[NSString alloc] initWithString:info[kID]];
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
 #warning date conversion
         _createdDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];

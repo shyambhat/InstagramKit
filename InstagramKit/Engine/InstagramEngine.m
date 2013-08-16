@@ -29,6 +29,7 @@
 #define kAppClientSecret CypressAppClientSecret
 
 #define kKeyClientID @"client_id"
+#define kKeyAccessToken @"access_token"
 
 #define kData @"data"
 
@@ -36,6 +37,9 @@
 {
     dispatch_queue_t mBackgroundQueue;
 }
+
+@property (nonatomic, strong) NSString *accessToken;
+
 @end
 @implementation InstagramEngine
 
@@ -72,69 +76,81 @@
     
 }
 
+#pragma mark - Base Call -
+
+- (void)getPath:(NSString*)path
+     responseModel:(Class)modelClass
+     parameters:(NSDictionary *)parameters
+        success:(void (^)(id response))success
+        failure:(void (^)(NSError* error, NSInteger statusCode))failure
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if (self.accessToken) {
+        [params setObject:self.accessToken forKey:kKeyAccessToken];
+    }
+    [params setObject:kAppClientID forKey:kKeyClientID];
+    [super getPath:path
+        parameters:params
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+               BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
+               if (collection) {
+                   NSArray *responseObjects = responseDictionary[kData];
+                   NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
+                   dispatch_async(mBackgroundQueue, ^{
+                       for (NSDictionary *info in responseObjects) {
+                           id model = [[modelClass alloc] initWithInfo:info];
+                           [objects addObject:model];
+                       }
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           success(objects);
+                       });
+                   });
+               }
+               else {
+                   id model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+                   success(model);
+               }
+           }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               failure(error,[[operation response] statusCode]);
+           }];
+}
+
+
 #pragma mark - Media -
 
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
-                           failure:(void (^)(NSError *error))failure
+                           failure:(void (^)(NSError* error))failure
 {
-    [super getPath:@"media/popular"
-        parameters:@{kKeyClientID: kAppClientID}
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
-       dispatch_async(mBackgroundQueue, ^{
-           NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-           NSArray *mediaInfos = responseDictionary[kData];
-           NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfos.count];
-           for (NSDictionary *info in mediaInfos) {
-               InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-               [objects addObject:media];
-           }
-           dispatch_async(dispatch_get_main_queue(), ^{
-               success(objects);
-           });
-       });
-    }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error : %@",error.description);
+    [self getPath:@"media/popular" responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+    } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
 }
 
-- (void)requestMediaDetails:(NSString *)mediaId
-               withSuccess:(void (^)(NSDictionary *mediaDetails))success
-                   failure:(void (^)(NSError *error))failure
+- (void)getMediaDetails:(NSString *)mediaID
+               withSuccess:(void (^)(InstagramMedia *media))success
+                   failure:(void (^)(NSError* error))failure
 {
-    [super getPath:[NSString stringWithFormat:@"media/%@",mediaId]
-        parameters:@{kKeyClientID: kAppClientID}
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               NSArray *mediaInfo = responseDictionary[kData];
-               
-               NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
-               dispatch_async(mBackgroundQueue, ^{
-                   for (NSDictionary *info in mediaInfo) {
-                       InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-                       [objects addObject:media];
-                   }
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       success([objects copy]);
-                   });
-               });
-           }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               NSLog(@"Error : %@",error.description);
-               failure(error);
-           }];
+    [self getPath:[NSString stringWithFormat:@"media/%@",mediaID] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        InstagramMedia *media = response;
+        success(media);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
 }
 
 
 
 #pragma mark - Users -
 
-- (void)requestUserDetails:(NSString *)userID
-               withSuccess:(void (^)(NSDictionary *userDetails))success
-                   failure:(void (^)(NSError *error))failure
-{
+//- (void)requestUserDetails:(NSString *)userID
+//               withSuccess:(void (^)(NSDictionary *userDetails))success
+//                   failure:(void (^)(NSError* error, NSInteger statusCode))failure
+//{
 //    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
 //    [self bodyForPath:path method:@"GET" body:nil onCompletion:^(NSDictionary *responseBody) {
 //        NSArray *mediaInfo = responseDictionary[kData];
@@ -150,6 +166,6 @@
 //        NSLog(@"Error : %@",error.description);
 //        failure(error);
 //    }];
-}
+//}
 
 @end

@@ -19,13 +19,12 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "InstagramUser.h"
 
-@interface IKUserDetail : NSObject
+@interface IKUserDetail : InstagramUser
 
 @property (readonly) NSInteger followedByCount;
 @property (readonly) NSInteger followersCount;
 @property (readonly) NSInteger mediaCount;
-
-- (id)initWithInfo:(NSDictionary *)info;
 
 @end

@@ -19,7 +19,6 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKUserDetail.h"
-#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation IKUserDetail
 

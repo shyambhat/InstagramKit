@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+@class InstagramMedia;
 
 @interface InstagramEngine : AFHTTPClient
 
@@ -27,10 +28,14 @@
 - (void)presentAuthenticationDialog;
 
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
-                           failure:(void (^)(NSError *error))failure;
+                           failure:(void (^)(NSError* error))failure;
+
+- (void)getMediaDetails:(NSString *)mediaID
+            withSuccess:(void (^)(InstagramMedia *media))success
+                failure:(void (^)(NSError* error))failure;
 
 - (void)requestUserDetails:(NSString *)userID
                withSuccess:(void (^)(NSDictionary *userDetails))success
-                   failure:(void (^)(NSError *error))failure;
+                   failure:(void (^)(NSError* error))failure;
 
 @end

@@ -27,6 +27,5 @@
 @property (nonatomic, readonly) CGPoint positionPercentage;
 @property (nonatomic, readonly) InstagramUser *user;
 
-- (id)initWithInfo:(NSDictionary *)info;
 
 @end
