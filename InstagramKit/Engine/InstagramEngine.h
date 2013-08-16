@@ -35,12 +35,12 @@
             withSuccess:(void (^)(InstagramMedia *media))success
                 failure:(void (^)(NSError* error))failure;
 
-- (void)requestUserDetails:(NSString *)userId
-               withSuccess:(void (^)(NSDictionary *userDetails))success
-                   failure:(void (^)(NSError* error))failure;
-
 - (void)getUserDetails:(InstagramUser *)user
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(void (^)(NSError* error))failure;
+
+- (void)getUserFeed:(NSString *)userId count:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure;
 
 @end

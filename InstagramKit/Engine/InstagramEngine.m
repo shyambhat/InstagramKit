@@ -143,9 +143,7 @@
     }];
 }
 
-
 #pragma mark - Users -
-
 
 - (void)getUserDetails:(InstagramUser *)user
      withSuccess:(void (^)(InstagramUser *userDetail))success
@@ -159,25 +157,18 @@
     }];
 }
 
-//- (void)requestUserDetails:(NSString *)userID
-//               withSuccess:(void (^)(NSDictionary *userDetails))success
-//                   failure:(void (^)(NSError* error, NSInteger statusCode))failure
-//{
-//    NSString *path = [NSString stringWithFormat:@"media/popular?client_id=fe23f3a4303d4970a52b1d2ab143f60c"];
-//    [self bodyForPath:path method:@"GET" body:nil onCompletion:^(NSDictionary *responseBody) {
-//        NSArray *mediaInfo = responseDictionary[kData];
-//        NSMutableArray*objects = [NSMutableArray arrayWithCapacity:mediaInfo.count];
-//        for (NSDictionary *info in mediaInfo) {
-//            InstagramMedia *media = [[InstagramMedia alloc] initWithInfo:info];
-//            [objects addObject:media];
-//        }
-//        NSArray *mediaArray = [NSArray arrayWithArray:objects];
-//        success(mediaArray);
-//
-//    } onError:^(NSError *error) {
-//        NSLog(@"Error : %@",error.description);
-//        failure(error);
-//    }];
-//}
+- (void)getUserFeed:(NSString *)userId count:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"/users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
+}
 
 @end

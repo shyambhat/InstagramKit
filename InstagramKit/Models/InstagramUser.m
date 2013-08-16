@@ -21,6 +21,10 @@
 #import "InstagramUser.h"
 #import "InstagramEngine.h"
 
+@interface InstagramUser()
+@property (nonatomic, strong) NSArray *recentMedia;
+@end
+
 @implementation InstagramUser
 
 - (id)initWithInfo:(NSDictionary *)info
@@ -36,13 +40,12 @@
             _website = [[NSURL alloc] initWithString:info[kWebsite]];
 
         // DO NOT PERSIST
-        if (VALID_OBJECT(info[kCountMedia]))
+        if (VALID_OBJECT(info[kCounts]))
+        {
             _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-        if (VALID_OBJECT(info[kCountFollows]))
             _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-        if (VALID_OBJECT(info[kCountFollowedBy]))
             _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-
+        }
     }
     return self;
 }
@@ -65,8 +68,19 @@
     
 }
 
-- (void)loadFeed
+- (void)loadRecentMedia:(NSInteger)count
 {
-    
+    [self loadRecentMedia:count withSuccess:nil failure:nil];
 }
+
+- (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
+{
+    [[InstagramEngine sharedEngine] getUserFeed:self.Id count:10 withSuccess:^(NSArray *feed) {
+        self.recentMedia = feed;
+        success();
+    } failure:^(NSError *error) {
+        failure();
+    }];
+}
+
 @end
