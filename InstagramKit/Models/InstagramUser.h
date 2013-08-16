@@ -28,5 +28,14 @@
 @property (readonly) NSURL* profilePictureURL;
 @property (readonly) NSString* bio;
 @property (readonly) NSURL* website;
+@property (readonly) NSInteger mediaCount;
+@property (readonly) NSInteger followsCount;
+@property (readonly) NSInteger followedByCount;
+
+- (void)loadCounts;
+- (void)loadCountsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure;
+
+- (void)loadFeed;
+- (void)loadFeedWithSuccess:(void(^)(void))success failure:(void(^)(void))failure;
 
 @end

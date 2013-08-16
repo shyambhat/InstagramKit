@@ -131,11 +131,11 @@
     }];
 }
 
-- (void)getMediaDetails:(NSString *)mediaID
+- (void)getMedia:(NSString *)mediaId
                withSuccess:(void (^)(InstagramMedia *media))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"media/%@",mediaID] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self getPath:[NSString stringWithFormat:@"media/%@",mediaId] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         InstagramMedia *media = response;
         success(media);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -144,8 +144,20 @@
 }
 
 
-
 #pragma mark - Users -
+
+
+- (void)getUserDetails:(InstagramUser *)user
+     withSuccess:(void (^)(InstagramUser *userDetail))success
+         failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"users/%@",user.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+        InstagramUser *userDetail = response;
+        success(userDetail);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
 
 //- (void)requestUserDetails:(NSString *)userID
 //               withSuccess:(void (^)(NSDictionary *userDetails))success

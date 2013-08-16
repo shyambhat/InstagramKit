@@ -19,6 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramUser.h"
+#import "InstagramEngine.h"
 
 @implementation InstagramUser
 
@@ -31,13 +32,41 @@
         _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
         if (VALID_OBJECT(info[kBio]))
             _bio = [[NSString alloc] initWithString:info[kBio]];;
-        
         if (VALID_OBJECT(info[kWebsite]))
             _website = [[NSURL alloc] initWithString:info[kWebsite]];
-        
+
+        // DO NOT PERSIST
+        if (VALID_OBJECT(info[kCountMedia]))
+            _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
+        if (VALID_OBJECT(info[kCountFollows]))
+            _followsCount = [(info[kCounts])[kCountFollows] integerValue];
+        if (VALID_OBJECT(info[kCountFollowedBy]))
+            _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
+
     }
     return self;
 }
 
+- (void)loadCounts
+{
+    [self loadCountsWithSuccess:nil failure:nil];
+}
 
+- (void)loadCountsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
+{
+    [[InstagramEngine sharedEngine] getUserDetails:self withSuccess:^(InstagramUser *userDetail) {
+        _mediaCount = userDetail.mediaCount;
+        _followsCount = userDetail.followsCount;
+        _followedByCount = userDetail.followedByCount;
+        success();
+    } failure:^(NSError *error) {
+        failure();
+    }];
+    
+}
+
+- (void)loadFeed
+{
+    
+}
 @end
