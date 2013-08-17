@@ -19,14 +19,14 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKUserInPhoto.h"
-#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
+#define IKNotNull(obj) (obj && ![obj isEqual:[NSNull null]])
 
 @implementation IKUserInPhoto
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && VALID_OBJECT(info)) {
+    if (self && IKNotNull(info)) {
         
     }
     return self;

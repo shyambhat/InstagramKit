@@ -26,7 +26,7 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && VALID_OBJECT(info)) {
+    if (self && IKNotNull(info)) {
         _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
         _text = [[NSString alloc] initWithString:info[kText]];
         _createdDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];

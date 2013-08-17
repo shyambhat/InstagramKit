@@ -26,7 +26,10 @@
 @interface InstagramEngine : AFHTTPClient
 
 + (InstagramEngine *)sharedEngine;
-- (void)presentAuthenticationDialog;
+
+//- (void)presentAuthenticationDialog;
+
+#pragma mark - Media -
 
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError* error))failure;
@@ -35,6 +38,8 @@
             withSuccess:(void (^)(InstagramMedia *media))success
                 failure:(void (^)(NSError* error))failure;
 
+#pragma mark - Users -
+
 - (void)getUserDetails:(InstagramUser *)user
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(void (^)(NSError* error))failure;
@@ -42,5 +47,6 @@
 - (void)getUserFeed:(NSString *)userId count:(NSInteger)count
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure;
+
 
 @end

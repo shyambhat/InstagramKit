@@ -30,17 +30,17 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && VALID_OBJECT(info)) {
+    if (self && IKNotNull(info)) {
         _username = [[NSString alloc] initWithString:info[kUsername]];
         _fullname = [[NSString alloc] initWithString:info[kFullName]];
         _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (VALID_OBJECT(info[kBio]))
+        if (IKNotNull(info[kBio]))
             _bio = [[NSString alloc] initWithString:info[kBio]];;
-        if (VALID_OBJECT(info[kWebsite]))
+        if (IKNotNull(info[kWebsite]))
             _website = [[NSURL alloc] initWithString:info[kWebsite]];
 
         // DO NOT PERSIST
-        if (VALID_OBJECT(info[kCounts]))
+        if (IKNotNull(info[kCounts]))
         {
             _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
             _followsCount = [(info[kCounts])[kCountFollows] integerValue];

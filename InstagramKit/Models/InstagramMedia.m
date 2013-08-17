@@ -37,7 +37,7 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && VALID_OBJECT(info)) {
+    if (self && IKNotNull(info)) {
         
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
 #warning date conversion
@@ -59,7 +59,7 @@
         }
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
-        if (VALID_OBJECT(info[kLocation])) {
+        if (IKNotNull(info[kLocation])) {
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
         }
         

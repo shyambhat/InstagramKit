@@ -73,4 +73,4 @@
 #define kCountFollows @"follows"
 #define kCountFollowedBy @"followed_by"
 
-#define VALID_OBJECT(obj) (obj && ![obj isEqual:[NSNull null]])
+#define IKNotNull(obj) (obj && ![obj isEqual:[NSNull null]])

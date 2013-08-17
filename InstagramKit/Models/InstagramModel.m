@@ -25,7 +25,7 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && VALID_OBJECT(info)) {
+    if (self && IKNotNull(info)) {
         _Id = [[NSString alloc] initWithString:info[kID]];
     }
     return self;
