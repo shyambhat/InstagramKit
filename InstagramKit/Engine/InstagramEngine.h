@@ -20,14 +20,13 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+
 @class InstagramMedia;
 @class InstagramUser;
 
 @interface InstagramEngine : AFHTTPClient
 
 + (InstagramEngine *)sharedEngine;
-
-//- (void)presentAuthenticationDialog;
 
 #pragma mark - Media -
 

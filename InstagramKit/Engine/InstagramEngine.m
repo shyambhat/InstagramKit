@@ -21,12 +21,13 @@
 #import "InstagramEngine.h"
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
+#import "CypressConstants.h"
 
 #define kInstagramAPIBaseURL @"https://api.instagram.com/v1/"
 #define kInstagramAuthorizationURL @"https://api.instagram.com/oauth/authorize/"
 
-#define kAppClientID @"fe23f3a4303d4970a52b1d2ab143f60c"
-#define kAppClientSecret CypressAppClientSecret
+#define kAppClientID kCypressClientID
+#define kAppClientSecret kCypressClientSecret
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -66,14 +67,6 @@
     [self setDefaultHeader:@"Accept" value:@"application/json"];
     
     return self;
-}
-
-
-#pragma mark - Authentication -
-
-- (void)presentAuthenticationDialog
-{
-    
 }
 
 #pragma mark - Base Call -
