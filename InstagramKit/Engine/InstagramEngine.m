@@ -39,8 +39,6 @@
     dispatch_queue_t mBackgroundQueue;
 }
 
-@property (nonatomic, strong) NSString *accessToken;
-
 @end
 @implementation InstagramEngine
 
@@ -154,7 +152,7 @@
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"/users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
+    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
         NSArray *objects = response;
         success(objects);
         

@@ -27,6 +27,7 @@
 @interface InstagramEngine : AFHTTPClient
 
 + (InstagramEngine *)sharedEngine;
+@property (nonatomic, strong) NSString *accessToken;
 
 #pragma mark - Media -
 
