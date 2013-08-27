@@ -21,13 +21,6 @@
 #import "InstagramEngine.h"
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
-#import "CypressConstants.h"
-
-#define kInstagramAPIBaseURL @"https://api.instagram.com/v1/"
-#define kInstagramAuthorizationURL @"https://api.instagram.com/oauth/authorize/"
-
-#define kAppClientID kCypressClientID
-#define kAppClientSecret kCypressClientSecret
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -48,11 +41,10 @@
     static InstagramEngine *_sharedEngine = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        _sharedEngine = [[self alloc] initWithBaseURL:[NSURL URLWithString:kInstagramAPIBaseURL]];
+        _sharedEngine = [[self alloc] initWithBaseURL:[NSURL URLWithString:INSTAGRAM_BASE_URL]];
     });
     return _sharedEngine;
 }
-
 
 - (id)initWithBaseURL:(NSURL *)url {
     self = [super initWithBaseURL:url];
@@ -79,7 +71,7 @@
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
-    [params setObject:kAppClientID forKey:kKeyClientID];
+    [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
     [super getPath:path
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -177,7 +169,6 @@
     }];
     
 }
-
 
 #pragma mark - Self -
 

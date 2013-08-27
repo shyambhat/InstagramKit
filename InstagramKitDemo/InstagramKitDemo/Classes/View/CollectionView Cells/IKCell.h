@@ -18,8 +18,10 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramEngine.h"
-#import "InstagramComment.h"
-#import "InstagramMedia.h"
-#import "InstagramUser.h"
-#import "IKUserInPhoto.h"
+#import <UIKit/UIKit.h>
+
+@interface IKCell : UICollectionViewCell
+
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
+@end

@@ -18,8 +18,24 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramEngine.h"
-#import "InstagramComment.h"
-#import "InstagramMedia.h"
-#import "InstagramUser.h"
-#import "IKUserInPhoto.h"
+#import "IKCell.h"
+
+@implementation IKCell
+@synthesize imageView;
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.imageView.frame = self.bounds;
+}
+
+@end
