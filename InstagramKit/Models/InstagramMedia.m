@@ -40,7 +40,6 @@
     if (self && IKNotNull(info)) {
         
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
-#warning date conversion
         _createdDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
         _link = [[NSString alloc] initWithString:info[kLink]];
         _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
