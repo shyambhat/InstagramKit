@@ -75,7 +75,7 @@
 
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getUserFeed:self.Id count:10 withSuccess:^(NSArray *feed) {
+    [[InstagramEngine sharedEngine] getMediaForUser:self.Id count:10 withSuccess:^(NSArray *feed) {
         self.recentMedia = feed;
         success();
     } failure:^(NSError *error) {

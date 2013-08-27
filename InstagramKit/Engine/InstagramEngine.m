@@ -148,7 +148,7 @@
     }];
 }
 
-- (void)getUserFeed:(NSString *)userId count:(NSInteger)count
+- (void)getMediaForUser:(NSString *)userId count:(NSInteger)count
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
@@ -160,6 +160,39 @@
         failure(error);
     }];
 
+}
+
+#pragma mark - Tags -
+
+- (void)getMediaWithTag:(NSString *)tag
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+
+#pragma mark - Self -
+
+- (void)getSelfFeed:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+                failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
 }
 
 @end

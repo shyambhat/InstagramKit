@@ -44,9 +44,13 @@
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(void (^)(NSError* error))failure;
 
-- (void)getUserFeed:(NSString *)userId count:(NSInteger)count
+- (void)getMediaForUser:(NSString *)userId count:(NSInteger)count
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure;
 
+#pragma mark - Tags -
 
+- (void)getMediaWithTag:(NSString *)tag
+            withSuccess:(void (^)(NSArray *feed))success
+                failure:(void (^)(NSError* error))failure;
 @end
