@@ -1,8 +1,9 @@
 InstagramKit
 ==================
  
-A blocks-based Objective C wrapper for the Instagram API, in the making. 
-Harnesses the power of the fabulous AFNetworking under the hood.
+A clean blocks-based Objective C wrapper for the Instagram API. 
 
-DISCLAIMER :
-Work in progress. 
+Harnesses the power of AFNetworking under the hood.
+
+Parses the JSON responses on a background thread without affecting the UI, making your slick and responsive.
+
