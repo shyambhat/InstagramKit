@@ -5,7 +5,7 @@ A clean blocks-based Objective C wrapper for the Instagram API.
 
 Harnesses the power of AFNetworking under the hood.
 
-Parses the JSON responses on a background thread without affecting the UI, making your slick and responsive.
+Parses the JSON responses on a background thread without affecting the UI, making your App slick and responsive.
 
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project, insert the right credentials in the Engine and you'll be up and running.
