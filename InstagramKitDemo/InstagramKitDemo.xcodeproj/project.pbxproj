@@ -280,8 +280,8 @@
 		52781DA317CD6E64001A32F7 /* InstagramKit */ = {
 			isa = PBXGroup;
 			children = (
-				52781DA417CD6E64001A32F7 /* Engine */,
 				52781DA717CD6E64001A32F7 /* InstagramKit.h */,
+				52781DA417CD6E64001A32F7 /* Engine */,
 				52781DA817CD6E64001A32F7 /* Models */,
 			);
 			name = InstagramKit;
@@ -635,6 +635,7 @@
 				52781D6C17CD6BB9001A32F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52781D6D17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -643,6 +644,7 @@
 				52781D6F17CD6BB9001A32F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
