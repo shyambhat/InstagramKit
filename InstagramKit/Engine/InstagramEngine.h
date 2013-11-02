@@ -21,12 +21,12 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#error Insert your Instagram App Credentials Here
+//#error Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
-#define APP_CLIENT_ID @"<Client_ID_here>"
-#define APP_CLIENT_SECRET @"<Client_Secret_here>"
-#define APP_REDIRECT_URL @"<Redirect_URL_here"
+#define APP_CLIENT_ID @"fe23f3a4303d4970a52b1d2ab143f60c"//@"<Client_ID_here>"
+#define APP_CLIENT_SECRET @"1d48d27791f24518a0898f9d7f5b2810" //@"<Client_Secret_here>"
+#define APP_REDIRECT_URL @"http://instagram.com" //@"<Redirect_URL_here"
 #define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
 #define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
 
@@ -77,5 +77,14 @@
 - (void)getCommentsOnMedia:(NSString *)mediaId
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure;
+
+
+- (void)createCommentOnMedia:(NSString *)mediaId
+                 withSuccess:(void (^)(NSArray *comments))success
+                     failure:(void (^)(NSError* error))failure;
+
+- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+          withSuccess:(void (^)(NSArray *comments))success
+              failure:(void (^)(NSError* error))failure;
 
 @end

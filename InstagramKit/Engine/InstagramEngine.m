@@ -216,4 +216,19 @@
     
 }
 
+
+- (void)createCommentOnMedia:(NSString *)mediaId
+                 withSuccess:(void (^)(NSArray *comments))success
+                     failure:(void (^)(NSError* error))failure
+{
+#warning incomplete implementation
+}
+
+- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+          withSuccess:(void (^)(NSArray *comments))success
+              failure:(void (^)(NSError* error))failure
+{
+#warning incomplete implementation
+}
+
 @end
