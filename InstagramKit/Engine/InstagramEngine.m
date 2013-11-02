@@ -21,6 +21,7 @@
 #import "InstagramEngine.h"
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
+#import "InstagramComment.h"
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -177,6 +178,35 @@
                 failure:(void (^)(NSError* error))failure
 {
     [self getPath:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
+                        failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"/users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+#pragma mark - Comments -
+
+- (void)getCommentsOnMedia:(NSString *)mediaId
+               withSuccess:(void (^)(NSArray *comments))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         

@@ -21,7 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#error warning Insert your Instagram App Credentials Here
+//#error Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 #define APP_CLIENT_ID @"<Client_ID_here>"
@@ -62,4 +62,20 @@
 - (void)getMediaWithTag:(NSString *)tag
             withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure;
+
+#pragma mark - Self -
+
+- (void)getSelfFeed:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure;
+
+- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure;
+
+#pragma mark - Comments -
+
+- (void)getCommentsOnMedia:(NSString *)mediaId
+               withSuccess:(void (^)(NSArray *comments))success
+                   failure:(void (^)(NSError* error))failure;
+
 @end
