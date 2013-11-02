@@ -22,6 +22,7 @@
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
 #import "InstagramComment.h"
+#import "InstagramLike.h"
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -190,6 +191,7 @@
 - (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
                         failure:(void (^)(NSError* error))failure
 {
+    #warning not yet tested
     [self getPath:[NSString stringWithFormat:@"/users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
@@ -206,6 +208,7 @@
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure
 {
+    #warning not yet tested
     [self getPath:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
@@ -217,14 +220,47 @@
 }
 
 
-- (void)createCommentOnMedia:(NSString *)mediaId
+- (void)createComment:(NSString *)commentText
+              onMedia:(NSString *)mediaId
+          withSuccess:(void (^)(NSArray *comments))success
+              failure:(void (^)(NSError* error))failure
+{
+#warning incomplete implementation
+}
+
+- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+          withSuccess:(void (^)(NSArray *comments))success
+              failure:(void (^)(NSError* error))failure
+{
+#warning incomplete implementation
+}
+
+
+#pragma mark - Likes -
+
+- (void)getLikesOnMedia:(NSString *)mediaId
+               withSuccess:(void (^)(NSArray *comments))success
+                   failure:(void (^)(NSError* error))failure
+{
+#warning not yet tested
+    [self getPath:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+- (void)likeMedia:(NSString *)mediaId
                  withSuccess:(void (^)(NSArray *comments))success
                      failure:(void (^)(NSError* error))failure
 {
 #warning incomplete implementation
 }
 
-- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+- (void)removeLike:(NSString *)likeId onMedia:(NSString *)mediaId
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {

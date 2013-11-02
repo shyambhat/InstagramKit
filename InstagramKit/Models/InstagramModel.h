@@ -64,6 +64,8 @@
 
 #define kUsername @"username"
 #define kFullName @"full_name"
+#define kFirstName @"first_name"
+#define kLastName @"last_name"
 #define kProfilePictureURL @"profile_picture"
 #define kBio @"bio"
 #define kWebsite @"website"

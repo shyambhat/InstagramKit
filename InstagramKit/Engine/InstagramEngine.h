@@ -79,12 +79,27 @@
                    failure:(void (^)(NSError* error))failure;
 
 
-- (void)createCommentOnMedia:(NSString *)mediaId
-                 withSuccess:(void (^)(NSArray *comments))success
-                     failure:(void (^)(NSError* error))failure;
+- (void)createComment:(NSString *)commentText
+              onMedia:(NSString *)mediaId
+          withSuccess:(void (^)(NSArray *comments))success
+              failure:(void (^)(NSError* error))failure;
 
 - (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure;
 
+
+#pragma mark - Likes -
+
+- (void)getLikesOnMedia:(NSString *)mediaId
+            withSuccess:(void (^)(NSArray *comments))success
+                failure:(void (^)(NSError* error))failure;
+
+- (void)likeMedia:(NSString *)mediaId
+              withSuccess:(void (^)(NSArray *comments))success
+                  failure:(void (^)(NSError* error))failure;
+
+- (void)removeLike:(NSString *)likeId onMedia:(NSString *)mediaId
+       withSuccess:(void (^)(NSArray *comments))success
+           failure:(void (^)(NSError* error))failure;
 @end
