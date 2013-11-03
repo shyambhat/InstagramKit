@@ -99,7 +99,7 @@
               withSuccess:(void (^)(NSArray *comments))success
                   failure:(void (^)(NSError* error))failure;
 
-- (void)removeLike:(NSString *)likeId onMedia:(NSString *)mediaId
+- (void)removeLikeOnMedia:(NSString *)mediaId
        withSuccess:(void (^)(NSArray *comments))success
            failure:(void (^)(NSError* error))failure;
 @end
