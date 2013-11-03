@@ -63,7 +63,7 @@
 
 #pragma mark - Base Call -
 
-- (void)getPath:(NSString*)path
+- (void)requestWithMethod:(NSString *)method path:(NSString*)path
      responseModel:(Class)modelClass
      parameters:(NSDictionary *)parameters
         success:(void (^)(id response))success
@@ -74,32 +74,33 @@
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
     [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
-    [super getPath:path
-        parameters:params
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
-               if (collection) {
-                   NSArray *responseObjects = responseDictionary[kData];
-                   NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
-                   dispatch_async(mBackgroundQueue, ^{
-                       for (NSDictionary *info in responseObjects) {
-                           id model = [[modelClass alloc] initWithInfo:info];
-                           [objects addObject:model];
-                       }
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           success(objects);
-                       });
-                   });
-               }
-               else {
-                   id model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
-                   success(model);
-               }
-           }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               failure(error,[[operation response] statusCode]);
-           }];
+
+    NSURLRequest *request = [super requestWithMethod:method path:path parameters:params];
+    AFHTTPRequestOperation *operation = [super HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
+        if (collection) {
+            NSArray *responseObjects = responseDictionary[kData];
+            NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
+            dispatch_async(mBackgroundQueue, ^{
+                for (NSDictionary *info in responseObjects) {
+                    id model = [[modelClass alloc] initWithInfo:info];
+                    [objects addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(objects);
+                });
+            });
+        }
+        else {
+            id model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+            success(model);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error,[[operation response] statusCode]);
+    }];
+    [self enqueueHTTPRequestOperation:operation];
+
 }
 
 
@@ -108,7 +109,7 @@
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError* error))failure
 {
-    [self getPath:@"media/popular" responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:@"media/popular" responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -120,7 +121,7 @@
                withSuccess:(void (^)(InstagramMedia *media))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"media/%@",mediaId] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/%@",mediaId] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         InstagramMedia *media = response;
         success(media);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -134,7 +135,7 @@
      withSuccess:(void (^)(InstagramUser *userDetail))success
          failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@",user.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@",user.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
         InstagramUser *userDetail = response;
         success(userDetail);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -146,7 +147,7 @@
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -162,7 +163,7 @@
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -178,7 +179,7 @@
         withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -191,8 +192,7 @@
 - (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
                         failure:(void (^)(NSError* error))failure
 {
-    #warning not yet tested
-    [self getPath:[NSString stringWithFormat:@"/users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -208,8 +208,7 @@
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure
 {
-    #warning not yet tested
-    [self getPath:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -225,14 +224,29 @@
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {
-#warning incomplete implementation
+    NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:params success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
 }
 
 - (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {
-#warning incomplete implementation
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/media/%@/comments/%@",mediaId,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
 }
 
 
@@ -242,8 +256,7 @@
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure
 {
-#warning not yet tested
-    [self getPath:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -257,14 +270,28 @@
                  withSuccess:(void (^)(NSArray *comments))success
                      failure:(void (^)(NSError* error))failure
 {
-#warning incomplete implementation
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
 }
 
 - (void)removeLike:(NSString *)likeId onMedia:(NSString *)mediaId
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {
-#warning incomplete implementation
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
 }
 
 @end
