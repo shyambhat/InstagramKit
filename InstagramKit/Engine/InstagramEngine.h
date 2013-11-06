@@ -26,7 +26,7 @@
 
 #define APP_CLIENT_ID @"fe23f3a4303d4970a52b1d2ab143f60c"//@"<Client_ID_here>"
 #define APP_CLIENT_SECRET @"1d48d27791f24518a0898f9d7f5b2810" //@"<Client_Secret_here>"
-#define APP_REDIRECT_URL @"http://instagram.com" //@"<Redirect_URL_here"
+#define APP_REDIRECT_URL @"http://instagram.com" //@"<Redirect_URL_here>"
 #define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
 #define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
 
