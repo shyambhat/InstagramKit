@@ -54,8 +54,6 @@
     }
     
 	mBackgroundQueue = dispatch_queue_create("background", NULL);
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [self setDefaultHeader:@"Accept" value:@"application/json"];
     
     return self;
 }
@@ -73,9 +71,8 @@
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
     [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
-    [super getPath:path
-        parameters:params
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSLog(@"JSON: %@", responseObject);
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
                if (collection) {
@@ -177,7 +174,7 @@
         withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self getPath:[NSString stringWithFormat:@"users/self/feed/"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
