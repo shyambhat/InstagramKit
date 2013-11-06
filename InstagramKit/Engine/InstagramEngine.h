@@ -19,14 +19,14 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
+#import "AFHTTPRequestOperationManager.h"
 
 #error Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 #define APP_CLIENT_ID @"<Client_ID_here>"
 #define APP_CLIENT_SECRET @"<Client_Secret_here>"
-#define APP_REDIRECT_URL @"<Redirect_URL_here"
+#define APP_REDIRECT_URL @"<Redirect_URL_here>"
 #define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
 #define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
 
