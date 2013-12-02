@@ -26,11 +26,11 @@
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
 
-NSString *const kInstagramKitAppClientIdConfigurationKey = @"AppClientId";
-NSString *const kInstagramKitAppRedirectUrlConfigurationKey = @"AppRedirectUrl";
+NSString *const kInstagramKitAppClientIdConfigurationKey = @"InstagramKitAppClientId";
+NSString *const kInstagramKitAppRedirectUrlConfigurationKey = @"InstagramKitAppRedirectUrl";
 
 NSString *const kInstagramKitBaseUrlConfigurationKey = @"BaseUrl";
-NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"AuthorizationUrl";
+NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"InstagramKitAuthorizationUrl";
 
 NSString *const kInstagramKitBaseUrlDefault = @"https://api.instagram.com/v1/";
 NSString *const kInstagramKitBaseUrl __deprecated = @"https://api.instagram.com/v1/";
@@ -63,8 +63,10 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 }
 
 + (NSDictionary*) sharedEngineConfiguration {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Instagram" withExtension:@"plist"];
-    return [NSDictionary dictionaryWithContentsOfURL:url];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"InstagramKit" withExtension:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL:url];
+    dict = dict ? dict : [[NSBundle mainBundle] infoDictionary];
+    return dict;
 }
 
 - (id)init {

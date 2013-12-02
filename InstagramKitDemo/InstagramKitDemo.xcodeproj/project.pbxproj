@@ -42,7 +42,6 @@
 		52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB217CD6E64001A32F7 /* InstagramUser.m */; };
 		52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */; };
 		52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */; };
-		FADB6DBC184D13980079A11B /* Instagram.plist in Resources */ = {isa = PBXBuildFile; fileRef = FADB6DBB184D13980079A11B /* Instagram.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +115,6 @@
 		52781DB217CD6E64001A32F7 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
 		52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		FADB6DBB184D13980079A11B /* Instagram.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Instagram.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,7 +198,6 @@
 				52781D4417CD6BB9001A32F7 /* InfoPlist.strings */,
 				52781D4717CD6BB9001A32F7 /* main.m */,
 				52781D4917CD6BB9001A32F7 /* InstagramKitDemo-Prefix.pch */,
-				FADB6DBB184D13980079A11B /* Instagram.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				52781D5417CD6BB9001A32F7 /* Images.xcassets in Resources */,
 				52781D4617CD6BB9001A32F7 /* InfoPlist.strings in Resources */,
 				52781D4F17CD6BB9001A32F7 /* Main.storyboard in Resources */,
-				FADB6DBC184D13980079A11B /* Instagram.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

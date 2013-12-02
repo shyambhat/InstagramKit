@@ -36,5 +36,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>InstagramKitAppClientId</key>
+	<string>&lt;fill this in&gt;</string>
+	<key>InstagramKitAppRedirectUrl</key>
+	<string>&lt;fill this in&gt;</string>
 </dict>
 </plist>
