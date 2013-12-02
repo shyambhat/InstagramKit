@@ -31,7 +31,14 @@
     mWebView.scrollView.bounces = NO;
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token", INSTAGRAM_AUTHORIZATION_URL, APP_CLIENT_ID, APP_REDIRECT_URL]];
+    
+    InstagramEngine *engine = [InstagramEngine sharedEngine];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token",
+        engine.authorizationURL,
+        engine.appClientID,
+        engine.appRedirectURL]];
+
     [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
     
 }
@@ -42,8 +49,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    InstagramEngine *engine = [InstagramEngine sharedEngine];
+
     NSString *URLString = [request.URL absoluteString];
-    if ([URLString hasPrefix:APP_REDIRECT_URL]) {
+    if ([URLString hasPrefix:engine.appRedirectURL]) {
         NSString *delimiter = @"access_token=";
         NSArray *components = [URLString componentsSeparatedByString:delimiter];
         if (components.count > 1) {

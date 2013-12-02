@@ -26,6 +26,18 @@
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
 
+NSString *const kInstagramKitAppClientIdConfigurationKey = @"AppClientId";
+NSString *const kInstagramKitAppRedirectUrlConfigurationKey = @"AppRedirectUrl";
+
+NSString *const kInstagramKitBaseUrlConfigurationKey = @"BaseUrl";
+NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"AuthorizationUrl";
+
+NSString *const kInstagramKitBaseUrlDefault = @"https://api.instagram.com/v1/";
+NSString *const kInstagramKitBaseUrl __deprecated = @"https://api.instagram.com/v1/";
+
+NSString *const kInstagramKitAuthorizationUrlDefault = @"https://api.instagram.com/oauth/authorize/";
+NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.instagram.com/oauth/authorize/";
+
 #define kData @"data"
 
 @interface InstagramEngine()
@@ -33,7 +45,10 @@
     dispatch_queue_t mBackgroundQueue;
 }
 
++ (NSDictionary*) sharedEngineConfiguration;
+
 @end
+
 @implementation InstagramEngine
 
 #pragma mark - Initializers -
@@ -42,22 +57,47 @@
     static InstagramEngine *_sharedEngine = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        _sharedEngine = [[self alloc] initWithBaseURL:[NSURL URLWithString:INSTAGRAM_BASE_URL]];
+        _sharedEngine = [[InstagramEngine alloc] init];
     });
     return _sharedEngine;
 }
 
-- (id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
++ (NSDictionary*) sharedEngineConfiguration {
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Instagram" withExtension:@"plist"];
+    return [NSDictionary dictionaryWithContentsOfURL:url];
+}
+
+- (id)init {
+    
+    NSDictionary *sharedEngineConfiguration = [InstagramEngine sharedEngineConfiguration];
+
+    id url = nil;
+
+    url = sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey];
+
+    if (url) {
+        url = [NSURL URLWithString:url];
+    } else {
+        url = [NSURL URLWithString:kInstagramKitBaseUrlDefault];
     }
-    
-	mBackgroundQueue = dispatch_queue_create("background", NULL);
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [self setDefaultHeader:@"Accept" value:@"application/json"];
-    
+
+    if (self = [super initWithBaseURL:url]) {
+
+        self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
+        self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
+
+        url = sharedEngineConfiguration[kInstagramKitAuthorizationUrlConfigurationKey];
+        self.authorizationURL = url ? url : kInstagramKitAuthorizationUrlDefault;
+
+        mBackgroundQueue = dispatch_queue_create("background", NULL);
+
+        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+        [self setDefaultHeader:@"Accept" value:@"application/json"];
+
+    }
+
     return self;
+
 }
 
 #pragma mark - Base Call -
@@ -68,11 +108,15 @@
         success:(void (^)(id response))success
         failure:(void (^)(NSError* error, NSInteger statusCode))failure
 {
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
+
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
-    [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
+
+
+    [params setObject:self.appClientID forKey:kKeyClientID];
     [super getPath:path
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
