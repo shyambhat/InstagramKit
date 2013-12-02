@@ -29,7 +29,7 @@
 NSString *const kInstagramKitAppClientIdConfigurationKey = @"InstagramKitAppClientId";
 NSString *const kInstagramKitAppRedirectUrlConfigurationKey = @"InstagramKitAppRedirectUrl";
 
-NSString *const kInstagramKitBaseUrlConfigurationKey = @"BaseUrl";
+NSString *const kInstagramKitBaseUrlConfigurationKey = @"InstagramKitBaseUrl";
 NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"InstagramKitAuthorizationUrl";
 
 NSString *const kInstagramKitBaseUrlDefault = @"https://api.instagram.com/v1/";
