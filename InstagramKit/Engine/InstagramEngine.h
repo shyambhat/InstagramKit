@@ -61,6 +61,9 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 
 #pragma mark - Users -
 
+- (void)getSelfUserDetailWithSuccess:(void (^)(InstagramUser *userDetail))success
+                             failure:(void (^)(NSError* error))failure;
+
 - (void)getUserDetails:(InstagramUser *)user
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(void (^)(NSError* error))failure;
