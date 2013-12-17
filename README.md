@@ -1,4 +1,4 @@
-InstagramKit
+InstagramKit-afn2
 ==================
  
 A neat little blocks-based Objective C wrapper for the Instagram API. 
@@ -8,10 +8,15 @@ Harnesses the power of AFNetworking under the hood.
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project, insert the right credentials in the Engine and you'll be up and running.
 
+This is a fork of the original InstagramKit developed by Shaym Bhat.  This version includes some enhancements as well as support for AFNetworking 2.0.
+
 #### Cocoapods Podfile
-```ruby
-platform :ios, '7.0'
-pod "InstagramKit", "0.1.0"
+
+Just add this to your cocoa pods profile and away you go.
+
+```
+platform :ios, '6.1'
+pod "InstagramKit-afn2", "0.1.0"
 ```
 
 Download and run the Demo Project to understand how the engine is intended to be used. 
