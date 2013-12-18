@@ -16,7 +16,7 @@ Just add this to your cocoa pods profile and away you go.
 
 ```
 platform :ios, '6.1'
-pod "InstagramKit-afn2", "0.1.1"
+pod "InstagramKit-afn2", "0.1.2"
 ```
 
 Download and run the Demo Project to understand how the engine is intended to be used. 
