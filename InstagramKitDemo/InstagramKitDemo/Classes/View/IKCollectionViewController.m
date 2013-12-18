@@ -24,7 +24,6 @@
 #import "IKCell.h"
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
-#import "IKLoginViewController.h"
 
 @interface IKCollectionViewController ()
 {
@@ -52,13 +51,29 @@
 
 - (void)requestMedia
 {
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
-        [mediaArray removeAllObjects];
-        [mediaArray addObjectsFromArray:media];
-        [self reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"Request Media Failed");
-    }];
+    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
+    
+    if (sharedEngine.accessToken)
+    {
+        [[InstagramEngine sharedEngine] getSelfFeed:10 withSuccess:^(NSArray *media) {
+            [mediaArray removeAllObjects];
+            [mediaArray addObjectsFromArray:media];
+            [self reloadData];
+        } failure:^(NSError *error) {
+            NSLog(@"Request Media Failed");
+        }];
+    }
+    else
+    {
+        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+            [mediaArray removeAllObjects];
+            [mediaArray addObjectsFromArray:media];
+            [self reloadData];
+        } failure:^(NSError *error) {
+            NSLog(@"Request Media Failed");
+        }];
+    }
+
 }
 
 - (IBAction)searchMedia
@@ -74,18 +89,6 @@
             NSLog(@"Search Media Failed");
         }];
     }
-}
-
-- (IBAction)reloadMedia
-{
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
-        [mediaArray removeAllObjects];
-        [mediaArray addObjectsFromArray:media];
-        [self reloadData];
-    }
-    failure:^(NSError *error) {
-       
-    }];
 }
 
 - (void)refreshCells
@@ -138,6 +141,67 @@
 
     } failure:^{
         NSLog(@"Loading User details failed");
+    }];
+}
+
+-(IBAction)didSelectLogin:(id)sender
+{
+    [[InstagramEngine sharedEngine] loginWithBlock:^(NSError *error) {
+    
+        if (error)
+        {
+
+            NSLog(@"Instagram login error %@ code %d", [error localizedDescription], [error code]);
+
+            NSString *title = @"Failed :(";
+            NSString *message = [NSString stringWithFormat:@"Failed to login: %@ (code %d)", [error localizedDescription], [error code]];
+
+            [[[UIAlertView alloc]
+             initWithTitle:title
+             message:message
+             delegate:nil
+             cancelButtonTitle:@"Whomp whomp"
+             otherButtonTitles: nil] show];
+
+            return;
+        }
+
+        NSLog(@"Successfully logged in with Instagram.");
+
+        [[InstagramEngine sharedEngine] getSelfUserDetailWithSuccess:^(InstagramUser *userDetail) {
+
+            NSLog(@"Instagram login error %@ code %d", [error localizedDescription], [error code]);
+            
+            NSString *title = @"It worked :)";
+            NSString *message = [NSString stringWithFormat:@"Welcome %@", userDetail.username];
+
+            [[[UIAlertView alloc]
+              initWithTitle:title
+              message:message
+              delegate:nil
+              cancelButtonTitle:@"Huzzah!"
+              otherButtonTitles: nil] show];
+            
+            [self requestMedia];
+
+        } failure:^(NSError *error) {
+
+            NSLog(@"Instagram login error %@ code %d", [error localizedDescription], [error code]);
+            
+            NSString *title = @"Failed :(";
+            NSString *message = [NSString stringWithFormat:@"Failed to get profile: %@ (code %d)", [error localizedDescription], [error code]];
+
+            [[[UIAlertView alloc]
+              initWithTitle:title
+              message:message
+              delegate:nil
+              cancelButtonTitle:@"Whomp whomp"
+              otherButtonTitles: nil] show];
+
+            return;
+            
+        }];
+
     }];
 }
 

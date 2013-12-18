@@ -21,22 +21,63 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#error Insert your Instagram App Credentials Here
-// Head over to http://instagram.com/developer/clients/manage/ to find these.
+typedef void(^InstagramLoginBlock)(NSError* error);
 
-#define APP_CLIENT_ID @"<Client_ID_here>"
-#define APP_CLIENT_SECRET @"<Client_Secret_here>"
-#define APP_REDIRECT_URL @"<Redirect_URL_here>"
-#define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
-#define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
+extern NSString *const kInstagramKitAppClientIdConfigurationKey;
+extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
 
-@class InstagramMedia;
+extern NSString *const kInstagramKitBaseUrlConfigurationKey;
+extern NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
+
+extern NSString *const kInstagramKitBaseUrl __deprecated;
+extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
+
+#define INSTAGRAM_AUTHORIZATION_URL kInstagramKitAuthorizationUrl
+#define INSTAGRAM_BASE_URL kINstagramKidAuthorizationBaseUrl
+
 @class InstagramUser;
+@class InstagramMedia;
 
-@interface InstagramEngine : AFHTTPClient
+extern NSString *const kInstagramKitErrorDomain;
+
+typedef enum
+{
+
+    // Indicates no error
+    kInstagramKitErrorCodeNone,
+
+    // Indicates that the access was not granted.  This happens when the instagram kit
+    // is not able to obtain an access_token
+    kInstagramKitErrorCodeAccessNotGranted,
+
+    // And finally some codes that are blatently plagerized from the core API
+    kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
+
+} InstagramErrorCode;
+
+@interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
-@property (nonatomic, strong) NSString *accessToken;
+
+@property (nonatomic, copy) NSString *accessToken;
+
+@property (nonatomic, copy) NSString *appClientID;
+@property (nonatomic, copy) NSString *appRedirectURL;
+
+@property (nonatomic, copy) NSString *authorizationURL;
+
+
+#pragma mark - Login -
+
+- (void) cancelLogin;
+
+- (void) loginWithBlock:(InstagramLoginBlock)block;
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            sourceApplication:(NSString *)
+            sourceApplication
+            annotation:(id)annotation;
 
 #pragma mark - Media -
 
@@ -48,6 +89,9 @@
                 failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Users -
+
+- (void)getSelfUserDetailWithSuccess:(void (^)(InstagramUser *userDetail))success
+                             failure:(void (^)(NSError* error))failure;
 
 - (void)getUserDetails:(InstagramUser *)user
            withSuccess:(void (^)(InstagramUser *userDetail))success

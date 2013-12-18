@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Collection View Controller-->
@@ -52,7 +52,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Login" id="yq2-y0-QAH">
                             <connections>
-                                <segue destination="Yqa-wS-RqO" kind="modal" id="DYT-Tp-fvF"/>
+                                <action selector="didSelectLogin:" destination="4al-wR-gxx" id="QWl-n2-tEE"/>
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Hashtags" minimumFontSize="17" id="Szz-yV-giw">
@@ -75,40 +75,6 @@
             </objects>
             <point key="canvasLocation" x="396" y="124"/>
         </scene>
-        <!--Login View Controller-->
-        <scene sceneID="vux-rx-nxM">
-            <objects>
-                <viewController id="Qfj-6N-R6z" customClass="IKLoginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fdB-M1-cIs"/>
-                        <viewControllerLayoutGuide type="bottom" id="xL7-Gk-126"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kKs-sG-aVT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-kX-gC1">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                    </view>
-                    <navigationItem key="navigationItem" id="tLF-sk-vbt">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="y5t-aw-c8c">
-                            <connections>
-                                <action selector="back:" destination="Qfj-6N-R6z" id="aTH-Mc-Pjt"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="mWebView" destination="bBm-kX-gC1" id="yHI-j6-Y99"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aGH-ev-YqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="940" y="124"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="R63-K3-3iq">
             <objects>
@@ -125,26 +91,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppB-8V-TCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="307" y="78"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="9CP-FP-i2A">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yqa-wS-RqO" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="xgb-Qe-nBg"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ER9-XT-p8R">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Qfj-6N-R6z" kind="relationship" relationship="rootViewController" id="6GZ-4R-J9G"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="856" y="78"/>
+            <point key="canvasLocation" x="-205" y="124"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

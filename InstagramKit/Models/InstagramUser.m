@@ -65,7 +65,6 @@
     } failure:^(NSError *error) {
         failure();
     }];
-    
 }
 
 - (void)loadRecentMedia:(NSInteger)count
