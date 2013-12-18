@@ -35,9 +35,8 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 #define INSTAGRAM_AUTHORIZATION_URL kInstagramKitAuthorizationUrl
 #define INSTAGRAM_BASE_URL kINstagramKidAuthorizationBaseUrl
 
-@class InstagramMedia;
 @class InstagramUser;
-
+@class InstagramMedia;
 
 extern NSString *const kInstagramKitErrorDomain;
 
