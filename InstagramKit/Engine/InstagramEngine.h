@@ -39,7 +39,7 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 @class InstagramMedia;
 @class InstagramUser;
 
-@interface InstagramEngine : AFHTTPClient
+@interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
 

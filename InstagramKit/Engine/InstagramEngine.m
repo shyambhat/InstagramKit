@@ -47,6 +47,8 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 
 + (NSDictionary*) sharedEngineConfiguration;
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
+
 @end
 
 @implementation InstagramEngine
@@ -83,7 +85,7 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
         url = [NSURL URLWithString:kInstagramKitBaseUrlDefault];
     }
 
-    if (self = [super initWithBaseURL:url]) {
+    if (self = [super init]) {
 
         self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
         self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
@@ -93,8 +95,8 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [self setDefaultHeader:@"Accept" value:@"application/json"];
+        self.operationManager.requestSerializer = [[AFJSONRequestSerializer alloc] init];
+        self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
     }
 
@@ -119,7 +121,7 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 
 
     [params setObject:self.appClientID forKey:kKeyClientID];
-    [super getPath:path
+    [self.operationManager GET:path
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
