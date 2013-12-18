@@ -51,13 +51,29 @@
 
 - (void)requestMedia
 {
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
-        [mediaArray removeAllObjects];
-        [mediaArray addObjectsFromArray:media];
-        [self reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"Request Media Failed");
-    }];
+    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
+    
+    if (sharedEngine.accessToken)
+    {
+        [[InstagramEngine sharedEngine] getSelfFeed:10 withSuccess:^(NSArray *media) {
+            [mediaArray removeAllObjects];
+            [mediaArray addObjectsFromArray:media];
+            [self reloadData];
+        } failure:^(NSError *error) {
+            NSLog(@"Request Media Failed");
+        }];
+    }
+    else
+    {
+        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+            [mediaArray removeAllObjects];
+            [mediaArray addObjectsFromArray:media];
+            [self reloadData];
+        } failure:^(NSError *error) {
+            NSLog(@"Request Media Failed");
+        }];
+    }
+
 }
 
 - (IBAction)searchMedia
@@ -73,18 +89,6 @@
             NSLog(@"Search Media Failed");
         }];
     }
-}
-
-- (IBAction)reloadMedia
-{
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
-        [mediaArray removeAllObjects];
-        [mediaArray addObjectsFromArray:media];
-        [self reloadData];
-    }
-    failure:^(NSError *error) {
-       
-    }];
 }
 
 - (void)refreshCells
@@ -177,6 +181,8 @@
               delegate:nil
               cancelButtonTitle:@"Huzzah!"
               otherButtonTitles: nil] show];
+            
+            [self requestMedia];
 
         } failure:^(NSError *error) {
 
