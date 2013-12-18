@@ -1,652 +1,1921 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		52781D3C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3B17CD6BB9001A32F7 /* Foundation.framework */; };
-		52781D3E17CD6BB9001A32F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */; };
-		52781D4017CD6BB9001A32F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3F17CD6BB9001A32F7 /* UIKit.framework */; };
-		52781D4617CD6BB9001A32F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52781D4417CD6BB9001A32F7 /* InfoPlist.strings */; };
-		52781D4817CD6BB9001A32F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D4717CD6BB9001A32F7 /* main.m */; };
-		52781D4F17CD6BB9001A32F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52781D4D17CD6BB9001A32F7 /* Main.storyboard */; };
-		52781D5417CD6BB9001A32F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52781D5317CD6BB9001A32F7 /* Images.xcassets */; };
-		52781D5B17CD6BB9001A32F7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D5A17CD6BB9001A32F7 /* XCTest.framework */; };
-		52781D5C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3B17CD6BB9001A32F7 /* Foundation.framework */; };
-		52781D5D17CD6BB9001A32F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3F17CD6BB9001A32F7 /* UIKit.framework */; };
-		52781D6517CD6BB9001A32F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52781D6317CD6BB9001A32F7 /* InfoPlist.strings */; };
-		52781D6717CD6BB9001A32F7 /* InstagramKitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D6617CD6BB9001A32F7 /* InstagramKitDemoTests.m */; };
-		52781D7C17CD6C85001A32F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7217CD6C85001A32F7 /* AppDelegate.m */; };
-		52781D7E17CD6C85001A32F7 /* IKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7717CD6C85001A32F7 /* IKCell.m */; };
-		52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */; };
-		52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */; };
-		52781D8417CD6CF9001A32F7 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8117CD6CF9001A32F7 /* fishhook.c */; };
-		52781D8517CD6CF9001A32F7 /* QuietAssertMacros.c in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8317CD6CF9001A32F7 /* QuietAssertMacros.c */; };
-		52781D9A17CD6E56001A32F7 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8817CD6E56001A32F7 /* AFHTTPClient.m */; };
-		52781D9B17CD6E56001A32F7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */; };
-		52781D9C17CD6E56001A32F7 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */; };
-		52781D9D17CD6E56001A32F7 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */; };
-		52781D9E17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */; };
-		52781D9F17CD6E56001A32F7 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */; };
-		52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */; };
-		52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */; };
-		52781DA217CD6E56001A32F7 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */; };
-		52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DA617CD6E64001A32F7 /* InstagramEngine.m */; };
-		52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */; };
-		52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAC17CD6E64001A32F7 /* InstagramComment.m */; };
-		52781DB617CD6E64001A32F7 /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAE17CD6E64001A32F7 /* InstagramMedia.m */; };
-		52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB017CD6E64001A32F7 /* InstagramModel.m */; };
-		52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB217CD6E64001A32F7 /* InstagramUser.m */; };
-		52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */; };
-		52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		52781D5E17CD6BB9001A32F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52781D3017CD6BB9001A32F7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52781D3717CD6BB9001A32F7;
-			remoteInfo = InstagramKitDemo;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		52781D3B17CD6BB9001A32F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		52781D3F17CD6BB9001A32F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		52781D4317CD6BB9001A32F7 /* InstagramKitDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InstagramKitDemo-Info.plist"; sourceTree = "<group>"; };
-		52781D4517CD6BB9001A32F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		52781D4717CD6BB9001A32F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		52781D4917CD6BB9001A32F7 /* InstagramKitDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstagramKitDemo-Prefix.pch"; sourceTree = "<group>"; };
-		52781D4E17CD6BB9001A32F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		52781D5317CD6BB9001A32F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		52781D5917CD6BB9001A32F7 /* InstagramKitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		52781D5A17CD6BB9001A32F7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		52781D6217CD6BB9001A32F7 /* InstagramKitDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InstagramKitDemoTests-Info.plist"; sourceTree = "<group>"; };
-		52781D6417CD6BB9001A32F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		52781D6617CD6BB9001A32F7 /* InstagramKitDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstagramKitDemoTests.m; sourceTree = "<group>"; };
-		52781D7117CD6C85001A32F7 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		52781D7217CD6C85001A32F7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		52781D7617CD6C85001A32F7 /* IKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCell.h; sourceTree = "<group>"; };
-		52781D7717CD6C85001A32F7 /* IKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCell.m; sourceTree = "<group>"; };
-		52781D7817CD6C85001A32F7 /* IKCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCollectionViewController.h; sourceTree = "<group>"; };
-		52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCollectionViewController.m; sourceTree = "<group>"; };
-		52781D7A17CD6C85001A32F7 /* IKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKLoginViewController.h; sourceTree = "<group>"; };
-		52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKLoginViewController.m; sourceTree = "<group>"; };
-		52781D8117CD6CF9001A32F7 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
-		52781D8217CD6CF9001A32F7 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
-		52781D8317CD6CF9001A32F7 /* QuietAssertMacros.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = QuietAssertMacros.c; sourceTree = "<group>"; };
-		52781D8717CD6E56001A32F7 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
-		52781D8817CD6E56001A32F7 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
-		52781D8917CD6E56001A32F7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		52781D8B17CD6E56001A32F7 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
-		52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
-		52781D8D17CD6E56001A32F7 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
-		52781D8F17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		52781D9117CD6E56001A32F7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		52781D9217CD6E56001A32F7 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
-		52781D9417CD6E56001A32F7 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		52781D9617CD6E56001A32F7 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
-		52781D9817CD6E56001A32F7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		52781DA517CD6E64001A32F7 /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
-		52781DA617CD6E64001A32F7 /* InstagramEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngine.m; sourceTree = "<group>"; };
-		52781DA717CD6E64001A32F7 /* InstagramKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramKit.h; sourceTree = "<group>"; };
-		52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKUserInPhoto.h; sourceTree = "<group>"; };
-		52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKUserInPhoto.m; sourceTree = "<group>"; };
-		52781DAB17CD6E64001A32F7 /* InstagramComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramComment.h; sourceTree = "<group>"; };
-		52781DAC17CD6E64001A32F7 /* InstagramComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramComment.m; sourceTree = "<group>"; };
-		52781DAD17CD6E64001A32F7 /* InstagramMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramMedia.h; sourceTree = "<group>"; };
-		52781DAE17CD6E64001A32F7 /* InstagramMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramMedia.m; sourceTree = "<group>"; };
-		52781DAF17CD6E64001A32F7 /* InstagramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramModel.h; sourceTree = "<group>"; };
-		52781DB017CD6E64001A32F7 /* InstagramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramModel.m; sourceTree = "<group>"; };
-		52781DB117CD6E64001A32F7 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUser.h; sourceTree = "<group>"; };
-		52781DB217CD6E64001A32F7 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
-		52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		52781D3517CD6BB9001A32F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781D4017CD6BB9001A32F7 /* UIKit.framework in Frameworks */,
-				52781D3C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */,
-				52781D3E17CD6BB9001A32F7 /* CoreGraphics.framework in Frameworks */,
-				52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */,
-				52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52781D5617CD6BB9001A32F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781D5B17CD6BB9001A32F7 /* XCTest.framework in Frameworks */,
-				52781D5D17CD6BB9001A32F7 /* UIKit.framework in Frameworks */,
-				52781D5C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		52781D2F17CD6BB9001A32F7 = {
-			isa = PBXGroup;
-			children = (
-				52781DA317CD6E64001A32F7 /* InstagramKit */,
-				52781D8617CD6E56001A32F7 /* AFNetworking */,
-				52781D4117CD6BB9001A32F7 /* InstagramKitDemo */,
-				52781D6017CD6BB9001A32F7 /* InstagramKitDemoTests */,
-				52781D3A17CD6BB9001A32F7 /* Frameworks */,
-				52781D3917CD6BB9001A32F7 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		52781D3917CD6BB9001A32F7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */,
-				52781D5917CD6BB9001A32F7 /* InstagramKitDemoTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		52781D3A17CD6BB9001A32F7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */,
-				52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */,
-				52781D3B17CD6BB9001A32F7 /* Foundation.framework */,
-				52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */,
-				52781D3F17CD6BB9001A32F7 /* UIKit.framework */,
-				52781D5A17CD6BB9001A32F7 /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		52781D4117CD6BB9001A32F7 /* InstagramKitDemo */ = {
-			isa = PBXGroup;
-			children = (
-				52781D7017CD6C85001A32F7 /* Classes */,
-				52781D4D17CD6BB9001A32F7 /* Main.storyboard */,
-				52781D5317CD6BB9001A32F7 /* Images.xcassets */,
-				52781D4217CD6BB9001A32F7 /* Supporting Files */,
-			);
-			path = InstagramKitDemo;
-			sourceTree = "<group>";
-		};
-		52781D4217CD6BB9001A32F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				52781D8117CD6CF9001A32F7 /* fishhook.c */,
-				52781D8217CD6CF9001A32F7 /* fishhook.h */,
-				52781D8317CD6CF9001A32F7 /* QuietAssertMacros.c */,
-				52781D4317CD6BB9001A32F7 /* InstagramKitDemo-Info.plist */,
-				52781D4417CD6BB9001A32F7 /* InfoPlist.strings */,
-				52781D4717CD6BB9001A32F7 /* main.m */,
-				52781D4917CD6BB9001A32F7 /* InstagramKitDemo-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		52781D6017CD6BB9001A32F7 /* InstagramKitDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				52781D6617CD6BB9001A32F7 /* InstagramKitDemoTests.m */,
-				52781D6117CD6BB9001A32F7 /* Supporting Files */,
-			);
-			path = InstagramKitDemoTests;
-			sourceTree = "<group>";
-		};
-		52781D6117CD6BB9001A32F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				52781D6217CD6BB9001A32F7 /* InstagramKitDemoTests-Info.plist */,
-				52781D6317CD6BB9001A32F7 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		52781D7017CD6C85001A32F7 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				52781D7117CD6C85001A32F7 /* AppDelegate.h */,
-				52781D7217CD6C85001A32F7 /* AppDelegate.m */,
-				52781D7417CD6C85001A32F7 /* View */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		52781D7417CD6C85001A32F7 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				52781D7517CD6C85001A32F7 /* CollectionView Cells */,
-				52781D7817CD6C85001A32F7 /* IKCollectionViewController.h */,
-				52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */,
-				52781D7A17CD6C85001A32F7 /* IKLoginViewController.h */,
-				52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		52781D7517CD6C85001A32F7 /* CollectionView Cells */ = {
-			isa = PBXGroup;
-			children = (
-				52781D7617CD6C85001A32F7 /* IKCell.h */,
-				52781D7717CD6C85001A32F7 /* IKCell.m */,
-			);
-			path = "CollectionView Cells";
-			sourceTree = "<group>";
-		};
-		52781D8617CD6E56001A32F7 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				52781D8717CD6E56001A32F7 /* AFHTTPClient.h */,
-				52781D8817CD6E56001A32F7 /* AFHTTPClient.m */,
-				52781D8917CD6E56001A32F7 /* AFHTTPRequestOperation.h */,
-				52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */,
-				52781D8B17CD6E56001A32F7 /* AFImageRequestOperation.h */,
-				52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */,
-				52781D8D17CD6E56001A32F7 /* AFJSONRequestOperation.h */,
-				52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */,
-				52781D8F17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.h */,
-				52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */,
-				52781D9117CD6E56001A32F7 /* AFNetworking.h */,
-				52781D9217CD6E56001A32F7 /* AFPropertyListRequestOperation.h */,
-				52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */,
-				52781D9417CD6E56001A32F7 /* AFURLConnectionOperation.h */,
-				52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */,
-				52781D9617CD6E56001A32F7 /* AFXMLRequestOperation.h */,
-				52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */,
-				52781D9817CD6E56001A32F7 /* UIImageView+AFNetworking.h */,
-				52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		52781DA317CD6E64001A32F7 /* InstagramKit */ = {
-			isa = PBXGroup;
-			children = (
-				52781DA717CD6E64001A32F7 /* InstagramKit.h */,
-				52781DA417CD6E64001A32F7 /* Engine */,
-				52781DA817CD6E64001A32F7 /* Models */,
-			);
-			name = InstagramKit;
-			path = ../InstagramKit;
-			sourceTree = "<group>";
-		};
-		52781DA417CD6E64001A32F7 /* Engine */ = {
-			isa = PBXGroup;
-			children = (
-				52781DA517CD6E64001A32F7 /* InstagramEngine.h */,
-				52781DA617CD6E64001A32F7 /* InstagramEngine.m */,
-			);
-			path = Engine;
-			sourceTree = "<group>";
-		};
-		52781DA817CD6E64001A32F7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */,
-				52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */,
-				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
-				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
-				52781DAD17CD6E64001A32F7 /* InstagramMedia.h */,
-				52781DAE17CD6E64001A32F7 /* InstagramMedia.m */,
-				52781DAF17CD6E64001A32F7 /* InstagramModel.h */,
-				52781DB017CD6E64001A32F7 /* InstagramModel.m */,
-				52781DB117CD6E64001A32F7 /* InstagramUser.h */,
-				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		52781D3717CD6BB9001A32F7 /* InstagramKitDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52781D6A17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemo" */;
-			buildPhases = (
-				52781D3417CD6BB9001A32F7 /* Sources */,
-				52781D3517CD6BB9001A32F7 /* Frameworks */,
-				52781D3617CD6BB9001A32F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = InstagramKitDemo;
-			productName = InstagramKitDemo;
-			productReference = 52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		52781D5817CD6BB9001A32F7 /* InstagramKitDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52781D6D17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemoTests" */;
-			buildPhases = (
-				52781D5517CD6BB9001A32F7 /* Sources */,
-				52781D5617CD6BB9001A32F7 /* Frameworks */,
-				52781D5717CD6BB9001A32F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52781D5F17CD6BB9001A32F7 /* PBXTargetDependency */,
-			);
-			name = InstagramKitDemoTests;
-			productName = InstagramKitDemoTests;
-			productReference = 52781D5917CD6BB9001A32F7 /* InstagramKitDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		52781D3017CD6BB9001A32F7 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Shyam Bhat";
-				TargetAttributes = {
-					52781D5817CD6BB9001A32F7 = {
-						TestTargetID = 52781D3717CD6BB9001A32F7;
-					};
-				};
-			};
-			buildConfigurationList = 52781D3317CD6BB9001A32F7 /* Build configuration list for PBXProject "InstagramKitDemo" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = 52781D2F17CD6BB9001A32F7;
-			productRefGroup = 52781D3917CD6BB9001A32F7 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				52781D3717CD6BB9001A32F7 /* InstagramKitDemo */,
-				52781D5817CD6BB9001A32F7 /* InstagramKitDemoTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		52781D3617CD6BB9001A32F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781D5417CD6BB9001A32F7 /* Images.xcassets in Resources */,
-				52781D4617CD6BB9001A32F7 /* InfoPlist.strings in Resources */,
-				52781D4F17CD6BB9001A32F7 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52781D5717CD6BB9001A32F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781D6517CD6BB9001A32F7 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		52781D3417CD6BB9001A32F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */,
-				52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */,
-				52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */,
-				52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */,
-				52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */,
-				52781D9D17CD6E56001A32F7 /* AFJSONRequestOperation.m in Sources */,
-				52781D9B17CD6E56001A32F7 /* AFHTTPRequestOperation.m in Sources */,
-				52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */,
-				52781D7C17CD6C85001A32F7 /* AppDelegate.m in Sources */,
-				52781D8417CD6CF9001A32F7 /* fishhook.c in Sources */,
-				52781D4817CD6BB9001A32F7 /* main.m in Sources */,
-				52781D8517CD6CF9001A32F7 /* QuietAssertMacros.c in Sources */,
-				52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */,
-				52781D9C17CD6E56001A32F7 /* AFImageRequestOperation.m in Sources */,
-				52781D9E17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				52781DA217CD6E56001A32F7 /* UIImageView+AFNetworking.m in Sources */,
-				52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */,
-				52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */,
-				52781D7E17CD6C85001A32F7 /* IKCell.m in Sources */,
-				52781DB617CD6E64001A32F7 /* InstagramMedia.m in Sources */,
-				52781D9A17CD6E56001A32F7 /* AFHTTPClient.m in Sources */,
-				52781D9F17CD6E56001A32F7 /* AFPropertyListRequestOperation.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52781D5517CD6BB9001A32F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52781D6717CD6BB9001A32F7 /* InstagramKitDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		52781D5F17CD6BB9001A32F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52781D3717CD6BB9001A32F7 /* InstagramKitDemo */;
-			targetProxy = 52781D5E17CD6BB9001A32F7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		52781D4417CD6BB9001A32F7 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52781D4517CD6BB9001A32F7 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		52781D4D17CD6BB9001A32F7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52781D4E17CD6BB9001A32F7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		52781D6317CD6BB9001A32F7 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52781D6417CD6BB9001A32F7 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		52781D6817CD6BB9001A32F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		52781D6917CD6BB9001A32F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		52781D6B17CD6BB9001A32F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
-				INFOPLIST_FILE = "InstagramKitDemo/InstagramKitDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		52781D6C17CD6BB9001A32F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
-				INFOPLIST_FILE = "InstagramKitDemo/InstagramKitDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		52781D6E17CD6BB9001A32F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InstagramKitDemo.app/InstagramKitDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "InstagramKitDemoTests/InstagramKitDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		52781D6F17CD6BB9001A32F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InstagramKitDemo.app/InstagramKitDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
-				INFOPLIST_FILE = "InstagramKitDemoTests/InstagramKitDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		52781D3317CD6BB9001A32F7 /* Build configuration list for PBXProject "InstagramKitDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52781D6817CD6BB9001A32F7 /* Debug */,
-				52781D6917CD6BB9001A32F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52781D6A17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52781D6B17CD6BB9001A32F7 /* Debug */,
-				52781D6C17CD6BB9001A32F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52781D6D17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52781D6E17CD6BB9001A32F7 /* Debug */,
-				52781D6F17CD6BB9001A32F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 52781D3017CD6BB9001A32F7 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0428948E4D90431F8AAB3BE8</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Pods-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>173D893006EF4AAAA872360E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A4836183621A40E6A3882484</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D2F17CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781DA317CD6E64001A32F7</string>
+				<string>52781D8617CD6E56001A32F7</string>
+				<string>52781D4117CD6BB9001A32F7</string>
+				<string>52781D6017CD6BB9001A32F7</string>
+				<string>52781D3A17CD6BB9001A32F7</string>
+				<string>52781D3917CD6BB9001A32F7</string>
+				<string>78303E5978024B31B009D9D1</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D3017CD6BB9001A32F7</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0500</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Shyam Bhat</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>52781D5817CD6BB9001A32F7</key>
+					<dict>
+						<key>TestTargetID</key>
+						<string>52781D3717CD6BB9001A32F7</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>52781D3317CD6BB9001A32F7</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>52781D2F17CD6BB9001A32F7</string>
+			<key>productRefGroup</key>
+			<string>52781D3917CD6BB9001A32F7</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>52781D3717CD6BB9001A32F7</string>
+				<string>52781D5817CD6BB9001A32F7</string>
+			</array>
+		</dict>
+		<key>52781D3317CD6BB9001A32F7</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>52781D6817CD6BB9001A32F7</string>
+				<string>52781D6917CD6BB9001A32F7</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>52781D3417CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781DA017CD6E56001A32F7</string>
+				<string>52781DA117CD6E56001A32F7</string>
+				<string>52781DB517CD6E64001A32F7</string>
+				<string>52781DB717CD6E64001A32F7</string>
+				<string>52781DB317CD6E64001A32F7</string>
+				<string>52781D9D17CD6E56001A32F7</string>
+				<string>52781D9B17CD6E56001A32F7</string>
+				<string>52781DB817CD6E64001A32F7</string>
+				<string>52781D7C17CD6C85001A32F7</string>
+				<string>52781D8417CD6CF9001A32F7</string>
+				<string>52781D4817CD6BB9001A32F7</string>
+				<string>52781D8517CD6CF9001A32F7</string>
+				<string>52781D7F17CD6C85001A32F7</string>
+				<string>52781D9C17CD6E56001A32F7</string>
+				<string>52781D9E17CD6E56001A32F7</string>
+				<string>52781DA217CD6E56001A32F7</string>
+				<string>52781D8017CD6C85001A32F7</string>
+				<string>52781DB417CD6E64001A32F7</string>
+				<string>52781D7E17CD6C85001A32F7</string>
+				<string>52781DB617CD6E64001A32F7</string>
+				<string>52781D9A17CD6E56001A32F7</string>
+				<string>52781D9F17CD6E56001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D3517CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781D4017CD6BB9001A32F7</string>
+				<string>52781D3C17CD6BB9001A32F7</string>
+				<string>52781D3E17CD6BB9001A32F7</string>
+				<string>52781DBC17CD6E9B001A32F7</string>
+				<string>52781DBA17CD6E8D001A32F7</string>
+				<string>173D893006EF4AAAA872360E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D3617CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781D5417CD6BB9001A32F7</string>
+				<string>52781D4617CD6BB9001A32F7</string>
+				<string>52781D4F17CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D3717CD6BB9001A32F7</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>52781D6A17CD6BB9001A32F7</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A181D67C98294C16A045A0B9</string>
+				<string>52781D3417CD6BB9001A32F7</string>
+				<string>52781D3517CD6BB9001A32F7</string>
+				<string>52781D3617CD6BB9001A32F7</string>
+				<string>0428948E4D90431F8AAB3BE8</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>InstagramKitDemo</string>
+			<key>productName</key>
+			<string>InstagramKitDemo</string>
+			<key>productReference</key>
+			<string>52781D3817CD6BB9001A32F7</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>52781D3817CD6BB9001A32F7</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>InstagramKitDemo.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>52781D3917CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D3817CD6BB9001A32F7</string>
+				<string>52781D5917CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D3A17CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781DBB17CD6E9B001A32F7</string>
+				<string>52781DB917CD6E8D001A32F7</string>
+				<string>52781D3B17CD6BB9001A32F7</string>
+				<string>52781D3D17CD6BB9001A32F7</string>
+				<string>52781D3F17CD6BB9001A32F7</string>
+				<string>52781D5A17CD6BB9001A32F7</string>
+				<string>A4836183621A40E6A3882484</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D3B17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>52781D3C17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D3B17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D3D17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>52781D3E17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D3D17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D3F17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>52781D4017CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D3F17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D4117CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D7017CD6C85001A32F7</string>
+				<string>52781D4D17CD6BB9001A32F7</string>
+				<string>52781D5317CD6BB9001A32F7</string>
+				<string>52781D4217CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>InstagramKitDemo</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4217CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D8117CD6CF9001A32F7</string>
+				<string>52781D8217CD6CF9001A32F7</string>
+				<string>52781D8317CD6CF9001A32F7</string>
+				<string>52781D4317CD6BB9001A32F7</string>
+				<string>52781D4417CD6BB9001A32F7</string>
+				<string>52781D4717CD6BB9001A32F7</string>
+				<string>52781D4917CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4317CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>InstagramKitDemo-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4417CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D4517CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4517CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4617CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D4417CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D4717CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4817CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D4717CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D4917CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramKitDemo-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4D17CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D4E17CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4E17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D4F17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D4D17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D5317CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D5417CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D5317CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D5517CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781D6717CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D5617CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781D5B17CD6BB9001A32F7</string>
+				<string>52781D5D17CD6BB9001A32F7</string>
+				<string>52781D5C17CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D5717CD6BB9001A32F7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>52781D6517CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>52781D5817CD6BB9001A32F7</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>52781D6D17CD6BB9001A32F7</string>
+			<key>buildPhases</key>
+			<array>
+				<string>52781D5517CD6BB9001A32F7</string>
+				<string>52781D5617CD6BB9001A32F7</string>
+				<string>52781D5717CD6BB9001A32F7</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>52781D5F17CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>InstagramKitDemoTests</string>
+			<key>productName</key>
+			<string>InstagramKitDemoTests</string>
+			<key>productReference</key>
+			<string>52781D5917CD6BB9001A32F7</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>52781D5917CD6BB9001A32F7</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>InstagramKitDemoTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>52781D5A17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>52781D5B17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D5A17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D5C17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D3B17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D5D17CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D3F17CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D5E17CD6BB9001A32F7</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>52781D3017CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>52781D3717CD6BB9001A32F7</string>
+			<key>remoteInfo</key>
+			<string>InstagramKitDemo</string>
+		</dict>
+		<key>52781D5F17CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>52781D3717CD6BB9001A32F7</string>
+			<key>targetProxy</key>
+			<string>52781D5E17CD6BB9001A32F7</string>
+		</dict>
+		<key>52781D6017CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D6617CD6BB9001A32F7</string>
+				<string>52781D6117CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>InstagramKitDemoTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6117CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D6217CD6BB9001A32F7</string>
+				<string>52781D6317CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6217CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>InstagramKitDemoTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6317CD6BB9001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D6417CD6BB9001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6417CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6517CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D6317CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D6617CD6BB9001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramKitDemoTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D6717CD6BB9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D6617CD6BB9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D6817CD6BB9001A32F7</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>52781D6917CD6BB9001A32F7</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>52781D6A17CD6BB9001A32F7</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>52781D6B17CD6BB9001A32F7</string>
+				<string>52781D6C17CD6BB9001A32F7</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>52781D6B17CD6BB9001A32F7</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>78303E5978024B31B009D9D1</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>52781D6C17CD6BB9001A32F7</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>78303E5978024B31B009D9D1</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>52781D6D17CD6BB9001A32F7</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>52781D6E17CD6BB9001A32F7</string>
+				<string>52781D6F17CD6BB9001A32F7</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>52781D6E17CD6BB9001A32F7</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/InstagramKitDemo.app/InstagramKitDemo</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>InstagramKitDemoTests/InstagramKitDemoTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>52781D6F17CD6BB9001A32F7</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/InstagramKitDemo.app/InstagramKitDemo</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>InstagramKitDemo/InstagramKitDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>InstagramKitDemoTests/InstagramKitDemoTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>52781D7017CD6C85001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D7117CD6C85001A32F7</string>
+				<string>52781D7217CD6C85001A32F7</string>
+				<string>52781D7417CD6C85001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Classes</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7117CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7217CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7417CD6C85001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D7517CD6C85001A32F7</string>
+				<string>52781D7817CD6C85001A32F7</string>
+				<string>52781D7917CD6C85001A32F7</string>
+				<string>52781D7A17CD6C85001A32F7</string>
+				<string>52781D7B17CD6C85001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>View</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7517CD6C85001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D7617CD6C85001A32F7</string>
+				<string>52781D7717CD6C85001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>CollectionView Cells</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7617CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IKCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7717CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IKCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7817CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IKCollectionViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7917CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IKCollectionViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7A17CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IKLoginViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7B17CD6C85001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IKLoginViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D7C17CD6C85001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D7217CD6C85001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D7E17CD6C85001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D7717CD6C85001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D7F17CD6C85001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D7917CD6C85001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D8017CD6C85001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D7B17CD6C85001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D8117CD6CF9001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.c</string>
+			<key>path</key>
+			<string>fishhook.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8217CD6CF9001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>fishhook.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8317CD6CF9001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.c</string>
+			<key>path</key>
+			<string>QuietAssertMacros.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8417CD6CF9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8117CD6CF9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D8517CD6CF9001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8317CD6CF9001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D8617CD6E56001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781D8717CD6E56001A32F7</string>
+				<string>52781D8817CD6E56001A32F7</string>
+				<string>52781D8917CD6E56001A32F7</string>
+				<string>52781D8A17CD6E56001A32F7</string>
+				<string>52781D8B17CD6E56001A32F7</string>
+				<string>52781D8C17CD6E56001A32F7</string>
+				<string>52781D8D17CD6E56001A32F7</string>
+				<string>52781D8E17CD6E56001A32F7</string>
+				<string>52781D8F17CD6E56001A32F7</string>
+				<string>52781D9017CD6E56001A32F7</string>
+				<string>52781D9117CD6E56001A32F7</string>
+				<string>52781D9217CD6E56001A32F7</string>
+				<string>52781D9317CD6E56001A32F7</string>
+				<string>52781D9417CD6E56001A32F7</string>
+				<string>52781D9517CD6E56001A32F7</string>
+				<string>52781D9617CD6E56001A32F7</string>
+				<string>52781D9717CD6E56001A32F7</string>
+				<string>52781D9817CD6E56001A32F7</string>
+				<string>52781D9917CD6E56001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>AFNetworking</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8717CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFHTTPClient.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8817CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFHTTPClient.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8917CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFHTTPRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8A17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFHTTPRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8B17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFImageRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8C17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFImageRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8D17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFJSONRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8E17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFJSONRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D8F17CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFNetworkActivityIndicatorManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9017CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFNetworkActivityIndicatorManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9117CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9217CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFPropertyListRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9317CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFPropertyListRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9417CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFURLConnectionOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9517CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFURLConnectionOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9617CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>AFXMLRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9717CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>AFXMLRequestOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9817CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>UIImageView+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9917CD6E56001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>UIImageView+AFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781D9A17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8817CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D9B17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8A17CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D9C17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8C17CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D9D17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D8E17CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D9E17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D9017CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781D9F17CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D9317CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DA017CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D9517CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DA117CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D9717CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DA217CD6E56001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781D9917CD6E56001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DA317CD6E64001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781DA717CD6E64001A32F7</string>
+				<string>52781DA417CD6E64001A32F7</string>
+				<string>52781DA817CD6E64001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>InstagramKit</string>
+			<key>path</key>
+			<string>../InstagramKit</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA417CD6E64001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781DA517CD6E64001A32F7</string>
+				<string>52781DA617CD6E64001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Engine</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA517CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramEngine.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA617CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramEngine.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA717CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramKit.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA817CD6E64001A32F7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>52781DA917CD6E64001A32F7</string>
+				<string>52781DAA17CD6E64001A32F7</string>
+				<string>52781DAB17CD6E64001A32F7</string>
+				<string>52781DAC17CD6E64001A32F7</string>
+				<string>52781DAD17CD6E64001A32F7</string>
+				<string>52781DAE17CD6E64001A32F7</string>
+				<string>52781DAF17CD6E64001A32F7</string>
+				<string>52781DB017CD6E64001A32F7</string>
+				<string>52781DB117CD6E64001A32F7</string>
+				<string>52781DB217CD6E64001A32F7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Models</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DA917CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IKUserInPhoto.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAA17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IKUserInPhoto.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAB17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramComment.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAC17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramComment.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAD17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramMedia.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAE17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramMedia.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DAF17CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramModel.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DB017CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramModel.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DB117CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>InstagramUser.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DB217CD6E64001A32F7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>InstagramUser.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52781DB317CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DA617CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB417CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DAA17CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB517CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DAC17CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB617CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DAE17CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB717CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DB017CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB817CD6E64001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DB217CD6E64001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DB917CD6E8D001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>SystemConfiguration.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/SystemConfiguration.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>52781DBA17CD6E8D001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DB917CD6E8D001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>52781DBB17CD6E9B001A32F7</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>MobileCoreServices.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/MobileCoreServices.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>52781DBC17CD6E9B001A32F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52781DBB17CD6E9B001A32F7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>78303E5978024B31B009D9D1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A181D67C98294C16A045A0B9</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>A4836183621A40E6A3882484</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>52781D3017CD6BB9001A32F7</string>
+</dict>
+</plist>
