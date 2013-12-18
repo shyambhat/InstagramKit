@@ -306,7 +306,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
+    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{kCount:[NSString stringWithFormat:@"%d",count]} success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
