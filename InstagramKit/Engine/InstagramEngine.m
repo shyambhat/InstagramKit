@@ -37,6 +37,7 @@ NSString *const kInstagramKitBaseUrl __deprecated = @"https://api.instagram.com/
 
 NSString *const kInstagramKitAuthorizationUrlDefault = @"https://api.instagram.com/oauth/authorize/";
 NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.instagram.com/oauth/authorize/";
+NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
 #define kData @"data"
 
@@ -47,6 +48,7 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 
 + (NSDictionary*) sharedEngineConfiguration;
 
+@property (nonatomic, copy) InstagramLoginBlock instagramLoginBlock;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
 
 @end
@@ -87,6 +89,9 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 
     if (self = [super init]) {
 
+        NSAssert(url, @"Base URL not valid: %@", sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey]);
+        self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+
         self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
         self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
 
@@ -98,10 +103,107 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
         self.operationManager.requestSerializer = [[AFJSONRequestSerializer alloc] init];
         self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
+        NSAssert(self.appClientID, @"App Client ID invalid: %@", self.appClientID);
+        NSAssert([NSURL URLWithString:self.appRedirectURL], @"App Redirect URL invalid: %@", self.appRedirectURL);
+        NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
+
     }
 
     return self;
 
+}
+
+
+#pragma mark - Login - 
+
+- (void) cancelLogin
+{
+
+    if (self.instagramLoginBlock)
+    {
+
+        NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
+
+        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
+            NSLocalizedDescriptionKey: localizedDescription
+        }];
+
+        self.instagramLoginBlock(error);
+
+    }
+
+}
+
+- (void) loginWithBlock:(InstagramLoginBlock)block
+{
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token",
+        self.authorizationURL,
+        self.appClientID,
+        self.appRedirectURL]];
+
+    self.instagramLoginBlock = block;
+
+    [[UIApplication sharedApplication] openURL:url];
+
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+
+    NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
+
+    if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
+    {
+        return NO;
+    }
+
+    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
+    
+    if (accessToken)
+    {
+        self.accessToken = accessToken;
+        if (self.instagramLoginBlock) self.instagramLoginBlock(nil);
+    }
+    else if (self.instagramLoginBlock)
+    {
+
+        NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
+
+        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeAccessNotGranted userInfo:@{
+            NSLocalizedDescriptionKey: localizedDescription
+        }];
+
+        self.instagramLoginBlock(error);
+
+    }
+
+    self.instagramLoginBlock = nil;
+    return YES;
+
+}
+
+-(NSDictionary*) queryStringParametersFromString:(NSString*)string {
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    for (NSString * param in [string componentsSeparatedByString:@"&"]) {
+        
+        NSArray *pairs = [param componentsSeparatedByString:@"="];
+        if ([pairs count] != 2) continue;
+        
+        NSString *key = [pairs[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *value = [pairs[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+        [dict setObject:value forKey:key];
+        
+    }
+    
+    return dict;
+    
 }
 
 #pragma mark - Base Call -

@@ -21,8 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-// #error Insert your Instagram App Credentials Here
-// Head over to http://instagram.com/developer/clients/manage/ to find these.
+typedef void(^InstagramLoginBlock)(NSError* error);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -39,6 +38,24 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 @class InstagramMedia;
 @class InstagramUser;
 
+
+extern NSString *const kInstagramKitErrorDomain;
+
+typedef enum
+{
+
+    // Indicates no error
+    kInstagramKitErrorCodeNone,
+
+    // Indicates that the access was not granted.  This happens when the instagram kit
+    // is not able to obtain an access_token
+    kInstagramKitErrorCodeAccessNotGranted,
+
+    // And finally some codes that are blatently plagerized from the core API
+    kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
+
+} InstagramErrorCode;
+
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
@@ -49,6 +66,19 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 @property (nonatomic, copy) NSString *appRedirectURL;
 
 @property (nonatomic, copy) NSString *authorizationURL;
+
+
+#pragma mark - Login -
+
+- (void) cancelLogin;
+
+- (void) loginWithBlock:(InstagramLoginBlock)block;
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            sourceApplication:(NSString *)
+            sourceApplication
+            annotation:(id)annotation;
 
 #pragma mark - Media -
 

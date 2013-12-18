@@ -36,9 +36,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>InstagramKitAppClientId</key>
-	<string>&lt;fill this in&gt;</string>
-	<key>InstagramKitAppRedirectUrl</key>
-	<string>&lt;fill this in&gt;</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>igkitios</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
