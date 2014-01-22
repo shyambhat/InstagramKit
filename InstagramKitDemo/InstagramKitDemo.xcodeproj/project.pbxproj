@@ -42,6 +42,7 @@
 		52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB217CD6E64001A32F7 /* InstagramUser.m */; };
 		52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */; };
 		52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */; };
+		82CC4B101825A6C600C36636 /* InstagramLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CC4B0F1825A6C600C36636 /* InstagramLike.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,8 @@
 		52781DB217CD6E64001A32F7 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
 		52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		82CC4B0E1825A6C600C36636 /* InstagramLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramLike.h; sourceTree = "<group>"; };
+		82CC4B0F1825A6C600C36636 /* InstagramLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramLike.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,14 +305,16 @@
 			children = (
 				52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */,
 				52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */,
-				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
-				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
 				52781DAD17CD6E64001A32F7 /* InstagramMedia.h */,
 				52781DAE17CD6E64001A32F7 /* InstagramMedia.m */,
 				52781DAF17CD6E64001A32F7 /* InstagramModel.h */,
 				52781DB017CD6E64001A32F7 /* InstagramModel.m */,
 				52781DB117CD6E64001A32F7 /* InstagramUser.h */,
 				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
+				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
+				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
+				82CC4B0E1825A6C600C36636 /* InstagramLike.h */,
+				82CC4B0F1825A6C600C36636 /* InstagramLike.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */,
+				82CC4B101825A6C600C36636 /* InstagramLike.m in Sources */,
 				52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */,
 				52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */,
 				52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */,
