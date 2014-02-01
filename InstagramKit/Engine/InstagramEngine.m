@@ -22,7 +22,6 @@
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
 #import "InstagramComment.h"
-#import "InstagramLike.h"
 #import "InstagramTag.h"
 
 #define kKeyClientID @"client_id"
@@ -230,7 +229,7 @@
         withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/self/feed"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -243,7 +242,7 @@
 - (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
                         failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/self/media/liked"] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -255,11 +254,11 @@
 
 #pragma mark - Comments -
 
-- (void)getCommentsOnMedia:(NSString *)mediaId
+- (void)getCommentsOnMedia:(InstagramMedia *)media
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/%@/comments",media.Id] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -276,7 +275,7 @@
               failure:(void (^)(NSError* error))failure
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
-    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:params success:^(id response) {
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:params success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -290,7 +289,7 @@
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/media/%@/comments/%@",mediaId,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/comments/%@",mediaId,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -302,11 +301,11 @@
 
 #pragma mark - Likes -
 
-- (void)getLikesOnMedia:(NSString *)mediaId
-               withSuccess:(void (^)(NSArray *comments))success
+- (void)getLikesOnMedia:(InstagramMedia *)media
+               withSuccess:(void (^)(NSArray *likedUsers))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -316,11 +315,11 @@
     
 }
 
-- (void)likeMedia:(NSString *)mediaId
+- (void)likeMedia:(InstagramMedia *)media
                  withSuccess:(void (^)(NSArray *comments))success
                      failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -330,11 +329,11 @@
     
 }
 
-- (void)unlikeOnMedia:(NSString *)mediaId
+- (void)unlikeOnMedia:(InstagramMedia *)media
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/media/%@/likes",mediaId] responseModel:[InstagramLike class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         

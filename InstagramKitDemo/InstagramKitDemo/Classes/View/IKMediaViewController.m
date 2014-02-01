@@ -19,10 +19,9 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKMediaViewController.h"
-#import "InstagramMedia.h"
 #import "IKMediaCell.h"
 #import "UIImageView+AFNetworking.h"
-#import "InstagramUser.h"
+#import "InstagramKit.h"
 
 @interface IKMediaViewController ()
 
@@ -36,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testLoadCounts];
+    [self testComments];
 }
 
 - (void)testLoadCounts
@@ -49,6 +48,28 @@
 
 }
 
+- (void)testComments
+{
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
+        for (InstagramComment *comment in comments) {
+            NSLog(@"@%@: %@",comment.user.username, comment.text);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Could not load comments");
+    }];
+}
+
+- (void)testLikes
+{
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
+        for (InstagramUser *user in likedUsers) {
+            NSLog(@"Like : @%@",user.username);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Could not load likes");
+    }];
+
+}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
 

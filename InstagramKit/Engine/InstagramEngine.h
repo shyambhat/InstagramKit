@@ -22,11 +22,12 @@
 #import "AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
 
-#error Insert your Instagram App Credentials Here
+#warning Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
-#define APP_CLIENT_ID @"<Client_ID_here>"
-#define APP_REDIRECT_URL @"<Redirect_URL_here>"
+#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
+#define APP_REDIRECT_URL @"http://instagram.com"
+
 #define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
 #define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
 
@@ -86,7 +87,7 @@
 
 #pragma mark - Comments -
 
-- (void)getCommentsOnMedia:(NSString *)mediaId
+- (void)getCommentsOnMedia:(InstagramMedia *)media
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure;
 
@@ -103,15 +104,15 @@
 
 #pragma mark - Likes -
 
-- (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(void (^)(NSArray *comments))success
+- (void)getLikesOnMedia:(InstagramMedia *)media
+            withSuccess:(void (^)(NSArray *likedUsers))success
                 failure:(void (^)(NSError* error))failure;
 
-- (void)likeMedia:(NSString *)mediaId
+- (void)likeMedia:(InstagramMedia *)media
               withSuccess:(void (^)(NSArray *comments))success
                   failure:(void (^)(NSError* error))failure;
 
-- (void)unlikeOnMedia:(NSString *)mediaId
+- (void)unlikeOnMedia:(InstagramMedia *)media
        withSuccess:(void (^)(NSArray *comments))success
            failure:(void (^)(NSError* error))failure;
 @end

@@ -23,5 +23,4 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "IKUserInPhoto.h"
-#import "InstagramLike.h"
 #import "InstagramTag.h"
