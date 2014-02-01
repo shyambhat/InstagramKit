@@ -11,7 +11,12 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 #### Cocoapods Podfile
 ```ruby
 platform :ios, '7.0'
-pod "InstagramKit", "0.1.0"
+pod "InstagramKit", "0.2.0"
 ```
 
 Download and run the Demo Project to understand how the engine is intended to be used. 
+
+Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram or simply use the temporary access keys provided to try out the thing.
+
+
+~ @bhatthead
