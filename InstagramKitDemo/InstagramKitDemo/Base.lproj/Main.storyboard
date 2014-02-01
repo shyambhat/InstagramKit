@@ -61,10 +61,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="0jQ-KI-jXz">
                             <connections>
-                                <action selector="searchMedia" destination="4al-wR-gxx" id="9o7-8Y-mSH"/>
+                                <outlet property="delegate" destination="4al-wR-gxx" id="G80-MA-Tup"/>
+                            </connections>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="0jQ-KI-jXz">
+                            <connections>
+                                <action selector="loadPopularMedia" destination="4al-wR-gxx" id="Plf-G2-kY8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
