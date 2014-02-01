@@ -45,7 +45,6 @@
 		82AC29F3189D27C000675776 /* InstagramTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC29F2189D27C000675776 /* InstagramTag.m */; };
 		82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A36189D3CDE00675776 /* IKMediaViewController.m */; };
 		82AC2A3A189D3E9F00675776 /* IKMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A39189D3E9F00675776 /* IKMediaCell.m */; };
-		82CC4B101825A6C600C36636 /* InstagramLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CC4B0F1825A6C600C36636 /* InstagramLike.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,8 +124,6 @@
 		82AC2A36189D3CDE00675776 /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaViewController.m; sourceTree = "<group>"; };
 		82AC2A38189D3E9F00675776 /* IKMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaCell.h; sourceTree = "<group>"; };
 		82AC2A39189D3E9F00675776 /* IKMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaCell.m; sourceTree = "<group>"; };
-		82CC4B0E1825A6C600C36636 /* InstagramLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramLike.h; sourceTree = "<group>"; };
-		82CC4B0F1825A6C600C36636 /* InstagramLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramLike.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,8 +323,6 @@
 				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
 				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
 				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
-				82CC4B0E1825A6C600C36636 /* InstagramLike.h */,
-				82CC4B0F1825A6C600C36636 /* InstagramLike.m */,
 				82AC29F1189D27C000675776 /* InstagramTag.h */,
 				82AC29F2189D27C000675776 /* InstagramTag.m */,
 			);
@@ -432,7 +427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */,
-				82CC4B101825A6C600C36636 /* InstagramLike.m in Sources */,
 				52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */,
 				82AC29F3189D27C000675776 /* InstagramTag.m in Sources */,
 				52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */,
