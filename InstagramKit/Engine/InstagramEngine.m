@@ -130,6 +130,19 @@
     }];
 }
 
+
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+               withSuccess:(void (^)(NSArray *media))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f",location.latitude,location.longitude] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
 #pragma mark - Users -
 
 - (void)getUserDetails:(InstagramUser *)user
@@ -151,11 +164,22 @@
     [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
         NSArray *objects = response;
         success(objects);
-        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
 
+}
+
+- (void)searchUsersWithString:(NSString *)string
+               withSuccess:(void (^)(NSArray *users))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/search?q=%@",string] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
 }
 
 #pragma mark - Tags -
@@ -186,11 +210,11 @@
     }];
 }
 
-- (void)searchTagsWithString:(NSString *)search
+- (void)searchTagsWithName:(NSString *)name
             withSuccess:(void (^)(NSArray *tags))success
                 failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/search?q=%@",search] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/search?q=%@",name] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -306,7 +330,7 @@
     
 }
 
-- (void)removeLikeOnMedia:(NSString *)mediaId
+- (void)unlikeOnMedia:(NSString *)mediaId
           withSuccess:(void (^)(NSArray *comments))success
               failure:(void (^)(NSError* error))failure
 {

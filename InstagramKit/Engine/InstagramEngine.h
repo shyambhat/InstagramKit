@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import <CoreLocation/CoreLocation.h>
 
 //#error Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
@@ -42,6 +43,10 @@
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError* error))failure;
 
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+               withSuccess:(void (^)(NSArray *media))success
+                   failure:(void (^)(NSError* error))failure;
+
 - (void)getMedia:(NSString *)mediaId
             withSuccess:(void (^)(InstagramMedia *media))success
                 failure:(void (^)(NSError* error))failure;
@@ -56,11 +61,19 @@
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure;
 
+- (void)searchUsersWithString:(NSString *)string
+                  withSuccess:(void (^)(NSArray *users))success
+                      failure:(void (^)(NSError* error))failure;
+
 #pragma mark - Tags -
 
 - (void)getMediaWithTagName:(NSString *)tag
             withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure;
+
+- (void)searchTagsWithName:(NSString *)name
+               withSuccess:(void (^)(NSArray *tags))success
+                   failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Self -
 
@@ -98,7 +111,7 @@
               withSuccess:(void (^)(NSArray *comments))success
                   failure:(void (^)(NSError* error))failure;
 
-- (void)removeLikeOnMedia:(NSString *)mediaId
+- (void)unlikeOnMedia:(NSString *)mediaId
        withSuccess:(void (^)(NSArray *comments))success
            failure:(void (^)(NSError* error))failure;
 @end

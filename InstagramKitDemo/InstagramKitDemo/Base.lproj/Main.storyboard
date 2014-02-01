@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Collection View Controller-->
@@ -40,6 +40,7 @@
                                 <size key="customSize" width="106" height="106"/>
                                 <connections>
                                     <outlet property="imageView" destination="M44-nY-AWF" id="tD3-K1-mOK"/>
+                                    <segue destination="2Tg-Lh-xe7" kind="push" id="Adw-gH-NyQ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -75,6 +76,53 @@
             </objects>
             <point key="canvasLocation" x="396" y="124"/>
         </scene>
+        <!--Table View Controller - Media-->
+        <scene sceneID="Prx-91-WIH">
+            <objects>
+                <tableViewController title="Media" id="2Tg-Lh-xe7" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" id="Pmw-6n-eIJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MediaCell" rowHeight="320" id="ORN-0p-6YO" customClass="IKMediaCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ORN-0p-6YO" id="hHW-93-W0z">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dy-8E-kBJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="mediaImageView" destination="8dy-8E-kBJ" id="Y8O-3k-2Q1"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Dpz-db-B16">
+                                <rect key="frame" x="0.0" y="406" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dpz-db-B16" id="FmP-VF-yLm">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2Tg-Lh-xe7" id="HkS-98-3DZ"/>
+                            <outlet property="delegate" destination="2Tg-Lh-xe7" id="aKN-yP-NAh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="uby-t6-HBl"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hq-hL-85q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="87"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="vux-rx-nxM">
             <objects>
@@ -107,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aGH-ev-YqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="124"/>
+            <point key="canvasLocation" x="556" y="-630"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R63-K3-3iq">
@@ -144,7 +192,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856" y="78"/>
+            <point key="canvasLocation" x="472" y="-676"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
