@@ -174,6 +174,17 @@
     
 }
 
+- (void)getTagWithName:(NSString *)name
+     withSuccess:(void (^)(InstagramTag *tag))success
+         failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/%@",name] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
+        InstagramTag *tag = response;
+        success(tag);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
 
 - (void)searchTagsWithString:(NSString *)search
             withSuccess:(void (^)(NSArray *tags))success
