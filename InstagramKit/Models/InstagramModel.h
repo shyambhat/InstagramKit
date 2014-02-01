@@ -75,4 +75,7 @@
 #define kCountFollows @"follows"
 #define kCountFollowedBy @"followed_by"
 
+#define kTagMediaCount @"media_count"
+#define kTagName @"name"
+
 #define IKNotNull(obj) (obj && ![obj isEqual:[NSNull null]])

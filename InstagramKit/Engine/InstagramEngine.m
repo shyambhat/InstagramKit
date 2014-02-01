@@ -23,6 +23,7 @@
 #import "InstagramMedia.h"
 #import "InstagramComment.h"
 #import "InstagramLike.h"
+#import "InstagramTag.h"
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -159,11 +160,26 @@
 
 #pragma mark - Tags -
 
-- (void)getMediaWithTag:(NSString *)tag
-        withSuccess:(void (^)(NSArray *feed))success
-            failure:(void (^)(NSError* error))failure
+- (void)getMediaWithTagName:(NSString *)tag
+            withSuccess:(void (^)(NSArray *feed))success
+                failure:(void (^)(NSError* error))failure
 {
     [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+
+- (void)searchTagsWithString:(NSString *)search
+            withSuccess:(void (^)(NSArray *tags))success
+                failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/search?q=%@",search] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -248,7 +264,6 @@
     }];
 
 }
-
 
 #pragma mark - Likes -
 

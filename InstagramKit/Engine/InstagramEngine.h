@@ -58,7 +58,7 @@
 
 #pragma mark - Tags -
 
-- (void)getMediaWithTag:(NSString *)tag
+- (void)getMediaWithTagName:(NSString *)tag
             withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure;
 

@@ -65,7 +65,7 @@
 {
     [textField resignFirstResponder];
     if ([textField.text length]) {
-        [[InstagramEngine sharedEngine] getMediaWithTag:textField.text withSuccess:^(NSArray *feed) {
+        [[InstagramEngine sharedEngine] getMediaWithTagName:textField.text withSuccess:^(NSArray *feed) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:feed];
             [self refreshCells];
