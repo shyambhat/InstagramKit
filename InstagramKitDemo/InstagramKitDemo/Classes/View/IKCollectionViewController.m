@@ -25,6 +25,7 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "IKLoginViewController.h"
+#import "IKMediaViewController.h"
 
 @interface IKCollectionViewController ()
 {
@@ -101,6 +102,15 @@
     [self.collectionView reloadData];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segue.media.detail"]) {
+        IKMediaViewController *mvc = (IKMediaViewController *)segue.destinationViewController;
+        NSIndexPath *selectedIndexPath = [self.collectionView indexPathsForSelectedItems][0];
+        InstagramMedia *media = mediaArray[selectedIndexPath.item];
+        mvc.media = media;
+    }
+}
 #pragma mark - UICollectionViewDelegate -
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -124,21 +134,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    InstagramMedia *media = mediaArray[indexPath.row];
-    [media.user loadCountsWithSuccess:^{
-        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",media.user.username, media.user.mediaCount, media.user.followsCount, media.user.followedByCount);
-        
-        [[InstagramEngine sharedEngine] getMediaForUser:media.user.Id count:20 withSuccess:^(NSArray *feed) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:feed];
-            [self refreshCells];
-        } failure:^(NSError *error) {
-            NSLog(@"Loading User media failed");
-        }];
-
-    } failure:^{
-        NSLog(@"Loading User details failed");
-    }];
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+//    InstagramMedia *media = mediaArray[indexPath.row];
+//    [media.user loadCountsWithSuccess:^{
+//        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",media.user.username, media.user.mediaCount, media.user.followsCount, media.user.followedByCount);
+//        
+//        [[InstagramEngine sharedEngine] getMediaForUser:media.user.Id count:20 withSuccess:^(NSArray *feed) {
+//            [mediaArray removeAllObjects];
+//            [mediaArray addObjectsFromArray:feed];
+//            [self refreshCells];
+//        } failure:^(NSError *error) {
+//            NSLog(@"Loading User media failed");
+//        }];
+//
+//    } failure:^{
+//        NSLog(@"Loading User details failed");
+//    }];
 }
 
 @end

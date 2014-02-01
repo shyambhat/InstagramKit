@@ -40,7 +40,7 @@
                                 <size key="customSize" width="106" height="106"/>
                                 <connections>
                                     <outlet property="imageView" destination="M44-nY-AWF" id="tD3-K1-mOK"/>
-                                    <segue destination="2Tg-Lh-xe7" kind="push" id="Adw-gH-NyQ"/>
+                                    <segue destination="2Tg-Lh-xe7" kind="push" identifier="segue.media.detail" id="Adw-gH-NyQ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -76,24 +76,24 @@
             </objects>
             <point key="canvasLocation" x="396" y="124"/>
         </scene>
-        <!--Table View Controller - Media-->
+        <!--Media View Controller - Media-->
         <scene sceneID="Prx-91-WIH">
             <objects>
-                <tableViewController title="Media" id="2Tg-Lh-xe7" sceneMemberID="viewController">
+                <tableViewController title="Media" id="2Tg-Lh-xe7" customClass="IKMediaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" id="Pmw-6n-eIJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MediaCell" rowHeight="320" id="ORN-0p-6YO" customClass="IKMediaCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="MediaCell" rowHeight="320" id="ORN-0p-6YO" customClass="IKMediaCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ORN-0p-6YO" id="hHW-93-W0z">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="ORN-0p-6YO" id="hHW-93-W0z">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dy-8E-kBJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dy-8E-kBJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
@@ -102,12 +102,21 @@
                                     <outlet property="mediaImageView" destination="8dy-8E-kBJ" id="Y8O-3k-2Q1"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Dpz-db-B16">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationLevel="1" indentationWidth="10" reuseIdentifier="Cell" textLabel="Zlf-l4-xPv" rowHeight="50" style="IBUITableViewCellStyleDefault" id="Dpz-db-B16">
                                 <rect key="frame" x="0.0" y="406" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dpz-db-B16" id="FmP-VF-yLm">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zlf-l4-xPv">
+                                            <rect key="frame" x="25" y="0.0" width="280" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

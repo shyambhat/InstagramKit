@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class InstagramMedia;
 @interface IKMediaViewController : UITableViewController
 
+@property (nonatomic, strong) InstagramMedia *media;
 @end
