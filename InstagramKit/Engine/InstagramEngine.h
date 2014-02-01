@@ -22,7 +22,7 @@
 #import "AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
 
-//#error Insert your Instagram App Credentials Here
+#error Insert your Instagram App Credentials Here
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 #define APP_CLIENT_ID @"<Client_ID_here>"
