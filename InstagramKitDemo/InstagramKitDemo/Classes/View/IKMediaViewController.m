@@ -35,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testComments];
+    [self testLoadCounts];
 }
 
 - (void)testLoadCounts
@@ -118,6 +118,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1)
+    {
+        [self testLikes];
+    }
+    else
+    if (indexPath.row == 2) {
+        [self testComments];
+    }
 }
 
 @end
