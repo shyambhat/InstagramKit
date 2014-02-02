@@ -176,7 +176,6 @@
 - (void)testAddComment
 {
     [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media withSuccess:^{
-        commented = YES;
         NSLog(@"Create Comment Success");
     } failure:^(NSError *error) {
         NSLog(@"Create Comment Failure");
