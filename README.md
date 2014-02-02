@@ -27,7 +27,7 @@ In that case, you do not have to move a muscle. Simply continue with the tempora
 
 Download and run the Demo Project to understand how the engine is intended to be used. 
 
-<img src='https://raw2.github.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=207 height=417 />
+<img src='https://raw2.github.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=310.5 height=625.5 />
 
 
 ## License
