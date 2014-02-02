@@ -93,11 +93,12 @@
 
 
 - (void)createComment:(NSString *)commentText
-              onMedia:(NSString *)mediaId
+              onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure;
 
-- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+- (void)removeComment:(NSString *)commentId
+              onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure;
 

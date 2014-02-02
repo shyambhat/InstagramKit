@@ -279,12 +279,12 @@
 
 
 - (void)createComment:(NSString *)commentText
-              onMedia:(NSString *)mediaId
+              onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
-    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:params success:^(id response) {
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/comments",media.Id] responseModel:[InstagramComment class] parameters:params success:^(id response) {
         success();
         
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -293,11 +293,12 @@
 
 }
 
-- (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
+- (void)removeComment:(NSString *)commentId
+              onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/comments/%@",mediaId,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/comments/%@",media.Id,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         success();
         
     } failure:^(NSError *error, NSInteger statusCode) {

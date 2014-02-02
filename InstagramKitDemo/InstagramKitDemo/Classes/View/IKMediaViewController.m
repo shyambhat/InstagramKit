@@ -40,58 +40,6 @@
     [self testLoadCounts];
 }
 
-- (void)testLoadCounts
-{
-    [self.media.user loadCountsWithSuccess:^{
-        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",self.media.user.username, self.media.user.mediaCount, self.media.user.followsCount, self.media.user.followedByCount);
-    } failure:^{
-        NSLog(@"Loading User details failed");
-    }];
-
-}
-
-- (void)testComments
-{
-    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
-        for (InstagramComment *comment in comments) {
-            NSLog(@"@%@: %@",comment.user.username, comment.text);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"Could not load comments");
-    }];
-}
-
-- (void)testGetLikes
-{
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
-        for (InstagramUser *user in likedUsers) {
-            NSLog(@"Like : @%@",user.username);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"Could not load likes");
-    }];
-}
-
-- (void)testLike
-{
-    [[InstagramEngine sharedEngine] likeMedia:self.media withSuccess:^{
-        liked = YES;
-        NSLog(@"Like Success");
-    } failure:^(NSError *error) {
-         NSLog(@"Like Failure");
-    }];
-}
-
-- (void)testUnlike
-{
-    [[InstagramEngine sharedEngine] unlikeMedia:self.media withSuccess:^{
-        liked = NO;
-        NSLog(@"Unlike Success");
-    } failure:^(NSError *error) {
-        NSLog(@"Unlike Failure");
-    }];
-}
-
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -158,8 +106,86 @@
     }
     else
     if (indexPath.row == 2) {
-        [self testComments];
+        
+        if ([[InstagramEngine sharedEngine] accessToken])
+        {
+            [self testAddComment];
+        }
+        else
+        {
+            [self testComments];
+        }
+
     }
+}
+
+#pragma mark - Tests -
+
+- (void)testLoadCounts
+{
+    [self.media.user loadCountsWithSuccess:^{
+        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",self.media.user.username, self.media.user.mediaCount, self.media.user.followsCount, self.media.user.followedByCount);
+    } failure:^{
+        NSLog(@"Loading User details failed");
+    }];
+    
+}
+
+- (void)testComments
+{
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
+        for (InstagramComment *comment in comments) {
+            NSLog(@"@%@: %@",comment.user.username, comment.text);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Could not load comments");
+    }];
+}
+
+- (void)testGetLikes
+{
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
+        for (InstagramUser *user in likedUsers) {
+            NSLog(@"Like : @%@",user.username);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"Could not load likes");
+    }];
+}
+
+- (void)testLike
+{
+    [[InstagramEngine sharedEngine] likeMedia:self.media withSuccess:^{
+        liked = YES;
+        NSLog(@"Like Success");
+    } failure:^(NSError *error) {
+        NSLog(@"Like Failure");
+    }];
+}
+
+- (void)testUnlike
+{
+    [[InstagramEngine sharedEngine] unlikeMedia:self.media withSuccess:^{
+        liked = NO;
+        NSLog(@"Unlike Success");
+    } failure:^(NSError *error) {
+        NSLog(@"Unlike Failure");
+    }];
+}
+
+- (void)testAddComment
+{
+    [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media withSuccess:^{
+        commented = YES;
+        NSLog(@"Create Comment Success");
+    } failure:^(NSError *error) {
+        NSLog(@"Create Comment Failure");
+    }];
+}
+
+- (void)testRemoveComment
+{
+    
 }
 
 @end
