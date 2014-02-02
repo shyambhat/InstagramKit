@@ -73,19 +73,24 @@
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
-    [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
+    else
+    {
+        [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
+    }
 
     NSURLRequest *request = [super requestWithMethod:method path:path parameters:params];
     AFHTTPRequestOperation *operation = [super HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
-        if (collection) {
+        BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
+        if (multiple) {
             NSArray *responseObjects = responseDictionary[kData];
             NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
             dispatch_async(mBackgroundQueue, ^{
-                for (NSDictionary *info in responseObjects) {
-                    id model = [[modelClass alloc] initWithInfo:info];
-                    [objects addObject:model];
+                if (modelClass) {
+                    for (NSDictionary *info in responseObjects) {
+                        id model = [[modelClass alloc] initWithInfo:info];
+                        [objects addObject:model];
+                    }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     success(objects);
@@ -93,7 +98,11 @@
             });
         }
         else {
-            id model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+            id model = nil;
+            if (modelClass && IKNotNull(responseDictionary[kData]))
+            {
+                model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+            }
             success(model);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -271,13 +280,12 @@
 
 - (void)createComment:(NSString *)commentText
               onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(NSArray *comments))success
+          withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
     [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:params success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
+        success();
         
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
@@ -286,12 +294,11 @@
 }
 
 - (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(NSArray *comments))success
+          withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
     [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/comments/%@",mediaId,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
+        success();
         
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
@@ -316,12 +323,11 @@
 }
 
 - (void)likeMedia:(InstagramMedia *)media
-                 withSuccess:(void (^)(NSArray *comments))success
-                     failure:(void (^)(NSError* error))failure
+              withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:nil parameters:nil success:^(id response) {
+        success();
         
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
@@ -329,13 +335,12 @@
     
 }
 
-- (void)unlikeOnMedia:(InstagramMedia *)media
-          withSuccess:(void (^)(NSArray *comments))success
-              failure:(void (^)(NSError* error))failure
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:nil parameters:nil success:^(id response) {
+        success();
         
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);

@@ -24,7 +24,9 @@
 #import "InstagramKit.h"
 
 @interface IKMediaViewController ()
-
+{
+    BOOL liked;
+}
 @end
 
 @implementation IKMediaViewController
@@ -59,7 +61,7 @@
     }];
 }
 
-- (void)testLikes
+- (void)testGetLikes
 {
     [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
         for (InstagramUser *user in likedUsers) {
@@ -68,7 +70,26 @@
     } failure:^(NSError *error) {
         NSLog(@"Could not load likes");
     }];
+}
 
+- (void)testLike
+{
+    [[InstagramEngine sharedEngine] likeMedia:self.media withSuccess:^{
+        liked = YES;
+        NSLog(@"Like Success");
+    } failure:^(NSError *error) {
+         NSLog(@"Like Failure");
+    }];
+}
+
+- (void)testUnlike
+{
+    [[InstagramEngine sharedEngine] unlikeMedia:self.media withSuccess:^{
+        liked = NO;
+        NSLog(@"Unlike Success");
+    } failure:^(NSError *error) {
+        NSLog(@"Unlike Failure");
+    }];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
@@ -120,7 +141,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1)
     {
-        [self testLikes];
+        if ([[InstagramEngine sharedEngine] accessToken])
+        {
+            if (!liked) {
+                [self testLike];
+            }
+            else
+            {
+                [self testUnlike];
+            }
+        }
+        else
+        {
+            [self testGetLikes];
+        }
     }
     else
     if (indexPath.row == 2) {

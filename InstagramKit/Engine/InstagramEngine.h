@@ -94,11 +94,11 @@
 
 - (void)createComment:(NSString *)commentText
               onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(NSArray *comments))success
+          withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure;
 
 - (void)removeComment:(NSString *)commentId onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(NSArray *comments))success
+          withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure;
 
 
@@ -109,10 +109,10 @@
                 failure:(void (^)(NSError* error))failure;
 
 - (void)likeMedia:(InstagramMedia *)media
-              withSuccess:(void (^)(NSArray *comments))success
-                  failure:(void (^)(NSError* error))failure;
+      withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure;
 
-- (void)unlikeOnMedia:(InstagramMedia *)media
-       withSuccess:(void (^)(NSArray *comments))success
-           failure:(void (^)(NSError* error))failure;
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure;
 @end

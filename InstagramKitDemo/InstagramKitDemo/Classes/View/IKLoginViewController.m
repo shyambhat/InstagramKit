@@ -31,7 +31,7 @@
     mWebView.scrollView.bounces = NO;
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token", INSTAGRAM_AUTHORIZATION_URL, APP_CLIENT_ID, APP_REDIRECT_URL]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments", INSTAGRAM_AUTHORIZATION_URL, APP_CLIENT_ID, APP_REDIRECT_URL]];
     [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
     
 }
