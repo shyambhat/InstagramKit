@@ -24,11 +24,14 @@
 #import "IKCell.h"
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
+#import "IKLoginViewController.h"
+#import "IKMediaViewController.h"
 
 @interface IKCollectionViewController ()
 {
     NSMutableArray *mediaArray;
     __weak IBOutlet UITextField *textField;
+    BOOL isPopularFeed;
 }
 @end
 
@@ -46,41 +49,66 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self requestMedia];
+    [self loadMedia];
 }
 
-- (void)requestMedia
+- (IBAction)loadMedia
 {
-    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
-    
-    if (sharedEngine.accessToken)
-    {
-        [[InstagramEngine sharedEngine] getSelfFeed:10 withSuccess:^(NSArray *media) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:media];
-            [self reloadData];
-        } failure:^(NSError *error) {
-            NSLog(@"Request Media Failed");
-        }];
+//<<<<<<< HEAD
+//    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
+//    
+//    if (sharedEngine.accessToken)
+//    {
+//        [[InstagramEngine sharedEngine] getSelfFeed:10 withSuccess:^(NSArray *media) {
+//            [mediaArray removeAllObjects];
+//            [mediaArray addObjectsFromArray:media];
+//            [self reloadData];
+//        } failure:^(NSError *error) {
+//            NSLog(@"Request Media Failed");
+//        }];
+//    }
+//    else
+//    {
+//        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+//            [mediaArray removeAllObjects];
+//            [mediaArray addObjectsFromArray:media];
+//            [self reloadData];
+//        } failure:^(NSError *error) {
+//            NSLog(@"Request Media Failed");
+//        }];
+//    }
+//
+//=======
+    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+        [mediaArray removeAllObjects];
+        [mediaArray addObjectsFromArray:media];
+        [self reloadData];
+        isPopularFeed = YES;
     }
-    else
-    {
-        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:media];
-            [self reloadData];
-        } failure:^(NSError *error) {
-            NSLog(@"Request Media Failed");
-        }];
-    }
+                                                   failure:^(NSError *error) {
+                                                       NSLog(@"Load Popular Media Failed");
+                                                   }];
+}
 
+- (IBAction)loadPopularMedia
+{
+    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+        [mediaArray removeAllObjects];
+        [mediaArray addObjectsFromArray:media];
+        [self refreshCells];
+        isPopularFeed = YES;
+    }
+                                                       failure:^(NSError *error) {
+                                                           NSLog(@"Load Popular Media Failed");
+                                                       }];
+//>>>>>>> master
 }
 
 - (IBAction)searchMedia
 {
     [textField resignFirstResponder];
     if ([textField.text length]) {
-        [[InstagramEngine sharedEngine] getMediaWithTag:textField.text withSuccess:^(NSArray *feed) {
+        [[InstagramEngine sharedEngine] getMediaWithTagName:textField.text withSuccess:^(NSArray *feed) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:feed];
             [self refreshCells];
@@ -90,6 +118,19 @@
         }];
     }
 }
+
+- (void)loadMediaForUser:(InstagramUser *)user
+{
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:20 withSuccess:^(NSArray *feed) {
+        [mediaArray removeAllObjects];
+        [mediaArray addObjectsFromArray:feed];
+        [self refreshCells];
+        isPopularFeed = NO;
+    } failure:^(NSError *error) {
+        NSLog(@"Loading User media failed");
+    }];
+}
+
 
 - (void)refreshCells
 {
@@ -104,6 +145,15 @@
     [self.collectionView reloadData];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segue.media.detail"]) {
+        IKMediaViewController *mvc = (IKMediaViewController *)segue.destinationViewController;
+        NSIndexPath *selectedIndexPath = [self.collectionView indexPathsForSelectedItems][0];
+        InstagramMedia *media = mediaArray[selectedIndexPath.item];
+        mvc.media = media;
+    }
+}
 #pragma mark - UICollectionViewDelegate -
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -127,21 +177,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     InstagramMedia *media = mediaArray[indexPath.row];
-    [media.user loadCountsWithSuccess:^{
-        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",media.user.username, media.user.mediaCount, media.user.followsCount, media.user.followedByCount);
-        
-        [[InstagramEngine sharedEngine] getMediaForUser:media.user.Id count:20 withSuccess:^(NSArray *feed) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:feed];
-            [self refreshCells];
-        } failure:^(NSError *error) {
-            NSLog(@"Loading User media failed");
-        }];
-
-    } failure:^{
-        NSLog(@"Loading User details failed");
-    }];
+    
+    if (isPopularFeed) {
+        [self loadMediaForUser:media.user];
+    }
 }
 
 -(IBAction)didSelectLogin:(id)sender
@@ -203,6 +244,17 @@
         }];
 
     }];
+}
+
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)tField
+{
+    if (tField.text.length) {
+        [self searchMedia];
+    }
+    [tField resignFirstResponder];
+
+    return YES;
 }
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		173D893006EF4AAAA872360E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4836183621A40E6A3882484 /* libPods.a */; };
 		52781D3C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3B17CD6BB9001A32F7 /* Foundation.framework */; };
 		52781D3E17CD6BB9001A32F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */; };
 		52781D4017CD6BB9001A32F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3F17CD6BB9001A32F7 /* UIKit.framework */; };
@@ -23,8 +22,18 @@
 		52781D7C17CD6C85001A32F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7217CD6C85001A32F7 /* AppDelegate.m */; };
 		52781D7E17CD6C85001A32F7 /* IKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7717CD6C85001A32F7 /* IKCell.m */; };
 		52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */; };
+		52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */; };
 		52781D8417CD6CF9001A32F7 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8117CD6CF9001A32F7 /* fishhook.c */; };
 		52781D8517CD6CF9001A32F7 /* QuietAssertMacros.c in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8317CD6CF9001A32F7 /* QuietAssertMacros.c */; };
+		52781D9A17CD6E56001A32F7 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8817CD6E56001A32F7 /* AFHTTPClient.m */; };
+		52781D9B17CD6E56001A32F7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */; };
+		52781D9C17CD6E56001A32F7 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */; };
+		52781D9D17CD6E56001A32F7 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */; };
+		52781D9E17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */; };
+		52781D9F17CD6E56001A32F7 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */; };
+		52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */; };
+		52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */; };
+		52781DA217CD6E56001A32F7 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */; };
 		52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DA617CD6E64001A32F7 /* InstagramEngine.m */; };
 		52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */; };
 		52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAC17CD6E64001A32F7 /* InstagramComment.m */; };
@@ -33,6 +42,10 @@
 		52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB217CD6E64001A32F7 /* InstagramUser.m */; };
 		52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */; };
 		52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */; };
+		82AC29F3189D27C000675776 /* InstagramTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC29F2189D27C000675776 /* InstagramTag.m */; };
+		82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A36189D3CDE00675776 /* IKMediaViewController.m */; };
+		82AC2A3A189D3E9F00675776 /* IKMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A39189D3E9F00675776 /* IKMediaCell.m */; };
+		82B80AEF189ECAC50094AB24 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 82B80AEE189ECAC50094AB24 /* Icon.png */; };
 		FA8DE6ED18611F7E003B8E1E /* InstagramKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA8DE6EC18611F7E003B8E1E /* InstagramKit.plist */; };
 /* End PBXBuildFile section */
 
@@ -68,9 +81,30 @@
 		52781D7717CD6C85001A32F7 /* IKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCell.m; sourceTree = "<group>"; };
 		52781D7817CD6C85001A32F7 /* IKCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCollectionViewController.h; sourceTree = "<group>"; };
 		52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCollectionViewController.m; sourceTree = "<group>"; };
+		52781D7A17CD6C85001A32F7 /* IKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKLoginViewController.h; sourceTree = "<group>"; };
+		52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKLoginViewController.m; sourceTree = "<group>"; };
 		52781D8117CD6CF9001A32F7 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
 		52781D8217CD6CF9001A32F7 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
 		52781D8317CD6CF9001A32F7 /* QuietAssertMacros.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = QuietAssertMacros.c; sourceTree = "<group>"; };
+		52781D8717CD6E56001A32F7 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		52781D8817CD6E56001A32F7 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		52781D8917CD6E56001A32F7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		52781D8B17CD6E56001A32F7 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		52781D8D17CD6E56001A32F7 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		52781D8F17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		52781D9117CD6E56001A32F7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		52781D9217CD6E56001A32F7 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		52781D9417CD6E56001A32F7 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		52781D9617CD6E56001A32F7 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		52781D9817CD6E56001A32F7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		52781DA517CD6E64001A32F7 /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
 		52781DA617CD6E64001A32F7 /* InstagramEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngine.m; sourceTree = "<group>"; };
 		52781DA717CD6E64001A32F7 /* InstagramKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramKit.h; sourceTree = "<group>"; };
@@ -86,6 +120,13 @@
 		52781DB217CD6E64001A32F7 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
 		52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		82AC29F1189D27C000675776 /* InstagramTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramTag.h; sourceTree = "<group>"; };
+		82AC29F2189D27C000675776 /* InstagramTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramTag.m; sourceTree = "<group>"; };
+		82AC2A35189D3CDE00675776 /* IKMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaViewController.h; sourceTree = "<group>"; };
+		82AC2A36189D3CDE00675776 /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaViewController.m; sourceTree = "<group>"; };
+		82AC2A38189D3E9F00675776 /* IKMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaCell.h; sourceTree = "<group>"; };
+		82AC2A39189D3E9F00675776 /* IKMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaCell.m; sourceTree = "<group>"; };
+		82B80AEE189ECAC50094AB24 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		78303E5978024B31B009D9D1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A4836183621A40E6A3882484 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8DE6EC18611F7E003B8E1E /* InstagramKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstagramKit.plist; sourceTree = "<group>"; };
@@ -122,11 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				52781DA317CD6E64001A32F7 /* InstagramKit */,
+				52781D8617CD6E56001A32F7 /* AFNetworking */,
 				52781D4117CD6BB9001A32F7 /* InstagramKitDemo */,
 				52781D6017CD6BB9001A32F7 /* InstagramKitDemoTests */,
 				52781D3A17CD6BB9001A32F7 /* Frameworks */,
 				52781D3917CD6BB9001A32F7 /* Products */,
-				78303E5978024B31B009D9D1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,7 +189,6 @@
 				52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */,
 				52781D3F17CD6BB9001A32F7 /* UIKit.framework */,
 				52781D5A17CD6BB9001A32F7 /* XCTest.framework */,
-				A4836183621A40E6A3882484 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,6 +199,7 @@
 				52781D7017CD6C85001A32F7 /* Classes */,
 				52781D4D17CD6BB9001A32F7 /* Main.storyboard */,
 				52781D5317CD6BB9001A32F7 /* Images.xcassets */,
+				82B80AEE189ECAC50094AB24 /* Icon.png */,
 				52781D4217CD6BB9001A32F7 /* Supporting Files */,
 			);
 			path = InstagramKitDemo;
@@ -213,6 +254,10 @@
 				52781D7517CD6C85001A32F7 /* CollectionView Cells */,
 				52781D7817CD6C85001A32F7 /* IKCollectionViewController.h */,
 				52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */,
+				82AC2A35189D3CDE00675776 /* IKMediaViewController.h */,
+				82AC2A36189D3CDE00675776 /* IKMediaViewController.m */,
+				52781D7A17CD6C85001A32F7 /* IKLoginViewController.h */,
+				52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,8 +267,36 @@
 			children = (
 				52781D7617CD6C85001A32F7 /* IKCell.h */,
 				52781D7717CD6C85001A32F7 /* IKCell.m */,
+				82AC2A38189D3E9F00675776 /* IKMediaCell.h */,
+				82AC2A39189D3E9F00675776 /* IKMediaCell.m */,
 			);
 			path = "CollectionView Cells";
+			sourceTree = "<group>";
+		};
+		52781D8617CD6E56001A32F7 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				52781D8717CD6E56001A32F7 /* AFHTTPClient.h */,
+				52781D8817CD6E56001A32F7 /* AFHTTPClient.m */,
+				52781D8917CD6E56001A32F7 /* AFHTTPRequestOperation.h */,
+				52781D8A17CD6E56001A32F7 /* AFHTTPRequestOperation.m */,
+				52781D8B17CD6E56001A32F7 /* AFImageRequestOperation.h */,
+				52781D8C17CD6E56001A32F7 /* AFImageRequestOperation.m */,
+				52781D8D17CD6E56001A32F7 /* AFJSONRequestOperation.h */,
+				52781D8E17CD6E56001A32F7 /* AFJSONRequestOperation.m */,
+				52781D8F17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.h */,
+				52781D9017CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m */,
+				52781D9117CD6E56001A32F7 /* AFNetworking.h */,
+				52781D9217CD6E56001A32F7 /* AFPropertyListRequestOperation.h */,
+				52781D9317CD6E56001A32F7 /* AFPropertyListRequestOperation.m */,
+				52781D9417CD6E56001A32F7 /* AFURLConnectionOperation.h */,
+				52781D9517CD6E56001A32F7 /* AFURLConnectionOperation.m */,
+				52781D9617CD6E56001A32F7 /* AFXMLRequestOperation.h */,
+				52781D9717CD6E56001A32F7 /* AFXMLRequestOperation.m */,
+				52781D9817CD6E56001A32F7 /* UIImageView+AFNetworking.h */,
+				52781D9917CD6E56001A32F7 /* UIImageView+AFNetworking.m */,
+			);
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		52781DA317CD6E64001A32F7 /* InstagramKit */ = {
@@ -251,14 +324,16 @@
 			children = (
 				52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */,
 				52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */,
-				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
-				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
 				52781DAD17CD6E64001A32F7 /* InstagramMedia.h */,
 				52781DAE17CD6E64001A32F7 /* InstagramMedia.m */,
 				52781DAF17CD6E64001A32F7 /* InstagramModel.h */,
 				52781DB017CD6E64001A32F7 /* InstagramModel.m */,
 				52781DB117CD6E64001A32F7 /* InstagramUser.h */,
 				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
+				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
+				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
+				82AC29F1189D27C000675776 /* InstagramTag.h */,
+				82AC29F2189D27C000675776 /* InstagramTag.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -270,11 +345,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52781D6A17CD6BB9001A32F7 /* Build configuration list for PBXNativeTarget "InstagramKitDemo" */;
 			buildPhases = (
-				A181D67C98294C16A045A0B9 /* Check Pods Manifest.lock */,
 				52781D3417CD6BB9001A32F7 /* Sources */,
 				52781D3517CD6BB9001A32F7 /* Frameworks */,
 				52781D3617CD6BB9001A32F7 /* Resources */,
-				0428948E4D90431F8AAB3BE8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -344,6 +417,7 @@
 				52781D5417CD6BB9001A32F7 /* Images.xcassets in Resources */,
 				52781D4617CD6BB9001A32F7 /* InfoPlist.strings in Resources */,
 				52781D4F17CD6BB9001A32F7 /* Main.storyboard in Resources */,
+				82B80AEF189ECAC50094AB24 /* Icon.png in Resources */,
 				FA8DE6ED18611F7E003B8E1E /* InstagramKit.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,56 +432,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0428948E4D90431F8AAB3BE8 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A181D67C98294C16A045A0B9 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		52781D3417CD6BB9001A32F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52781DA017CD6E56001A32F7 /* AFURLConnectionOperation.m in Sources */,
+				52781DA117CD6E56001A32F7 /* AFXMLRequestOperation.m in Sources */,
+				82AC29F3189D27C000675776 /* InstagramTag.m in Sources */,
 				52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */,
 				52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */,
 				52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */,
+				52781D9D17CD6E56001A32F7 /* AFJSONRequestOperation.m in Sources */,
+				52781D9B17CD6E56001A32F7 /* AFHTTPRequestOperation.m in Sources */,
 				52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */,
+				82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */,
 				52781D7C17CD6C85001A32F7 /* AppDelegate.m in Sources */,
 				52781D8417CD6CF9001A32F7 /* fishhook.c in Sources */,
 				52781D4817CD6BB9001A32F7 /* main.m in Sources */,
 				52781D8517CD6CF9001A32F7 /* QuietAssertMacros.c in Sources */,
 				52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */,
+				52781D9C17CD6E56001A32F7 /* AFImageRequestOperation.m in Sources */,
+				52781D9E17CD6E56001A32F7 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				52781DA217CD6E56001A32F7 /* UIImageView+AFNetworking.m in Sources */,
+				52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */,
 				52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */,
 				52781D7E17CD6C85001A32F7 /* IKCell.m in Sources */,
 				52781DB617CD6E64001A32F7 /* InstagramMedia.m in Sources */,
+				52781D9A17CD6E56001A32F7 /* AFHTTPClient.m in Sources */,
+				82AC2A3A189D3E9F00675776 /* IKMediaCell.m in Sources */,
+				52781D9F17CD6E56001A32F7 /* AFPropertyListRequestOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +581,6 @@
 		};
 		52781D6B17CD6BB9001A32F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78303E5978024B31B009D9D1 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -541,7 +594,6 @@
 		};
 		52781D6C17CD6BB9001A32F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78303E5978024B31B009D9D1 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

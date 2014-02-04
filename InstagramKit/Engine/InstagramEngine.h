@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import <CoreLocation/CoreLocation.h>
 
 typedef void(^InstagramLoginBlock)(NSError* error);
 
@@ -34,6 +35,15 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 
 #define INSTAGRAM_AUTHORIZATION_URL kInstagramKitAuthorizationUrl
 #define INSTAGRAM_BASE_URL kINstagramKidAuthorizationBaseUrl
+
+//#warning Insert your Instagram App Credentials Here
+//// Head over to http://instagram.com/developer/clients/manage/ to find these.
+//
+//#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
+//#define APP_REDIRECT_URL @"http://instagram.com"
+//
+//#define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
+//#define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
 
 @class InstagramUser;
 @class InstagramMedia;
@@ -84,6 +94,10 @@ typedef enum
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError* error))failure;
 
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+               withSuccess:(void (^)(NSArray *media))success
+                   failure:(void (^)(NSError* error))failure;
+
 - (void)getMedia:(NSString *)mediaId
             withSuccess:(void (^)(InstagramMedia *media))success
                 failure:(void (^)(NSError* error))failure;
@@ -101,11 +115,19 @@ typedef enum
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure;
 
+- (void)searchUsersWithString:(NSString *)string
+                  withSuccess:(void (^)(NSArray *users))success
+                      failure:(void (^)(NSError* error))failure;
+
 #pragma mark - Tags -
 
-- (void)getMediaWithTag:(NSString *)tag
+- (void)getMediaWithTagName:(NSString *)tag
             withSuccess:(void (^)(NSArray *feed))success
                 failure:(void (^)(NSError* error))failure;
+
+- (void)searchTagsWithName:(NSString *)name
+               withSuccess:(void (^)(NSArray *tags))success
+                   failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Self -
 
@@ -118,8 +140,33 @@ typedef enum
 
 #pragma mark - Comments -
 
-- (void)getCommentsOnMedia:(NSString *)mediaId
+- (void)getCommentsOnMedia:(InstagramMedia *)media
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure;
 
+
+- (void)createComment:(NSString *)commentText
+              onMedia:(InstagramMedia *)media
+          withSuccess:(void (^)(void))success
+              failure:(void (^)(NSError* error))failure;
+
+- (void)removeComment:(NSString *)commentId
+              onMedia:(InstagramMedia *)media
+          withSuccess:(void (^)(void))success
+              failure:(void (^)(NSError* error))failure;
+
+
+#pragma mark - Likes -
+
+- (void)getLikesOnMedia:(InstagramMedia *)media
+            withSuccess:(void (^)(NSArray *likedUsers))success
+                failure:(void (^)(NSError* error))failure;
+
+- (void)likeMedia:(InstagramMedia *)media
+      withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure;
+
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure;
 @end

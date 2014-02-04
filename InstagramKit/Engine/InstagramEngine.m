@@ -23,6 +23,7 @@
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
 #import "InstagramComment.h"
+#import "InstagramTag.h"
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -209,7 +210,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
 #pragma mark - Base Call -
 
-- (void)getPath:(NSString*)path
+- (void)requestWithMethod:(NSString *)method path:(NSString*)path
      responseModel:(Class)modelClass
      parameters:(NSDictionary *)parameters
         success:(void (^)(id response))success
@@ -221,21 +222,22 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
-
-
     [params setObject:self.appClientID forKey:kKeyClientID];
+
     [self.operationManager GET:path
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               BOOL collection = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
-               if (collection) {
+               BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
+               if (multiple) {
                    NSArray *responseObjects = responseDictionary[kData];
                    NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
                    dispatch_async(mBackgroundQueue, ^{
-                       for (NSDictionary *info in responseObjects) {
-                           id model = [[modelClass alloc] initWithInfo:info];
-                           [objects addObject:model];
+                       if (modelClass) {
+                           for (NSDictionary *info in responseObjects) {
+                               id model = [[modelClass alloc] initWithInfo:info];
+                               [objects addObject:model];
+                           }
                        }
                        dispatch_async(dispatch_get_main_queue(), ^{
                            success(objects);
@@ -243,7 +245,11 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                    });
                }
                else {
-                   id model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+                   id model = nil;
+                   if (modelClass && IKNotNull(responseDictionary[kData]))
+                   {
+                       model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+                   }
                    success(model);
                }
            }
@@ -258,7 +264,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 - (void)getPopularMediaWithSuccess:(void (^)(NSArray *media))success
                            failure:(void (^)(NSError* error))failure
 {
-    [self getPath:@"media/popular" responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:@"media/popular" responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -270,9 +276,22 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                withSuccess:(void (^)(InstagramMedia *media))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"media/%@",mediaId] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/%@",mediaId] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
         InstagramMedia *media = response;
         success(media);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
+
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+               withSuccess:(void (^)(NSArray *media))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f",location.latitude,location.longitude] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
@@ -295,7 +314,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
      withSuccess:(void (^)(InstagramUser *userDetail))success
          failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@",user.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@",user.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
         InstagramUser *userDetail = response;
         success(userDetail);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -310,20 +329,57 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{kCount:[NSString stringWithFormat:@"%d",count]} success:^(id response) {
         NSArray *objects = response;
         success(objects);
-        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
 
 }
 
+- (void)searchUsersWithString:(NSString *)string
+               withSuccess:(void (^)(NSArray *users))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/search?q=%@",string] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
 #pragma mark - Tags -
 
-- (void)getMediaWithTag:(NSString *)tag
-        withSuccess:(void (^)(NSArray *feed))success
-            failure:(void (^)(NSError* error))failure
+- (void)getMediaWithTagName:(NSString *)tag
+            withSuccess:(void (^)(NSArray *feed))success
+                failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/%@/media/recent",tag] responseModel:[InstagramMedia class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+- (void)getTagWithName:(NSString *)name
+     withSuccess:(void (^)(InstagramTag *tag))success
+         failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/%@",name] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
+        InstagramTag *tag = response;
+        success(tag);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
+- (void)searchTagsWithName:(NSString *)name
+            withSuccess:(void (^)(NSArray *tags))success
+                failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"tags/search?q=%@",name] responseModel:[InstagramTag class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -362,11 +418,11 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
 #pragma mark - Comments -
 
-- (void)getCommentsOnMedia:(NSString *)mediaId
+- (void)getCommentsOnMedia:(InstagramMedia *)media
                withSuccess:(void (^)(NSArray *comments))success
                    failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"media/%@/comments",mediaId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+    [self getPath:[NSString stringWithFormat:@"media/%@/comments",media.Id] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
         NSArray *objects = response;
         success(objects);
         
@@ -374,6 +430,78 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         failure(error);
     }];
     
+}
+
+
+- (void)createComment:(NSString *)commentText
+              onMedia:(InstagramMedia *)media
+          withSuccess:(void (^)(void))success
+              failure:(void (^)(NSError* error))failure
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/comments",media.Id] responseModel:[InstagramComment class] parameters:params success:^(id response) {
+        success();
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
+}
+
+- (void)removeComment:(NSString *)commentId
+              onMedia:(InstagramMedia *)media
+          withSuccess:(void (^)(void))success
+              failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/comments/%@",media.Id,commentId] responseModel:[InstagramComment class] parameters:nil success:^(id response) {
+        success();
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
+}
+
+#pragma mark - Likes -
+
+- (void)getLikesOnMedia:(InstagramMedia *)media
+               withSuccess:(void (^)(NSArray *likedUsers))success
+                   failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:[InstagramUser class] parameters:nil success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+- (void)likeMedia:(InstagramMedia *)media
+              withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:nil parameters:nil success:^(id response) {
+        success();
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+    
+}
+
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+          failure:(void (^)(NSError* error))failure
+{
+    [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"media/%@/likes",media.Id] responseModel:nil parameters:nil success:^(id response) {
+        success();
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+
 }
 
 @end

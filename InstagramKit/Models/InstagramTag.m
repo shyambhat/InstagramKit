@@ -18,9 +18,20 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramEngine.h"
-#import "InstagramComment.h"
-#import "InstagramMedia.h"
-#import "InstagramUser.h"
-#import "IKUserInPhoto.h"
+
 #import "InstagramTag.h"
+#import "InstagramModel.h"
+
+@implementation InstagramTag
+
+- (id)initWithInfo:(NSDictionary *)info
+{
+    self = [super init];
+    if (self && IKNotNull(info)) {
+        _name = [[NSString alloc] initWithString:info[kTagName]];
+        _mediaCount = [info[kTagMediaCount] integerValue];
+    }
+    return self;
+}
+
+@end
