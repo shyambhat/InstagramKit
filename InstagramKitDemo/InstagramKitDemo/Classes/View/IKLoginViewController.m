@@ -20,6 +20,8 @@
 
 #import "IKLoginViewController.h"
 #import "InstagramKit.h"
+#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
+#define APP_REDIRECT_URL @"http://instagram.com"
 
 @implementation IKLoginViewController
 
