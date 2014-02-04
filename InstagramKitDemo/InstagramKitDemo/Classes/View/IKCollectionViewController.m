@@ -223,7 +223,7 @@
               cancelButtonTitle:@"Huzzah!"
               otherButtonTitles: nil] show];
             
-            [self requestMedia];
+            [self loadMedia];
 
         } failure:^(NSError *error) {
 

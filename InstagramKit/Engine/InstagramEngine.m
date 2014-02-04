@@ -19,7 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramEngine.h"
-
+#import "AFNetworking.h"
 #import "InstagramUser.h"
 #import "InstagramMedia.h"
 #import "InstagramComment.h"
@@ -211,6 +211,15 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 #pragma mark - Base Call -
 
 - (void)requestWithMethod:(NSString *)method path:(NSString*)path
+            responseModel:(Class)modelClass
+               parameters:(NSDictionary *)parameters
+                  success:(void (^)(id response))success
+                  failure:(void (^)(NSError* error, NSInteger statusCode))failure
+{
+    [self getPath:path responseModel:modelClass parameters:parameters success:success failure:failure];
+}
+
+- (void)getPath:(NSString *)path
      responseModel:(Class)modelClass
      parameters:(NSDictionary *)parameters
         success:(void (^)(id response))success
