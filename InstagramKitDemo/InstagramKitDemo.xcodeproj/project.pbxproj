@@ -62,7 +62,7 @@
 
 /* Begin PBXFileReference section */
 		5201620318A404A50046293A /* InstagramKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstagramKit.plist; sourceTree = "<group>"; };
-		52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52781D3817CD6BB9001A32F7 /* InstagramKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52781D3B17CD6BB9001A32F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		52781D3F17CD6BB9001A32F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -174,7 +174,7 @@
 		52781D3917CD6BB9001A32F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */,
+				52781D3817CD6BB9001A32F7 /* InstagramKit.app */,
 				52781D5917CD6BB9001A32F7 /* InstagramKitDemoTests.xctest */,
 			);
 			name = Products;
@@ -357,7 +357,7 @@
 			);
 			name = InstagramKitDemo;
 			productName = InstagramKitDemo;
-			productReference = 52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */;
+			productReference = 52781D3817CD6BB9001A32F7 /* InstagramKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 		52781D5817CD6BB9001A32F7 /* InstagramKitDemoTests */ = {
@@ -590,7 +590,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
 				INFOPLIST_FILE = "InstagramKitDemo/InstagramKitDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InstagramKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -603,7 +603,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InstagramKitDemo/InstagramKitDemo-Prefix.pch";
 				INFOPLIST_FILE = "InstagramKitDemo/InstagramKitDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InstagramKit;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
