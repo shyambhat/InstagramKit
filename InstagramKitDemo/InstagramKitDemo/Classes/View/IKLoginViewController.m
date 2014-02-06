@@ -20,6 +20,8 @@
 
 #import "IKLoginViewController.h"
 #import "InstagramKit.h"
+#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
+#define APP_REDIRECT_URL @"http://instagram.com"
 
 @implementation IKLoginViewController
 
@@ -31,7 +33,8 @@
     mWebView.scrollView.bounces = NO;
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments", INSTAGRAM_AUTHORIZATION_URL, APP_CLIENT_ID, APP_REDIRECT_URL]];
+    NSDictionary *configuration = [InstagramEngine sharedEngineConfiguration];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey]]];
     [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
     
 }
