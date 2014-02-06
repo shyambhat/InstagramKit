@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5201620418A404A50046293A /* InstagramKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5201620318A404A50046293A /* InstagramKit.plist */; };
 		52781D3C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3B17CD6BB9001A32F7 /* Foundation.framework */; };
 		52781D3E17CD6BB9001A32F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */; };
 		52781D4017CD6BB9001A32F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3F17CD6BB9001A32F7 /* UIKit.framework */; };
@@ -47,7 +48,6 @@
 		82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A36189D3CDE00675776 /* IKMediaViewController.m */; };
 		82AC2A3A189D3E9F00675776 /* IKMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A39189D3E9F00675776 /* IKMediaCell.m */; };
 		82B80AEF189ECAC50094AB24 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 82B80AEE189ECAC50094AB24 /* Icon.png */; };
-		FA8DE6ED18611F7E003B8E1E /* InstagramKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA8DE6EC18611F7E003B8E1E /* InstagramKit.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5201620318A404A50046293A /* InstagramKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstagramKit.plist; sourceTree = "<group>"; };
 		52781D3817CD6BB9001A32F7 /* InstagramKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52781D3B17CD6BB9001A32F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,7 +131,6 @@
 		82AC2A38189D3E9F00675776 /* IKMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaCell.h; sourceTree = "<group>"; };
 		82AC2A39189D3E9F00675776 /* IKMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaCell.m; sourceTree = "<group>"; };
 		82B80AEE189ECAC50094AB24 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		FA8DE6EC18611F7E003B8E1E /* InstagramKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstagramKit.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +215,7 @@
 				52781D4417CD6BB9001A32F7 /* InfoPlist.strings */,
 				52781D4717CD6BB9001A32F7 /* main.m */,
 				52781D4917CD6BB9001A32F7 /* InstagramKitDemo-Prefix.pch */,
-				FA8DE6EC18611F7E003B8E1E /* InstagramKit.plist */,
+				5201620318A404A50046293A /* InstagramKit.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -416,11 +416,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5201620418A404A50046293A /* InstagramKit.plist in Resources */,
 				52781D5417CD6BB9001A32F7 /* Images.xcassets in Resources */,
 				52781D4617CD6BB9001A32F7 /* InfoPlist.strings in Resources */,
 				52781D4F17CD6BB9001A32F7 /* Main.storyboard in Resources */,
 				82B80AEF189ECAC50094AB24 /* Icon.png in Resources */,
-				FA8DE6ED18611F7E003B8E1E /* InstagramKit.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

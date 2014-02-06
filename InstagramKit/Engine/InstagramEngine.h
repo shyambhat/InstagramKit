@@ -35,14 +35,7 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 #define INSTAGRAM_AUTHORIZATION_URL kInstagramKitAuthorizationUrl
 #define INSTAGRAM_BASE_URL kINstagramKidAuthorizationBaseUrl
 
-//#warning Insert your Instagram App Credentials Here
-//// Head over to http://instagram.com/developer/clients/manage/ to find these.
-//
-//#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
-//#define APP_REDIRECT_URL @"http://instagram.com"
-//
-//#define INSTAGRAM_AUTHORIZATION_URL @"https://api.instagram.com/oauth/authorize/"
-//#define INSTAGRAM_BASE_URL @"https://api.instagram.com/v1/"
+// Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 @class InstagramUser;
 @class InstagramMedia;
@@ -67,6 +60,7 @@ typedef enum
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
++ (NSDictionary*) sharedEngineConfiguration;
 
 @property (nonatomic, copy) NSString *accessToken;
 
