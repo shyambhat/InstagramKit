@@ -77,8 +77,9 @@
     {
         [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
     }
-
-    NSURLRequest *request = [super requestWithMethod:method path:path parameters:params];
+    
+    NSString *properlyEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLRequest *request = [super requestWithMethod:method path:properlyEscapedPath parameters:params];
     AFHTTPRequestOperation *operation = [super HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
         BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
@@ -169,7 +170,7 @@
         withSuccess:(void (^)(NSArray *feed))success
             failure:(void (^)(NSError* error))failure
 {
-    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{[NSString stringWithFormat:@"%d",count]:kCount} success:^(id response) {
+    [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@/media/recent",userId] responseModel:[InstagramMedia class] parameters:@{kCount:[NSString stringWithFormat:@"%d",count]} success:^(id response) {
         NSArray *objects = response;
         success(objects);
     } failure:^(NSError *error, NSInteger statusCode) {
