@@ -77,8 +77,9 @@
     {
         [params setObject:APP_CLIENT_ID forKey:kKeyClientID];
     }
-
-    NSURLRequest *request = [super requestWithMethod:method path:path parameters:params];
+    
+    NSString *properlyEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLRequest *request = [super requestWithMethod:method path:properlyEscapedPath parameters:params];
     AFHTTPRequestOperation *operation = [super HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
         BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
