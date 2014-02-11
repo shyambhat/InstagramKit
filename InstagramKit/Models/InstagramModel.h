@@ -43,7 +43,7 @@
 #define kStandardResolution @"standard_resolution"
 
 #define kMediaTypeImage @"image"
-#define kMediaTypeVideo @"videp"
+#define kMediaTypeVideo @"video"
 
 #define kUser @"user"
 #define kCreatedDate @"created_time"
