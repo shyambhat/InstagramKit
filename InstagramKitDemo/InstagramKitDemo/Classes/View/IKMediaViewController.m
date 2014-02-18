@@ -75,10 +75,16 @@
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         if (indexPath.row == 1) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%d Likes",self.media.likesCount];
+            if ([[InstagramEngine sharedEngine] accessToken])
+                cell.textLabel.text = @"Like";
+            else
+                cell.textLabel.text = [NSString stringWithFormat:@"%d Likes",self.media.likesCount];
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%d Comments",self.media.commentCount];
+            if ([[InstagramEngine sharedEngine] accessToken])
+                cell.textLabel.text = @"Comment";
+            else
+                cell.textLabel.text = [NSString stringWithFormat:@"%d Comments",self.media.commentCount];
         }
         return cell;
     }
