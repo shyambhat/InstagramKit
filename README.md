@@ -17,7 +17,7 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 pod "InstagramKit", "1.1.0"
 ```
 #### Instagram Developer Registration
-Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in the Engine. 
+Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramEngine.h. 
 
 #### I'm too lazy for that shit
 In that case, you do not have to move a muscle. Simply continue with the temporary access keys provided and let the magic unfold.
