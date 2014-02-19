@@ -82,7 +82,7 @@
         }
         if (indexPath.row == 2) {
             if ([[InstagramEngine sharedEngine] accessToken])
-                cell.textLabel.text = @"Comment";
+                cell.textLabel.text = @"Test Comment";
             else
                 cell.textLabel.text = [NSString stringWithFormat:@"%d Comments",self.media.commentCount];
         }

@@ -273,7 +273,6 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
 @property (readwrite, nonatomic, strong) NSOperationQueue *operationQueue;
 @property (readwrite, nonatomic, strong) NSURLSession *session;
 @property (readwrite, nonatomic, strong) NSMutableDictionary *mutableTaskDelegatesKeyedByTaskIdentifier;
-@property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
 @property (readwrite, nonatomic, strong) NSLock *lock;
 @property (readwrite, nonatomic, copy) AFURLSessionDidBecomeInvalidBlock sessionDidBecomeInvalid;
 @property (readwrite, nonatomic, copy) AFURLSessionDidReceiveAuthenticationChallengeBlock sessionDidReceiveAuthenticationChallenge;
@@ -349,6 +348,7 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
             forTask:(NSURLSessionTask *)task
 {
     NSParameterAssert(task);
+    NSParameterAssert(delegate);
 
     [self.lock lock];
     self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)] = delegate;
@@ -568,6 +568,10 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
 }
 
 #pragma mark -
+
+- (void)setTaskNeedNewBodyStreamBlock:(NSInputStream * (^)(NSURLSession *session, NSURLSessionTask *task))block {
+   self.taskNeedNewBodyStream = block;
+}
 
 - (void)setTaskWillPerformHTTPRedirectionBlock:(NSURLRequest * (^)(NSURLSession *session, NSURLSessionTask *task, NSURLResponse *response, NSURLRequest *request))block {
     self.taskWillPerformHTTPRedirection = block;
@@ -789,10 +793,11 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask
     AFURLSessionManagerTaskDelegate *delegate = [self delegateForTask:dataTask];
     if (delegate) {
         [self removeDelegateForTask:dataTask];
+        [self setDelegate:delegate forTask:downloadTask];
+
         [dataTask removeObserver:self forKeyPath:@"state" context:AFTaskStateChangedContext];
     }
 
-    [self setDelegate:delegate forTask:downloadTask];
     [downloadTask addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:AFTaskStateChangedContext];
 
     if (self.dataTaskDidBecomeDownloadTask) {
