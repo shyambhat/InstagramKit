@@ -283,6 +283,28 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 }
 
 
+- (void)deletePath:(NSString *)path
+      parameters:(NSDictionary *)parameters
+   responseModel:(Class)modelClass
+         success:(void (^)(void))success
+         failure:(void (^)(NSError* error, NSInteger statusCode))failure
+{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    
+    if (self.accessToken) {
+        [params setObject:self.accessToken forKey:kKeyAccessToken];
+    }
+    else
+        [params setObject:self.appClientID forKey:kKeyClientID];
+    [self.operationManager DELETE:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error,[[operation response] statusCode]);
+    }];
+}
+
+
 
 #pragma mark - Media -
 
@@ -450,28 +472,23 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     [self getPath:[NSString stringWithFormat:@"media/%@/comments",media.Id] parameters:nil responseModel:[InstagramComment class] success:^(id response) {
         NSArray *objects = response;
         success(objects);
-        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-    
 }
-
 
 - (void)createComment:(NSString *)commentText
               onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
-    #warning - call does not work
+    // Please email apidevelopers@instagram.com for access.
     NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
-    [self postPath:[NSString stringWithFormat:@"media/%@/comments",media.Id] parameters:params responseModel:[InstagramComment class] success:^{
-            success();
-        }
-           failure:^(NSError *error, NSInteger statusCode) {
+    [self postPath:[NSString stringWithFormat:@"media/%@/comments",media.Id] parameters:params responseModel:nil success:^{
+        success();
+    } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-
 }
 
 - (void)removeComment:(NSString *)commentId
@@ -479,14 +496,11 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure
 {
-#warning - incorrect call
-    [self getPath:[NSString stringWithFormat:@"media/%@/comments/%@",media.Id,commentId] parameters:nil responseModel:[InstagramComment class] success:^(id response) {
+    [self deletePath:[NSString stringWithFormat:@"media/%@/comments/%@",media.Id,commentId] parameters:nil responseModel:nil success:^{
         success();
-        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-
 }
 
 #pragma mark - Likes -
@@ -508,27 +522,22 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
               withSuccess:(void (^)(void))success
           failure:(void (^)(NSError* error))failure
 {
-#warning - call does not work
     [self postPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
         success();
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-    
 }
 
 - (void)unlikeMedia:(InstagramMedia *)media
         withSuccess:(void (^)(void))success
           failure:(void (^)(NSError* error))failure
 {
-#warning - incorrect call
-    [self postPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
+    [self deletePath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
         success();
-        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-
 }
 
 @end
