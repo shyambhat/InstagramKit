@@ -102,7 +102,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        self.operationManager.requestSerializer = [[AFJSONRequestSerializer alloc] init];
         self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
         NSAssert(self.appClientID, @"App Client ID invalid: %@", self.appClientID);

@@ -76,7 +76,16 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         if (indexPath.row == 1) {
             if ([[InstagramEngine sharedEngine] accessToken])
-                cell.textLabel.text = @"Like";
+            {
+                if (liked) {
+                    cell.textLabel.text = @"Unlike";
+                }
+                else
+                {
+                    cell.textLabel.text = @"Like";
+                }
+                
+            }
             else
                 cell.textLabel.text = [NSString stringWithFormat:@"%d Likes",self.media.likesCount];
         }
@@ -163,6 +172,7 @@
 {
     [[InstagramEngine sharedEngine] likeMedia:self.media withSuccess:^{
         liked = YES;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         NSLog(@"Like Success");
     } failure:^(NSError *error) {
         NSLog(@"Like Failure");
@@ -174,6 +184,8 @@
     [[InstagramEngine sharedEngine] unlikeMedia:self.media withSuccess:^{
         liked = NO;
         NSLog(@"Unlike Success");
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+
     } failure:^(NSError *error) {
         NSLog(@"Unlike Failure");
     }];
