@@ -101,7 +101,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
         self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
-        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<insert-client-id-here>"];
+        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
         NSAssert(validClientId, @"Invalid Instagram Client ID.");
         NSAssert([NSURL URLWithString:self.appRedirectURL], @"App Redirect URL invalid: %@", self.appRedirectURL);
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
@@ -116,7 +116,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     if (self.instagramLoginBlock)
     {
         NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
-
         NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
             NSLocalizedDescriptionKey: localizedDescription
         }];
@@ -124,7 +123,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     }
 }
 
-- (void) loginWithBlock:(InstagramLoginBlock)block
+- (void)loginWithBlock:(InstagramLoginBlock)block
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token",
         self.authorizationURL,
