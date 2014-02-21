@@ -3,7 +3,7 @@ InstagramKit
 
 A neat little blocks-based Objective C wrapper for the Instagram API. 
 
-Built atop AFNetworking 2, it rips through the JSON asynchronously to give you ready-to-use Instagram model objects..
+Built atop AFNetworking 2, it rips through the JSON asynchronously to give you ready-to-use Instagram model objects.
 
 ##Installation
 
