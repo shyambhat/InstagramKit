@@ -1,10 +1,9 @@
 InstagramKit
 ==================
- 
+
 A neat little blocks-based Objective C wrapper for the Instagram API. 
 
-It readily parses the JSON responses on a background thread and does the dirty work for you so you just have to deal with Instagram model objects.
-Harnesses the power of AFNetworking under the hood.
+Built atop AFNetworking 2, it rips through the JSON asynchronously to give you ready-to-use Instagram model objects..
 
 ##Installation
 
@@ -14,14 +13,11 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 
 #### Cocoapods Podfile
 ```ruby
-pod "InstagramKit", "1.1.0"
+pod "InstagramKit", "2.1.0"
 ```
 #### Instagram Developer Registration
-Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramEngine.h. 
-
-#### I'm too lazy for that shit
-In that case, you do not have to move a muscle. Simply continue with the temporary access keys provided and let the magic unfold.
-
+Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
+If you're the Info.plist-for-all sort of a person, include these keys in directly in your info.plist file.
 
 ## Demo
 
@@ -29,6 +25,11 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 <img src='https://raw2.github.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=310.5 height=625.5 />
 
+## Contributions?
+
+Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
+
+A note of thanks to [Patrick](https://github.com/ptwohig) and [Cristian](https://github.com/elkraneo) for their help on getting AFNetworking 2 in place.
 
 ## License
 InstagramKit is released under the MIT license. See
