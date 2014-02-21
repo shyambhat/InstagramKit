@@ -76,21 +76,18 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 }
 
 - (id)init {
-    
-    NSDictionary *sharedEngineConfiguration = [InstagramEngine sharedEngineConfiguration];
-
-    id url = nil;
-
-    url = sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey];
-
-    if (url) {
-        url = [NSURL URLWithString:url];
-    } else {
-        url = [NSURL URLWithString:kInstagramKitBaseUrlDefault];
-    }
-
-    if (self = [super init]) {
-
+    if (self = [super init])
+    {
+        NSDictionary *sharedEngineConfiguration = [InstagramEngine sharedEngineConfiguration];
+        id url = nil;
+        url = sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey];
+        
+        if (url) {
+            url = [NSURL URLWithString:url];
+        } else {
+            url = [NSURL URLWithString:kInstagramKitBaseUrlDefault];
+        }
+        
         NSAssert(url, @"Base URL not valid: %@", sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey]);
         self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
 
@@ -104,40 +101,31 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
         self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
-        NSAssert(self.appClientID, @"App Client ID invalid: %@", self.appClientID);
+        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<insert-client-id-here>"];
+        NSAssert(validClientId, @"Invalid Instagram Client ID.");
         NSAssert([NSURL URLWithString:self.appRedirectURL], @"App Redirect URL invalid: %@", self.appRedirectURL);
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
-
     }
-
     return self;
-
 }
 
+#pragma mark - Login -
 
-#pragma mark - Login - 
-
-- (void) cancelLogin
+- (void)cancelLogin
 {
-
     if (self.instagramLoginBlock)
     {
-
         NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
 
         NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
             NSLocalizedDescriptionKey: localizedDescription
         }];
-
         self.instagramLoginBlock(error);
-
     }
-
 }
 
 - (void) loginWithBlock:(InstagramLoginBlock)block
 {
-
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token",
         self.authorizationURL,
         self.appClientID,
@@ -146,7 +134,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     self.instagramLoginBlock = block;
 
     [[UIApplication sharedApplication] openURL:url];
-
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -161,9 +148,8 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     {
         return NO;
     }
-
-    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
     
+    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
     if (accessToken)
     {
         self.accessToken = accessToken;
@@ -171,40 +157,28 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     }
     else if (self.instagramLoginBlock)
     {
-
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
-
         NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeAccessNotGranted userInfo:@{
             NSLocalizedDescriptionKey: localizedDescription
         }];
-
         self.instagramLoginBlock(error);
-
     }
-
     self.instagramLoginBlock = nil;
     return YES;
-
 }
 
--(NSDictionary*) queryStringParametersFromString:(NSString*)string {
+-(NSDictionary*)queryStringParametersFromString:(NSString*)string {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
-    for (NSString * param in [string componentsSeparatedByString:@"&"]) {
-        
+    for (NSString * param in [string componentsSeparatedByString:@"&"])
+    {
         NSArray *pairs = [param componentsSeparatedByString:@"="];
         if ([pairs count] != 2) continue;
-        
         NSString *key = [pairs[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *value = [pairs[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
         [dict setObject:value forKey:key];
-        
     }
-    
     return dict;
-    
 }
 
 #pragma mark - Base Call -
@@ -263,9 +237,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         success:(void (^)(void))success
         failure:(void (^)(NSError* error, NSInteger statusCode))failure
 {
-
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
@@ -289,9 +261,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
          success:(void (^)(void))success
          failure:(void (^)(NSError* error, NSInteger statusCode))failure
 {
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
@@ -330,7 +300,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         failure(error);
     }];
 }
-
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
                withSuccess:(void (^)(NSArray *media))success
@@ -379,7 +348,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-
 }
 
 - (void)searchUsersWithString:(NSString *)string
@@ -389,6 +357,33 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     [self getPath:[NSString stringWithFormat:@"users/search?q=%@",string] parameters:nil responseModel:[InstagramUser class] success:^(id response) {
         NSArray *objects = response;
         success(objects);
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
+#pragma mark - Self -
+
+- (void)getSelfFeed:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"users/self/feed"] parameters:nil responseModel:[InstagramMedia class] success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
+- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
+                        failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"users/self/media/liked"] parameters:nil responseModel:[InstagramMedia class] success:^(id response) {
+        NSArray *objects = response;
+        success(objects);
+        
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
@@ -407,7 +402,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-    
 }
 
 - (void)getTagWithName:(NSString *)name
@@ -432,35 +426,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-}
-
-#pragma mark - Self -
-
-- (void)getSelfFeed:(NSInteger)count
-        withSuccess:(void (^)(NSArray *feed))success
-                failure:(void (^)(NSError* error))failure
-{
-    [self getPath:[NSString stringWithFormat:@"users/self/feed"] parameters:nil responseModel:[InstagramMedia class] success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
-        
-    } failure:^(NSError *error, NSInteger statusCode) {
-        failure(error);
-    }];
-    
-}
-
-- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
-                        failure:(void (^)(NSError* error))failure
-{
-    [self getPath:[NSString stringWithFormat:@"users/self/media/liked"] parameters:nil responseModel:[InstagramMedia class] success:^(id response) {
-        NSArray *objects = response;
-        success(objects);
-        
-    } failure:^(NSError *error, NSInteger statusCode) {
-        failure(error);
-    }];
-    
 }
 
 #pragma mark - Comments -
@@ -515,7 +480,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];
-    
 }
 
 - (void)likeMedia:(InstagramMedia *)media

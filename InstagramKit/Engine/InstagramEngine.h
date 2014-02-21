@@ -32,9 +32,6 @@ extern NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
 extern NSString *const kInstagramKitBaseUrl __deprecated;
 extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 
-#define INSTAGRAM_AUTHORIZATION_URL kInstagramKitAuthorizationUrl
-#define INSTAGRAM_BASE_URL kINstagramKidAuthorizationBaseUrl
-
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 @class InstagramUser;
@@ -44,7 +41,6 @@ extern NSString *const kInstagramKitErrorDomain;
 
 typedef enum
 {
-
     // Indicates no error
     kInstagramKitErrorCodeNone,
 
@@ -52,7 +48,7 @@ typedef enum
     // is not able to obtain an access_token
     kInstagramKitErrorCodeAccessNotGranted,
 
-    // And finally some codes that are blatently plagerized from the core API
+    // And finally some code that are blatently plagerized from the core API
     kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
 
 } InstagramErrorCode;
@@ -112,6 +108,15 @@ typedef enum
                   withSuccess:(void (^)(NSArray *users))success
                       failure:(void (^)(NSError* error))failure;
 
+#pragma mark - Self User -
+
+- (void)getSelfFeed:(NSInteger)count
+        withSuccess:(void (^)(NSArray *feed))success
+            failure:(void (^)(NSError* error))failure;
+
+- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
+                        failure:(void (^)(NSError* error))failure;
+
 #pragma mark - Tags -
 
 - (void)getMediaWithTagName:(NSString *)tag
@@ -121,15 +126,6 @@ typedef enum
 - (void)searchTagsWithName:(NSString *)name
                withSuccess:(void (^)(NSArray *tags))success
                    failure:(void (^)(NSError* error))failure;
-
-#pragma mark - Self -
-
-- (void)getSelfFeed:(NSInteger)count
-        withSuccess:(void (^)(NSArray *feed))success
-            failure:(void (^)(NSError* error))failure;
-
-- (void)getSelfLikesWithSuccess:(void (^)(NSArray *feed))success
-            failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Comments -
 

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>InstagramKitAppClientId</key>
-	<string>15cb0eb135104700934a939bb472fafd</string>
+	<string>&lt;insert-client-id-here&gt;</string>
 	<key>InstagramKitAppRedirectURL</key>
 	<string>http://instagram.com</string>
 	<key>InstagramKitBaseUrl</key>
