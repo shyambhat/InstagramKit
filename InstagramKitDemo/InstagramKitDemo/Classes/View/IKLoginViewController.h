@@ -19,11 +19,11 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-
+@class IKCollectionViewController;
 @interface IKLoginViewController : UIViewController <UIWebViewDelegate>
 {
     __weak IBOutlet UIWebView *mWebView;
 }
-
+@property (nonatomic, weak) IKCollectionViewController *collectionViewController;
 - (IBAction)back:(id)sender;
 @end

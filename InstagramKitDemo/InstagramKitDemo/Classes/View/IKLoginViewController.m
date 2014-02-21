@@ -20,8 +20,7 @@
 
 #import "IKLoginViewController.h"
 #import "InstagramKit.h"
-#define APP_CLIENT_ID @"15cb0eb135104700934a939bb472fafd"
-#define APP_REDIRECT_URL @"http://instagram.com"
+#import "IKCollectionViewController.h"
 
 @implementation IKLoginViewController
 
@@ -46,7 +45,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *URLString = [request.URL absoluteString];
-    if ([URLString hasPrefix:APP_REDIRECT_URL]) {
+    if ([URLString hasPrefix:[[InstagramEngine sharedEngine] appRedirectURL]]) {
         NSString *delimiter = @"access_token=";
         NSArray *components = [URLString componentsSeparatedByString:delimiter];
         if (components.count > 1) {
@@ -55,6 +54,7 @@
             [[InstagramEngine sharedEngine] setAccessToken:accessToken];
             
             [self dismissViewControllerAnimated:YES completion:^{
+                [self.collectionViewController loadMedia];
             }];
         }
         return NO;

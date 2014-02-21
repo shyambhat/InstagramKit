@@ -53,7 +53,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="0jQ-KI-jXz">
                             <connections>
-                                <action selector="loadPopularMedia" destination="4al-wR-gxx" id="Plf-G2-kY8"/>
+                                <action selector="loadMedia" destination="4al-wR-gxx" id="tCz-5F-JMf"/>
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Hashtags" minimumFontSize="17" id="Szz-yV-giw">
@@ -67,7 +67,7 @@
                         </textField>
                         <barButtonItem key="rightBarButtonItem" title="Login" id="9wq-oD-noP">
                             <connections>
-                                <segue destination="Yqa-wS-RqO" kind="modal" id="e5j-qO-vqy"/>
+                                <segue destination="Yqa-wS-RqO" kind="modal" identifier="segue.login" id="e5j-qO-vqy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -135,7 +135,7 @@
             </objects>
             <point key="canvasLocation" x="842" y="87"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login View Controller - Login -->
         <scene sceneID="vux-rx-nxM">
             <objects>
                 <viewController id="Qfj-6N-R6z" customClass="IKLoginViewController" sceneMemberID="viewController">
@@ -154,7 +154,7 @@
                             </webView>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" id="tLF-sk-vbt">
+                    <navigationItem key="navigationItem" title="Login " id="tLF-sk-vbt">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="y5t-aw-c8c">
                             <connections>
                                 <action selector="back:" destination="Qfj-6N-R6z" id="aTH-Mc-Pjt"/>
