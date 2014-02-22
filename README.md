@@ -17,7 +17,7 @@ pod "InstagramKit", "2.1.0"
 ```
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
-If you're the Info.plist-for-all sort of a person, include these keys in directly in your info.plist file.
+If you prefer the Info.plist for all your app settings, you can include these keys in directly in your info.plist file.
 
 ## Demo
 
@@ -29,7 +29,7 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
-A note of thanks to [Patrick](https://github.com/ptwohig) and [Cristian](https://github.com/elkraneo) for their help on getting AFNetworking 2 in place.
+A note of thanks to [Patrick](https://github.com/ptwohig) for his help on getting AFNetworking 2 in place and structuring the repo better.
 
 ## License
 InstagramKit is released under the MIT license. See
