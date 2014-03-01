@@ -29,11 +29,7 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
-A note of thanks to [Patrick](https://github.com/ptwohig) for his help on getting AFNetworking 2 in place and structuring the repo better.
-
-## License
-InstagramKit is released under the MIT license. See
-[LICENSE.txt](https://github.com/shyambhat/InstagramKit/blob/master/LICENSE.txt).
+A note of thanks to [Patrick Twohig](https://github.com/ptwohig) for his help on getting AFNetworking 2 in place and structuring the repo better.
 
 
 ==================
