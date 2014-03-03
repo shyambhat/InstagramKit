@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>InstagramKitAppClientId</key>
-	<string>&lt;Client Id here&gt;</string>
+	<string>15cb0eb135104700934a939bb472fafd</string>
 	<key>InstagramKitAppRedirectURL</key>
-	<string>&lt;Redirect URL here&gt;</string>
+	<string>http://instagram.com</string>
 	<key>InstagramKitBaseUrl</key>
 	<string>https://api.instagram.com/v1/</string>
 	<key>InstagramKitAuthorizationUrl</key>
