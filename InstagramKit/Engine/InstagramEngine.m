@@ -195,8 +195,10 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
     [params setObject:self.appClientID forKey:kKeyClientID];
+    
+    NSString *properlyEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-    [self.operationManager GET:path
+    [self.operationManager GET:properlyEscapedPath
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
