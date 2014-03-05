@@ -31,6 +31,7 @@
 		52781DB817CD6E64001A32F7 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB217CD6E64001A32F7 /* InstagramUser.m */; };
 		52781DBA17CD6E8D001A32F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */; };
 		52781DBC17CD6E9B001A32F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */; };
+		52A3602318C7BD4D00B4CBD7 /* InstagramPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A3602218C7BD4D00B4CBD7 /* InstagramPaginationInfo.m */; };
 		820D6DC218B7DC6900847053 /* InstagramKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 820D6DC118B7DC6900847053 /* InstagramKit.plist */; };
 		825BB4BD18A183D800F3BDF3 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 825BB4AB18A183D800F3BDF3 /* AFHTTPRequestOperation.m */; };
 		825BB4BE18A183D800F3BDF3 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 825BB4AD18A183D800F3BDF3 /* AFHTTPRequestOperationManager.m */; };
@@ -97,6 +98,8 @@
 		52781DB217CD6E64001A32F7 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
 		52781DB917CD6E8D001A32F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		52781DBB17CD6E9B001A32F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		52A3602118C7BD4D00B4CBD7 /* InstagramPaginationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramPaginationInfo.h; sourceTree = "<group>"; };
+		52A3602218C7BD4D00B4CBD7 /* InstagramPaginationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramPaginationInfo.m; sourceTree = "<group>"; };
 		820D6DC118B7DC6900847053 /* InstagramKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InstagramKit.plist; sourceTree = "<group>"; };
 		825BB4AA18A183D800F3BDF3 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		825BB4AB18A183D800F3BDF3 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
 				82AC29F1189D27C000675776 /* InstagramTag.h */,
 				82AC29F2189D27C000675776 /* InstagramTag.m */,
+				52A3602118C7BD4D00B4CBD7 /* InstagramPaginationInfo.h */,
+				52A3602218C7BD4D00B4CBD7 /* InstagramPaginationInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -437,6 +442,7 @@
 				82AC29F3189D27C000675776 /* InstagramTag.m in Sources */,
 				825BB4BF18A183D800F3BDF3 /* AFHTTPSessionManager.m in Sources */,
 				825BB4C018A183D800F3BDF3 /* AFNetworkReachabilityManager.m in Sources */,
+				52A3602318C7BD4D00B4CBD7 /* InstagramPaginationInfo.m in Sources */,
 				52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */,
 				52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */,
 				52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */,

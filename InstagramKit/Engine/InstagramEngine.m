@@ -42,6 +42,7 @@ NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.insta
 NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
 #define kData @"data"
+#define kPagination @"pagination"
 
 @interface InstagramEngine()
 {

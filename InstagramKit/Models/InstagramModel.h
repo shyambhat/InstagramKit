@@ -78,4 +78,7 @@
 #define kTagMediaCount @"media_count"
 #define kTagName @"name"
 
+#define kNextURL @"next_url"
+#define kNextMaxId @"next_max_id"
+
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
