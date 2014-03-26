@@ -29,8 +29,9 @@
         {
             _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
         }
+        return self;
     }
-    return self;
+    return nil;
 }
 
 @end
