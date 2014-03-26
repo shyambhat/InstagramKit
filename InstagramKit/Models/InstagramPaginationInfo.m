@@ -20,11 +20,11 @@
     self = [super init];
     BOOL infoExists = IKNotNull(info);
     BOOL nextURLExists = IKNotNull(info[kNextURL]);
-    BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
-    BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
-    
-    if (self && infoExists && nextURLExists && (nextMaxIdExists || nextMaxLikeIdExists) ){
+    if (self && infoExists && nextURLExists){
+        
         _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
+        BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
+        BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
         if (nextMaxIdExists)
         {
             _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
