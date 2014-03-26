@@ -63,7 +63,7 @@
     
     if (sharedEngine.accessToken)
     {
-        [[InstagramEngine sharedEngine] getSelfFeed:21 withSuccess:^(NSArray *media) {
+        [[InstagramEngine sharedEngine] getSelfFeed:21 withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:media];
 
@@ -75,7 +75,7 @@
     }
     else
     {
-        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media) {
+        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:media];
             (animated)?[self refreshCells]:[self reloadData];
@@ -90,7 +90,7 @@
 {
     [textField resignFirstResponder];
     if ([textField.text length]) {
-        [[InstagramEngine sharedEngine] getMediaWithTagName:textField.text withSuccess:^(NSArray *feed) {
+        [[InstagramEngine sharedEngine] getMediaWithTagName:textField.text withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:feed];
             [self refreshCells];
@@ -103,7 +103,7 @@
 
 - (void)loadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:20 withSuccess:^(NSArray *feed) {
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:20 withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:feed];
         [self refreshCells];

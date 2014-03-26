@@ -148,7 +148,7 @@
 
 - (void)testComments
 {
-    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments, InstagramPaginationInfo *paginationInfo) {
         for (InstagramComment *comment in comments) {
             NSLog(@"@%@: %@",comment.user.username, comment.text);
         }
@@ -159,7 +159,7 @@
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }

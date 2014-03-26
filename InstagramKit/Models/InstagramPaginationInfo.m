@@ -14,9 +14,21 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
+    BOOL infoExists = IKNotNull(info);
+    BOOL nextURLExists = IKNotNull(info[kNextURL]);
+    BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
+    BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
+    
+    if (self && infoExists && nextURLExists && (nextMaxIdExists || nextMaxLikeIdExists) ){
         _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
-        _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+        if (nextMaxIdExists)
+        {
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+        }
+        else if (nextMaxLikeIdExists)
+        {
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+        }
     }
     return self;
 }

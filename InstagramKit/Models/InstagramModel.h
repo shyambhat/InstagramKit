@@ -80,5 +80,6 @@
 
 #define kNextURL @"next_url"
 #define kNextMaxId @"next_max_id"
+#define kNextMaxLikeId @"next_max_like_id"
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
