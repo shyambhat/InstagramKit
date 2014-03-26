@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testLoadCounts];
+//    [self testLoadCounts];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
@@ -87,13 +87,13 @@
                 
             }
             else
-                cell.textLabel.text = [NSString stringWithFormat:@"%d Likes",self.media.likesCount];
+                cell.textLabel.text = [NSString stringWithFormat:@"%ld Likes",(long)self.media.likesCount];
         }
         if (indexPath.row == 2) {
             if ([[InstagramEngine sharedEngine] accessToken])
                 cell.textLabel.text = @"Test Comment";
             else
-                cell.textLabel.text = [NSString stringWithFormat:@"%d Comments",self.media.commentCount];
+                cell.textLabel.text = [NSString stringWithFormat:@"%ld Comments",(long)self.media.commentCount];
         }
         return cell;
     }
@@ -139,7 +139,7 @@
 - (void)testLoadCounts
 {
     [self.media.user loadCountsWithSuccess:^{
-        NSLog(@"Courtesy: %@. %d media posts, follows %d users and is followed by %d users",self.media.user.username, self.media.user.mediaCount, self.media.user.followsCount, self.media.user.followedByCount);
+        NSLog(@"Courtesy: %@. %ld media posts, follows %ld users and is followed by %ld users",self.media.user.username, (long)self.media.user.mediaCount, (long)self.media.user.followsCount, (long)self.media.user.followedByCount);
     } failure:^{
         NSLog(@"Loading User details failed");
     }];

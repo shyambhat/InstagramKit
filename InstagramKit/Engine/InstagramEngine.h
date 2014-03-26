@@ -160,4 +160,12 @@ typedef enum
 - (void)unlikeMedia:(InstagramMedia *)media
         withSuccess:(void (^)(void))success
           failure:(void (^)(NSError* error))failure;
+
+
+#pragma mark - Pagination requests -
+
+- (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
+                     withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
+                         failure:(void (^)(NSError* error))failure;
+
 @end

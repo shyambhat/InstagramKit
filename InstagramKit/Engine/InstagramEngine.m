@@ -196,7 +196,10 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     if (self.accessToken) {
         [params setObject:self.accessToken forKey:kKeyAccessToken];
     }
-    [params setObject:self.appClientID forKey:kKeyClientID];
+    else
+    {
+        [params setObject:self.appClientID forKey:kKeyClientID];
+    }
     
     NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
@@ -205,7 +208,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                NSDictionary *pInfo = responseDictionary[kPagination];
-               InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo]: nil;
+               InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
                BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
                if (multiple) {
                    NSArray *responseObjects = responseDictionary[kData];
@@ -347,7 +350,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
         withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
             failure:(void (^)(NSError* error))failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:@{kCount:[NSString stringWithFormat:@"%d",count]} responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:@{kCount:[NSString stringWithFormat:@"%ld",(long)count]} responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -504,6 +507,21 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 {
     [self deletePath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
         success();
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+    }];
+}
+
+#pragma mark - Pagination -
+
+- (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
+            withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
+                failure:(void (^)(NSError* error))failure
+{
+    NSString *relativePath = [[paginationInfo.nextURL absoluteString] stringByReplacingOccurrencesOfString:[self.operationManager.baseURL absoluteString] withString:@""];
+    [self getPath:relativePath parameters:nil responseModel:paginationInfo.type success:^(id response, InstagramPaginationInfo *paginationInfo) {
+        NSArray *objects = response;
+        success(objects, paginationInfo);
     } failure:^(NSError *error, NSInteger statusCode) {
         failure(error);
     }];

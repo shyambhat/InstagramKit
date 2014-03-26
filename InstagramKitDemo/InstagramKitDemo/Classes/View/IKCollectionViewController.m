@@ -33,6 +33,7 @@
     __weak IBOutlet UITextField *textField;
     BOOL isPopularFeed;
 }
+@property (nonatomic, strong) InstagramPaginationInfo *currentPaginationInfo;
 @end
 
 @implementation IKCollectionViewController
@@ -55,6 +56,7 @@
 - (IBAction)loadMedia
 {
     [self loadMediaAnimated:YES];
+    textField.text = @"";
 }
 
 - (void)loadMediaAnimated:(BOOL)animated
@@ -107,9 +109,25 @@
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:feed];
         [self refreshCells];
+        if (paginationInfo) {
+            self.currentPaginationInfo = paginationInfo;
+        }
         isPopularFeed = NO;
     } failure:^(NSError *error) {
         NSLog(@"Loading User media failed");
+    }];
+}
+
+- (void)testPaginationRequest:(InstagramPaginationInfo *)pInfo
+{
+    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        NSLog(@"%ld more media in Pagination",media.count);
+        self.currentPaginationInfo = paginationInfo;
+        [mediaArray addObjectsFromArray:media];
+        [self reloadData];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Pagination Failed");
     }];
 }
 
@@ -170,9 +188,15 @@
     if (isPopularFeed) {
         [self loadMediaForUser:media.user];
     }
+    else if (self.currentPaginationInfo)
+    {
+        // paginate on navigating to detail
+        [self testPaginationRequest:self.currentPaginationInfo];
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods
+
 - (BOOL)textFieldShouldReturn:(UITextField *)tField
 {
     if (tField.text.length) {
