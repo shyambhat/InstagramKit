@@ -29,7 +29,12 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
+
+
 ==================
+
+
+InstagramKit uses the public Instagram API and is not affiliated with either Instagram or Facebook.
 
 If you're using InstagramKit in your app or intend to, I'd be happy to hear from you. 
 
