@@ -50,18 +50,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadMediaAnimated:NO];
+    [self loadMedia];
 }
 
-- (IBAction)loadMedia
+- (void)loadMedia
 {
     [textField resignFirstResponder];
     textField.text = @"";
-    [self loadMediaAnimated:YES];
-}
 
-- (void)loadMediaAnimated:(BOOL)animated
-{
     InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
     
     if (sharedEngine.accessToken)
@@ -70,7 +66,7 @@
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:media];
 
-            (animated)?[self refreshCells]:[self reloadData];
+            [self reloadData];
             isPopularFeed = NO;
         } failure:^(NSError *error) {
             NSLog(@"Request Self Feed Failed");
@@ -81,7 +77,7 @@
         [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:media];
-            (animated)?[self refreshCells]:[self reloadData];
+            [self reloadData];
             isPopularFeed = YES;
         } failure:^(NSError *error) {
            NSLog(@"Load Popular Media Failed");
@@ -93,12 +89,12 @@
 {
     [textField resignFirstResponder];
     if ([textField.text length]) {
-//        [self getMediaFromTag:textField.text];
-        [self searchUsersWithString:textField.text];
+        [self testGetMediaFromTag:textField.text];
+//        [self testSearchUsersWithString:textField.text];
     }
 }
 
-- (void)searchUsersWithString:(NSString *)string
+- (void)testSearchUsersWithString:(NSString *)string
 {
     [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"%ld users found",users.count);
@@ -107,9 +103,9 @@
     }];
 }
 
-- (void)getMediaFromTag:(NSString *)tag
+- (void)testGetMediaFromTag:(NSString *)tag
 {
-    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:10 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         if (isPopularFeed) {
             [mediaArray removeAllObjects];
@@ -125,7 +121,7 @@
 
 - (void)loadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:10 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
         if (isPopularFeed) {
             [mediaArray removeAllObjects];
         }
@@ -150,14 +146,6 @@
         
     } failure:^(NSError *error) {
         NSLog(@"Pagination Failed");
-    }];
-}
-
-- (void)refreshCells
-{
-    [mediaArray enumerateObjectsUsingBlock:^(InstagramMedia *media, NSUInteger idx, BOOL *stop) {
-        IKCell *cell = (IKCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-        [cell.imageView setImageWithURL:media.thumbnailURL];
     }];
 }
 
