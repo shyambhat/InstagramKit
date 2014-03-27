@@ -136,6 +136,15 @@
 
 #pragma mark - Tests -
 
+- (void)testGetMedia
+{
+    [[InstagramEngine sharedEngine] getMedia:self.media.Id withSuccess:^(InstagramMedia *media) {
+        NSLog(@"Load Media Successful");
+    } failure:^(NSError *error) {
+        NSLog(@"Loading Media Failed");
+    }];
+}
+
 - (void)testLoadCounts
 {
     [self.media.user loadCountsWithSuccess:^{
@@ -148,7 +157,7 @@
 
 - (void)testComments
 {
-    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
         for (InstagramComment *comment in comments) {
             NSLog(@"@%@: %@",comment.user.username, comment.text);
         }
@@ -159,7 +168,7 @@
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }

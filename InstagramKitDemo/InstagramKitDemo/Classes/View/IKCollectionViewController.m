@@ -55,8 +55,9 @@
 
 - (IBAction)loadMedia
 {
-    [self loadMediaAnimated:YES];
+    [textField resignFirstResponder];
     textField.text = @"";
+    [self loadMediaAnimated:YES];
 }
 
 - (void)loadMediaAnimated:(BOOL)animated
@@ -65,7 +66,7 @@
     
     if (sharedEngine.accessToken)
     {
-        [[InstagramEngine sharedEngine] getSelfFeed:21 withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        [[InstagramEngine sharedEngine] getSelfFeedWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
             [mediaArray removeAllObjects];
             [mediaArray addObjectsFromArray:media];
 
@@ -92,23 +93,44 @@
 {
     [textField resignFirstResponder];
     if ([textField.text length]) {
-        [[InstagramEngine sharedEngine] getMediaWithTagName:textField.text withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:feed];
-            [self refreshCells];
-            
-        } failure:^(NSError *error) {
-            NSLog(@"Search Media Failed");
-        }];
+//        [self getMediaFromTag:textField.text];
+        [self searchUsersWithString:textField.text];
     }
+}
+
+- (void)searchUsersWithString:(NSString *)string
+{
+    [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
+        NSLog(@"%ld users found",users.count);
+    } failure:^(NSError *error) {
+        NSLog(@"user search failed");
+    }];
+}
+
+- (void)getMediaFromTag:(NSString *)tag
+{
+    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:10 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+        self.currentPaginationInfo = paginationInfo;
+        if (isPopularFeed) {
+            [mediaArray removeAllObjects];
+        }
+        isPopularFeed = NO;
+        [mediaArray addObjectsFromArray:feed];
+        [self reloadData];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Search Media Failed");
+    }];
 }
 
 - (void)loadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:20 withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
-        [mediaArray removeAllObjects];
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:10 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+        if (isPopularFeed) {
+            [mediaArray removeAllObjects];
+        }
         [mediaArray addObjectsFromArray:feed];
-        [self refreshCells];
+        [self reloadData];
         if (paginationInfo) {
             self.currentPaginationInfo = paginationInfo;
         }
@@ -121,7 +143,7 @@
 - (void)testPaginationRequest:(InstagramPaginationInfo *)pInfo
 {
     [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-        NSLog(@"%ld more media in Pagination",media.count);
+        NSLog(@"%ld more media in Pagination",(unsigned long)media.count);
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
@@ -191,7 +213,8 @@
     else if (self.currentPaginationInfo)
     {
         // paginate on navigating to detail
-        [self testPaginationRequest:self.currentPaginationInfo];
+        [self loadMediaForUser:media.user];
+//        [self testPaginationRequest:self.currentPaginationInfo];
     }
 }
 

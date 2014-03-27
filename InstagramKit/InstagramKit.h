@@ -24,3 +24,4 @@
 #import "InstagramUser.h"
 #import "IKUserInPhoto.h"
 #import "InstagramTag.h"
+#import "InstagramPaginationInfo.h"
