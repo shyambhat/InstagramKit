@@ -496,7 +496,6 @@ typedef enum
 
 #pragma mark - Tags -
 
-#warning Tested until here. Please test every call after this
 
 - (void)getTagDetailsWithName:(NSString *)name
                   withSuccess:(void (^)(InstagramTag *tag))success
