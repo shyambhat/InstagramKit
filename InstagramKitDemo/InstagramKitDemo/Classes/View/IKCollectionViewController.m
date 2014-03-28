@@ -31,7 +31,6 @@
 {
     NSMutableArray *mediaArray;
     __weak IBOutlet UITextField *textField;
-    BOOL isPopularFeed;
 }
 @property (nonatomic, strong) InstagramPaginationInfo *currentPaginationInfo;
 @end
@@ -53,6 +52,16 @@
     [self loadMedia];
 }
 
+- (IBAction)reloadMedia
+{
+    self.currentPaginationInfo = nil;
+    if (mediaArray) {
+        [mediaArray removeAllObjects];
+    }
+
+    [self loadMedia];
+}
+
 - (void)loadMedia
 {
     [textField resignFirstResponder];
@@ -64,7 +73,6 @@
     {
         [self testLoadSelfFeed];
 //        [self testLoadSelfLikedMedia];
-
     }
     else
     {
@@ -74,7 +82,12 @@
 
 - (IBAction)searchMedia
 {
+    self.currentPaginationInfo = nil;
+    if (mediaArray) {
+        [mediaArray removeAllObjects];
+    }
     [textField resignFirstResponder];
+
     if ([textField.text length]) {
         [self testGetMediaFromTag:textField.text];
 //        [self testSearchUsersWithString:textField.text];
@@ -88,7 +101,6 @@
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
-        isPopularFeed = YES;
     } failure:^(NSError *error) {
         NSLog(@"Load Popular Media Failed");
     }];
@@ -101,17 +113,12 @@
     [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         
-        if (isPopularFeed) {
-            [mediaArray removeAllObjects];
-        }
         [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
-        isPopularFeed = NO;
     } failure:^(NSError *error) {
         NSLog(@"Request Self Feed Failed");
     }];
-    
 }
 
 
@@ -120,13 +127,9 @@
     [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         
-        if (isPopularFeed) {
-            [mediaArray removeAllObjects];
-        }
         [mediaArray addObjectsFromArray:feed];
         
         [self reloadData];
-        isPopularFeed = NO;
     } failure:^(NSError *error) {
         NSLog(@"Request Self Liked Media Failed");
         
@@ -147,10 +150,6 @@
 {
     [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
-        if (isPopularFeed) {
-            [mediaArray removeAllObjects];
-        }
-        isPopularFeed = NO;
         [mediaArray addObjectsFromArray:feed];
         [self reloadData];
         
@@ -159,18 +158,17 @@
     }];
 }
 
-- (void)loadMediaForUser:(InstagramUser *)user
+- (void)testLoadMediaForUser:(InstagramUser *)user
 {
     [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
-        if (isPopularFeed) {
-            [mediaArray removeAllObjects];
-        }
-        [mediaArray addObjectsFromArray:feed];
-        [self reloadData];
+
         if (paginationInfo) {
             self.currentPaginationInfo = paginationInfo;
         }
-        isPopularFeed = NO;
+        
+        [mediaArray addObjectsFromArray:feed];
+        [self reloadData];
+        
     } failure:^(NSError *error) {
         NSLog(@"Loading User media failed");
     }];
@@ -233,16 +231,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    InstagramMedia *media = mediaArray[indexPath.row];
+//    InstagramMedia *media = mediaArray[indexPath.row];
+//        [self testLoadMediaForUser:media.user];
     
-    if (isPopularFeed) {
-        [self loadMediaForUser:media.user];
-    }
-    else if (self.currentPaginationInfo)
+    if (self.currentPaginationInfo)
     {
-        [self loadMedia];
-        // paginate on navigating to detail
-//        [self loadMediaForUser:media.user];
+//  Paginate on navigating to detail
+//        [self loadMedia];
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }
 }

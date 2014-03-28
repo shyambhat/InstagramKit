@@ -21,5 +21,5 @@
 #import <UIKit/UIKit.h>
 
 @interface IKCollectionViewController : UICollectionViewController
-- (IBAction)loadMedia;
+- (IBAction)reloadMedia;
 @end

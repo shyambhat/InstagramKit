@@ -45,6 +45,14 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 #define kData @"data"
 #define kPagination @"pagination"
 
+
+typedef enum
+{
+    kPaginationMaxId,
+    kPaginationMaxLikeId,
+    kPaginationMaxTagId,
+} MaxIdKeyType;
+
 @interface InstagramEngine()
 {
     dispatch_queue_t mBackgroundQueue;
@@ -282,24 +290,26 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     }];
 }
 
-- (NSDictionary *)parametersFromCount:(NSInteger)count andMaxId:(NSString *)maxId
+- (NSDictionary *)parametersFromCount:(NSInteger)count maxId:(NSString *)maxId andMaxIdType:(MaxIdKeyType)keyType
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
     if (maxId) {
-        [params setObject:maxId forKey:kMaxId];
+        NSString *key = nil;
+        switch (keyType) {
+            case kPaginationMaxId:
+                key = kMaxId;
+                break;
+            case kPaginationMaxLikeId:
+                key = kMaxLikeId;
+                break;
+            case kPaginationMaxTagId:
+                key = kMaxTagId;
+                break;
+        }
+        [params setObject:maxId forKey:key];
     }
     return [NSDictionary dictionaryWithDictionary:params];
 }
-
-- (NSDictionary *)parametersFromCount:(NSInteger)count andMaxLikeId:(NSString *)maxId
-{
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
-    if (maxId) {
-        [params setObject:maxId forKey:kMaxLikeId];
-    }
-    return [NSDictionary dictionaryWithDictionary:params];
-}
-
 
 
 #pragma mark - Media -
@@ -347,7 +357,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
                    failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
     [self getPath:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f",location.latitude,location.longitude] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
@@ -390,7 +400,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
             withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                 failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
     [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
@@ -445,7 +455,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                      success:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                        failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
     [self getPath:[NSString stringWithFormat:@"users/self/feed"] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
@@ -473,7 +483,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                              success:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                              failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxLikeId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxLikeId];
     [self getPath:[NSString stringWithFormat:@"users/self/media/liked"] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
@@ -486,6 +496,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 
 #pragma mark - Tags -
 
+#warning Tested until here. Please test every call after this
 
 - (void)getTagDetailsWithName:(NSString *)name
                   withSuccess:(void (^)(InstagramTag *tag))success
@@ -518,7 +529,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                 withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                     failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxTagId];
     [self getPath:[NSString stringWithFormat:@"tags/%@/media/recent",tag] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);
@@ -546,7 +557,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
                    failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
     [self getPath:[NSString stringWithFormat:@"tags/search?q=%@",name] parameters:params responseModel:[InstagramTag class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);

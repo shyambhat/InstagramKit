@@ -53,7 +53,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="0jQ-KI-jXz">
                             <connections>
-                                <action selector="loadMedia" destination="4al-wR-gxx" id="tCz-5F-JMf"/>
+                                <action selector="reloadMedia" destination="4al-wR-gxx" id="h0z-7u-qHo"/>
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Hashtags" minimumFontSize="17" id="Szz-yV-giw">
