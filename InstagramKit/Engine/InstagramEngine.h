@@ -205,6 +205,11 @@ typedef enum
           withSuccess:(void (^)(void))success
               failure:(void (^)(NSError* error))failure;
 
+#pragma mark - Relationships -
+
+- (void)followUser:(InstagramUser*)user
+       withSuccess:(void (^)(void))success
+           failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Likes -
 

@@ -202,11 +202,18 @@
 
 - (void)testAddComment
 {
-    [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media withSuccess:^{
-        NSLog(@"Create Comment Success");
+//    [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media withSuccess:^{
+//        NSLog(@"Create Comment Success");
+//    } failure:^(NSError *error) {
+//        NSLog(@"Create Comment Failure");
+//    }];
+    
+    [[InstagramEngine sharedEngine] followUser:self.media.user withSuccess:^{
+        NSLog(@"follow success");
     } failure:^(NSError *error) {
-        NSLog(@"Create Comment Failure");
+        NSLog(@"failed to follow");
     }];
+
 }
 
 - (void)testRemoveComment
