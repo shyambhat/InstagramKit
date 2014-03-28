@@ -608,7 +608,10 @@ typedef enum
         failure(error);
     }];
 }
+
+
 #pragma mark - Relationships -
+
 
 - (void)followUser:(InstagramUser*)user
        withSuccess:(void (^)(void))success
@@ -622,6 +625,8 @@ typedef enum
         NSLog(@"%@", [error description]);
     }];
 }
+
+
 #pragma mark - Likes -
 
 
