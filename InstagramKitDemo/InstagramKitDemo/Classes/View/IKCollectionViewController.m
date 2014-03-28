@@ -62,26 +62,13 @@
     
     if (sharedEngine.accessToken)
     {
-        [[InstagramEngine sharedEngine] getSelfFeedWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:media];
+        [self testLoadSelfFeed];
+//        [self testLoadSelfLikedMedia];
 
-            [self reloadData];
-            isPopularFeed = NO;
-        } failure:^(NSError *error) {
-            NSLog(@"Request Self Feed Failed");
-        }];
     }
     else
     {
-        [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-            [mediaArray removeAllObjects];
-            [mediaArray addObjectsFromArray:media];
-            [self reloadData];
-            isPopularFeed = YES;
-        } failure:^(NSError *error) {
-           NSLog(@"Load Popular Media Failed");
-       }];
+        [self testLoadPopularMedia];
     }
 }
 
@@ -93,6 +80,59 @@
 //        [self testSearchUsersWithString:textField.text];
     }
 }
+
+
+- (void)testLoadPopularMedia
+{
+    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        [mediaArray removeAllObjects];
+        [mediaArray addObjectsFromArray:media];
+        [self reloadData];
+        isPopularFeed = YES;
+    } failure:^(NSError *error) {
+        NSLog(@"Load Popular Media Failed");
+    }];
+
+}
+
+
+- (void)testLoadSelfFeed
+{
+    [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        self.currentPaginationInfo = paginationInfo;
+        
+        if (isPopularFeed) {
+            [mediaArray removeAllObjects];
+        }
+        [mediaArray addObjectsFromArray:media];
+        
+        [self reloadData];
+        isPopularFeed = NO;
+    } failure:^(NSError *error) {
+        NSLog(@"Request Self Feed Failed");
+    }];
+    
+}
+
+
+- (void)testLoadSelfLikedMedia
+{
+    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+        self.currentPaginationInfo = paginationInfo;
+        
+        if (isPopularFeed) {
+            [mediaArray removeAllObjects];
+        }
+        [mediaArray addObjectsFromArray:feed];
+        
+        [self reloadData];
+        isPopularFeed = NO;
+    } failure:^(NSError *error) {
+        NSLog(@"Request Self Liked Media Failed");
+        
+    }];
+}
+
 
 - (void)testSearchUsersWithString:(NSString *)string
 {
@@ -200,8 +240,9 @@
     }
     else if (self.currentPaginationInfo)
     {
+        [self loadMedia];
         // paginate on navigating to detail
-        [self loadMediaForUser:media.user];
+//        [self loadMediaForUser:media.user];
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }
 }

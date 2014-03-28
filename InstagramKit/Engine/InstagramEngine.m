@@ -291,6 +291,17 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
     return [NSDictionary dictionaryWithDictionary:params];
 }
 
+- (NSDictionary *)parametersFromCount:(NSInteger)count andMaxLikeId:(NSString *)maxId
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
+    if (maxId) {
+        [params setObject:maxId forKey:kMaxLikeId];
+    }
+    return [NSDictionary dictionaryWithDictionary:params];
+}
+
+
+
 #pragma mark - Media -
 
 
@@ -445,7 +456,6 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
 }
 
 
-#warning - test this for next_max_like_id
 - (void)getMediaLikedBySelfWithSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                         failure:(void (^)(NSError* error))failure
 {
@@ -463,7 +473,7 @@ NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
                              success:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
                              failure:(void (^)(NSError* error))failure
 {
-    NSDictionary *params = [self parametersFromCount:count andMaxId:maxId];
+    NSDictionary *params = [self parametersFromCount:count andMaxLikeId:maxId];
     [self getPath:[NSString stringWithFormat:@"users/self/media/liked"] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         NSArray *objects = response;
         success(objects, paginationInfo);

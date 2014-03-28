@@ -83,5 +83,6 @@
 #define kNextMaxLikeId @"next_max_like_id"
 
 #define kMaxId @"max_id"
+#define kMaxLikeId @"max_like_id"
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
