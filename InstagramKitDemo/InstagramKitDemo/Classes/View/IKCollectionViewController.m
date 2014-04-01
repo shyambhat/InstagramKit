@@ -124,10 +124,10 @@
 
 - (void)testLoadSelfLikedMedia
 {
-    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         
-        [mediaArray addObjectsFromArray:feed];
+        [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
     } failure:^(NSError *error) {
@@ -148,9 +148,9 @@
 
 - (void)testGetMediaFromTag:(NSString *)tag
 {
-    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
-        [mediaArray addObjectsFromArray:feed];
+        [mediaArray addObjectsFromArray:media];
         [self reloadData];
         
     } failure:^(NSError *error) {
@@ -232,12 +232,12 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 //    InstagramMedia *media = mediaArray[indexPath.row];
-//        [self testLoadMediaForUser:media.user];
+//    [self testLoadMediaForUser:media.user];
     
     if (self.currentPaginationInfo)
     {
 //  Paginate on navigating to detail
-//        [self loadMedia];
+        [self loadMedia];
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }
 }

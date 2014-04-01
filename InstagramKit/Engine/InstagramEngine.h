@@ -20,8 +20,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+@class InstagramUser;
+@class InstagramMedia;
+@class InstagramPaginationInfo;
+@class InstagramTag;
+
 
 typedef void(^InstagramLoginBlock)(NSError* error);
+typedef void(^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramFailureBlock)(NSError* error);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -34,26 +41,15 @@ extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
 
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
-@class InstagramUser;
-@class InstagramMedia;
-@class InstagramPaginationInfo;
-@class InstagramTag;
-
 extern NSString *const kInstagramKitErrorDomain;
 
 typedef enum
 {
-    // Indicates no error
     kInstagramKitErrorCodeNone,
-
-    // Indicates that the access was not granted.  This happens when the instagram kit
-    // is not able to obtain an access_token
     kInstagramKitErrorCodeAccessNotGranted,
-
-    // And finally some code that are blatently plagerized from the core API
     kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
 
-} InstagramErrorCode;
+} InstagramKitErrorCode;
 
 @interface InstagramEngine : NSObject
 
@@ -85,24 +81,24 @@ typedef enum
 
 - (void)getMedia:(NSString *)mediaId
      withSuccess:(void (^)(InstagramMedia *media))success
-         failure:(void (^)(NSError* error))failure;
+         failure:(InstagramFailureBlock)failure;
 
 
 
 
-- (void)getPopularMediaWithSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
-                           failure:(void (^)(NSError* error))failure;
+- (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
+                           failure:(InstagramFailureBlock)failure;
 
 
 
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
-               withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
-                   failure:(void (^)(NSError* error))failure;
+               withSuccess:(InstagramMediaBlock)success
+                   failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location count:(NSInteger)count maxId:(NSString *)maxId
-               withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
-                   failure:(void (^)(NSError* error))failure;
+               withSuccess:(InstagramMediaBlock)success
+                   failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Users -
@@ -110,52 +106,52 @@ typedef enum
 
 - (void)getUserDetails:(InstagramUser *)user
            withSuccess:(void (^)(InstagramUser *userDetail))success
-               failure:(void (^)(NSError* error))failure;
+               failure:(InstagramFailureBlock)failure;
 
 
 
 
 - (void)getMediaForUser:(NSString *)userId
-        withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-            failure:(void (^)(NSError* error))failure;
+        withSuccess:(InstagramMediaBlock)success
+            failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaForUser:(NSString *)userId count:(NSInteger)count maxId:(NSString *)maxId
-            withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-                failure:(void (^)(NSError* error))failure;
+            withSuccess:(InstagramMediaBlock)success
+                failure:(InstagramFailureBlock)failure;
 
 
 
 
 - (void)searchUsersWithString:(NSString *)string
                   withSuccess:(void (^)(NSArray *users, InstagramPaginationInfo *paginationInfo))success
-                      failure:(void (^)(NSError* error))failure;
+                      failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Self User -
 
 
 - (void)getSelfUserDetailsWithSuccess:(void (^)(InstagramUser *userDetail))success
-                              failure:(void (^)(NSError* error))failure;
+                              failure:(InstagramFailureBlock)failure;
 
 
 
 
-- (void)getSelfFeedWithSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-            failure:(void (^)(NSError* error))failure;
+- (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
+            failure:(InstagramFailureBlock)failure;
 
 - (void)getSelfFeedWithCount:(NSInteger)count maxId:(NSString *)maxId
-        success:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-            failure:(void (^)(NSError* error))failure;
+        success:(InstagramMediaBlock)success
+            failure:(InstagramFailureBlock)failure;
 
 
 
 
-- (void)getMediaLikedBySelfWithSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-                        failure:(void (^)(NSError* error))failure;
+- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
+                        failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaLikedBySelfWithCount:(NSInteger)count maxId:(NSString *)maxId
-                             success:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-                               failure:(void (^)(NSError* error))failure;
+                             success:(InstagramMediaBlock)success
+                               failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Tags -
@@ -163,29 +159,29 @@ typedef enum
 
 - (void)getTagDetailsWithName:(NSString *)name
                   withSuccess:(void (^)(InstagramTag *tag))success
-                      failure:(void (^)(NSError* error))failure;
+                      failure:(InstagramFailureBlock)failure;
 
 
 
 
 - (void)getMediaWithTagName:(NSString *)tag
-            withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-                failure:(void (^)(NSError* error))failure;
+            withSuccess:(InstagramMediaBlock)success
+                failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaWithTagName:(NSString *)tag count:(NSInteger)count maxId:(NSString *)maxId
-                withSuccess:(void (^)(NSArray *feed, InstagramPaginationInfo *paginationInfo))success
-                    failure:(void (^)(NSError* error))failure;
+                withSuccess:(InstagramMediaBlock)success
+                    failure:(InstagramFailureBlock)failure;
 
 
 
 
 - (void)searchTagsWithName:(NSString *)name
                withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
-                   failure:(void (^)(NSError* error))failure;
+                   failure:(InstagramFailureBlock)failure;
 
 - (void)searchTagsWithName:(NSString *)name count:(NSInteger)count maxId:(NSString *)maxId
                withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
-                   failure:(void (^)(NSError* error))failure;
+                   failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Comments -
@@ -193,17 +189,17 @@ typedef enum
 
 - (void)getCommentsOnMedia:(InstagramMedia *)media
                withSuccess:(void (^)(NSArray *comments))success
-                   failure:(void (^)(NSError* error))failure;
+                   failure:(InstagramFailureBlock)failure;
 
 - (void)createComment:(NSString *)commentText
               onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
-              failure:(void (^)(NSError* error))failure;
+              failure:(InstagramFailureBlock)failure;
 
 - (void)removeComment:(NSString *)commentId
               onMedia:(InstagramMedia *)media
           withSuccess:(void (^)(void))success
-              failure:(void (^)(NSError* error))failure;
+              failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Likes -
@@ -211,21 +207,21 @@ typedef enum
 
 - (void)getLikesOnMedia:(InstagramMedia *)media
             withSuccess:(void (^)(NSArray *likedUsers))success
-                failure:(void (^)(NSError* error))failure;
+                failure:(InstagramFailureBlock)failure;
 
 - (void)likeMedia:(InstagramMedia *)media
       withSuccess:(void (^)(void))success
-          failure:(void (^)(NSError* error))failure;
+          failure:(InstagramFailureBlock)failure;
 
 - (void)unlikeMedia:(InstagramMedia *)media
         withSuccess:(void (^)(void))success
-          failure:(void (^)(NSError* error))failure;
+          failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Pagination Request -
 
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
-                     withSuccess:(void (^)(NSArray *media, InstagramPaginationInfo *paginationInfo))success
-                         failure:(void (^)(NSError* error))failure;
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(InstagramFailureBlock)failure;
 
 @end
