@@ -237,7 +237,9 @@
     if (self.currentPaginationInfo)
     {
 //  Paginate on navigating to detail
-        [self loadMedia];
+//either
+//        [self loadMedia];
+//or
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }
 }
