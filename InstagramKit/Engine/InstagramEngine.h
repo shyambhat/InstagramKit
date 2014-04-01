@@ -36,9 +36,6 @@ extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
 extern NSString *const kInstagramKitBaseUrlConfigurationKey;
 extern NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
 
-extern NSString *const kInstagramKitBaseUrl __deprecated;
-extern NSString *const kInstagramKitAuthorizationUrl __deprecated;
-
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
 extern NSString *const kInstagramKitErrorDomain;
@@ -54,7 +51,7 @@ typedef enum
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
-+ (NSDictionary*) sharedEngineConfiguration;
++ (NSDictionary*)sharedEngineConfiguration;
 
 @property (nonatomic, copy) NSString *appClientID;
 @property (nonatomic, copy) NSString *appRedirectURL;
@@ -84,12 +81,10 @@ typedef enum
          failure:(InstagramFailureBlock)failure;
 
 
-
-
 - (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
                            failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
@@ -101,6 +96,7 @@ typedef enum
                    failure:(InstagramFailureBlock)failure;
 
 
+
 #pragma mark - Users -
 
 
@@ -108,7 +104,7 @@ typedef enum
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)getMediaForUser:(NSString *)userId
@@ -119,12 +115,13 @@ typedef enum
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)searchUsersWithString:(NSString *)string
                   withSuccess:(void (^)(NSArray *users, InstagramPaginationInfo *paginationInfo))success
                       failure:(InstagramFailureBlock)failure;
+
 
 
 #pragma mark - Self User -
@@ -133,7 +130,7 @@ typedef enum
 - (void)getSelfUserDetailsWithSuccess:(void (^)(InstagramUser *userDetail))success
                               failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
@@ -143,7 +140,7 @@ typedef enum
         success:(InstagramMediaBlock)success
             failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
@@ -154,6 +151,7 @@ typedef enum
                                failure:(InstagramFailureBlock)failure;
 
 
+
 #pragma mark - Tags -
 
 
@@ -161,7 +159,7 @@ typedef enum
                   withSuccess:(void (^)(InstagramTag *tag))success
                       failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)getMediaWithTagName:(NSString *)tag
@@ -172,7 +170,7 @@ typedef enum
                 withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure;
 
-
+#pragma mark -
 
 
 - (void)searchTagsWithName:(NSString *)name
@@ -182,6 +180,7 @@ typedef enum
 - (void)searchTagsWithName:(NSString *)name count:(NSInteger)count maxId:(NSString *)maxId
                withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
                    failure:(InstagramFailureBlock)failure;
+
 
 
 #pragma mark - Comments -
@@ -202,6 +201,7 @@ typedef enum
               failure:(InstagramFailureBlock)failure;
 
 
+
 #pragma mark - Likes -
 
 
@@ -218,7 +218,8 @@ typedef enum
           failure:(InstagramFailureBlock)failure;
 
 
-#pragma mark - Pagination Request -
+
+#pragma mark - Common Pagination Request -
 
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
                      withSuccess:(InstagramMediaBlock)success
