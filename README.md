@@ -1,16 +1,17 @@
 InstagramKit
 ==================
 
-An extensive blocks-based Objective C wrapper for the Instagram API. 
+An extensive Objective C wrapper for the Instagram API. 
 
-This framework is built atop AFNetworking’s blocks-based architecture and additionally parses the JSON response asynchronously so there’s absolutely no processing on the main thread. It’s neat, fast and works like a charm providing an easy interface to interacting with Instagram’s model objects.
+This framework is built atop AFNetworking’s blocks-based architecture and additionally parses the JSON response asynchronously so there’s absolutely no parsing on the main thread. 
+It’s neat, fast and works like a charm providing an easy interface to interacting with Instagram’s model objects.
 
 
 
 #### Changelog:
-Version 3.1.0 adds support for seamless pagination making it almost effortless to get multiple pages of feed data.
+Version 3.1.0 adds support for seamless pagination.
 
-Read about implementing Pagination in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
+Read about implementing Pagination effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
 
 ##Installation
