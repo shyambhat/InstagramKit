@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-//    [self testLoadCounts];
+    [self testLoadCounts];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
@@ -61,6 +61,7 @@
     }
     return retVal;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!indexPath.row) {
