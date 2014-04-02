@@ -73,6 +73,7 @@
     {
         [self testLoadSelfFeed];
 //        [self testLoadSelfLikedMedia];
+//        [self getSelfUserDetails];
     }
     else
     {
@@ -105,6 +106,15 @@
         NSLog(@"Load Popular Media Failed");
     }];
 
+}
+
+- (void)getSelfUserDetails
+{
+    [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail) {
+        NSLog(@"%@",userDetail);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 
