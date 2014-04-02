@@ -1,9 +1,12 @@
 InstagramKit
 ==================
 
-A neat little blocks-based Objective C wrapper for the Instagram API. 
+An extensive blocks-based Objective C wrapper for the Instagram API. 
 
-Built atop AFNetworking 2, it rips through the JSON asynchronously to give you ready-to-use Instagram model objects.
+Built atop AFNetworking, it rips through the JSON asynchronously to give you ready-to-use Instagram model objects.
+
+##### Changelog:
+Version 3.1.0 adds support for seamless pagination making it almost effortless to get multiple pages of feed data.
 
 ##Installation
 
@@ -13,7 +16,7 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 
 #### Cocoapods Podfile
 ```ruby
-pod 'InstagramKit', '2.1.0'
+pod 'InstagramKit', '3.1.0'
 ```
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
