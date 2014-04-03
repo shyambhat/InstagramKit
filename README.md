@@ -21,7 +21,7 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 
 ##### Cocoapods Podfile:
 ```ruby
-pod 'InstagramKit', '3.1.0'
+pod 'InstagramKit', '3.1.1'
 ```
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
