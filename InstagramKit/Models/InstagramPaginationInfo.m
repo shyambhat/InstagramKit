@@ -9,16 +9,37 @@
 #import "InstagramPaginationInfo.h"
 #import "InstagramModel.h"
 
+@interface InstagramPaginationInfo ()
+@property (nonatomic, strong) Class type;
+@end
+
 @implementation InstagramPaginationInfo
 
-- (id)initWithInfo:(NSDictionary *)info
+- (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
+    BOOL infoExists = IKNotNull(info);
+    BOOL nextURLExists = IKNotNull(info[kNextURL]);
+    if (self && infoExists && nextURLExists){
+        
         _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
-        _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+        BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
+        BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
+        if (nextMaxIdExists)
+        {
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+        }
+        else if (nextMaxLikeIdExists)
+        {
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+        }
+        
+        if (type) {
+            self.type = type;
+        }
+        return self;
     }
-    return self;
+    return nil;
 }
 
 @end

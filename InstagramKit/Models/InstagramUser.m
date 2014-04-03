@@ -74,8 +74,8 @@
 
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:self.Id count:10 withSuccess:^(NSArray *feed) {
-        self.recentMedia = feed;
+    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        self.recentMedia = media;
         success();
     } failure:^(NSError *error) {
         failure();

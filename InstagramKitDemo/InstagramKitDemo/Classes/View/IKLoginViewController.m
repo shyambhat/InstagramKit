@@ -54,7 +54,7 @@
             [[InstagramEngine sharedEngine] setAccessToken:accessToken];
             
             [self dismissViewControllerAnimated:YES completion:^{
-                [self.collectionViewController loadMedia];
+                [self.collectionViewController reloadMedia];
             }];
         }
         return NO;
