@@ -29,6 +29,8 @@
 typedef void(^InstagramLoginBlock)(NSError* error);
 typedef void(^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramFailureBlock)(NSError* error);
+typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramCommentsBlock)(NSArray *comments);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -174,11 +176,11 @@ typedef enum
 
 
 - (void)searchTagsWithName:(NSString *)name
-               withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
+               withSuccess:(InstagramTagsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 - (void)searchTagsWithName:(NSString *)name count:(NSInteger)count maxId:(NSString *)maxId
-               withSuccess:(void (^)(NSArray *tags, InstagramPaginationInfo *paginationInfo))success
+               withSuccess:(InstagramTagsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 
@@ -187,7 +189,7 @@ typedef enum
 
 
 - (void)getCommentsOnMedia:(InstagramMedia *)media
-               withSuccess:(void (^)(NSArray *comments))success
+               withSuccess:(InstagramCommentsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 - (void)createComment:(NSString *)commentText
