@@ -37,11 +37,12 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 
 
-## Contributions?
+### Contributions?
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
 
+Questions? 
 The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is your definitive source of information in case something goes wrong. Please make sure you've read up the document thoroughly before posting issues.
 
 ==================
