@@ -40,6 +40,18 @@ extern NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
 
 // Head over to http://instagram.com/developer/clients/manage/ to find these.
 
+
+extern NSString *const kRelationshipOutgoingStatusKey;
+extern NSString *const kRelationshipOutStatusFollows;
+extern NSString *const kRelationshipOutStatusRequested;
+extern NSString *const kRelationshipOutStatusNone;
+
+extern NSString *const kRelationshipIncomingStatusKey;
+extern NSString *const kRelationshipInStatusFollowedBy;
+extern NSString *const kRelationshipInStatusRequestedBy;
+extern NSString *const kRelationshipInStatusBlockedByYou;
+extern NSString *const kRelationshipInStatusNone;
+
 extern NSString *const kInstagramKitErrorDomain;
 
 typedef enum
@@ -205,9 +217,40 @@ typedef enum
 
 #pragma mark - Relationships -
 
-- (void)followUser:(InstagramUser*)user
-       withSuccess:(void (^)(void))success
+- (void)getUsersFollowedByUser:(NSString *)userId
+                   withSuccess:(void (^)(NSArray *usersFollowed))success
+                       failure:(void (^)(NSError* error))failure;
+
+- (void)getFollowersOfUser:(NSString *)userId
+               withSuccess:(void (^)(NSArray *followers))success
+                   failure:(void (^)(NSError* error))failure;
+
+- (void)getFollowRequestsWithSuccess:(void (^)(NSArray *requestedUsers))success
+                        failure:(void (^)(NSError* error))failure;
+
+- (void)followUser:(NSString *)userId
+       withSuccess:(void (^)(NSDictionary *response))success
            failure:(void (^)(NSError* error))failure;
+
+- (void)unfollowUser:(NSString *)userId
+         withSuccess:(void (^)(NSDictionary *response))success
+             failure:(void (^)(NSError* error))failure;
+
+- (void)blockUser:(NSString *)userId
+       withSuccess:(void (^)(NSDictionary *response))success
+           failure:(void (^)(NSError* error))failure;
+
+- (void)unblockUser:(NSString *)userId
+         withSuccess:(void (^)(NSDictionary *response))success
+             failure:(void (^)(NSError* error))failure;
+
+- (void)approveUser:(NSString *)userId
+        withSuccess:(void (^)(NSDictionary *response))success
+            failure:(void (^)(NSError* error))failure;
+
+- (void)denyUser:(NSString *)userId
+        withSuccess:(void (^)(NSDictionary *response))success
+            failure:(void (^)(NSError* error))failure;
 
 #pragma mark - Likes -
 
