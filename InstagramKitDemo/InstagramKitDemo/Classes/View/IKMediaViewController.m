@@ -215,4 +215,13 @@
     
 }
 
+- (void)testFollowUser
+{
+    [[InstagramEngine sharedEngine] followUser:self.media.user withSuccess:^{
+        NSLog(@"follow success");
+    } failure:^(NSError *error) {
+        NSLog(@"failed to follow");
+    }];
+}
+
 @end

@@ -33,7 +33,8 @@
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
     NSDictionary *configuration = [InstagramEngine sharedEngineConfiguration];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments+relationships", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey]]];
+
     [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
     
 }

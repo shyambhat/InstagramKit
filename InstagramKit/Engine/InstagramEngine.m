@@ -730,6 +730,23 @@ typedef enum
 }
 
 
+#pragma mark - Relationships -
+
+
+- (void)followUser:(InstagramUser*)user
+       withSuccess:(void (^)(void))success
+           failure:(void (^)(NSError* error))failure
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjects:@[@"action=follow"] forKeys:@[kText]];
+    [self postPath:[NSString stringWithFormat:@"users/%@/relationships",user.Id] parameters:params responseModel:nil success:^{
+        success();
+    } failure:^(NSError *error, NSInteger statusCode) {
+        failure(error);
+        NSLog(@"%@", [error description]);
+    }];
+}
+
+
 #pragma mark - Likes -
 
 
