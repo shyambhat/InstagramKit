@@ -250,7 +250,7 @@
 
 - (void)testRelationshipStatusOfUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getRelationshipStatusWithUser:userId withSuccess:^(NSDictionary *responseDictionary) {
+    [[InstagramEngine sharedEngine] getRelationshipStatusOfUser:userId withSuccess:^(NSDictionary *responseDictionary) {
         NSLog(@"responseDictionary %@",responseDictionary);
     } failure:^(NSError *error) {
         NSLog(@"fail %@",error);
