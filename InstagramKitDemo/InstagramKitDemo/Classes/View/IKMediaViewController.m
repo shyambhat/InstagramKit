@@ -248,6 +248,14 @@
     [self testUnfollowUser];
 }
 
+- (void)testRelationshipStatusOfUser:(NSString *)userId
+{
+    [[InstagramEngine sharedEngine] getRelationshipStatusWithUser:userId withSuccess:^(NSDictionary *responseDictionary) {
+        NSLog(@"responseDictionary %@",responseDictionary);
+    } failure:^(NSError *error) {
+        NSLog(@"fail %@",error);
+    }];
+}
 - (void)testGetUsersFollowedByUser:(NSString *)userId
 {
     [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *usersFollowed) {

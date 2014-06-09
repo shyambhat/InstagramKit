@@ -217,6 +217,10 @@ typedef enum
 
 #pragma mark - Relationships -
 
+- (void)getRelationshipStatusOfUser:(NSString *)userId
+                          withSuccess:(void (^)(NSDictionary *responseDictionary))success
+                              failure:(void (^)(NSError* error))failure;
+
 - (void)getUsersFollowedByUser:(NSString *)userId
                    withSuccess:(void (^)(NSArray *usersFollowed))success
                        failure:(void (^)(NSError* error))failure;

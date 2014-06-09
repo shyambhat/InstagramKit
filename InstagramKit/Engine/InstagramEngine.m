@@ -62,7 +62,7 @@ NSString *const kRelationshipInStatusRequestedBy = @"requested_by";
 NSString *const kRelationshipInStatusBlockedByYou = @"blocked_by_you";
 NSString *const kRelationshipInStatusNone = @"none";
 
-//
+NSString *const kRelationshipUserPrivateKey = @"target_user_is_private";
 
 NSString *const kRelationshipActionKey = @"action";
 NSString *const kRelationshipActionFollow = @"follow";
@@ -268,7 +268,13 @@ typedef enum
                    id model = nil;
                    if (modelClass && IKNotNull(responseDictionary[kData]))
                    {
-                       model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+                       if (modelClass == [NSDictionary class]) {
+                           model = [[NSDictionary alloc] initWithDictionary:responseDictionary[kData]];
+                       }
+                       else
+                       {
+                           model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
+                       }
                    }
                    success(model, paginationInfo);
                }
@@ -769,6 +775,24 @@ typedef enum
 
 #pragma mark - Relationships -
 
+- (void)getRelationshipStatusOfUser:(NSString *)userId
+                          withSuccess:(void (^)(NSDictionary *responseDictionary))success
+                              failure:(void (^)(NSError* error))failure
+{
+    [self getPath:[NSString stringWithFormat:@"users/%@/relationship",userId] parameters:nil responseModel:[NSDictionary class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+        if(success)
+		{
+			NSDictionary *responseDictionary = response;
+			success(responseDictionary);
+		}
+    } failure:^(NSError *error, NSInteger statusCode) {
+        if(failure)
+		{
+			failure(error);
+		}
+    }];
+}
+
 
 - (void)getUsersFollowedByUser:(NSString *)userId
                    withSuccess:(void (^)(NSArray *usersFollowed))success
@@ -786,7 +810,6 @@ typedef enum
 			failure(error);
 		}
     }];
-
 }
 
 
