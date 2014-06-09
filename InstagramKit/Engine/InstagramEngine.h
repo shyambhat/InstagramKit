@@ -52,6 +52,8 @@ extern NSString *const kRelationshipInStatusRequestedBy;
 extern NSString *const kRelationshipInStatusBlockedByYou;
 extern NSString *const kRelationshipInStatusNone;
 
+extern NSString *const kRelationshipUserIsPrivateKey;
+
 extern NSString *const kInstagramKitErrorDomain;
 
 typedef enum

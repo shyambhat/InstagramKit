@@ -62,7 +62,7 @@ NSString *const kRelationshipInStatusRequestedBy = @"requested_by";
 NSString *const kRelationshipInStatusBlockedByYou = @"blocked_by_you";
 NSString *const kRelationshipInStatusNone = @"none";
 
-NSString *const kRelationshipUserPrivateKey = @"target_user_is_private";
+NSString *const kRelationshipUserIsPrivateKey = @"target_user_is_private";
 
 NSString *const kRelationshipActionKey = @"action";
 NSString *const kRelationshipActionFollow = @"follow";
