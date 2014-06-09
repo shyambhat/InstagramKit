@@ -9,6 +9,8 @@ It’s neat, fast and works like a charm providing an easy interface to interact
 
 
 #### Changelog:
+Version 3.5.0 includes accessors for relationship endpoints to follow, unfollow, block, unblock, approve or deny other users.
+
 Version 3.1.0 adds support for seamless pagination.
 
 Read about implementing Pagination effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
