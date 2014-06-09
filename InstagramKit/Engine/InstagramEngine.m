@@ -773,7 +773,67 @@ typedef enum
 }
 
 
+#pragma mark - Likes -
+
+
+- (void)getLikesOnMedia:(InstagramMedia *)media
+            withSuccess:(void (^)(NSArray *likedUsers))success
+                failure:(InstagramFailureBlock)failure
+{
+    [self getPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+        if(success)
+		{
+			NSArray *objects = response;
+			success(objects);
+		}
+    } failure:^(NSError *error, NSInteger statusCode) {
+        if(failure)
+		{
+			failure(error);
+		}
+    }];
+}
+
+
+- (void)likeMedia:(InstagramMedia *)media
+      withSuccess:(void (^)(void))success
+          failure:(InstagramFailureBlock)failure
+{
+    [self postPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^(NSDictionary *responseObject)
+     {
+         if(success)
+         {
+             success();
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if(failure)
+         {
+             failure(error);
+         }
+     }];
+}
+
+
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+            failure:(InstagramFailureBlock)failure
+{
+    [self deletePath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
+        if(success)
+		{
+			success();
+		}
+    } failure:^(NSError *error, NSInteger statusCode) {
+        if(failure)
+		{
+			failure(error);
+		}
+    }];
+}
+
+
 #pragma mark - Relationships -
+
 
 - (void)getRelationshipStatusOfUser:(NSString *)userId
                           withSuccess:(void (^)(NSDictionary *responseDictionary))success
@@ -850,6 +910,7 @@ typedef enum
     
 }
 
+
 - (void)followUser:(NSString *)userId
        withSuccess:(void (^)(NSDictionary *response))success
            failure:(void (^)(NSError* error))failure
@@ -892,7 +953,6 @@ typedef enum
 }
 
 
-
 - (void)blockUser:(NSString *)userId
        withSuccess:(void (^)(NSDictionary *response))success
            failure:(void (^)(NSError* error))failure
@@ -912,7 +972,6 @@ typedef enum
         NSLog(@"%@", [error description]);
     }];
 }
-
 
 
 - (void)unblockUser:(NSString *)userId
@@ -957,7 +1016,6 @@ typedef enum
 }
 
 
-
 - (void)denyUser:(NSString *)userId
         withSuccess:(void (^)(NSDictionary *response))success
             failure:(void (^)(NSError* error))failure
@@ -974,65 +1032,6 @@ typedef enum
 			failure(error);
 		}
         NSLog(@"%@", [error description]);
-    }];
-}
-
-
-#pragma mark - Likes -
-
-
-- (void)getLikesOnMedia:(InstagramMedia *)media
-               withSuccess:(void (^)(NSArray *likedUsers))success
-                   failure:(InstagramFailureBlock)failure
-{
-    [self getPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
-        if(success)
-		{
-			NSArray *objects = response;
-			success(objects);
-		}
-    } failure:^(NSError *error, NSInteger statusCode) {
-        if(failure)
-		{
-			failure(error);
-		}
-    }];
-}
-
-
-- (void)likeMedia:(InstagramMedia *)media
-              withSuccess:(void (^)(void))success
-          failure:(InstagramFailureBlock)failure
-{
-    [self postPath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^(NSDictionary *responseObject)
-    {
-        if(success)
-		{
-			success();
-		}
-    } failure:^(NSError *error, NSInteger statusCode) {
-        if(failure)
-		{
-			failure(error);
-		}
-    }];
-}
-
-
-- (void)unlikeMedia:(InstagramMedia *)media
-        withSuccess:(void (^)(void))success
-          failure:(InstagramFailureBlock)failure
-{
-    [self deletePath:[NSString stringWithFormat:@"media/%@/likes",media.Id] parameters:nil responseModel:nil success:^{
-        if(success)
-		{
-			success();
-		}
-    } failure:^(NSError *error, NSInteger statusCode) {
-        if(failure)
-		{
-			failure(error);
-		}
     }];
 }
 

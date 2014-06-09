@@ -217,7 +217,24 @@ typedef enum
               failure:(InstagramFailureBlock)failure;
 
 
+#pragma mark - Likes -
+
+
+- (void)getLikesOnMedia:(InstagramMedia *)media
+            withSuccess:(void (^)(NSArray *likedUsers))success
+                failure:(InstagramFailureBlock)failure;
+
+- (void)likeMedia:(InstagramMedia *)media
+      withSuccess:(void (^)(void))success
+          failure:(InstagramFailureBlock)failure;
+
+- (void)unlikeMedia:(InstagramMedia *)media
+        withSuccess:(void (^)(void))success
+            failure:(InstagramFailureBlock)failure;
+
+
 #pragma mark - Relationships -
+
 
 - (void)getRelationshipStatusOfUser:(NSString *)userId
                           withSuccess:(void (^)(NSDictionary *responseDictionary))success
@@ -257,22 +274,6 @@ typedef enum
 - (void)denyUser:(NSString *)userId
         withSuccess:(void (^)(NSDictionary *response))success
             failure:(void (^)(NSError* error))failure;
-
-#pragma mark - Likes -
-
-
-- (void)getLikesOnMedia:(InstagramMedia *)media
-            withSuccess:(void (^)(NSArray *likedUsers))success
-                failure:(InstagramFailureBlock)failure;
-
-- (void)likeMedia:(InstagramMedia *)media
-      withSuccess:(void (^)(void))success
-          failure:(InstagramFailureBlock)failure;
-
-- (void)unlikeMedia:(InstagramMedia *)media
-        withSuccess:(void (^)(void))success
-          failure:(InstagramFailureBlock)failure;
-
 
 
 #pragma mark - Common Pagination Request -
