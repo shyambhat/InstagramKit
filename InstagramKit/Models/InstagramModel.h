@@ -58,7 +58,6 @@
 #define kLocation @"location"
 #define kType @"type"
 
-#define kDate @"created_time"
 #define kCreator @"from"
 #define kText @"text"
 
