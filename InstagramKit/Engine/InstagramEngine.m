@@ -164,13 +164,21 @@ typedef enum
     }
 }
 
-- (void)loginWithBlock:(InstagramLoginBlock)block
+- (void)loginWithScope:(NSArray *)scope completionBlock:(InstagramLoginBlock)block
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token",
-        self.authorizationURL,
-        self.appClientID,
-        self.appRedirectURL]];
-
+    NSMutableDictionary *params = [@{kKeyClientID: self.appClientID,
+                                     @"redirect_uri": self.appRedirectURL,
+                                     @"response_type": @"token"} mutableCopy];
+    if (scope.count > 0) {
+        params[@"scope"] = [scope componentsJoinedByString:@"+"];
+    }
+    NSMutableArray *queryElements = [NSMutableArray arrayWithCapacity:params.count];
+    [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+        [queryElements addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
+    }];
+    NSString *queryString = [queryElements componentsJoinedByString:@"&"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",
+        self.authorizationURL, queryString]];
     self.instagramLoginBlock = block;
 
     [[UIApplication sharedApplication] openURL:url];

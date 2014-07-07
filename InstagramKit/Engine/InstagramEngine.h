@@ -77,7 +77,7 @@ typedef enum
 
 #pragma mark - Login -
 
-- (void)loginWithBlock:(InstagramLoginBlock)block;
+- (void)loginWithScope:(NSArray *)scope completionBlock:(InstagramLoginBlock)block;
 
 - (void)cancelLogin;
 
