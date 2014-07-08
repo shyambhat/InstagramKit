@@ -1096,6 +1096,9 @@ typedef enum
         if (scope & enumBitValueToCheck)
             [strings addObject:[typeStrings objectAtIndex:i]];
     }
+    if (!strings.count) {
+        return @"basic";
+    }
     
     return [strings componentsJoinedByString:@"+"];
     
