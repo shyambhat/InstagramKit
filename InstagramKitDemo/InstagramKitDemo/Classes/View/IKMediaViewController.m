@@ -44,7 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return ([[InstagramEngine sharedEngine] accessToken])?4:3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,27 +75,43 @@
     else
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        if (indexPath.row == 1) {
-            if ([[InstagramEngine sharedEngine] accessToken])
+        
+        switch (indexPath.row) {
+            case 1:
             {
-                if (liked) {
-                    cell.textLabel.text = @"Unlike";
+                if ([[InstagramEngine sharedEngine] accessToken])
+                {
+                    if (liked) {
+                        cell.textLabel.text = @"Unlike";
+                    }
+                    else
+                    {
+                        cell.textLabel.text = @"Like";
+                    }
+                    
                 }
                 else
-                {
-                    cell.textLabel.text = @"Like";
-                }
-                
+                    cell.textLabel.text = [NSString stringWithFormat:@"%ld Likes",(long)self.media.likesCount];
             }
-            else
-                cell.textLabel.text = [NSString stringWithFormat:@"%ld Likes",(long)self.media.likesCount];
+                break;
+                
+            case 2:
+            {
+                if ([[InstagramEngine sharedEngine] accessToken])
+                    cell.textLabel.text = @"Test Comment";
+                else
+                    cell.textLabel.text = [NSString stringWithFormat:@"%ld Comments",(long)self.media.commentCount];
+            }
+                break;
+                
+            default:
+            {
+                cell.textLabel.text = @"Test";
+            }
+                break;
+                
         }
-        if (indexPath.row == 2) {
-            if ([[InstagramEngine sharedEngine] accessToken])
-                cell.textLabel.text = @"Test Comment";
-            else
-                cell.textLabel.text = [NSString stringWithFormat:@"%ld Comments",(long)self.media.commentCount];
-        }
+        
         return cell;
     }
 }
@@ -120,8 +136,7 @@
             [self testGetLikes];
         }
     }
-    else
-    if (indexPath.row == 2) {
+    else if (indexPath.row == 2) {
         
         if ([[InstagramEngine sharedEngine] accessToken])
         {
@@ -132,6 +147,14 @@
             [self testComments];
         }
 
+    }
+    else if (indexPath.row == 3)
+    {
+        [self testCustom1];
+    }
+    else
+    {
+        [self testCustom2];
     }
 }
 
@@ -214,5 +237,104 @@
 {
     
 }
+
+- (void)testCustom1
+{
+    [self testFollowUser];
+}
+
+- (void)testCustom2
+{
+    [self testUnfollowUser];
+}
+
+- (void)testRelationshipStatusOfUser:(NSString *)userId
+{
+    [[InstagramEngine sharedEngine] getRelationshipStatusOfUser:userId withSuccess:^(NSDictionary *responseDictionary) {
+        NSLog(@"responseDictionary %@",responseDictionary);
+    } failure:^(NSError *error) {
+        NSLog(@"fail %@",error);
+    }];
+}
+- (void)testGetUsersFollowedByUser:(NSString *)userId
+{
+    [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *usersFollowed) {
+        NSLog(@"Get Follows Success");
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Get Follows Failure");
+ 
+    }];
+}
+
+- (void)testGetFollowersOfUser:(NSString *)userId
+{
+    [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *usersFollowed) {
+        NSLog(@"Get Followers Success");
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Get Followers Failure");
+        
+    }];
+}
+
+- (void)getSelfFollowRequests
+{
+    [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *usersFollowed) {
+        NSLog(@"Get Requests Success");
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Get Requests Failure");
+        
+    }];
+
+}
+
+- (void)testFollowUser
+{
+    [[InstagramEngine sharedEngine] followUser:self.media.user.Id withSuccess:^(NSDictionary *response)
+    {
+        NSLog(@"follow success");
+    } failure:^(NSError *error) {
+        NSLog(@"failed to follow");
+    }];
+}
+
+
+
+- (void)testUnfollowUser
+{
+    [[InstagramEngine sharedEngine] unfollowUser:self.media.user.Id withSuccess:^(NSDictionary *response)
+    {
+        NSLog(@"unfollow success");
+    } failure:^(NSError *error) {
+        NSLog(@"failed to unfollow");
+    }];
+}
+
+
+- (void)testBlockUser
+{
+    [[InstagramEngine sharedEngine] blockUser:self.media.user.Id withSuccess:^(NSDictionary *response)
+    {
+        NSLog(@"block success");
+    } failure:^(NSError *error) {
+        NSLog(@"failed to block");
+    }];
+}
+
+
+- (void)testUnblockUser
+{
+    [[InstagramEngine sharedEngine] unblockUser:self.media.user.Id withSuccess:^(NSDictionary *response)
+    {
+        NSLog(@"unblock success");
+    } failure:^(NSError *error) {
+        NSLog(@"failed to unblock");
+    }];
+}
+
+
+
 
 @end
