@@ -164,21 +164,32 @@ typedef enum
     }
 }
 
-- (void)loginWithScope:(NSArray *)scope completionBlock:(InstagramLoginBlock)block
+- (void)loginWithBlock:(InstagramLoginBlock)block
+{
+    [self loginWithScope:IKLoginScopeBasic completionBlock:block];
+}
+
+- (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
 {
     NSMutableDictionary *params = [@{kKeyClientID: self.appClientID,
                                      @"redirect_uri": self.appRedirectURL,
                                      @"response_type": @"token"} mutableCopy];
-    if (scope.count > 0) {
-        params[@"scope"] = [scope componentsJoinedByString:@"+"];
+    
+    if(scope)
+    {
+        params[@"scope"] = [InstagramEngine stringForScope:scope];
     }
+    
     NSMutableArray *queryElements = [NSMutableArray arrayWithCapacity:params.count];
     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
         [queryElements addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
     }];
+    
     NSString *queryString = [queryElements componentsJoinedByString:@"&"];
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",
         self.authorizationURL, queryString]];
+    
     self.instagramLoginBlock = block;
 
     [[UIApplication sharedApplication] openURL:url];
@@ -1068,6 +1079,26 @@ typedef enum
 		}
 		
     }];
+}
+
+#pragma mark - Helpers
+
++ (NSString *)stringForScope:(IKLoginScope)scope
+{
+    
+    NSArray *typeStrings = @[@"basic",@"comments",@"relationships",@"likes"];
+    NSMutableArray *strings = [NSMutableArray arrayWithCapacity:4];
+    
+    #define kBitsUsedByIKLoginScope 4
+    for (NSUInteger i=0; i < kBitsUsedByIKLoginScope; i++)
+    {
+        NSUInteger enumBitValueToCheck = 1 << i;
+        if (scope & enumBitValueToCheck)
+            [strings addObject:[typeStrings objectAtIndex:i]];
+    }
+    
+    return [strings componentsJoinedByString:@"+"];
+    
 }
 
 @end

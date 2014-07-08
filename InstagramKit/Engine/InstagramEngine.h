@@ -64,6 +64,17 @@ typedef enum
 
 } InstagramKitErrorCode;
 
+typedef NS_OPTIONS(NSInteger, IKLoginScope) {
+//    Default, to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.)
+    IKLoginScopeBasic = 0,
+//    to create or delete comments on a user’s behalf
+    IKLoginScopeComments = 1<<1,
+//    to follow and unfollow users on a user’s behalf
+    IKLoginScopeRelationships = 1<<2,
+//    to like and unlike items on a user’s behalf
+    IKLoginScopeLikes = 1<<3
+};
+
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
@@ -77,7 +88,9 @@ typedef enum
 
 #pragma mark - Login -
 
-- (void)loginWithScope:(NSArray *)scope completionBlock:(InstagramLoginBlock)block;
+//  Comes with the basic login scope
+- (void)loginWithBlock:(InstagramLoginBlock)block;
+- (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
 
 - (void)cancelLogin;
 
