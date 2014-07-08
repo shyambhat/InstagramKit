@@ -152,17 +152,6 @@ typedef enum
 
 #pragma mark - Login -
 
-- (void)cancelLogin
-{
-    if (self.instagramLoginBlock)
-    {
-        NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
-        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
-            NSLocalizedDescriptionKey: localizedDescription
-        }];
-        self.instagramLoginBlock(error);
-    }
-}
 
 - (void)loginWithBlock:(InstagramLoginBlock)block
 {
@@ -215,6 +204,18 @@ typedef enum
     
     return [strings componentsJoinedByString:@"+"];
     
+}
+
+- (void)cancelLogin
+{
+    if (self.instagramLoginBlock)
+    {
+        NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
+        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
+                                                                                                                               NSLocalizedDescriptionKey: localizedDescription
+                                                                                                                               }];
+        self.instagramLoginBlock(error);
+    }
 }
 
 - (BOOL)application:(UIApplication *)application
