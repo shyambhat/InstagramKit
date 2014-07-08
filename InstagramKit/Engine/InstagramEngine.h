@@ -92,6 +92,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 - (void)loginWithBlock:(InstagramLoginBlock)block;
 - (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
 + (NSString *)stringForScope:(IKLoginScope)scope;
+
 - (void)cancelLogin;
 
 - (BOOL)application:(UIApplication *)application

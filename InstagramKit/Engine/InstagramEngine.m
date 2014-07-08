@@ -195,6 +195,28 @@ typedef enum
     [[UIApplication sharedApplication] openURL:url];
 }
 
++ (NSString *)stringForScope:(IKLoginScope)scope
+{
+    
+    NSArray *typeStrings = @[@"basic",@"comments",@"relationships",@"likes"];
+    NSMutableArray *strings = [NSMutableArray arrayWithCapacity:4];
+    
+#define kBitsUsedByIKLoginScope 4
+    
+    for (NSUInteger i=0; i < kBitsUsedByIKLoginScope; i++)
+    {
+        NSUInteger enumBitValueToCheck = 1 << i;
+        if (scope & enumBitValueToCheck)
+            [strings addObject:[typeStrings objectAtIndex:i]];
+    }
+    if (!strings.count) {
+        return @"basic";
+    }
+    
+    return [strings componentsJoinedByString:@"+"];
+    
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -240,7 +262,9 @@ typedef enum
     return dict;
 }
 
-#pragma mark - Base Call -
+
+#pragma mark - Base Calls -
+
 
 - (void)getPath:(NSString *)path
      parameters:(NSDictionary *)parameters
@@ -1079,29 +1103,6 @@ typedef enum
 		}
 		
     }];
-}
-
-#pragma mark - Helpers
-
-+ (NSString *)stringForScope:(IKLoginScope)scope
-{
-    
-    NSArray *typeStrings = @[@"basic",@"comments",@"relationships",@"likes"];
-    NSMutableArray *strings = [NSMutableArray arrayWithCapacity:4];
-    
-    #define kBitsUsedByIKLoginScope 4
-    for (NSUInteger i=0; i < kBitsUsedByIKLoginScope; i++)
-    {
-        NSUInteger enumBitValueToCheck = 1 << i;
-        if (scope & enumBitValueToCheck)
-            [strings addObject:[typeStrings objectAtIndex:i]];
-    }
-    if (!strings.count) {
-        return @"basic";
-    }
-    
-    return [strings componentsJoinedByString:@"+"];
-    
 }
 
 @end
