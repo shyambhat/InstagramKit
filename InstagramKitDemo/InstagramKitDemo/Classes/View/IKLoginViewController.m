@@ -23,19 +23,6 @@
 
 @implementation IKLoginViewController
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self initialize];
-    }
-    return self;
-}
-
-- (void)initialize
-{
-    self.scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes;
-}
 
 - (void)viewDidLoad
 {
@@ -45,6 +32,8 @@
     mWebView.scrollView.bounces = NO;
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
+    
+    self.scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes;
     
     NSDictionary *configuration = [InstagramEngine sharedEngineConfiguration];
     NSString *scopeString = [InstagramEngine stringForScope:self.scope];
