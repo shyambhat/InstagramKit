@@ -64,6 +64,17 @@ typedef enum
 
 } InstagramKitErrorCode;
 
+typedef NS_OPTIONS(NSInteger, IKLoginScope) {
+//    Default, to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.)
+    IKLoginScopeBasic = 0,
+//    to create or delete comments on a user’s behalf
+    IKLoginScopeComments = 1<<1,
+//    to follow and unfollow users on a user’s behalf
+    IKLoginScopeRelationships = 1<<2,
+//    to like and unlike items on a user’s behalf
+    IKLoginScopeLikes = 1<<3
+};
+
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
@@ -77,7 +88,10 @@ typedef enum
 
 #pragma mark - Login -
 
+//  Comes with the basic login scope
 - (void)loginWithBlock:(InstagramLoginBlock)block;
+- (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
++ (NSString *)stringForScope:(IKLoginScope)scope;
 
 - (void)cancelLogin;
 
@@ -202,17 +216,17 @@ typedef enum
 #pragma mark - Comments -
 
 
-- (void)getCommentsOnMedia:(InstagramMedia *)media
+- (void)getCommentsOnMedia:(NSString *)mediaId
                withSuccess:(InstagramCommentsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 - (void)createComment:(NSString *)commentText
-              onMedia:(InstagramMedia *)media
+              onMedia:(NSString *)mediaId
           withSuccess:(void (^)(void))success
               failure:(InstagramFailureBlock)failure;
 
 - (void)removeComment:(NSString *)commentId
-              onMedia:(InstagramMedia *)media
+              onMedia:(NSString *)mediaId
           withSuccess:(void (^)(void))success
               failure:(InstagramFailureBlock)failure;
 
@@ -220,15 +234,15 @@ typedef enum
 #pragma mark - Likes -
 
 
-- (void)getLikesOnMedia:(InstagramMedia *)media
+- (void)getLikesOnMedia:(NSString *)mediaId
             withSuccess:(void (^)(NSArray *likedUsers))success
                 failure:(InstagramFailureBlock)failure;
 
-- (void)likeMedia:(InstagramMedia *)media
+- (void)likeMedia:(NSString *)mediaId
       withSuccess:(void (^)(void))success
           failure:(InstagramFailureBlock)failure;
 
-- (void)unlikeMedia:(InstagramMedia *)media
+- (void)unlikeMedia:(NSString *)mediaId
         withSuccess:(void (^)(void))success
             failure:(InstagramFailureBlock)failure;
 

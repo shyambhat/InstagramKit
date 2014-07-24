@@ -19,10 +19,10 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKLoginViewController.h"
-#import "InstagramKit.h"
 #import "IKCollectionViewController.h"
 
 @implementation IKLoginViewController
+
 
 - (void)viewDidLoad
 {
@@ -32,8 +32,12 @@
     mWebView.scrollView.bounces = NO;
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
+    
+    self.scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes;
+    
     NSDictionary *configuration = [InstagramEngine sharedEngineConfiguration];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=likes+comments+relationships", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey]]];
+    NSString *scopeString = [InstagramEngine stringForScope:self.scope];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey], scopeString]];
 
     [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
     

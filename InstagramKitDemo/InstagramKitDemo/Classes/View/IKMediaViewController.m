@@ -181,7 +181,7 @@
 
 - (void)testComments
 {
-    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media withSuccess:^(NSArray *comments) {
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media.Id withSuccess:^(NSArray *comments) {
         for (InstagramComment *comment in comments) {
             NSLog(@"@%@: %@",comment.user.username, comment.text);
         }
@@ -192,7 +192,7 @@
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media withSuccess:^(NSArray *likedUsers) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }
@@ -203,7 +203,7 @@
 
 - (void)testLike
 {
-    [[InstagramEngine sharedEngine] likeMedia:self.media withSuccess:^{
+    [[InstagramEngine sharedEngine] likeMedia:self.media.Id withSuccess:^{
         liked = YES;
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         NSLog(@"Like Success");
@@ -214,7 +214,7 @@
 
 - (void)testUnlike
 {
-    [[InstagramEngine sharedEngine] unlikeMedia:self.media withSuccess:^{
+    [[InstagramEngine sharedEngine] unlikeMedia:self.media.Id withSuccess:^{
         liked = NO;
         NSLog(@"Unlike Success");
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -226,7 +226,7 @@
 
 - (void)testAddComment
 {
-    [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media withSuccess:^{
+    [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media.Id withSuccess:^{
         NSLog(@"Create Comment Success");
     } failure:^(NSError *error) {
         NSLog(@"Create Comment Failure");
