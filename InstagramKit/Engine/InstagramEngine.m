@@ -249,6 +249,32 @@ typedef enum
     return YES;
 }
 
+- (void)logout
+{
+//    Clear all cookies so the next time the user wishes to switch accounts,
+//    they can do so
+    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.accessToken = nil;
+    
+    NSLog(@"User is now logged out");
+    
+#ifdef DEBUG
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged out" message:@"The user is now logged out. Proceed with dismissing the view. This message only appears in the debug environment." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    
+    [alert show];
+    
+#endif
+    
+}
+
 -(NSDictionary*)queryStringParametersFromString:(NSString*)string {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];

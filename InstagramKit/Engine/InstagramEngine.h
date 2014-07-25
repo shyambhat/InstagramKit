@@ -101,7 +101,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
             sourceApplication
             annotation:(id)annotation;
 
-
+- (void)logout;
 
 #pragma mark - Media -
 

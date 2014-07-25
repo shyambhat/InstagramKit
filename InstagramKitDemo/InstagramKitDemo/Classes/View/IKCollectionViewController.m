@@ -150,7 +150,7 @@
 - (void)testSearchUsersWithString:(NSString *)string
 {
     [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
-        NSLog(@"%ld users found",users.count);
+        NSLog(@"%ld users found", (long)users.count);
     } failure:^(NSError *error) {
         NSLog(@"user search failed");
     }];
