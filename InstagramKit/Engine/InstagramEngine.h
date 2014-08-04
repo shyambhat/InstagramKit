@@ -31,6 +31,7 @@ typedef void(^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *pagi
 typedef void (^InstagramFailureBlock)(NSError* error);
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
+typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -255,15 +256,15 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                               failure:(void (^)(NSError* error))failure;
 
 - (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(void (^)(NSArray *usersFollowed))success
-                       failure:(void (^)(NSError* error))failure;
+                   withSuccess:(InstagramUsersBlock)success
+                       failure:(InstagramFailureBlock)failure;
 
 - (void)getFollowersOfUser:(NSString *)userId
-               withSuccess:(void (^)(NSArray *followers))success
-                   failure:(void (^)(NSError* error))failure;
+               withSuccess:(InstagramUsersBlock)success
+                   failure:(InstagramFailureBlock)failure;
 
-- (void)getFollowRequestsWithSuccess:(void (^)(NSArray *requestedUsers))success
-                        failure:(void (^)(NSError* error))failure;
+- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
+                        failure:(InstagramFailureBlock)failure;
 
 - (void)followUser:(NSString *)userId
        withSuccess:(void (^)(NSDictionary *response))success
@@ -293,7 +294,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 #pragma mark - Common Pagination Request -
 
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
-                     withSuccess:(InstagramMediaBlock)success
+                     withSuccess:(void (^)(NSArray *objects, InstagramPaginationInfo *paginationInfo))success
                          failure:(InstagramFailureBlock)failure;
 
 @end
