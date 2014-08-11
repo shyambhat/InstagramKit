@@ -92,7 +92,11 @@ typedef enum
 + (NSDictionary*) sharedEngineConfiguration;
 
 @property (nonatomic, copy) InstagramLoginBlock instagramLoginBlock;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *operationManager;
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
+@property (nonatomic, strong) AFHTTPRequestOperationManager *httpManager;
+#else
+@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+#endif
 
 @end
 
@@ -130,7 +134,11 @@ typedef enum
         }
         
         NSAssert(url, @"Base URL not valid: %@", sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey]);
-        self.operationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
+        self.httpManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+#else
+        self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+#endif
 
         self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
         self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
@@ -140,7 +148,7 @@ typedef enum
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        self.operationManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+        self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
         BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
         NSAssert(validClientId, @"Invalid Instagram Client ID.");
@@ -312,9 +320,13 @@ typedef enum
     
     NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-    [self.operationManager GET:percentageEscapedPath
+    [self.httpManager GET:percentageEscapedPath
         parameters:params
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+#else
+           success:^(NSURLSessionDataTask *task, id responseObject) {
+#endif
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                NSDictionary *pInfo = responseDictionary[kPagination];
                InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
@@ -349,8 +361,13 @@ typedef enum
                    success(model, paginationInfo);
                }
            }
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                failure(error,[[operation response] statusCode]);
+#else
+           failure:^(NSURLSessionDataTask *task, NSError *error) {
+               failure(error,((NSHTTPURLResponse *)[task response]).statusCode);
+#endif
            }];
 }
 
@@ -367,14 +384,23 @@ typedef enum
     else
         [params setObject:self.appClientID forKey:kKeyClientID];
     
-    [self.operationManager POST:path
+    [self.httpManager POST:path
                     parameters:params
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+#else
+                       success:^(NSURLSessionDataTask *task, id responseObject) {
+#endif
                            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                            success(responseDictionary);
                        }
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                            failure(error,[[operation response] statusCode]);
+#else
+                       failure:^(NSURLSessionDataTask *task, NSError *error) {
+                           failure(error,((NSHTTPURLResponse*)[task response]).statusCode);
+#endif
                        }];
 }
 
@@ -391,15 +417,28 @@ typedef enum
     }
     else
         [params setObject:self.appClientID forKey:kKeyClientID];
-    [self.operationManager DELETE:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success();
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error,[[operation response] statusCode]);
-        }
-    }];
+    [self.httpManager DELETE:path
+                  parameters:params
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
+                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+#else
+                     success:^(NSURLSessionDataTask *task, id responseObject) {
+#endif
+                         if (success) {
+                             success();
+                         }
+                     }
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
+                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         if (failure) {
+                             failure(error,[[operation response] statusCode]);
+#else
+                     failure:^(NSURLSessionDataTask *task, NSError *error) {
+                         if (failure) {
+                             failure(error,((NSHTTPURLResponse*)[task response]).statusCode);
+#endif
+                         }
+                     }];
 }
 
 - (NSDictionary *)parametersFromCount:(NSInteger)count maxId:(NSString *)maxId andMaxIdType:(MaxIdKeyType)keyType
@@ -1113,7 +1152,7 @@ typedef enum
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
-    NSString *relativePath = [[paginationInfo.nextURL absoluteString] stringByReplacingOccurrencesOfString:[self.operationManager.baseURL absoluteString] withString:@""];
+    NSString *relativePath = [[paginationInfo.nextURL absoluteString] stringByReplacingOccurrencesOfString:[self.httpManager.baseURL absoluteString] withString:@""];
     [self getPath:relativePath parameters:nil responseModel:paginationInfo.type success:^(id response, InstagramPaginationInfo *paginationInfo) {
         
 		if(success)
