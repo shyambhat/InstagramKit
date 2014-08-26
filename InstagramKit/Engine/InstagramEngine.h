@@ -28,10 +28,10 @@
 
 typedef void(^InstagramLoginBlock)(NSError* error);
 typedef void(^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramFailureBlock)(NSError* error);
+typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
-typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramFailureBlock)(NSError* error);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -256,14 +256,14 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                               failure:(void (^)(NSError* error))failure;
 
 - (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(InstagramUsersBlock)success
+                   withSuccess:(InstagramObjectsBlock)success
                        failure:(InstagramFailureBlock)failure;
 
 - (void)getFollowersOfUser:(NSString *)userId
-               withSuccess:(InstagramUsersBlock)success
+               withSuccess:(InstagramObjectsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
-- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowRequestsWithSuccess:(InstagramObjectsBlock)success
                         failure:(InstagramFailureBlock)failure;
 
 - (void)followUser:(NSString *)userId

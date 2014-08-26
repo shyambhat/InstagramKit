@@ -258,9 +258,8 @@
 }
 - (void)testGetUsersFollowedByUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *usersFollowed) {
+    [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Follows Success");
-        
     } failure:^(NSError *error) {
         NSLog(@"Get Follows Failure");
  
@@ -269,7 +268,7 @@
 
 - (void)testGetFollowersOfUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *usersFollowed) {
+    [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Followers Success");
         
     } failure:^(NSError *error) {
@@ -280,7 +279,7 @@
 
 - (void)getSelfFollowRequests
 {
-    [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *usersFollowed) {
+    [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Requests Success");
         
     } failure:^(NSError *error) {

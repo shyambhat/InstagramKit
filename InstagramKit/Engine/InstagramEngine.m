@@ -925,7 +925,7 @@ typedef enum
 
 
 - (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(InstagramUsersBlock)success
+                   withSuccess:(InstagramObjectsBlock)success
                        failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/follows",userId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -944,7 +944,7 @@ typedef enum
 
 
 - (void)getFollowersOfUser:(NSString *)userId
-                   withSuccess:(InstagramUsersBlock)success
+                   withSuccess:(InstagramObjectsBlock)success
                        failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/followed-by",userId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -962,7 +962,7 @@ typedef enum
 }
 
 
-- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowRequestsWithSuccess:(InstagramObjectsBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/self/requested-by"] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
