@@ -718,6 +718,42 @@ typedef enum
     }];
 }
 
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
+							failure:(InstagramFailureBlock)failure
+{
+	[self getPath:[NSString stringWithFormat:@"users/self/media/recent"] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+		if(success)
+		{
+			NSArray *objects = response;
+			success(objects, paginationInfo);
+		}
+	} failure:^(NSError *error, NSInteger statusCode) {
+		if(failure)
+		{
+			failure(error);
+		}
+	}];
+}
+
+
+- (void)getSelfRecentMediaWithSuccess:(NSInteger)count maxId:(NSString *)maxId
+								success:(InstagramMediaBlock)success
+								failure:(InstagramFailureBlock)failure
+{
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxLikeId];
+	[self getPath:[NSString stringWithFormat:@"users/self/media/recent"] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+		if(success)
+		{
+			NSArray *objects = response;
+			success(objects, paginationInfo);
+		}
+	} failure:^(NSError *error, NSInteger statusCode) {
+		if(failure)
+		{
+			failure(error);
+		}
+	}];
+}
 
 #pragma mark - Tags -
 
