@@ -18,9 +18,8 @@
 - (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
 {
     self = [super init];
-    BOOL infoExists = IKNotNull(info);
-    BOOL nextURLExists = IKNotNull(info[kNextURL]);
-    if (self && infoExists && nextURLExists){
+    BOOL infoExists = IKNotNull(info) && IKNotNull(info[kNextURL]);
+    if (self && infoExists){
         
         _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
         BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
