@@ -61,6 +61,7 @@
 #define kCreator @"from"
 #define kText @"text"
 
+#define kUserId @"id"
 #define kUsername @"username"
 #define kFullName @"full_name"
 #define kFirstName @"first_name"

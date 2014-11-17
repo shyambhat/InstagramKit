@@ -31,6 +31,8 @@
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
+
+        _userId = [info[kUserId]integerValue];
         _username = [[NSString alloc] initWithString:info[kUsername]];
         _fullName = [[NSString alloc] initWithString:info[kFullName]];
         _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
