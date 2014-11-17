@@ -24,6 +24,7 @@
 
 @interface InstagramUser : InstagramModel
 
+@property (readonly) NSInteger userId;
 @property (readonly) NSString* username;
 @property (readonly) NSString* fullName;
 @property (readonly) NSURL* profilePictureURL;
