@@ -35,7 +35,7 @@ If you prefer the Info.plist for all your app settings, you can include these ke
 
 Download and run the Demo Project to understand how the engine is intended to be used. 
 
-<img src='https://raw2.github.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=310.5 height=625.5 />
+<img src='https://raw.githubusercontent.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=310.5 height=625.5 />
 
 
 
