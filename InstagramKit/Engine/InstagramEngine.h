@@ -20,6 +20,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <UIKit/UIKit.h>
+
 @class InstagramUser;
 @class InstagramMedia;
 @class InstagramPaginationInfo;

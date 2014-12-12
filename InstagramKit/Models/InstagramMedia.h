@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "InstagramModel.h"
 
 @class InstagramUser;
