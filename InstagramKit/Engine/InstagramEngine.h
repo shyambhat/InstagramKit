@@ -133,7 +133,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 #pragma mark - Users -
 
 
-- (void)getUserDetails:(InstagramUser *)user
+- (void)getUserDetails:(NSString *)userId
            withSuccess:(void (^)(InstagramUser *userDetail))success
                failure:(InstagramFailureBlock)failure;
 
