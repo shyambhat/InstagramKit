@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151536091A8D2120006EF175 /* NSDictionary+IKValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 151536081A8D2120006EF175 /* NSDictionary+IKValidation.m */; };
 		52781D3C17CD6BB9001A32F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3B17CD6BB9001A32F7 /* Foundation.framework */; };
 		52781D3E17CD6BB9001A32F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */; };
 		52781D4017CD6BB9001A32F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52781D3F17CD6BB9001A32F7 /* UIKit.framework */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151536071A8D2120006EF175 /* NSDictionary+IKValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IKValidation.h"; sourceTree = "<group>"; };
+		151536081A8D2120006EF175 /* NSDictionary+IKValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IKValidation.m"; sourceTree = "<group>"; };
 		52781D3817CD6BB9001A32F7 /* InstagramKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52781D3B17CD6BB9001A32F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52781D3D17CD6BB9001A32F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -157,6 +160,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		151536061A8D2120006EF175 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				151536071A8D2120006EF175 /* NSDictionary+IKValidation.h */,
+				151536081A8D2120006EF175 /* NSDictionary+IKValidation.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		52781D2F17CD6BB9001A32F7 = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +284,7 @@
 			children = (
 				52781DA717CD6E64001A32F7 /* InstagramKit.h */,
 				820D6DC118B7DC6900847053 /* InstagramKit.plist */,
+				151536061A8D2120006EF175 /* Categories */,
 				52781DA417CD6E64001A32F7 /* Engine */,
 				52781DA817CD6E64001A32F7 /* Models */,
 			);
@@ -439,6 +452,7 @@
 				825BB4C518A183D800F3BDF3 /* AFURLSessionManager.m in Sources */,
 				825BB4C818A1849600F3BDF3 /* UIImageView+AFNetworking.m in Sources */,
 				825BB4C218A183D800F3BDF3 /* AFURLConnectionOperation.m in Sources */,
+				151536091A8D2120006EF175 /* NSDictionary+IKValidation.m in Sources */,
 				82AC29F3189D27C000675776 /* InstagramTag.m in Sources */,
 				825BB4BF18A183D800F3BDF3 /* AFHTTPSessionManager.m in Sources */,
 				825BB4C018A183D800F3BDF3 /* AFNetworkReachabilityManager.m in Sources */,

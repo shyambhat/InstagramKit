@@ -21,15 +21,16 @@
 
 #import "InstagramTag.h"
 #import "InstagramModel.h"
+#import "NSDictionary+IKValidation.h"
 
 @implementation InstagramTag
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
-        _name = [[NSString alloc] initWithString:info[kTagName]];
-        _mediaCount = [info[kTagMediaCount] integerValue];
+    if (self && [info isKindOfClass:[NSDictionary class]]) {
+        _name = [info ik_stringForKey:kTagName];
+        _mediaCount = [[info ik_numberForKey:kTagMediaCount] integerValue];
     }
     return self;
 }

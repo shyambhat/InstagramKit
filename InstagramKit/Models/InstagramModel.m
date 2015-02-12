@@ -19,14 +19,15 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramModel.h"
+#import "NSDictionary+IKValidation.h"
 
 @implementation InstagramModel
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
-        _Id = [[NSString alloc] initWithString:info[kID]];
+    if (self && [info isKindOfClass:[NSDictionary class]]) {
+        _Id = [info ik_stringForKey:kID];
     }
     return self;
 }
