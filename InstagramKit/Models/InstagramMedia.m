@@ -40,10 +40,10 @@
     self = [super initWithInfo:info];
     if (self && [info isKindOfClass:[NSDictionary class]]) {
         
-        _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
+        _user = [[InstagramUser alloc] initWithInfo:[info ik_dictionaryForKey:kUser]];
         _createdDate = [info ik_dateForKey:kCreatedDate];
         _link = [info ik_stringForKey:kLink];
-        _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
+        _caption = [[InstagramComment alloc] initWithInfo:[info ik_dictionaryForKey:kCaption]];
         _likesCount = [[[info ik_dictionaryForKey:kLikes] ik_numberForKey:kCount] integerValue];
         
         mLikes = [[NSMutableArray alloc] init];
