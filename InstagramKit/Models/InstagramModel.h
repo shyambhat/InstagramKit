@@ -81,9 +81,11 @@
 #define kNextMaxId @"next_max_id"
 #define kNextMaxLikeId @"next_max_like_id"
 #define kNextMaxTagId @"next_max_tag_id"
+#define kNextCursor @"next_cursor"
 
 #define kMaxId @"max_id"
 #define kMaxLikeId @"max_like_id"
 #define kMaxTagId @"max_tag_id"
+#define kCursor @"cursor"
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
