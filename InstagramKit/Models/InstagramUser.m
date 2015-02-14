@@ -50,14 +50,14 @@
     return self;
 }
 
-- (void)loadCounts
+- (void)loadUserDetails
 {
-    [self loadCountsWithSuccess:nil failure:nil];
+    [self loadUserDetailsWithSuccess:nil failure:nil];
 }
 
-- (void)loadCountsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
+- (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self withSuccess:^(InstagramUser *userDetail) {
+    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail) {
         _mediaCount = userDetail.mediaCount;
         _followsCount = userDetail.followsCount;
         _followedByCount = userDetail.followedByCount;

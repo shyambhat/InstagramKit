@@ -169,9 +169,9 @@
     }];
 }
 
-- (void)testLoadCounts
+- (void)testLoadUserDetails
 {
-    [self.media.user loadCountsWithSuccess:^{
+    [self.media.user loadUserDetailsWithSuccess:^{
         NSLog(@"Courtesy: %@. %ld media posts, follows %ld users and is followed by %ld users",self.media.user.username, (long)self.media.user.mediaCount, (long)self.media.user.followsCount, (long)self.media.user.followedByCount);
     } failure:^{
         NSLog(@"Loading User details failed");
