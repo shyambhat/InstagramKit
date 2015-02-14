@@ -736,11 +736,11 @@ typedef enum
 }
 
 
-- (void)getSelfRecentMediaWithSuccess:(NSInteger)count maxId:(NSString *)maxId
+- (void)getSelfRecentMediaWithCount:(NSInteger)count maxId:(NSString *)maxId
 								success:(InstagramMediaBlock)success
 								failure:(InstagramFailureBlock)failure
 {
-    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxLikeId];
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
 	[self getPath:[NSString stringWithFormat:@"users/self/media/recent"] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
 		if(success)
 		{

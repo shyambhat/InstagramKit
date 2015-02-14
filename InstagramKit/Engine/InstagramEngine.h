@@ -188,7 +188,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 - (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
 							  failure:(InstagramFailureBlock)failure;
 
-- (void)getSelfRecentMediaWithSuccess:(NSInteger)count maxId:(NSString *)maxId
+- (void)getSelfRecentMediaWithCount:(NSInteger)count maxId:(NSString *)maxId
 							  success:(InstagramMediaBlock)success
 							  failure:(InstagramFailureBlock)failure;
 
