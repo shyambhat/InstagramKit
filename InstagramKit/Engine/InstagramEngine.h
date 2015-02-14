@@ -185,6 +185,15 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 
 
+#pragma mark - 
+
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
+							  failure:(InstagramFailureBlock)failure;
+
+- (void)getSelfRecentMediaWithCount:(NSInteger)count maxId:(NSString *)maxId
+							  success:(InstagramMediaBlock)success
+							  failure:(InstagramFailureBlock)failure;
+
 #pragma mark - Tags -
 
 
