@@ -8,6 +8,7 @@
 
 #import "InstagramPaginationInfo.h"
 #import "InstagramModel.h"
+#import "NSDictionary+IKValidation.h"
 
 @interface InstagramPaginationInfo ()
 @property (nonatomic, strong) Class type;
@@ -18,19 +19,13 @@
 - (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
 {
     self = [super init];
-    BOOL infoExists = IKNotNull(info) && IKNotNull(info[kNextURL]);
-    if (self && infoExists){
+    BOOL infoExists = [info isKindOfClass:[NSDictionary class]] && [info ik_urlForKey:kNextURL];
+    if (self && infoExists) {
         
-        _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
-        BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
-        BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
-        if (nextMaxIdExists)
-        {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
-        }
-        else if (nextMaxLikeIdExists)
-        {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+        _nextURL = [info ik_urlForKey:kNextURL];
+        _nextMaxId = [info ik_stringForKey:kNextMaxId];
+        if (!_nextMaxId) {
+            _nextMaxId = [info ik_stringForKey:kNextMaxLikeId];
         }
         
         if (type) {

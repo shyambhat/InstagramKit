@@ -20,6 +20,7 @@
 
 #import "InstagramUser.h"
 #import "InstagramEngine.h"
+#import "NSDictionary+IKValidation.h"
 
 @interface InstagramUser()
 @property (nonatomic, strong) NSArray *recentMedia;
@@ -30,22 +31,18 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        _username = [[NSString alloc] initWithString:info[kUsername]];
-        _fullName = [[NSString alloc] initWithString:info[kFullName]];
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (IKNotNull(info[kBio]))
-            _bio = [[NSString alloc] initWithString:info[kBio]];;
-        if (IKNotNull(info[kWebsite]))
-            _website = [[NSURL alloc] initWithString:info[kWebsite]];
+    if (self && [info isKindOfClass:[NSDictionary class]]) {
+        _username = [info ik_stringForKey:kUsername];
+        _fullName = [info ik_stringForKey:kFullName];
+        _profilePictureURL = [info ik_urlForKey:kProfilePictureURL];
+        _bio = [info ik_stringForKey:kBio];
+        _website = [info ik_urlForKey:kWebsite];
 
         // DO NOT PERSIST
-        if (IKNotNull(info[kCounts]))
-        {
-            _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-            _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-            _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-        }
+        NSDictionary *countsDictionary = [info ik_dictionaryForKey:kCounts];
+        _mediaCount = [[countsDictionary ik_numberForKey:kCountMedia] integerValue];
+        _followsCount = [[countsDictionary ik_numberForKey:kCountFollows] integerValue];
+        _followedByCount = [[countsDictionary ik_numberForKey:kCountFollowedBy] integerValue];
     }
     return self;
 }

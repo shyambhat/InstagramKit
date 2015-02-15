@@ -21,6 +21,7 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "InstagramComment.h"
+#import "NSDictionary+IKValidation.h"
 
 
 @interface InstagramMedia ()
@@ -37,39 +38,43 @@
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
+    if (self && [info isKindOfClass:[NSDictionary class]]) {
         
-        _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
-        _link = [[NSString alloc] initWithString:info[kLink]];
-        _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
-        _likesCount = [(info[kLikes])[kCount] integerValue];
+        _user = [[InstagramUser alloc] initWithInfo:[info ik_dictionaryForKey:kUser]];
+        _createdDate = [info ik_dateForKey:kCreatedDate];
+        _link = [info ik_stringForKey:kLink];
+        _caption = [[InstagramComment alloc] initWithInfo:[info ik_dictionaryForKey:kCaption]];
+        _likesCount = [[[info ik_dictionaryForKey:kLikes] ik_numberForKey:kCount] integerValue];
+        
         mLikes = [[NSMutableArray alloc] init];
-        for (NSDictionary *userInfo in (info[kLikes])[kData]) {
+        for (NSDictionary *userInfo in ([[info ik_dictionaryForKey:kLikes] ik_arrayForKey:kData])) {
             InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
             [mLikes addObject:user];
         }
         
-        _commentCount = [(info[kComments])[kCount] integerValue];
+        _commentCount = [[[info ik_dictionaryForKey:kComments] ik_numberForKey:kCount] integerValue];
         mComments = [[NSMutableArray alloc] init];
-        for (NSDictionary *commentInfo in (info[kComments])[kData]) {
+        for (NSDictionary *commentInfo in ([[info ik_dictionaryForKey:kComments] ik_arrayForKey:kData])) {
             InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
             [mComments addObject:comment];
         }
-        _tags = [[NSArray alloc] initWithArray:info[kTags]];
-        
-        if (IKNotNull(info[kLocation])) {
-            _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
+        if ([info ik_arrayForKey:kTags]) {
+            _tags = [[NSArray alloc] initWithArray:[info ik_arrayForKey:kTags]];
         }
         
-        _filter = info[kFilter];
+        NSDictionary *locationDictionary = [info ik_dictionaryForKey:kLocation];
+        if ([locationDictionary ik_numberForKey:kLatitude] && [locationDictionary ik_numberForKey:kLongitude]) {
+            _location = CLLocationCoordinate2DMake([[locationDictionary ik_numberForKey:kLatitude] doubleValue], [[locationDictionary ik_numberForKey:kLongitude] doubleValue]);
+        }
         
-        [self initializeImages:info[kImages]];
+        _filter = [info ik_stringForKey:kFilter];
         
-        NSString* mediaType = info[kType];
-        _isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]];
+        [self initializeImages:[info ik_dictionaryForKey:kImages]];
+        
+        NSString *mediaType = [info ik_stringForKey:kType];
+        _isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@", kMediaTypeVideo]];
         if (_isVideo) {
-            [self initializeVideos:info[kVideos]];
+            [self initializeVideos:[info ik_dictionaryForKey:kVideos]];
         }
     }
     return self;
@@ -77,28 +82,38 @@
 
 - (void)initializeImages:(NSDictionary *)imagesInfo
 {
-    NSDictionary *thumbInfo = imagesInfo[kThumbnail];
-    _thumbnailURL = [[NSURL alloc] initWithString:thumbInfo[kURL]];
-    _thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
+    NSDictionary *thumbInfo = [imagesInfo ik_dictionaryForKey:kThumbnail];
+    _thumbnailURL = [thumbInfo ik_urlForKey:kURL];
+    if ([thumbInfo ik_numberForKey:kWidth] && [thumbInfo ik_numberForKey:kHeight]) {
+        _thumbnailFrameSize = CGSizeMake([[thumbInfo ik_numberForKey:kWidth] floatValue], [[thumbInfo ik_numberForKey:kHeight] floatValue]);
+    }
     
-    NSDictionary *lowResInfo = imagesInfo[kLowResolution];
-    _lowResolutionImageURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
-    _lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    NSDictionary *lowResInfo = [imagesInfo ik_dictionaryForKey:kLowResolution];
+    _lowResolutionImageURL = [lowResInfo ik_urlForKey:kURL];
+    if ([lowResInfo ik_numberForKey:kWidth] && [lowResInfo ik_numberForKey:kHeight]) {
+        _lowResolutionImageFrameSize = CGSizeMake([[lowResInfo ik_numberForKey:kWidth] floatValue], [[lowResInfo ik_numberForKey:kHeight] floatValue]);
+    }
     
-    NSDictionary *standardResInfo = imagesInfo[kStandardResolution];
-    _standardResolutionImageURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
-    _standardResolutionImageFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    NSDictionary *standardResInfo = [imagesInfo ik_dictionaryForKey:kStandardResolution];
+    _standardResolutionImageURL = [standardResInfo ik_urlForKey:kURL];
+    if ([standardResInfo ik_numberForKey:kWidth] && [standardResInfo ik_numberForKey:kHeight]) {
+        _standardResolutionImageFrameSize = CGSizeMake([[standardResInfo ik_numberForKey:kWidth] floatValue], [[standardResInfo ik_numberForKey:kHeight] floatValue]);
+    }
 }
 
 - (void)initializeVideos:(NSDictionary *)videosInfo
 {
-    NSDictionary *lowResInfo = videosInfo[kLowResolution];
-    _lowResolutionVideoURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
-    _lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    NSDictionary *lowResInfo = [videosInfo ik_dictionaryForKey:kLowResolution];
+    _lowResolutionVideoURL = [lowResInfo ik_urlForKey:kURL];
+    if ([lowResInfo ik_numberForKey:kWidth] && [lowResInfo ik_numberForKey:kHeight]) {
+        _lowResolutionVideoFrameSize = CGSizeMake([[lowResInfo ik_numberForKey:kWidth] floatValue], [[lowResInfo ik_numberForKey:kHeight] floatValue]);
+    }
     
-    NSDictionary *standardResInfo = videosInfo[kStandardResolution];
-    _standardResolutionVideoURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
-    _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    NSDictionary *standardResInfo = [videosInfo ik_dictionaryForKey:kStandardResolution];
+    _standardResolutionVideoURL = [standardResInfo ik_urlForKey:kURL];
+    if ([standardResInfo ik_numberForKey:kWidth] && [standardResInfo ik_numberForKey:kHeight]) {
+        _standardResolutionVideoFrameSize = CGSizeMake([[standardResInfo ik_numberForKey:kWidth] floatValue], [[standardResInfo ik_numberForKey:kHeight] floatValue]);
+    }
 }
 
 @end

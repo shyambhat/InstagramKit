@@ -20,16 +20,17 @@
 
 #import "InstagramComment.h"
 #import "InstagramUser.h"
+#import "NSDictionary+IKValidation.h"
 
 @implementation InstagramComment
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
-        _text = [[NSString alloc] initWithString:info[kText]];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
+    if (self && [info isKindOfClass:[NSDictionary class]]) {
+        _user = [[InstagramUser alloc] initWithInfo:[info ik_dictionaryForKey:kCreator]];
+        _text = [info ik_stringForKey:kText];
+        _createdDate = [info ik_dateForKey:kCreatedDate];
     }
     return self;
 }
