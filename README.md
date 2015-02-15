@@ -27,7 +27,7 @@ pod 'InstagramKit', '3.5.0'
 ```
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
-If you prefer the Info.plist for all your app settings, you can include these keys in directly in your info.plist file.
+If you prefer the Info.plist for all your app settings, you can include these keys directly in your info.plist file.
 
 
 
