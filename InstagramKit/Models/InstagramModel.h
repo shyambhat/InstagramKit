@@ -46,6 +46,7 @@
 #define kMediaTypeVideo @"video"
 
 #define kUser @"user"
+#define kUserHasLiked @"user_has_liked"
 #define kCreatedDate @"created_time"
 #define kLink @"link"
 #define kCaption @"caption"
