@@ -55,4 +55,6 @@
 @property (nonatomic, readonly) NSURL *standardResolutionVideoURL;
 @property (nonatomic, readonly) CGSize standardResolutionVideoFrameSize;
 
+- (BOOL) isEqualToInstagramMedia: (InstagramMedia *) media;
+
 @end

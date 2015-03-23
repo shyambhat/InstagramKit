@@ -34,5 +34,29 @@
     return self;
 }
 
+- (BOOL) isEqualToInstagramComment: (InstagramComment *) comment {
+
+    if (!comment) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: comment];
+
+} // -isEqualToInstagramComment:
+
+
+- (BOOL) isEqual: (id) object {
+
+    if (self == object) {
+
+        return YES;
+    }
+    if (![object isKindOfClass: [InstagramComment class]]) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: (InstagramComment *) object];
+    
+} // -isEqual:
 
 @end
