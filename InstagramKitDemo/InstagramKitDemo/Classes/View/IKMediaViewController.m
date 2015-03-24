@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testLoadCounts];
+    [self testLoadUserDetails];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
