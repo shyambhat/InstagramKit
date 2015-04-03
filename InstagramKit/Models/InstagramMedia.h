@@ -29,7 +29,7 @@
 @interface InstagramMedia : InstagramModel
 
 @property (nonatomic, readonly) InstagramUser* user;
-@property (nonatomic, readonly) BOOL userHasLiked;
+@property (nonatomic) BOOL userHasLiked;
 @property (nonatomic, readonly) NSDate *createdDate;
 @property (nonatomic, readonly) NSString* link;
 @property (nonatomic, readonly) InstagramComment* caption;
