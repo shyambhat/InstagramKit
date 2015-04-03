@@ -150,7 +150,7 @@ typedef enum
 
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
-        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
+        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && [self.appClientID isEqualToString:@"<Client Id here>"];
         NSAssert(validClientId, @"Invalid Instagram Client ID.");
         NSAssert([NSURL URLWithString:self.appRedirectURL], @"App Redirect URL invalid: %@", self.appRedirectURL);
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
