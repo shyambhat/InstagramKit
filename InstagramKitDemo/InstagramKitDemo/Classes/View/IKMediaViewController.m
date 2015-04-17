@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testLoadCounts];
+    [self testLoadUserDetails];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
@@ -52,7 +52,7 @@
     NSInteger retVal = 0;
     switch (indexPath.row) {
         case 0:
-            retVal = 320;
+            retVal = self.tableView.bounds.size.width;
             break;
             
         default:

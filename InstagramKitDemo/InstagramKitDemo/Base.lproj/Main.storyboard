@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lv9-3E-qvv">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <development version="5000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <development version="5100" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Collection View Controller-->
@@ -30,14 +32,12 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="M44-nY-AWF">
                                             <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <size key="customSize" width="106" height="106"/>
                                 <connections>
                                     <outlet property="imageView" destination="M44-nY-AWF" id="tD3-K1-mOK"/>
                                     <segue destination="2Tg-Lh-xe7" kind="push" identifier="segue.media.detail" id="Adw-gH-NyQ"/>
@@ -79,7 +79,7 @@
             </objects>
             <point key="canvasLocation" x="396" y="124"/>
         </scene>
-        <!--Media View Controller - Media-->
+        <!--Media-->
         <scene sceneID="Prx-91-WIH">
             <objects>
                 <tableViewController title="Media" id="2Tg-Lh-xe7" customClass="IKMediaViewController" sceneMemberID="viewController">
@@ -88,18 +88,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="MediaCell" rowHeight="320" id="ORN-0p-6YO" customClass="IKMediaCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="MediaCell" id="ORN-0p-6YO" customClass="IKMediaCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="ORN-0p-6YO" id="hHW-93-W0z">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="319"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dy-8E-kBJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8dy-8E-kBJ">
+                                            <rect key="frame" x="0.0" y="-1" width="320" height="320"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="8dy-8E-kBJ" secondAttribute="height" multiplier="1:1" id="hxW-qe-iwR"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="8dy-8E-kBJ" secondAttribute="trailing" id="N67-z7-jAH"/>
+                                        <constraint firstItem="8dy-8E-kBJ" firstAttribute="top" secondItem="hHW-93-W0z" secondAttribute="topMargin" constant="-9" id="net-Xb-MM9"/>
+                                        <constraint firstItem="8dy-8E-kBJ" firstAttribute="leading" secondItem="hHW-93-W0z" secondAttribute="leading" id="vRg-0A-Jr0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="mediaImageView" destination="8dy-8E-kBJ" id="Y8O-3k-2Q1"/>
@@ -112,7 +119,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zlf-l4-xPv">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" useAutomaticPreferredMaxLayoutWidth="YES" id="Zlf-l4-xPv">
                                             <rect key="frame" x="25" y="0.0" width="280" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -135,7 +142,7 @@
             </objects>
             <point key="canvasLocation" x="842" y="87"/>
         </scene>
-        <!--Login View Controller - Login -->
+        <!--Login -->
         <scene sceneID="vux-rx-nxM">
             <objects>
                 <viewController id="Qfj-6N-R6z" customClass="IKLoginViewController" sceneMemberID="viewController">
@@ -147,12 +154,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-kX-gC1">
+                            <webView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-kX-gC1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="xL7-Gk-126" firstAttribute="top" secondItem="bBm-kX-gC1" secondAttribute="bottom" id="1Vy-rU-t2G"/>
+                            <constraint firstAttribute="trailing" secondItem="bBm-kX-gC1" secondAttribute="trailing" id="5ym-Qs-0aA"/>
+                            <constraint firstItem="bBm-kX-gC1" firstAttribute="leading" secondItem="kKs-sG-aVT" secondAttribute="leading" id="XV0-gI-Ynv"/>
+                            <constraint firstItem="bBm-kX-gC1" firstAttribute="top" secondItem="kKs-sG-aVT" secondAttribute="top" id="Xds-Qw-Vpg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login " id="tLF-sk-vbt">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="y5t-aw-c8c">
