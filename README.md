@@ -19,7 +19,7 @@ Read about implementing Pagination effortlessly in the [Pagination Wiki](https:/
 ##Installation
 
 
-Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. 
+Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
 ##### Cocoapods Podfile:
 ```ruby
@@ -29,7 +29,23 @@ pod 'InstagramKit', '3.5.0'
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist. 
 If you prefer the Info.plist for all your app settings, you can include these keys directly in your info.plist file.
 
+##Usage
 
+Inside the files that you want to use InstagramKit, you have to make sure you add the .h file. 
+
+In order to make calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app. To do so, send the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` with ```[Client ID]``` being replaced with the Client ID you received from the Instagram Developer Dashboard and ```[Redirect URI]``` being replaced with whatever you like. You can use http://localhost as well if you don't need to access a backend of any sort. 
+
+Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. Once you have the Access Token and User ID saved, you can create a Instagram Engine object and start using the various methods available. Below is an example of how to retrieve the media from a user's feed:
+
+```Objective-C
+//This is the object used to get data from the user's feed
+InstagramEngine *engine = [InstagramEngine sharedEngine];
+engine.accessToken = token;//Token received from redirect url
+[engine getMediaForUser:userID count:20 maxId:nil  withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+ 	//media is now array of InstagramMedia objects that can be used       
+    } failure:^(NSError *error) {
+      //Handle error here
+    }];```
 
 ## Demo
 
