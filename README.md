@@ -45,7 +45,8 @@ engine.accessToken = token;//Token received from redirect url
  	//media is now array of InstagramMedia objects that can be used       
     } failure:^(NSError *error) {
       //Handle error here
-    }];```
+    }];
+```
 
 ## Demo
 
