@@ -52,7 +52,7 @@
     NSInteger retVal = 0;
     switch (indexPath.row) {
         case 0:
-            retVal = 320;
+            retVal = self.tableView.bounds.size.width;
             break;
             
         default:
