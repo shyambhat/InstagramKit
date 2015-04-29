@@ -98,11 +98,11 @@
 
 - (void)testLoadPopularMedia
 {
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Load Popular Media Failed");
     }];
 
@@ -110,9 +110,9 @@
 
 - (void)getSelfUserDetails
 {
-    [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail) {
+    [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail, NSDictionary *serverResponse) {
         NSLog(@"%@",userDetail);
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         
     }];
 }
@@ -120,13 +120,13 @@
 
 - (void)testLoadSelfFeed
 {
-    [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         self.currentPaginationInfo = paginationInfo;
         
         [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Request Self Feed Failed");
     }];
 }
@@ -134,13 +134,13 @@
 
 - (void)testLoadSelfLikedMedia
 {
-    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         self.currentPaginationInfo = paginationInfo;
         
         [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Request Self Liked Media Failed");
         
     }];
@@ -149,28 +149,28 @@
 
 - (void)testSearchUsersWithString:(NSString *)string
 {
-    [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         NSLog(@"%ld users found", (long)users.count);
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"user search failed");
     }];
 }
 
 - (void)testGetMediaFromTag:(NSString *)tag
 {
-    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Search Media Failed");
     }];
 }
 
 - (void)testLoadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
 
         if (paginationInfo) {
             self.currentPaginationInfo = paginationInfo;
@@ -179,20 +179,20 @@
         [mediaArray addObjectsFromArray:feed];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Loading User media failed");
     }];
 }
 
 - (void)testPaginationRequest:(InstagramPaginationInfo *)pInfo
 {
-    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         NSLog(@"%ld more media in Pagination",(unsigned long)media.count);
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Pagination Failed");
     }];
 }

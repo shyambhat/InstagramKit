@@ -57,12 +57,12 @@
 
 - (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail) {
+    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail, NSDictionary *serverResponse) {
         _mediaCount = userDetail.mediaCount;
         _followsCount = userDetail.followsCount;
         _followedByCount = userDetail.followedByCount;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError* error, NSInteger statusCode) {
         failure();
     }];
 }
@@ -74,10 +74,10 @@
 
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         self.recentMedia = media;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         failure();
     }];
 }
