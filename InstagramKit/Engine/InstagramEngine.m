@@ -283,6 +283,11 @@ typedef enum
     
 }
 
+- (BOOL)isSessionValid
+{
+    return self.accessToken != nil;
+}
+
 -(NSDictionary*)queryStringParametersFromString:(NSString*)string {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
