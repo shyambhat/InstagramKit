@@ -20,15 +20,27 @@
 
 #import "InstagramModel.h"
 
+@interface InstagramModel ()
+
+@end
+
 @implementation InstagramModel
 
-- (id)initWithInfo:(NSDictionary *)info
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
     if (self && IKNotNull(info)) {
         _Id = [[NSString alloc] initWithString:info[kID]];
     }
     return self;
+}
+
+- (BOOL)isEqualToModel:(InstagramModel *)model {
+    
+    if (model && [model respondsToSelector:@selector(Id)]) {
+        return [self.Id isEqualToString:model.Id];
+    }
+    return NO;
 }
 
 @end

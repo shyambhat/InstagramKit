@@ -82,4 +82,7 @@
     }];
 }
 
+- (BOOL)isEqualToUser:(InstagramUser *)user {
+    return [super isEqualToModel:user];
+}
 @end

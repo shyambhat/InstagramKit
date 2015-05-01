@@ -103,4 +103,9 @@
     _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
+
+- (BOOL)isEqualToMedia:(InstagramMedia *)media {
+    return [super isEqualToModel:media];
+}
+
 @end
