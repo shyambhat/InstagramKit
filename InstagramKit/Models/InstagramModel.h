@@ -37,6 +37,7 @@
 #define kData @"data"
 #define kLatitude @"latitude"
 #define kLongitude @"longitude"
+#define kLocationName @"name"
 
 #define kThumbnail @"thumbnail"
 #define kLowResolution @"low_resolution"
