@@ -553,7 +553,7 @@ typedef enum
 
 
 - (void)getUserDetails:(NSString *)userId
-           withSuccess:(InstagramSelfUserBlock)success
+           withSuccess:(InstagramUserBlock)success
                failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@",userId]  parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -634,7 +634,7 @@ typedef enum
 #pragma mark - Self -
 
 
-- (void)getSelfUserDetailsWithSuccess:(InstagramSelfUserBlock)success
+- (void)getSelfUserDetailsWithSuccess:(InstagramUserBlock)success
                               failure:(InstagramFailureBlock)failure
 {
     [self getPath:@"users/self" parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
