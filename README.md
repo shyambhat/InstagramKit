@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/adamjuhasz/InstagramKit.svg)](https://travis-ci.org/adamjuhasz/InstagramKit)
+
 InstagramKit
 ==================
 
