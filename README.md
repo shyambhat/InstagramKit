@@ -18,7 +18,6 @@ Read about implementing Pagination effortlessly in the [Pagination Wiki](https:/
 
 ##Installation
 
-
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
 ##### Cocoapods Podfile:
@@ -33,7 +32,7 @@ If you prefer the Info.plist for all your app settings, you can include these ke
 
 For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication-and-Usage).
 
-
+Note: _For your app to POST or DELETE likes, comments or follows, you must apply to Instagram here : https://www.facebook.com/help/instagram/contact/185819881608116# _
 ## Demo
 
 Download and run the Demo Project to understand how the engine is intended to be used.
