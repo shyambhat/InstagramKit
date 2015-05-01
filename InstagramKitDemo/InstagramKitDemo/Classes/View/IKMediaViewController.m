@@ -192,7 +192,7 @@
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }
@@ -250,7 +250,7 @@
 
 - (void)testRelationshipStatusOfUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getRelationshipStatusOfUser:userId withSuccess:^(NSDictionary *responseDictionary, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getRelationshipStatusOfUser:userId withSuccess:^(NSDictionary *responseDictionary) {
         NSLog(@"responseDictionary %@",responseDictionary);
     } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"fail %@",error);
