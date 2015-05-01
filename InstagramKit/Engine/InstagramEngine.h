@@ -26,6 +26,7 @@
 @class InstagramMedia;
 @class InstagramPaginationInfo;
 @class InstagramTag;
+@class InstagramLocation;
 
 
 typedef void(^InstagramLoginBlock)(NSError* error);
@@ -34,6 +35,7 @@ typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo 
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
 typedef void (^InstagramFailureBlock)(NSError* error);
+typedef void (^InstagramLocationsBlock)(NSArray *locations);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -128,7 +130,11 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
+#pragma mark - Locations -
 
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                      withSuccess:(InstagramLocationsBlock)success
+                          failure:(InstagramFailureBlock)failure;
 
 #pragma mark - Users -
 
