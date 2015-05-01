@@ -30,8 +30,8 @@
 
 typedef void (^InstagramLoginBlock)(NSError *error);
 typedef void (^InstagramUserBlock)(InstagramUser *userDetail);
-typedef void (^InstagramMediaBlock)(InstagramMedia *media);
-typedef void (^InstagramMediaListBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
+typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagBlock)(InstagramTag *tag);
@@ -116,24 +116,24 @@ sourceApplication
 
 
 - (void)getMedia:(NSString *)mediaId
-     withSuccess:(InstagramMediaBlock)success
+     withSuccess:(InstagramMediaDetailBlock)success
          failure:(InstagramFailureBlock)failure;
 
 
-- (void)getPopularMediaWithSuccess:(InstagramMediaListBlock)success
+- (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
                            failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
-               withSuccess:(InstagramMediaListBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
                      count:(NSInteger)count
                      maxId:(NSString *)maxId
-               withSuccess:(InstagramMediaListBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 
@@ -149,13 +149,13 @@ sourceApplication
 
 
 - (void)getMediaForUser:(NSString *)userId
-            withSuccess:(InstagramMediaListBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaForUser:(NSString *)userId
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
-            withSuccess:(InstagramMediaListBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
@@ -176,35 +176,35 @@ sourceApplication
 #pragma mark -
 
 
-- (void)getSelfFeedWithSuccess:(InstagramMediaListBlock)success
+- (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
                        failure:(InstagramFailureBlock)failure;
 
 - (void)getSelfFeedWithCount:(NSInteger)count
                        maxId:(NSString *)maxId
-                     success:(InstagramMediaListBlock)success
+                     success:(InstagramMediaBlock)success
                      failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
-- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaListBlock)success
+- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
                                failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaLikedBySelfWithCount:(NSInteger)count
                                maxId:(NSString *)maxId
-                             success:(InstagramMediaListBlock)success
+                             success:(InstagramMediaBlock)success
                              failure:(InstagramFailureBlock)failure;
 
 
 
 #pragma mark -
 
-- (void)getSelfRecentMediaWithSuccess:(InstagramMediaListBlock)success
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
                               failure:(InstagramFailureBlock)failure;
 
 - (void)getSelfRecentMediaWithCount:(NSInteger)count
                               maxId:(NSString *)maxId
-                            success:(InstagramMediaListBlock)success
+                            success:(InstagramMediaBlock)success
                             failure:(InstagramFailureBlock)failure;
 
 #pragma mark - Tags -
@@ -218,13 +218,13 @@ sourceApplication
 
 
 - (void)getMediaWithTagName:(NSString *)tag
-                withSuccess:(InstagramMediaListBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure;
 
 - (void)getMediaWithTagName:(NSString *)tag
                       count:(NSInteger)count
                       maxId:(NSString *)maxId
-                withSuccess:(InstagramMediaListBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure;
 
 #pragma mark -

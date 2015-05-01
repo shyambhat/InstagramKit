@@ -472,7 +472,7 @@ typedef enum
 
 
 - (void)getMedia:(NSString *)mediaId
-     withSuccess:(InstagramMediaBlock)success
+     withSuccess:(InstagramMediaDetailBlock)success
          failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"media/%@",mediaId] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -490,7 +490,7 @@ typedef enum
 }
 
 
-- (void)getPopularMediaWithSuccess:(InstagramMediaListBlock)success
+- (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
                            failure:(InstagramFailureBlock)failure
 {
     [self getPath:@"media/popular" parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -509,7 +509,7 @@ typedef enum
 
 
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
-               withSuccess:(InstagramMediaListBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f",location.latitude,location.longitude] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -530,7 +530,7 @@ typedef enum
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
                      count:(NSInteger)count
                      maxId:(NSString *)maxId
-               withSuccess:(InstagramMediaListBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
@@ -572,7 +572,7 @@ typedef enum
 
 
 - (void)getMediaForUser:(NSString *)userId
-            withSuccess:(InstagramMediaListBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -593,7 +593,7 @@ typedef enum
 - (void)getMediaForUser:(NSString *)userId
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
-            withSuccess:(InstagramMediaListBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
@@ -652,7 +652,7 @@ typedef enum
 }
 
 
-- (void)getSelfFeedWithSuccess:(InstagramMediaListBlock)success
+- (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
                        failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/self/feed"] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -672,7 +672,7 @@ typedef enum
 
 - (void)getSelfFeedWithCount:(NSInteger)count
                        maxId:(NSString *)maxId
-                     success:(InstagramMediaListBlock)success
+                     success:(InstagramMediaBlock)success
                      failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
@@ -691,7 +691,7 @@ typedef enum
 }
 
 
-- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaListBlock)success
+- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
                                failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/self/media/liked"] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -711,7 +711,7 @@ typedef enum
 
 - (void)getMediaLikedBySelfWithCount:(NSInteger)count
                                maxId:(NSString *)maxId
-                             success:(InstagramMediaListBlock)success
+                             success:(InstagramMediaBlock)success
                              failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxLikeId];
@@ -729,7 +729,7 @@ typedef enum
     }];
 }
 
-- (void)getSelfRecentMediaWithSuccess:(InstagramMediaListBlock)success
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
 							  failure:(InstagramFailureBlock)failure
 {
 	[self getPath:[NSString stringWithFormat:@"users/self/media/recent"] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -749,7 +749,7 @@ typedef enum
 
 - (void)getSelfRecentMediaWithCount:(NSInteger)count
                               maxId:(NSString *)maxId
-                            success:(InstagramMediaListBlock)success
+                            success:(InstagramMediaBlock)success
                             failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
@@ -790,7 +790,7 @@ typedef enum
 
 
 - (void)getMediaWithTagName:(NSString *)tag
-                withSuccess:(InstagramMediaListBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"tags/%@/media/recent",tag] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -811,7 +811,7 @@ typedef enum
 - (void)getMediaWithTagName:(NSString *)tag
                       count:(NSInteger)count
                       maxId:(NSString *)maxId
-                withSuccess:(InstagramMediaListBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxTagId];
