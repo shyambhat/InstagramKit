@@ -29,6 +29,5 @@
 @property (nonatomic, strong) InstagramUser *user;
 @property (nonatomic, strong) NSString *text;
 
-- (BOOL) isEqualToInstagramComment: (InstagramComment *) comment;
-
+- (BOOL)isEqualToComment:(InstagramComment *)comment;
 @end

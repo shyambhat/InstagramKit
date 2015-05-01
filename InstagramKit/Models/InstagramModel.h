@@ -26,7 +26,7 @@
 
 - (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
 
-- (BOOL) isEqualToInstagramModel: (InstagramModel *) model;
+- (BOOL)isEqualToModel:(InstagramModel *)model;
 
 @end
 

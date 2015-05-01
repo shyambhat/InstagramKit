@@ -22,8 +22,6 @@
 
 @interface InstagramModel ()
 
-@property (readonly) NSUInteger hash;
-
 @end
 
 @implementation InstagramModel
@@ -37,38 +35,12 @@
     return self;
 }
 
-@dynamic hash;
-
-- (NSUInteger) hash {
-
-    return self.Id.hash;
-
-} // -hash
-
-
-- (BOOL) isEqualToInstagramModel: (InstagramModel *) model {
-
-    if (!model) {
-
-        return NO;
-    }
-    return [self.Id isEqualToString: model.Id];
-
-} // -isEqualToInstagramModel:
-
-
-- (BOOL) isEqual: (id) object {
-
-    if (self == object) {
-
-        return YES;
-    }
-    if (![object isKindOfClass: [InstagramModel class]]) {
-
-        return NO;
-    }
-    return [self isEqualToInstagramModel: (InstagramModel *) object];
+- (BOOL)isEqualToModel:(InstagramModel *)model {
     
-} // -isEqual:
+    if (model && [model respondsToSelector:@selector(Id)]) {
+        return [self.Id isEqualToString:model.Id];
+    }
+    return NO;
+}
 
 @end

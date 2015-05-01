@@ -42,6 +42,6 @@
 - (void)loadRecentMedia:(NSInteger)count;
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure;
 
-- (BOOL) isEqualToInstagramUser: (InstagramUser *) user;
+- (BOOL)isEqualToUser:(InstagramUser *)user;
 
 @end
