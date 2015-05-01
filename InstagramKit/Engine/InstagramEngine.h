@@ -130,7 +130,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
-#pragma mar - Locations -
+#pragma mark - Locations -
 
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                       withSuccess:(InstagramLocationsBlock)success
