@@ -25,6 +25,7 @@
 #import "InstagramComment.h"
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
+#import "InstagramLocation.h"
 
 #define kKeyClientID @"client_id"
 #define kKeyAccessToken @"access_token"
@@ -539,6 +540,22 @@ typedef enum
 			failure(error);
 		}
     }];
+}
+                         
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                       withSuccess:(InstagramLocationsBlock)success
+                           failure:(InstagramFailureBlock)failure
+{
+     [self getPath:[NSString stringWithFormat:@"locations/search?lat=%f&lng=%f", loction.latitude, loction.longitude] parameters:nil responseModel:[InstagramLocation class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+         if (success) {
+             NSArray *objects = response;
+             success(objects);
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if (failure) {
+             failure(error);
+         }
+     }];
 }
 
 

@@ -88,4 +88,9 @@
 #define kMaxLikeId @"max_like_id"
 #define kMaxTagId @"max_tag_id"
 
+#define kLocationId @"id"
+#define kLocationLatitude @"latitude"
+#define kLocationLongitude @"longitude"
+#define kLocationName @"name"
+
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
