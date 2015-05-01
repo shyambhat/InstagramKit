@@ -35,4 +35,9 @@
 }
 
 
+- (BOOL)isEqualToComment:(InstagramComment *)comment {
+    return [super isEqualToModel:comment];
+}
+
+
 @end

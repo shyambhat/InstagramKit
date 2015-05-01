@@ -61,6 +61,7 @@
         
         if (IKNotNull(info[kLocation])) {
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
+            _locationName = info[kLocation][kLocationName];
         }
         
         _filter = info[kFilter];
@@ -100,6 +101,11 @@
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
     _standardResolutionVideoURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
     _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+}
+
+
+- (BOOL)isEqualToMedia:(InstagramMedia *)media {
+    return [super isEqualToModel:media];
 }
 
 @end

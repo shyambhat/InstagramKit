@@ -24,7 +24,9 @@
 
 @property (readonly) NSString* Id;
 
-- (id)initWithInfo:(NSDictionary *)info;
+- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+
+- (BOOL)isEqualToModel:(InstagramModel *)model;
 
 @end
 
@@ -37,6 +39,7 @@
 #define kData @"data"
 #define kLatitude @"latitude"
 #define kLongitude @"longitude"
+#define kLocationName @"name"
 
 #define kThumbnail @"thumbnail"
 #define kLowResolution @"low_resolution"

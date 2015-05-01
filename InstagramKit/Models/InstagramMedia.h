@@ -29,7 +29,7 @@
 @interface InstagramMedia : InstagramModel
 
 @property (nonatomic, readonly) InstagramUser* user;
-@property (nonatomic, readonly) BOOL userHasLiked;
+@property (nonatomic) BOOL userHasLiked;
 @property (nonatomic, readonly) NSDate *createdDate;
 @property (nonatomic, readonly) NSString* link;
 @property (nonatomic, readonly) InstagramComment* caption;
@@ -39,8 +39,9 @@
 @property (nonatomic, readonly) NSArray *comments;
 @property (nonatomic, readonly) NSArray *tags;
 @property (nonatomic, readonly) CLLocationCoordinate2D location;
-@property (nonatomic, readonly) NSString* filter;
-@property (nonatomic, readonly) NSDictionary* images;
+@property (nonatomic, readonly) NSString *locationName;
+@property (nonatomic, readonly) NSString *filter;
+@property (nonatomic, readonly) NSDictionary *images;
 
 @property (nonatomic, readonly) NSURL *thumbnailURL;
 @property (nonatomic, readonly) CGSize thumbnailFrameSize;
@@ -54,5 +55,7 @@
 @property (nonatomic, readonly) CGSize lowResolutionVideoFrameSize;
 @property (nonatomic, readonly) NSURL *standardResolutionVideoURL;
 @property (nonatomic, readonly) CGSize standardResolutionVideoFrameSize;
+
+- (BOOL)isEqualToMedia:(InstagramMedia *)media;
 
 @end
