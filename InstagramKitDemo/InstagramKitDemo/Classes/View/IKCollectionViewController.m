@@ -98,7 +98,7 @@
 
 - (void)testLoadPopularMedia
 {
-    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
@@ -110,7 +110,7 @@
 
 - (void)getSelfUserDetails
 {
-    [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail) {
         NSLog(@"%@",userDetail);
     } failure:^(NSError *error, NSInteger statusCode) {
         
@@ -120,7 +120,7 @@
 
 - (void)testLoadSelfFeed
 {
-    [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getSelfFeedWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         
         [mediaArray addObjectsFromArray:media];
@@ -134,7 +134,7 @@
 
 - (void)testLoadSelfLikedMedia
 {
-    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getMediaLikedBySelfWithCount:15 maxId:self.currentPaginationInfo.nextMaxId success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         
         [mediaArray addObjectsFromArray:media];
@@ -149,7 +149,7 @@
 
 - (void)testSearchUsersWithString:(NSString *)string
 {
-    [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"%ld users found", (long)users.count);
     } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"user search failed");
@@ -158,7 +158,7 @@
 
 - (void)testGetMediaFromTag:(NSString *)tag
 {
-    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getMediaWithTagName:tag count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
@@ -170,7 +170,7 @@
 
 - (void)testLoadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
 
         if (paginationInfo) {
             self.currentPaginationInfo = paginationInfo;
@@ -186,7 +186,7 @@
 
 - (void)testPaginationRequest:(InstagramPaginationInfo *)pInfo
 {
-    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"%ld more media in Pagination",(unsigned long)media.count);
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];

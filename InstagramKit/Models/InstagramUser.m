@@ -57,7 +57,7 @@
 
 - (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail) {
         _mediaCount = userDetail.mediaCount;
         _followsCount = userDetail.followsCount;
         _followedByCount = userDetail.followedByCount;
@@ -74,7 +74,7 @@
 
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.recentMedia = media;
         success();
     } failure:^(NSError *error, NSInteger statusCode) {

@@ -162,7 +162,7 @@
 
 - (void)testGetMedia
 {
-    [[InstagramEngine sharedEngine] getMedia:self.media.Id withSuccess:^(InstagramMedia *media, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getMedia:self.media.Id withSuccess:^(InstagramMedia *media) {
         NSLog(@"Load Media Successful");
     } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Loading Media Failed");
@@ -181,7 +181,7 @@
 
 - (void)testComments
 {
-    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media.Id withSuccess:^(NSArray *comments, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getCommentsOnMedia:self.media.Id withSuccess:^(NSArray *comments) {
         for (InstagramComment *comment in comments) {
             NSLog(@"@%@: %@",comment.user.username, comment.text);
         }
@@ -192,7 +192,7 @@
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }
@@ -258,7 +258,7 @@
 }
 - (void)testGetUsersFollowedByUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Follows Success");
     } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Get Follows Failure");
@@ -268,7 +268,7 @@
 
 - (void)testGetFollowersOfUser:(NSString *)userId
 {
-    [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Followers Success");
         
     } failure:^(NSError *error, NSInteger statusCode) {
@@ -279,7 +279,7 @@
 
 - (void)getSelfFollowRequests
 {
-    [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse) {
+    [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Requests Success");
         
     } failure:^(NSError *error, NSInteger statusCode) {

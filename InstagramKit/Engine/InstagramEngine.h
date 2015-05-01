@@ -29,14 +29,14 @@
 
 
 typedef void (^InstagramLoginBlock)(NSError *error);
-typedef void (^InstagramSelfUserBlock)(InstagramUser *userDetail, NSDictionary *serverResponse);
-typedef void (^InstagramMediaBlock)(InstagramMedia *media, NSDictionary *serverResponse);
-typedef void (^InstagramMediaListBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse);
-typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse);
-typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse);
-typedef void (^InstagramTagBlock)(InstagramTag *tag, NSDictionary *serverResponse);
-typedef void (^InstagramCommentsBlock)(NSArray *comments, NSDictionary *serverResponse);
-typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo, NSDictionary *serverResponse);
+typedef void (^InstagramSelfUserBlock)(InstagramUser *userDetail);
+typedef void (^InstagramMediaBlock)(InstagramMedia *media);
+typedef void (^InstagramMediaListBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramTagBlock)(InstagramTag *tag);
+typedef void (^InstagramCommentsBlock)(NSArray *comments);
+typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramGenericResponseBlock)(NSDictionary *serverResponse);
 typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
 
