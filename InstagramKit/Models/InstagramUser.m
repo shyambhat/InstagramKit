@@ -82,4 +82,29 @@
     }];
 }
 
+- (BOOL) isEqualToInstagramUser: (InstagramUser *) user {
+
+    if (!user) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: user];
+
+} // -isEqualToInstagramUser:
+
+
+- (BOOL) isEqual: (id) object {
+
+    if (self == object) {
+
+        return YES;
+    }
+    if (![object isKindOfClass: [InstagramUser class]]) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: (InstagramUser *) object];
+    
+} // -isEqual:
+
 @end

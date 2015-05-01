@@ -103,4 +103,29 @@
     _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
+- (BOOL) isEqualToInstagramMedia: (InstagramMedia *) media {
+
+    if (!media) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: media];
+
+} // -isEqualToInstagramMedia:
+
+
+- (BOOL) isEqual: (id) object {
+
+    if (self == object) {
+
+        return YES;
+    }
+    if (![object isKindOfClass: [InstagramMedia class]]) {
+
+        return NO;
+    }
+    return [self isEqualToInstagramModel: (InstagramModel *) object];
+    
+} // -isEqual:
+
 @end

@@ -24,7 +24,9 @@
 
 @property (readonly) NSString* Id;
 
-- (id)initWithInfo:(NSDictionary *)info;
+- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+
+- (BOOL) isEqualToInstagramModel: (InstagramModel *) model;
 
 @end
 
