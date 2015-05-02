@@ -36,10 +36,12 @@
 
 @property (readonly) NSArray *recentMedia;
 
-- (void)loadCounts;
-- (void)loadCountsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure;
+- (void)loadUserDetails;
+- (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure;
 
 - (void)loadRecentMedia:(NSInteger)count;
 - (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure;
+
+- (BOOL)isEqualToUser:(InstagramUser *)user;
 
 @end

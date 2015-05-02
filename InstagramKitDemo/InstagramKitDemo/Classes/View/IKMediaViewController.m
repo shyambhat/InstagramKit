@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:@"@%@",self.media.user.username];
-    [self testLoadCounts];
+    [self testLoadUserDetails];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource Methods
@@ -52,7 +52,7 @@
     NSInteger retVal = 0;
     switch (indexPath.row) {
         case 0:
-            retVal = 320;
+            retVal = self.tableView.bounds.size.width;
             break;
             
         default:
@@ -164,14 +164,14 @@
 {
     [[InstagramEngine sharedEngine] getMedia:self.media.Id withSuccess:^(InstagramMedia *media) {
         NSLog(@"Load Media Successful");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Loading Media Failed");
     }];
 }
 
-- (void)testLoadCounts
+- (void)testLoadUserDetails
 {
-    [self.media.user loadCountsWithSuccess:^{
+    [self.media.user loadUserDetailsWithSuccess:^{
         NSLog(@"Courtesy: %@. %ld media posts, follows %ld users and is followed by %ld users",self.media.user.username, (long)self.media.user.mediaCount, (long)self.media.user.followsCount, (long)self.media.user.followedByCount);
     } failure:^{
         NSLog(@"Loading User details failed");
@@ -185,18 +185,18 @@
         for (InstagramComment *comment in comments) {
             NSLog(@"@%@: %@",comment.user.username, comment.text);
         }
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Could not load comments");
     }];
 }
 
 - (void)testGetLikes
 {
-    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers) {
+    [[InstagramEngine sharedEngine] getLikesOnMedia:self.media.Id withSuccess:^(NSArray *likedUsers, InstagramPaginationInfo *paginationInfo) {
         for (InstagramUser *user in likedUsers) {
             NSLog(@"Like : @%@",user.username);
         }
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Could not load likes");
     }];
 }
@@ -207,7 +207,7 @@
         liked = YES;
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         NSLog(@"Like Success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Like Failure");
     }];
 }
@@ -219,7 +219,7 @@
         NSLog(@"Unlike Success");
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Unlike Failure");
     }];
 }
@@ -228,7 +228,7 @@
 {
     [[InstagramEngine sharedEngine] createComment:@"Test" onMedia:self.media.Id withSuccess:^{
         NSLog(@"Create Comment Success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Create Comment Failure");
     }];
 }
@@ -252,7 +252,7 @@
 {
     [[InstagramEngine sharedEngine] getRelationshipStatusOfUser:userId withSuccess:^(NSDictionary *responseDictionary) {
         NSLog(@"responseDictionary %@",responseDictionary);
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"fail %@",error);
     }];
 }
@@ -260,7 +260,7 @@
 {
     [[InstagramEngine sharedEngine] getUsersFollowedByUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Follows Success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Get Follows Failure");
  
     }];
@@ -271,7 +271,7 @@
     [[InstagramEngine sharedEngine] getFollowersOfUser:userId withSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Followers Success");
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Get Followers Failure");
         
     }];
@@ -282,7 +282,7 @@
     [[InstagramEngine sharedEngine] getFollowRequestsWithSuccess:^(NSArray *objects, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"Get Requests Success");
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Get Requests Failure");
         
     }];
@@ -294,7 +294,7 @@
     [[InstagramEngine sharedEngine] followUser:self.media.user.Id withSuccess:^(NSDictionary *response)
     {
         NSLog(@"follow success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"failed to follow");
     }];
 }
@@ -306,7 +306,7 @@
     [[InstagramEngine sharedEngine] unfollowUser:self.media.user.Id withSuccess:^(NSDictionary *response)
     {
         NSLog(@"unfollow success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"failed to unfollow");
     }];
 }
@@ -317,7 +317,7 @@
     [[InstagramEngine sharedEngine] blockUser:self.media.user.Id withSuccess:^(NSDictionary *response)
     {
         NSLog(@"block success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"failed to block");
     }];
 }
@@ -328,7 +328,7 @@
     [[InstagramEngine sharedEngine] unblockUser:self.media.user.Id withSuccess:^(NSDictionary *response)
     {
         NSLog(@"unblock success");
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"failed to unblock");
     }];
 }

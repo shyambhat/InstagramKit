@@ -40,6 +40,7 @@
     if (self && IKNotNull(info)) {
         
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
+        _userHasLiked = [info[kUserHasLiked] boolValue];
         _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
         _link = [[NSString alloc] initWithString:info[kLink]];
         _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
@@ -60,6 +61,7 @@
         
         if (IKNotNull(info[kLocation])) {
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
+            _locationName = info[kLocation][kLocationName];
         }
         
         _filter = info[kFilter];
@@ -99,6 +101,11 @@
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
     _standardResolutionVideoURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
     _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+}
+
+
+- (BOOL)isEqualToMedia:(InstagramMedia *)media {
+    return [super isEqualToModel:media];
 }
 
 @end

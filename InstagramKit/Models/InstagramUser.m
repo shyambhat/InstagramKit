@@ -50,19 +50,19 @@
     return self;
 }
 
-- (void)loadCounts
+- (void)loadUserDetails
 {
-    [self loadCountsWithSuccess:nil failure:nil];
+    [self loadUserDetailsWithSuccess:nil failure:nil];
 }
 
-- (void)loadCountsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
+- (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self withSuccess:^(InstagramUser *userDetail) {
+    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail) {
         _mediaCount = userDetail.mediaCount;
         _followsCount = userDetail.followsCount;
         _followedByCount = userDetail.followedByCount;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError* error, NSInteger statusCode) {
         failure();
     }];
 }
@@ -77,9 +77,12 @@
     [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.recentMedia = media;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         failure();
     }];
 }
 
+- (BOOL)isEqualToUser:(InstagramUser *)user {
+    return [super isEqualToModel:user];
+}
 @end

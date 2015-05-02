@@ -102,7 +102,7 @@
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Load Popular Media Failed");
     }];
 
@@ -112,7 +112,7 @@
 {
     [[InstagramEngine sharedEngine] getSelfUserDetailsWithSuccess:^(InstagramUser *userDetail) {
         NSLog(@"%@",userDetail);
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         
     }];
 }
@@ -126,7 +126,7 @@
         [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Request Self Feed Failed");
     }];
 }
@@ -140,7 +140,7 @@
         [mediaArray addObjectsFromArray:media];
         
         [self reloadData];
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Request Self Liked Media Failed");
         
     }];
@@ -151,7 +151,7 @@
 {
     [[InstagramEngine sharedEngine] searchUsersWithString:string withSuccess:^(NSArray *users, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"%ld users found", (long)users.count);
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"user search failed");
     }];
 }
@@ -163,7 +163,7 @@
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Search Media Failed");
     }];
 }
@@ -179,7 +179,7 @@
         [mediaArray addObjectsFromArray:feed];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Loading User media failed");
     }];
 }
@@ -192,7 +192,7 @@
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
         
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Pagination Failed");
     }];
 }
@@ -252,6 +252,12 @@
 //or
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [self collectionView].bounds.size.width / 3 - 1;
+    return CGSizeMake(width, width);
 }
 
 #pragma mark - UITextFieldDelegate methods
