@@ -24,6 +24,7 @@
         _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
         BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
         BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
+        BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
         if (nextMaxIdExists)
         {
             _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
@@ -31,6 +32,10 @@
         else if (nextMaxLikeIdExists)
         {
             _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+        }
+        else if (nextCursorExists)
+        {
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
         }
         
         if (type) {

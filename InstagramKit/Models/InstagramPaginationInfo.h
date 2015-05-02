@@ -13,6 +13,7 @@
 @property (readonly) NSURL* nextURL;
 @property (readonly) NSString *nextMaxId;
 @property (readonly) Class type;
+
 - (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
 
 @end
