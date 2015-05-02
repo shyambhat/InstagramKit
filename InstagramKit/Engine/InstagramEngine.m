@@ -910,14 +910,14 @@ typedef enum
 
 
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(InstagramObjectsBlock)success
+            withSuccess:(InstagramLikesBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"media/%@/likes",mediaId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         if(success)
 		{
 			NSArray *objects = response;
-			success(objects, paginationInfo);
+			success(objects);
 		}
     } failure:^(NSError *error, NSInteger statusCode) {
         if(failure)

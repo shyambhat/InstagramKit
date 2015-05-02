@@ -35,6 +35,7 @@ typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *pag
 typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagBlock)(InstagramTag *tag);
+typedef void (^InstagramLikesBlock)(NSArray *likes);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
 typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
@@ -264,7 +265,7 @@ sourceApplication
 
 
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(InstagramObjectsBlock)success
+            withSuccess:(InstagramLikesBlock)success
                 failure:(InstagramFailureBlock)failure;
 
 - (void)likeMedia:(NSString *)mediaId
