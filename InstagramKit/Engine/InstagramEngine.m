@@ -135,11 +135,7 @@ typedef enum
         }
         
         NSAssert(url, @"Base URL not valid: %@", sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey]);
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-        self.httpManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
-#else
         self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
-#endif
 
         self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
         self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
@@ -328,11 +324,7 @@ typedef enum
 
     [self.httpManager GET:percentageEscapedPath
         parameters:params
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#else
            success:^(NSURLSessionDataTask *task, id responseObject) {
-#endif
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                NSDictionary *pInfo = responseDictionary[kPagination];
                InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
@@ -367,13 +359,8 @@ typedef enum
                    success(model, paginationInfo);
                }
            }
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               failure(error,[[operation response] statusCode]);
-#else
            failure:^(NSURLSessionDataTask *task, NSError *error) {
                failure(error, ((NSHTTPURLResponse *)[task response]).statusCode);
-#endif
            }];
 }
 
@@ -392,21 +379,12 @@ typedef enum
     
     [self.httpManager POST:path
                     parameters:params
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#else
                        success:^(NSURLSessionDataTask *task, id responseObject) {
-#endif
                            NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                            success(responseDictionary);
                        }
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                           failure(error,[[operation response] statusCode]);
-#else
                        failure:^(NSURLSessionDataTask *task, NSError *error) {
                            failure(error,((NSHTTPURLResponse*)[task response]).statusCode);
-#endif
                        }];
 }
 
@@ -425,24 +403,14 @@ typedef enum
         [params setObject:self.appClientID forKey:kKeyClientID];
     [self.httpManager DELETE:path
                   parameters:params
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#else
                      success:^(NSURLSessionDataTask *task, id responseObject) {
-#endif
                          if (success) {
                              success();
                          }
                      }
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
-                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                         if (failure) {
-                             failure(error,[[operation response] statusCode]);
-#else
                      failure:^(NSURLSessionDataTask *task, NSError *error) {
                          if (failure) {
                              failure(error,((NSHTTPURLResponse*)[task response]).statusCode);
-#endif
                          }
                      }];
 }
