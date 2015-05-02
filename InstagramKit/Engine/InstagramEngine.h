@@ -37,7 +37,7 @@ typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *pagin
 typedef void (^InstagramTagBlock)(InstagramTag *tag);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
 typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramGenericResponseBlock)(NSDictionary *serverResponse);
+typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
 typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
@@ -280,7 +280,7 @@ sourceApplication
 
 
 - (void)getRelationshipStatusOfUser:(NSString *)userId
-                        withSuccess:(InstagramGenericResponseBlock)success
+                        withSuccess:(InstagramResponseBlock)success
                             failure:(InstagramFailureBlock)failure;
 
 - (void)getUsersFollowedByUser:(NSString *)userId
@@ -295,27 +295,27 @@ sourceApplication
                              failure:(InstagramFailureBlock)failure;
 
 - (void)followUser:(NSString *)userId
-       withSuccess:(InstagramGenericResponseBlock)success
+       withSuccess:(InstagramResponseBlock)success
            failure:(InstagramFailureBlock)failure;
 
 - (void)unfollowUser:(NSString *)userId
-         withSuccess:(InstagramGenericResponseBlock)success
+         withSuccess:(InstagramResponseBlock)success
              failure:(InstagramFailureBlock)failure;
 
 - (void)blockUser:(NSString *)userId
-      withSuccess:(InstagramGenericResponseBlock)success
+      withSuccess:(InstagramResponseBlock)success
           failure:(InstagramFailureBlock)failure;
 
 - (void)unblockUser:(NSString *)userId
-        withSuccess:(InstagramGenericResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(InstagramFailureBlock)failure;
 
 - (void)approveUser:(NSString *)userId
-        withSuccess:(InstagramGenericResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(InstagramFailureBlock)failure;
 
 - (void)denyUser:(NSString *)userId
-     withSuccess:(InstagramGenericResponseBlock)success
+     withSuccess:(InstagramResponseBlock)success
          failure:(InstagramFailureBlock)failure;
 
 

@@ -997,7 +997,7 @@ typedef enum
 
 
 - (void)getRelationshipStatusOfUser:(NSString *)userId
-                        withSuccess:(InstagramGenericResponseBlock)success
+                        withSuccess:(InstagramResponseBlock)success
                             failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/relationship",userId] parameters:nil responseModel:[NSDictionary class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -1072,7 +1072,7 @@ typedef enum
 
 
 - (void)followUser:(NSString *)userId
-       withSuccess:(InstagramGenericResponseBlock)success
+       withSuccess:(InstagramResponseBlock)success
            failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionFollow};
@@ -1093,7 +1093,7 @@ typedef enum
 
 
 - (void)unfollowUser:(NSString *)userId
-         withSuccess:(InstagramGenericResponseBlock)success
+         withSuccess:(InstagramResponseBlock)success
              failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionUnfollow};
@@ -1114,7 +1114,7 @@ typedef enum
 
 
 - (void)blockUser:(NSString *)userId
-      withSuccess:(InstagramGenericResponseBlock)success
+      withSuccess:(InstagramResponseBlock)success
           failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionBlock};
@@ -1135,7 +1135,7 @@ typedef enum
 
 
 - (void)unblockUser:(NSString *)userId
-        withSuccess:(InstagramGenericResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionUnblock};
@@ -1156,7 +1156,7 @@ typedef enum
 
 
 - (void)approveUser:(NSString *)userId
-        withSuccess:(InstagramGenericResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionApprove};
@@ -1177,7 +1177,7 @@ typedef enum
 
 
 - (void)denyUser:(NSString *)userId
-     withSuccess:(InstagramGenericResponseBlock)success
+     withSuccess:(InstagramResponseBlock)success
          failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionDeny};
