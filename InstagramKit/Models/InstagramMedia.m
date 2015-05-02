@@ -34,7 +34,7 @@
 @synthesize likes = mLikes;
 @synthesize comments = mComments;
 
-- (id)initWithInfo:(NSDictionary *)info
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {

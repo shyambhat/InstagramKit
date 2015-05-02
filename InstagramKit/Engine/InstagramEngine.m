@@ -121,7 +121,7 @@ typedef enum
     return dict;
 }
 
-- (id)init {
+- (instancetype)init {
     if (self = [super init])
     {
         NSDictionary *sharedEngineConfiguration = [InstagramEngine sharedEngineConfiguration];

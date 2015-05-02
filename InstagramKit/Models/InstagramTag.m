@@ -24,7 +24,7 @@
 
 @implementation InstagramTag
 
-- (id)initWithInfo:(NSDictionary *)info
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
     if (self && IKNotNull(info)) {

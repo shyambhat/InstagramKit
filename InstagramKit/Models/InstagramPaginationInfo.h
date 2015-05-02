@@ -14,6 +14,6 @@
 @property (readonly) NSString *nextMaxId;
 @property (readonly) Class type;
 
-- (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
+- (instancetype)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
 
 @end

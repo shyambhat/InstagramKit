@@ -15,7 +15,7 @@
 
 @implementation InstagramPaginationInfo
 
-- (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
+- (instancetype)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
 {
     self = [super init];
     BOOL infoExists = IKNotNull(info) && IKNotNull(info[kNextURL]);

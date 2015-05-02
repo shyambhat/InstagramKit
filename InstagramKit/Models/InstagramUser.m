@@ -27,7 +27,7 @@
 
 @implementation InstagramUser
 
-- (id)initWithInfo:(NSDictionary *)info
+- (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
