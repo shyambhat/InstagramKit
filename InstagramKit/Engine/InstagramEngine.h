@@ -28,12 +28,17 @@
 @class InstagramTag;
 
 
-typedef void(^InstagramLoginBlock)(NSError* error);
-typedef void(^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramLoginBlock)(NSError *error);
+typedef void (^InstagramUserBlock)(InstagramUser *userDetail);
+typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
+typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramTagBlock)(InstagramTag *tag);
 typedef void (^InstagramCommentsBlock)(NSArray *comments);
-typedef void (^InstagramFailureBlock)(NSError* error);
+typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
+typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -64,17 +69,17 @@ typedef enum
     kInstagramKitErrorCodeNone,
     kInstagramKitErrorCodeAccessNotGranted,
     kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
-
+    
 } InstagramKitErrorCode;
 
 typedef NS_OPTIONS(NSInteger, IKLoginScope) {
-//    Default, to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.)
+    //    Default, to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.)
     IKLoginScopeBasic = 0,
-//    to create or delete comments on a user’s behalf
+    //    to create or delete comments on a user’s behalf
     IKLoginScopeComments = 1<<1,
-//    to follow and unfollow users on a user’s behalf
+    //    to follow and unfollow users on a user’s behalf
     IKLoginScopeRelationships = 1<<2,
-//    to like and unlike items on a user’s behalf
+    //    to like and unlike items on a user’s behalf
     IKLoginScopeLikes = 1<<3
 };
 
@@ -100,17 +105,18 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
-            sourceApplication:(NSString *)
-            sourceApplication
-            annotation:(id)annotation;
+  sourceApplication:(NSString *)
+sourceApplication
+         annotation:(id)annotation;
 
 - (void)logout;
+- (BOOL)isSessionValid;
 
 #pragma mark - Media -
 
 
 - (void)getMedia:(NSString *)mediaId
-     withSuccess:(void (^)(InstagramMedia *media))success
+     withSuccess:(InstagramMediaDetailBlock)success
          failure:(InstagramFailureBlock)failure;
 
 
@@ -124,7 +130,9 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
-- (void)getMediaAtLocation:(CLLocationCoordinate2D)location count:(NSInteger)count maxId:(NSString *)maxId
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+                     count:(NSInteger)count
+                     maxId:(NSString *)maxId
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
@@ -134,17 +142,19 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 
 - (void)getUserDetails:(NSString *)userId
-           withSuccess:(void (^)(InstagramUser *userDetail))success
+           withSuccess:(InstagramUserBlock)success
                failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
 - (void)getMediaForUser:(NSString *)userId
-        withSuccess:(InstagramMediaBlock)success
-            failure:(InstagramFailureBlock)failure;
+            withSuccess:(InstagramMediaBlock)success
+                failure:(InstagramFailureBlock)failure;
 
-- (void)getMediaForUser:(NSString *)userId count:(NSInteger)count maxId:(NSString *)maxId
+- (void)getMediaForUser:(NSString *)userId
+                  count:(NSInteger)count
+                  maxId:(NSString *)maxId
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
@@ -152,7 +162,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 
 - (void)searchUsersWithString:(NSString *)string
-                  withSuccess:(void (^)(NSArray *users, InstagramPaginationInfo *paginationInfo))success
+                  withSuccess:(InstagramUsersBlock)success
                       failure:(InstagramFailureBlock)failure;
 
 
@@ -160,55 +170,60 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 #pragma mark - Self User -
 
 
-- (void)getSelfUserDetailsWithSuccess:(void (^)(InstagramUser *userDetail))success
+- (void)getSelfUserDetailsWithSuccess:(InstagramUserBlock)success
                               failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
 - (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
-            failure:(InstagramFailureBlock)failure;
+                       failure:(InstagramFailureBlock)failure;
 
-- (void)getSelfFeedWithCount:(NSInteger)count maxId:(NSString *)maxId
-        success:(InstagramMediaBlock)success
-            failure:(InstagramFailureBlock)failure;
+- (void)getSelfFeedWithCount:(NSInteger)count
+                       maxId:(NSString *)maxId
+                     success:(InstagramMediaBlock)success
+                     failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
 - (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
-                        failure:(InstagramFailureBlock)failure;
-
-- (void)getMediaLikedBySelfWithCount:(NSInteger)count maxId:(NSString *)maxId
-                             success:(InstagramMediaBlock)success
                                failure:(InstagramFailureBlock)failure;
 
+- (void)getMediaLikedBySelfWithCount:(NSInteger)count
+                               maxId:(NSString *)maxId
+                             success:(InstagramMediaBlock)success
+                             failure:(InstagramFailureBlock)failure;
 
 
-#pragma mark - 
+
+#pragma mark -
 
 - (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
-							  failure:(InstagramFailureBlock)failure;
+                              failure:(InstagramFailureBlock)failure;
 
-- (void)getSelfRecentMediaWithCount:(NSInteger)count maxId:(NSString *)maxId
-							  success:(InstagramMediaBlock)success
-							  failure:(InstagramFailureBlock)failure;
+- (void)getSelfRecentMediaWithCount:(NSInteger)count
+                              maxId:(NSString *)maxId
+                            success:(InstagramMediaBlock)success
+                            failure:(InstagramFailureBlock)failure;
 
 #pragma mark - Tags -
 
 
 - (void)getTagDetailsWithName:(NSString *)name
-                  withSuccess:(void (^)(InstagramTag *tag))success
+                  withSuccess:(InstagramTagBlock)success
                       failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
 - (void)getMediaWithTagName:(NSString *)tag
-            withSuccess:(InstagramMediaBlock)success
-                failure:(InstagramFailureBlock)failure;
+                withSuccess:(InstagramMediaBlock)success
+                    failure:(InstagramFailureBlock)failure;
 
-- (void)getMediaWithTagName:(NSString *)tag count:(NSInteger)count maxId:(NSString *)maxId
+- (void)getMediaWithTagName:(NSString *)tag
+                      count:(NSInteger)count
+                      maxId:(NSString *)maxId
                 withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure;
 
@@ -219,7 +234,9 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                withSuccess:(InstagramTagsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
-- (void)searchTagsWithName:(NSString *)name count:(NSInteger)count maxId:(NSString *)maxId
+- (void)searchTagsWithName:(NSString *)name
+                     count:(NSInteger)count
+                     maxId:(NSString *)maxId
                withSuccess:(InstagramTagsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
@@ -234,12 +251,12 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 - (void)createComment:(NSString *)commentText
               onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(void))success
+          withSuccess:(dispatch_block_t)success
               failure:(InstagramFailureBlock)failure;
 
 - (void)removeComment:(NSString *)commentId
               onMedia:(NSString *)mediaId
-          withSuccess:(void (^)(void))success
+          withSuccess:(dispatch_block_t)success
               failure:(InstagramFailureBlock)failure;
 
 
@@ -247,15 +264,15 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(void (^)(NSArray *likedUsers))success
+            withSuccess:(InstagramObjectsBlock)success
                 failure:(InstagramFailureBlock)failure;
 
 - (void)likeMedia:(NSString *)mediaId
-      withSuccess:(void (^)(void))success
+      withSuccess:(dispatch_block_t)success
           failure:(InstagramFailureBlock)failure;
 
 - (void)unlikeMedia:(NSString *)mediaId
-        withSuccess:(void (^)(void))success
+        withSuccess:(dispatch_block_t)success
             failure:(InstagramFailureBlock)failure;
 
 
@@ -263,8 +280,8 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 
 - (void)getRelationshipStatusOfUser:(NSString *)userId
-                          withSuccess:(void (^)(NSDictionary *responseDictionary))success
-                              failure:(void (^)(NSError* error))failure;
+                        withSuccess:(InstagramResponseBlock)success
+                            failure:(InstagramFailureBlock)failure;
 
 - (void)getUsersFollowedByUser:(NSString *)userId
                    withSuccess:(InstagramObjectsBlock)success
@@ -275,37 +292,37 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
                    failure:(InstagramFailureBlock)failure;
 
 - (void)getFollowRequestsWithSuccess:(InstagramObjectsBlock)success
-                        failure:(InstagramFailureBlock)failure;
+                             failure:(InstagramFailureBlock)failure;
 
 - (void)followUser:(NSString *)userId
-       withSuccess:(void (^)(NSDictionary *response))success
-           failure:(void (^)(NSError* error))failure;
+       withSuccess:(InstagramResponseBlock)success
+           failure:(InstagramFailureBlock)failure;
 
 - (void)unfollowUser:(NSString *)userId
-         withSuccess:(void (^)(NSDictionary *response))success
-             failure:(void (^)(NSError* error))failure;
+         withSuccess:(InstagramResponseBlock)success
+             failure:(InstagramFailureBlock)failure;
 
 - (void)blockUser:(NSString *)userId
-       withSuccess:(void (^)(NSDictionary *response))success
-           failure:(void (^)(NSError* error))failure;
+      withSuccess:(InstagramResponseBlock)success
+          failure:(InstagramFailureBlock)failure;
 
 - (void)unblockUser:(NSString *)userId
-         withSuccess:(void (^)(NSDictionary *response))success
-             failure:(void (^)(NSError* error))failure;
+        withSuccess:(InstagramResponseBlock)success
+            failure:(InstagramFailureBlock)failure;
 
 - (void)approveUser:(NSString *)userId
-        withSuccess:(void (^)(NSDictionary *response))success
-            failure:(void (^)(NSError* error))failure;
+        withSuccess:(InstagramResponseBlock)success
+            failure:(InstagramFailureBlock)failure;
 
 - (void)denyUser:(NSString *)userId
-        withSuccess:(void (^)(NSDictionary *response))success
-            failure:(void (^)(NSError* error))failure;
+     withSuccess:(InstagramResponseBlock)success
+         failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Common Pagination Request -
 
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
-                     withSuccess:(void (^)(NSArray *objects, InstagramPaginationInfo *paginationInfo))success
+                     withSuccess:(InstagramObjectsBlock)success
                          failure:(InstagramFailureBlock)failure;
 
 @end

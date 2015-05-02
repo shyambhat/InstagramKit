@@ -62,7 +62,7 @@
         _followsCount = userDetail.followsCount;
         _followedByCount = userDetail.followedByCount;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError* error, NSInteger statusCode) {
         failure();
     }];
 }
@@ -77,7 +77,7 @@
     [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         self.recentMedia = media;
         success();
-    } failure:^(NSError *error) {
+    } failure:^(NSError *error, NSInteger statusCode) {
         failure();
     }];
 }
