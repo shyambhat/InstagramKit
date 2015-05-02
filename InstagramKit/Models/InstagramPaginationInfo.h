@@ -11,11 +11,8 @@
 @interface InstagramPaginationInfo : NSObject
 
 @property (readonly) NSURL* nextURL;
-@property (readonly) NSString* nextIdType;
+@property (readonly) NSString *nextMaxId;
 @property (readonly) Class type;
-
--(NSString *)nextMaxId;
--(NSString *)nextCursor;
 
 - (id)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
 

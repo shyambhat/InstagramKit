@@ -82,6 +82,7 @@ typedef enum
     kPaginationMaxId,
     kPaginationMaxLikeId,
     kPaginationMaxTagId,
+    kPaginationCursor
 } MaxIdKeyType;
 
 @interface InstagramEngine()
@@ -455,6 +456,9 @@ typedef enum
                 break;
             case kPaginationMaxTagId:
                 key = kMaxTagId;
+                break;
+            case kPaginationCursor:
+                key = kCursor;
                 break;
         }
         [params setObject:maxId forKey:key];

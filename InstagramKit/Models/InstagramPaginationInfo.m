@@ -11,7 +11,6 @@
 
 @interface InstagramPaginationInfo ()
 @property (nonatomic, strong) Class type;
-@property (readonly) NSString* nextId;
 @end
 
 @implementation InstagramPaginationInfo
@@ -28,18 +27,15 @@
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
         if (nextMaxIdExists)
         {
-            _nextId = [[NSString alloc] initWithString:info[kNextMaxId]];
-            _nextIdType = kMaxId;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
         }
         else if (nextMaxLikeIdExists)
         {
-            _nextId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
-            _nextIdType = kMaxId;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
         }
         else if (nextCursorExists)
         {
-            _nextId = [[NSString alloc] initWithString:info[kNextCursor]];
-            _nextIdType = kCursor;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
         }
         
         if (type) {
@@ -49,19 +45,5 @@
     }
     return nil;
 }
-
--(NSString *)nextMaxId
-{
-    if([_nextIdType isEqual:kMaxId])
-        return _nextId;
-    return nil;
-}
--(NSString *)nextCursor
-{
-    if([_nextIdType isEqual:kCursor])
-        return _nextId;
-    return nil;
-}
-
 
 @end
