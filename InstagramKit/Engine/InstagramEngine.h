@@ -29,7 +29,7 @@
 
 
 typedef void (^InstagramLoginBlock)(NSError *error);
-typedef void (^InstagramUserBlock)(InstagramUser *userDetail);
+typedef void (^InstagramUserBlock)(InstagramUser *user);
 typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
 typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
@@ -141,18 +141,18 @@ sourceApplication
 #pragma mark - Users -
 
 
-- (void)getUserDetails:(NSString *)userId
+- (void)getUserDetails:(InstagramUser *)user
            withSuccess:(InstagramUserBlock)success
                failure:(InstagramFailureBlock)failure;
 
 #pragma mark -
 
 
-- (void)getMediaForUser:(NSString *)userId
+- (void)getMediaForUser:(InstagramUser *)user
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
-- (void)getMediaForUser:(NSString *)userId
+- (void)getMediaForUser:(InstagramUser *)user
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
             withSuccess:(InstagramMediaBlock)success

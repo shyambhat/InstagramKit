@@ -417,26 +417,29 @@ typedef enum
 
 - (NSDictionary *)parametersFromCount:(NSInteger)count maxId:(NSString *)maxId andMaxIdType:(MaxIdKeyType)keyType
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
-    if (maxId) {
-        NSString *key = nil;
-        switch (keyType) {
-            case kPaginationMaxId:
-                key = kMaxId;
-                break;
-            case kPaginationMaxLikeId:
-                key = kMaxLikeId;
-                break;
-            case kPaginationMaxTagId:
-                key = kMaxTagId;
-                break;
-            case kPaginationCursor:
-                key = kCursor;
-                break;
+    NSMutableDictionary *params = nil;
+    if (count) {
+        params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
+        if (maxId) {
+            NSString *key = nil;
+            switch (keyType) {
+                case kPaginationMaxId:
+                    key = kMaxId;
+                    break;
+                case kPaginationMaxLikeId:
+                    key = kMaxLikeId;
+                    break;
+                case kPaginationMaxTagId:
+                    key = kMaxTagId;
+                    break;
+                case kPaginationCursor:
+                    key = kCursor;
+                    break;
+            }
+            [params setObject:maxId forKey:key];
         }
-        [params setObject:maxId forKey:key];
     }
-    return [NSDictionary dictionaryWithDictionary:params];
+    return params?[NSDictionary dictionaryWithDictionary:params]:nil;
 }
 
 
@@ -524,15 +527,15 @@ typedef enum
 #pragma mark - Users -
 
 
-- (void)getUserDetails:(NSString *)userId
+- (void)getUserDetails:(InstagramUser *)user
            withSuccess:(InstagramUserBlock)success
                failure:(InstagramFailureBlock)failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@",userId]  parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
-        if(success)
+    [self getPath:[NSString stringWithFormat:@"users/%@",user.Id]  parameters:nil responseModel:[NSDictionary class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+        if(success && IKNotNull(response))
 		{
-			InstagramUser *userDetail = response;
-			success(userDetail);
+            [user updateDetails:response];
+			success(user);
 		}
     } failure:^(NSError *error, NSInteger statusCode) {
         if(failure)
@@ -543,37 +546,26 @@ typedef enum
 }
 
 
-- (void)getMediaForUser:(NSString *)userId
+- (void)getMediaForUser:(InstagramUser *)user
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
-        if(success)
-		{
-			NSArray *objects = response;
-			success(objects, paginationInfo);
-		}
-    } failure:^(NSError *error, NSInteger statusCode) {
-        if(failure)
-		{
-			failure(error, statusCode);
-		}
-    }];
+    [self getMediaForUser:user count:0 maxId:nil withSuccess:success failure:failure];
 }
 
 
-- (void)getMediaForUser:(NSString *)userId
+- (void)getMediaForUser:(InstagramUser *)user
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",user.Id] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         if(success)
 		{
-			NSArray *objects = response;
-			success(objects, paginationInfo);
+			NSArray *media = response;
+			success(media, paginationInfo);
 		}
     } failure:^(NSError *error, NSInteger statusCode) {
         if(failure)

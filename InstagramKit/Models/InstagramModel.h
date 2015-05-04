@@ -93,3 +93,7 @@
 #define kCursor @"cursor"
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
+#define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])
+#define IKValidArray(array) (IKNotNull(array) && [array isKindOfClass:[NSArray class]])
+#define IKValidString(str) (IKNotNull(str) && [str isKindOfClass:[NSString class]])
+#define IKValidNumber(num) (IKNotNull(num) && [num isKindOfClass:[NSNumber class]])

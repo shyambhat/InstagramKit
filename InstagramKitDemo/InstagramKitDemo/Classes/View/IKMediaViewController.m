@@ -171,12 +171,11 @@
 
 - (void)testLoadUserDetails
 {
-    [self.media.user loadUserDetailsWithSuccess:^{
-        NSLog(@"Courtesy: %@. %ld media posts, follows %ld users and is followed by %ld users",self.media.user.username, (long)self.media.user.mediaCount, (long)self.media.user.followsCount, (long)self.media.user.followedByCount);
-    } failure:^{
+    [[InstagramEngine sharedEngine] getUserDetails:self.media.user withSuccess:^(InstagramUser *user) {
+        NSLog(@"Courtesy: %@. %ld media posts, follows %ld users and is followed by %ld users",user.username, (long)user.mediaCount, (long)user.followsCount, (long)user.followedByCount);
+    } failure:^(NSError *error, NSInteger serverStatusCode) {
         NSLog(@"Loading User details failed");
     }];
-    
 }
 
 - (void)testComments
