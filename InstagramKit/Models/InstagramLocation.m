@@ -25,5 +25,17 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:
+            @"<%@"
+            @" id: %@"
+            @", name: '%@'"
+            @", coordinate: '%f,%f'"
+            @">",
+            [super description],
+            self.locationId,
+            self.name,
+            self.coordinate.latitude, self.coordinate.longitude];
+}
 
 @end
