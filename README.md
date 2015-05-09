@@ -28,12 +28,32 @@ pod 'InstagramKit', '3.5.0'
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist.
 If you prefer the Info.plist for all your app settings, you can include these keys directly in your info.plist file.
 
-##Authentication and Usage
+##Authentication
 
 For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication-and-Usage).
 
 Note: _For your app to POST or DELETE likes, comments or follows, you must apply to Instagram here : https://www.facebook.com/help/instagram/contact/185819881608116# _
-## Demo
+
+
+## Usage
+
+Here's an quick example of how to retrieve the media from a user's feed:
+
+```Objective-C
+
+InstagramEngine *engine = [InstagramEngine sharedEngine];
+engine.accessToken = token; //Token received from redirect url
+
+[engine getMediaForUser:userID 
+            withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+                // media is an array of InstagramMedia objects 
+                // The InstagramPaginationInfo object gives you everything you need to make the next paginated call.
+                } 
+                failure:^(NSError *error) {
+                //Handle error here
+                }
+];
+```
 
 Download and run the Demo Project to understand how the engine is intended to be used.
 
