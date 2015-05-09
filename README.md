@@ -20,7 +20,7 @@ Read about implementing Pagination effortlessly in the [Pagination Wiki](https:/
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
-##### Cocoapods Podfile:
+#### Cocoapods Podfile:
 ```ruby
 pod 'InstagramKit', '3.5.0'
 ```
