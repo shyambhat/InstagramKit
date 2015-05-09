@@ -61,6 +61,6 @@ The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is 
 
 InstagramKit uses the public Instagram API and is not affiliated with either Instagram or Facebook.
 
-If you're using InstagramKit in your app or intend to, I'd be happy to hear from you.
+If you're using InstagramKit in your App or intend to, I'd be happy to hear from you.
 
 ~ [@bhatthead](https://twitter.com/bhatthead)
