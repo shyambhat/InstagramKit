@@ -31,66 +31,66 @@
 @end
 
 
-#define kID @"id"
-#define kCount @"count"
-#define kURL @"url"
-#define kHeight @"height"
-#define kWidth @"width"
-#define kData @"data"
-#define kLatitude @"latitude"
-#define kLongitude @"longitude"
-#define kLocationName @"name"
+NSString *const kID;
+NSString *const kCount;
+NSString *const kURL;
+NSString *const kHeight;
+NSString *const kWidth;
+NSString *const kData;
+NSString *const kLatitude;
+NSString *const kLongitude;
+NSString *const kLocationName;
 
-#define kThumbnail @"thumbnail"
-#define kLowResolution @"low_resolution"
-#define kStandardResolution @"standard_resolution"
+NSString *const kThumbnail;
+NSString *const kLowResolution;
+NSString *const kStandardResolution;
 
-#define kMediaTypeImage @"image"
-#define kMediaTypeVideo @"video"
+NSString *const kMediaTypeImage;
+NSString *const kMediaTypeVideo;
 
-#define kUser @"user"
-#define kUserHasLiked @"user_has_liked"
-#define kCreatedDate @"created_time"
-#define kLink @"link"
-#define kCaption @"caption"
-#define kLikes @"likes"
-#define kComments @"comments"
-#define kFilter @"filter"
-#define kTags @"tags"
-#define kImages @"images"
-#define kVideos @"videos"
-#define kLocation @"location"
-#define kType @"type"
+NSString *const kUser;
+NSString *const kUserHasLiked;
+NSString *const kCreatedDate;
+NSString *const kLink;
+NSString *const kCaption;
+NSString *const kLikes;
+NSString *const kComments;
+NSString *const kFilter;
+NSString *const kTags;
+NSString *const kImages;
+NSString *const kVideos;
+NSString *const kLocation;
+NSString *const kType;
 
-#define kCreator @"from"
-#define kText @"text"
+NSString *const kCreator;
+NSString *const kText;
 
-#define kUsername @"username"
-#define kFullName @"full_name"
-#define kFirstName @"first_name"
-#define kLastName @"last_name"
-#define kProfilePictureURL @"profile_picture"
-#define kBio @"bio"
-#define kWebsite @"website"
+NSString *const kUsername;
+NSString *const kFullName;
+NSString *const kFirstName;
+NSString *const kLastName;
+NSString *const kProfilePictureURL;
+NSString *const kBio;
+NSString *const kWebsite;
 
-#define kCounts @"counts"
-#define kCountMedia @"media"
-#define kCountFollows @"follows"
-#define kCountFollowedBy @"followed_by"
+NSString *const kCounts;
+NSString *const kCountMedia;
+NSString *const kCountFollows;
+NSString *const kCountFollowedBy;
 
-#define kTagMediaCount @"media_count"
-#define kTagName @"name"
+NSString *const kTagMediaCount;
+NSString *const kTagName;
 
-#define kNextURL @"next_url"
-#define kNextMaxId @"next_max_id"
-#define kNextMaxLikeId @"next_max_like_id"
-#define kNextMaxTagId @"next_max_tag_id"
-#define kNextCursor @"next_cursor"
+NSString *const kNextURL;
+NSString *const kNextMaxId;
+NSString *const kNextMaxLikeId;
+NSString *const kNextMaxTagId;
+NSString *const kNextCursor;
 
-#define kMaxId @"max_id"
-#define kMaxLikeId @"max_like_id"
-#define kMaxTagId @"max_tag_id"
-#define kCursor @"cursor"
+NSString *const kMaxId;
+NSString *const kMaxLikeId;
+NSString *const kMaxTagId;
+NSString *const kCursor;
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
 #define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])

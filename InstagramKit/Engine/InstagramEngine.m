@@ -26,29 +26,25 @@
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
 
-#define kKeyClientID @"client_id"
-#define kKeyAccessToken @"access_token"
-
 NSString *const kInstagramKitAppClientIdConfigurationKey = @"InstagramKitAppClientId";
-NSString *const kInstagramKitAppRedirectUrlConfigurationKey = @"InstagramKitAppRedirectURL";
+NSString *const kInstagramKitAppRedirectURLConfigurationKey = @"InstagramKitAppRedirectURL";
 
 NSString *const kInstagramKitBaseUrlConfigurationKey = @"InstagramKitBaseUrl";
 NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"InstagramKitAuthorizationUrl";
+NSString *const kInstagramKitBaseUrl = @"https://api.instagram.com/v1/";
+NSString *const kInstagramKitAuthorizationUrl = @"https://api.instagram.com/oauth/authorize/";
 
-NSString *const kInstagramKitBaseUrlDefault = @"https://api.instagram.com/v1/";
-NSString *const kInstagramKitBaseUrl __deprecated = @"https://api.instagram.com/v1/";
-
-NSString *const kInstagramKitAuthorizationUrlDefault = @"https://api.instagram.com/oauth/authorize/";
-NSString *const kInstagramKitAuthorizationUrl __deprecated = @"https://api.instagram.com/oauth/authorize/";
 NSString *const kInstagramKitErrorDomain = @"InstagramKitErrorDomain";
+NSString *const kKeyClientID = @"client_id";
+NSString *const kKeyAccessToken = @"access_token";
 
 
-/* From the Documentation :
+
+/* From Instagram's Documentation :
  
  Relationships are expressed using the following terms:
  outgoing_status: Your relationship to the user. Can be "follows", "requested", "none".
  incoming_status: A user's relationship to you. Can be "followed_by", "requested_by", "blocked_by_you", "none".
- 
  */
 
 NSString *const kRelationshipOutgoingStatusKey = @"outgoing_status";
@@ -72,9 +68,7 @@ NSString *const kRelationshipActionUnblock = @"unblock";
 NSString *const kRelationshipActionApprove = @"approve";
 NSString *const kRelationshipActionDeny = @"deny";
 
-
-#define kData @"data"
-#define kPagination @"pagination"
+NSString *const kPagination = @"pagination";
 
 
 typedef enum
@@ -89,8 +83,6 @@ typedef enum
 {
     dispatch_queue_t mBackgroundQueue;
 }
-
-+ (NSDictionary*) sharedEngineConfiguration;
 
 @property (nonatomic, copy) InstagramLoginBlock instagramLoginBlock;
 #if (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
@@ -114,42 +106,42 @@ typedef enum
     return _sharedEngine;
 }
 
-+ (NSDictionary*) sharedEngineConfiguration {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"InstagramKit" withExtension:@"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL:url];
-    dict = dict ? dict : [[NSBundle mainBundle] infoDictionary];
-    return dict;
+- (NSDictionary*)clientConfiguration {
+
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSMutableDictionary *configuration = [NSMutableDictionary dictionary];
+    if (info[kInstagramKitAppClientIdConfigurationKey]) {
+        configuration[kInstagramKitAppClientIdConfigurationKey] = info[kInstagramKitAppClientIdConfigurationKey];
+    }
+    if (info[kInstagramKitAppRedirectURLConfigurationKey]) {
+        configuration[kInstagramKitAppRedirectURLConfigurationKey] = info[kInstagramKitAppRedirectURLConfigurationKey];
+    }
+    configuration[kInstagramKitBaseUrlConfigurationKey] = kInstagramKitBaseUrl;
+    configuration[kInstagramKitAuthorizationUrlConfigurationKey] = kInstagramKitAuthorizationUrl;
+    
+    return [NSDictionary dictionaryWithDictionary:configuration];
 }
 
 - (instancetype)init {
     if (self = [super init])
     {
-        NSDictionary *sharedEngineConfiguration = [InstagramEngine sharedEngineConfiguration];
-        id url = nil;
-        url = sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey];
-        
-        if (url) {
-            url = [NSURL URLWithString:url];
-        } else {
-            url = [NSURL URLWithString:kInstagramKitBaseUrlDefault];
-        }
-        
-        NSAssert(url, @"Base URL not valid: %@", sharedEngineConfiguration[kInstagramKitBaseUrlConfigurationKey]);
-        self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+        NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseUrl];
+        self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
-        self.appClientID =  sharedEngineConfiguration[kInstagramKitAppClientIdConfigurationKey];
-        self.appRedirectURL = sharedEngineConfiguration[kInstagramKitAppRedirectUrlConfigurationKey];
-
-        url = sharedEngineConfiguration[kInstagramKitAuthorizationUrlConfigurationKey];
-        self.authorizationURL = url ? url : kInstagramKitAuthorizationUrlDefault;
+        NSDictionary *configuration = [self clientConfiguration];
+        self.appClientID = configuration[kInstagramKitAppClientIdConfigurationKey];
+        self.appRedirectURL = configuration[kInstagramKitAppRedirectURLConfigurationKey];
+        self.authorizationURL = kInstagramKitAuthorizationUrl;
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
-
         BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
-        NSAssert(validClientId, @"Invalid Instagram Client ID.");
-        NSAssert([NSURL URLWithString:self.appRedirectURL], @"App Redirect URL invalid: %@", self.appRedirectURL);
+        NSAssert(validClientId, @"Invalid Instagram Client ID. Please set a valid value for the key \"InstagramKitAppClientId\" in Info.plist");
+        
+        BOOL validRedirectURL = IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"];
+        NSAssert(validRedirectURL, @"Invalid Redirect URL. Please set a valid value for the key \"InstagramKitAppRedirectURL\" in Info.plist", self.appRedirectURL);
+        
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
     }
     return self;
@@ -158,38 +150,35 @@ typedef enum
 #pragma mark - Login -
 
 
-- (void)loginWithBlock:(InstagramLoginBlock)block
+- (NSURL *)authorizarionURLForScope:(IKLoginScope)scope
 {
-    [self loginWithScope:IKLoginScopeBasic completionBlock:block];
+    NSDictionary *parameters = [self authorizationParametersWithScope:scope];
+    NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:self.authorizationURL parameters:parameters error:nil];
+    return authRequest.URL;
 }
 
-- (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
+
+- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
 {
-    NSMutableDictionary *params = [@{kKeyClientID: self.appClientID,
-                                     @"redirect_uri": self.appRedirectURL,
-                                     @"response_type": @"token"} mutableCopy];
-    
-    if(scope)
-    {
-        params[@"scope"] = [InstagramEngine stringForScope:scope];
-    }
-    
-    NSMutableArray *queryElements = [NSMutableArray arrayWithCapacity:params.count];
-    [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-        [queryElements addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
-    }];
-    
-    NSString *queryString = [queryElements componentsJoinedByString:@"&"];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",
-        self.authorizationURL, queryString]];
-    
+    NSURL *authURL = [self authorizarionURLForScope:scope];
     self.instagramLoginBlock = block;
-
-    [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:authURL];
 }
 
-+ (NSString *)stringForScope:(IKLoginScope)scope
+- (NSDictionary *)authorizationParametersWithScope:(IKLoginScope)scope
+{
+    NSDictionary *configuration = [self clientConfiguration];
+    NSString *scopeString = [self stringForScope:scope];
+    NSDictionary *parameters = @{
+                                 @"client_id": configuration[kInstagramKitAppClientIdConfigurationKey],
+                                 @"redirect_uri": configuration[kInstagramKitAppRedirectURLConfigurationKey],
+                                 @"response_type": @"token",
+                                 @"scope": scopeString
+                                 };
+    return parameters;
+}
+
+- (NSString *)stringForScope:(IKLoginScope)scope
 {
     
     NSArray *typeStrings = @[@"basic",@"comments",@"relationships",@"likes"];

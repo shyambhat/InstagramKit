@@ -41,13 +41,7 @@ typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
 typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
-extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
-
-extern NSString *const kInstagramKitBaseUrlConfigurationKey;
-extern NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
-
-// Head over to http://instagram.com/developer/clients/manage/ to find these.
-
+extern NSString *const kInstagramKitAppRedirectURLConfigurationKey;
 
 extern NSString *const kRelationshipOutgoingStatusKey;
 extern NSString *const kRelationshipOutStatusFollows;
@@ -86,7 +80,6 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 @interface InstagramEngine : NSObject
 
 + (InstagramEngine *)sharedEngine;
-+ (NSDictionary*)sharedEngineConfiguration;
 
 @property (nonatomic, copy) NSString *appClientID;
 @property (nonatomic, copy) NSString *appRedirectURL;
@@ -96,10 +89,9 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 #pragma mark - Login -
 
-//  Comes with the basic login scope
-- (void)loginWithBlock:(InstagramLoginBlock)block;
-- (void)loginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
-+ (NSString *)stringForScope:(IKLoginScope)scope;
+- (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
+
+- (void)redirectToLoginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
 
 - (void)cancelLogin;
 

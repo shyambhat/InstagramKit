@@ -31,6 +31,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>InstagramKitAppClientId</key>
+	<string>&lt;Client Id here&gt;</string>
+	<key>InstagramKitAppRedirectURL</key>
+	<string>&lt;Redirect URL here&gt;</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
