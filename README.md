@@ -16,7 +16,6 @@ engine.accessToken = token; //Token received from redirect url
 [engine getMediaForUser:userID 
             withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
                 // media is an array of InstagramMedia objects 
-                // The InstagramPaginationInfo object gives you everything you need to make the next paginated call.
                 } 
                 failure:^(NSError *error) {
                 //Handle error here
@@ -40,9 +39,9 @@ If you prefer the Info.plist for all your app settings, you can include these ke
 
 For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication-and-Usage).
 
-Note: _For your app to POST or DELETE likes, comments or follows, you must apply to Instagram here : https://www.facebook.com/help/instagram/contact/185819881608116# _
+Note: To use POST or DELETE requests to change likes, comments or follows, you must [apply to Instagram here](https://www.facebook.com/help/instagram/contact/185819881608116#).
 
-Read about implementing Pagination for your requests effortlessly in the [Pagination Wiki]. (https://github.com/shyambhat/InstagramKit/wiki/Pagination)
+Read about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
 Download and run the Demo Project to understand how the engine is intended to be used.
 
