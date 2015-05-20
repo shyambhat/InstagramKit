@@ -21,7 +21,7 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "InstagramComment.h"
-
+#import "InstagramLocation.h"
 
 @interface InstagramMedia ()
 {
@@ -60,8 +60,7 @@
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
-            _location = CLLocationCoordinate2DMake([(info[kLocation])[kLatitude] doubleValue], [(info[kLocation])[kLongitude] doubleValue]);
-            _locationName = info[kLocation][kLocationName];
+            _location = [[InstagramLocation alloc] initWithInfo:info[kLocation]];
         }
         
         _filter = info[kFilter];
