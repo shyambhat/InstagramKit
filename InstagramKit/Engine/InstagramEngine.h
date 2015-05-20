@@ -26,6 +26,7 @@
 @class InstagramMedia;
 @class InstagramPaginationInfo;
 @class InstagramTag;
+@class InstagramLocation;
 
 
 typedef void (^InstagramLoginBlock)(NSError *error);
@@ -39,6 +40,8 @@ typedef void (^InstagramCommentsBlock)(NSArray *comments);
 typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
 typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
 typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
+typedef void (^InstagramLocationsBlock)(NSArray *locations);
+typedef void (^InstagramLocationBlock)(InstagramLocation *location);
 
 extern NSString *const kInstagramKitAppClientIdConfigurationKey;
 extern NSString *const kInstagramKitAppRedirectUrlConfigurationKey;
@@ -136,8 +139,24 @@ sourceApplication
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure;
 
+#pragma mark - Locations -
 
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                      withSuccess:(InstagramLocationsBlock)success
+                          failure:(InstagramFailureBlock)failure;
 
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                 distanceInMeters:(NSInteger)distance
+                      withSuccess:(InstagramLocationsBlock)success
+                          failure:(InstagramFailureBlock)failure;
+
+- (void)getLocationWithId:(NSString*)locationId
+              withSuccess:(InstagramLocationBlock)success
+                  failure:(InstagramFailureBlock)failure;
+
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(InstagramFailureBlock)failure;
 #pragma mark - Users -
 
 

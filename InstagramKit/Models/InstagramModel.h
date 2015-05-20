@@ -37,9 +37,6 @@
 #define kHeight @"height"
 #define kWidth @"width"
 #define kData @"data"
-#define kLatitude @"latitude"
-#define kLongitude @"longitude"
-#define kLocationName @"name"
 
 #define kThumbnail @"thumbnail"
 #define kLowResolution @"low_resolution"
@@ -91,5 +88,9 @@
 #define kMaxLikeId @"max_like_id"
 #define kMaxTagId @"max_tag_id"
 #define kCursor @"cursor"
+
+#define kLocationLatitude @"latitude"
+#define kLocationLongitude @"longitude"
+#define kLocationName @"name"
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
