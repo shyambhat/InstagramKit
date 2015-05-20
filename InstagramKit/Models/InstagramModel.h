@@ -37,9 +37,6 @@ NSString *const kURL;
 NSString *const kHeight;
 NSString *const kWidth;
 NSString *const kData;
-NSString *const kLatitude;
-NSString *const kLongitude;
-NSString *const kLocationName;
 
 NSString *const kThumbnail;
 NSString *const kLowResolution;
@@ -91,6 +88,11 @@ NSString *const kMaxId;
 NSString *const kMaxLikeId;
 NSString *const kMaxTagId;
 NSString *const kCursor;
+
+NSString *const kLocationLatitude;
+NSString *const kLocationLongitude;
+NSString *const kLocationName;
+
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
 #define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])

@@ -27,9 +27,6 @@ NSString *const kURL = @"url";
 NSString *const kHeight = @"height";
 NSString *const kWidth = @"width";
 NSString *const kData = @"data";
-NSString *const kLatitude = @"latitude";
-NSString *const kLongitude = @"longitude";
-NSString *const kLocationName = @"name";
 
 NSString *const kThumbnail = @"thumbnail";
 NSString *const kLowResolution = @"low_resolution";
@@ -82,6 +79,9 @@ NSString *const kMaxLikeId = @"max_like_id";
 NSString *const kMaxTagId = @"max_tag_id";
 NSString *const kCursor = @"cursor";
 
+NSString *const kLocationLatitude = @"latitude";
+NSString *const kLocationLongitude = @"longitude";
+NSString *const kLocationName = @"name";
 
 @interface InstagramModel ()
 

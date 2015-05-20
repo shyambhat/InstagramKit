@@ -25,6 +25,7 @@
 #import "InstagramComment.h"
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
+#import "InstagramLocation.h"
 
 NSString *const kInstagramKitAppClientIdConfigurationKey = @"InstagramKitAppClientId";
 NSString *const kInstagramKitAppRedirectURLConfigurationKey = @"InstagramKitAppRedirectURL";
@@ -500,7 +501,69 @@ typedef enum
 		}
     }];
 }
-
+                         
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                       withSuccess:(InstagramLocationsBlock)success
+                           failure:(InstagramFailureBlock)failure
+{
+     [self getPath:[NSString stringWithFormat:@"locations/search?lat=%f&lng=%f", loction.latitude, loction.longitude] parameters:nil responseModel:[InstagramLocation class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+         if (success) {
+             NSArray *objects = response;
+             success(objects);
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if (failure) {
+             failure(error, statusCode);
+         }
+     }];
+}
+                         
+- (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
+                     distanceInMeters:(NSInteger)distance
+                     withSuccess:(InstagramLocationsBlock)success
+                     failure:(InstagramFailureBlock)failure
+{
+     [self getPath:[NSString stringWithFormat:@"locations/search?lat=%f&lng=%f&distance=%ld", loction.latitude, loction.longitude, (long)distance] parameters:nil responseModel:[InstagramLocation class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+         if (success) {
+             NSArray *objects = response;
+             success(objects);
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if (failure) {
+             failure(error, statusCode);
+         }
+     }];
+}
+                         
+- (void)getLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramLocationBlock)success
+                     failure:(InstagramFailureBlock)failure
+ {
+     [self getPath:[NSString stringWithFormat:@"locations/%@", locationId] parameters:nil responseModel:[InstagramLocation class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+         if (success) {
+             success(response);
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if (failure) {
+             failure(error, statusCode);
+         }
+     }];
+ }
+                         
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                     failure:(InstagramFailureBlock)failure
+ {
+     [self getPath:[NSString stringWithFormat:@"locations/%@/media/recent", locationId] parameters:nil responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+         if (success) {
+             success(response, paginationInfo);
+         }
+     } failure:^(NSError *error, NSInteger statusCode) {
+         if (failure) {
+             failure(error, statusCode);
+         }
+     }];
+ }
 
 #pragma mark - Users -
 

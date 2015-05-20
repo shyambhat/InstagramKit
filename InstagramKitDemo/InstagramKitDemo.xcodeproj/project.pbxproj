@@ -45,6 +45,7 @@
 		82AC29F3189D27C000675776 /* InstagramTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC29F2189D27C000675776 /* InstagramTag.m */; };
 		82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A36189D3CDE00675776 /* IKMediaViewController.m */; };
 		82AC2A3A189D3E9F00675776 /* IKMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82AC2A39189D3E9F00675776 /* IKMediaCell.m */; };
+		82B127CB1B0CE672001AD612 /* InstagramLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B127CA1B0CE672001AD612 /* InstagramLocation.m */; };
 		82B80AEF189ECAC50094AB24 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 82B80AEE189ECAC50094AB24 /* Icon.png */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,8 @@
 		82AC2A36189D3CDE00675776 /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaViewController.m; sourceTree = "<group>"; };
 		82AC2A38189D3E9F00675776 /* IKMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaCell.h; sourceTree = "<group>"; };
 		82AC2A39189D3E9F00675776 /* IKMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaCell.m; sourceTree = "<group>"; };
+		82B127C91B0CE672001AD612 /* InstagramLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramLocation.h; sourceTree = "<group>"; };
+		82B127CA1B0CE672001AD612 /* InstagramLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramLocation.m; sourceTree = "<group>"; };
 		82B80AEE189ECAC50094AB24 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,6 +301,8 @@
 				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
 				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
 				52781DAC17CD6E64001A32F7 /* InstagramComment.m */,
+				82B127C91B0CE672001AD612 /* InstagramLocation.h */,
+				82B127CA1B0CE672001AD612 /* InstagramLocation.m */,
 				82AC29F1189D27C000675776 /* InstagramTag.h */,
 				82AC29F2189D27C000675776 /* InstagramTag.m */,
 				52A3602118C7BD4D00B4CBD7 /* InstagramPaginationInfo.h */,
@@ -447,6 +452,7 @@
 				82AC2A37189D3CDE00675776 /* IKMediaViewController.m in Sources */,
 				52781D7C17CD6C85001A32F7 /* AppDelegate.m in Sources */,
 				825BB4BE18A183D800F3BDF3 /* AFHTTPRequestOperationManager.m in Sources */,
+				82B127CB1B0CE672001AD612 /* InstagramLocation.m in Sources */,
 				52781D4817CD6BB9001A32F7 /* main.m in Sources */,
 				52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */,
 				52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */,
