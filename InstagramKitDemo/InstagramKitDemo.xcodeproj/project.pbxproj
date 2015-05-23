@@ -24,7 +24,6 @@
 		52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7917CD6C85001A32F7 /* IKCollectionViewController.m */; };
 		52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781D7B17CD6C85001A32F7 /* IKLoginViewController.m */; };
 		52781DB317CD6E64001A32F7 /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DA617CD6E64001A32F7 /* InstagramEngine.m */; };
-		52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */; };
 		52781DB517CD6E64001A32F7 /* InstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAC17CD6E64001A32F7 /* InstagramComment.m */; };
 		52781DB617CD6E64001A32F7 /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DAE17CD6E64001A32F7 /* InstagramMedia.m */; };
 		52781DB717CD6E64001A32F7 /* InstagramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52781DB017CD6E64001A32F7 /* InstagramModel.m */; };
@@ -86,8 +85,6 @@
 		52781DA517CD6E64001A32F7 /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
 		52781DA617CD6E64001A32F7 /* InstagramEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngine.m; sourceTree = "<group>"; };
 		52781DA717CD6E64001A32F7 /* InstagramKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramKit.h; sourceTree = "<group>"; };
-		52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKUserInPhoto.h; sourceTree = "<group>"; };
-		52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKUserInPhoto.m; sourceTree = "<group>"; };
 		52781DAB17CD6E64001A32F7 /* InstagramComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramComment.h; sourceTree = "<group>"; };
 		52781DAC17CD6E64001A32F7 /* InstagramComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramComment.m; sourceTree = "<group>"; };
 		52781DAD17CD6E64001A32F7 /* InstagramMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramMedia.h; sourceTree = "<group>"; };
@@ -291,12 +288,10 @@
 		52781DA817CD6E64001A32F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				52781DA917CD6E64001A32F7 /* IKUserInPhoto.h */,
-				52781DAA17CD6E64001A32F7 /* IKUserInPhoto.m */,
-				52781DAD17CD6E64001A32F7 /* InstagramMedia.h */,
-				52781DAE17CD6E64001A32F7 /* InstagramMedia.m */,
 				52781DAF17CD6E64001A32F7 /* InstagramModel.h */,
 				52781DB017CD6E64001A32F7 /* InstagramModel.m */,
+				52781DAD17CD6E64001A32F7 /* InstagramMedia.h */,
+				52781DAE17CD6E64001A32F7 /* InstagramMedia.m */,
 				52781DB117CD6E64001A32F7 /* InstagramUser.h */,
 				52781DB217CD6E64001A32F7 /* InstagramUser.m */,
 				52781DAB17CD6E64001A32F7 /* InstagramComment.h */,
@@ -456,7 +451,6 @@
 				52781D4817CD6BB9001A32F7 /* main.m in Sources */,
 				52781D7F17CD6C85001A32F7 /* IKCollectionViewController.m in Sources */,
 				52781D8017CD6C85001A32F7 /* IKLoginViewController.m in Sources */,
-				52781DB417CD6E64001A32F7 /* IKUserInPhoto.m in Sources */,
 				52781D7E17CD6C85001A32F7 /* IKCell.m in Sources */,
 				52781DB617CD6E64001A32F7 /* InstagramMedia.m in Sources */,
 				825BB4C318A183D800F3BDF3 /* AFURLRequestSerialization.m in Sources */,
