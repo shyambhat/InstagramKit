@@ -22,7 +22,6 @@
 #import "InstagramComment.h"
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
-#import "IKUserInPhoto.h"
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
 #import "InstagramLocation.h"
