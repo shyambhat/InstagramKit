@@ -92,8 +92,11 @@ NSString *const kLocationName = @"name";
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
-        _Id = [[NSString alloc] initWithString:info[kID]];
+    if (self && ik_dictionaryIsValid(info)) {
+        _Id = [[NSString alloc] initWithFormat:@"%@",info[kID]];
+    }
+    if (!ik_stringIsValid(_Id)) {
+        NSLog(@"");
     }
     return self;
 }

@@ -26,22 +26,8 @@
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        _username = [[NSString alloc] initWithString:info[kUsername]];
-        _fullName = [[NSString alloc] initWithString:info[kFullName]];
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (IKNotNull(info[kBio]))
-            _bio = [[NSString alloc] initWithString:info[kBio]];;
-        if (IKNotNull(info[kWebsite]))
-            _website = [[NSURL alloc] initWithString:info[kWebsite]];
-
-        // DO NOT PERSIST
-        if (IKNotNull(info[kCounts]))
-        {
-            _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-            _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-            _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-        }
+    if (self && ik_dictionaryIsValid(info)) {
+        [self updateDetails:info];
     }
     return self;
 }
@@ -49,11 +35,18 @@
 
 - (void)updateDetails:(NSDictionary *)info
 {
-    if (IKNotNull(info[kCounts]))
+    _username = [[NSString alloc] initWithString:ik_safeString(info[kUsername])];
+    _fullName = [[NSString alloc] initWithString:ik_safeString(info[kFullName])];
+    _profilePictureURL = [[NSURL alloc] initWithString:ik_safeString(info[kProfilePictureURL])];
+    _bio = [[NSString alloc] initWithString:ik_safeString(info[kBio])];;
+    _website = [[NSURL alloc] initWithString:ik_safeString(info[kWebsite])];
+    
+    // DO NOT PERSIST
+    if (ik_dictionaryIsValid(info[kCounts]))
     {
-        _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-        _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-        _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
+        _mediaCount = [ik_safeNumber((info[kCounts])[kCountMedia]) integerValue];
+        _followsCount = [ik_safeNumber((info[kCounts])[kCountFollows]) integerValue];
+        _followedByCount = [ik_safeNumber((info[kCounts])[kCountFollowedBy]) integerValue];
     }
 }
 

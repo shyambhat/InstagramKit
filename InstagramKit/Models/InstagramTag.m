@@ -27,9 +27,9 @@
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
-    if (self && IKNotNull(info)) {
-        _name = [[NSString alloc] initWithString:info[kTagName]];
-        _mediaCount = [info[kTagMediaCount] integerValue];
+    if (self && ik_dictionaryIsValid(info)) {
+        _name = [[NSString alloc] initWithString:ik_safeString(info[kTagName])];
+        _mediaCount = [ik_safeNumber(info[kTagMediaCount]) integerValue];
     }
     return self;
 }

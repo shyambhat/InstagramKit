@@ -71,9 +71,9 @@
     
     if (sharedEngine.accessToken)
     {
-        [self testLoadSelfFeed];
+//        [self testLoadSelfFeed];
 //        [self testLoadSelfLikedMedia];
-//        [self getSelfUserDetails];
+        [self getSelfUserDetails];
     }
     else
     {
@@ -99,6 +99,7 @@
 - (void)testLoadPopularMedia
 {
     [[InstagramEngine sharedEngine] getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+        self.currentPaginationInfo = paginationInfo;
         [mediaArray removeAllObjects];
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
@@ -248,7 +249,7 @@
     {
 //  Paginate on navigating to detail
 //either
-//        [self loadMedia];
+        [self loadMedia];
 //or
 //        [self testPaginationRequest:self.currentPaginationInfo];
     }

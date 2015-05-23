@@ -26,10 +26,12 @@
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
-        _text = [[NSString alloc] initWithString:info[kText]];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
+    if (self && ik_dictionaryIsValid(info)) {
+        if (ik_dictionaryIsValid(info[kCreator])) {
+            _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
+        }
+        _text = [[NSString alloc] initWithString:ik_safeString(info[kText])];
+        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[ik_safeString(info[kCreatedDate]) doubleValue]];
     }
     return self;
 }

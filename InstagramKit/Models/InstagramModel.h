@@ -94,8 +94,15 @@ NSString *const kLocationLongitude;
 NSString *const kLocationName;
 
 
-#define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
-#define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])
-#define IKValidArray(array) (IKNotNull(array) && [array isKindOfClass:[NSArray class]])
-#define IKValidString(str) (IKNotNull(str) && [str isKindOfClass:[NSString class]])
-#define IKValidNumber(num) (IKNotNull(num) && [num isKindOfClass:[NSNumber class]])
+#define ik_validObject(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
+
+#define ik_dictionaryIsValid(dict) (ik_validObject(dict) && [dict isKindOfClass:[NSDictionary class]]) && [dict count]
+#define ik_arrayIsValid(array) (ik_validObject(array) && [array isKindOfClass:[NSArray class]]) && [array count]
+#define ik_stringIsValid(str) (ik_validObject(str) && [str isKindOfClass:[NSString class]]) && [str length]
+#define ik_numberOrStringIsValid(num) (ik_validObject(num) && ([num isKindOfClass:[NSNumber class]] || [num isKindOfClass:[NSString class]]) )
+
+#define ik_safeDictionary(dict) ik_dictionaryIsValid(dict) ? dict : @{}
+#define ik_safeArray(array) ik_arrayIsValid(array)  ? array : @[]
+#define ik_safeString(str) ik_stringIsValid(str) ? str : @""
+#define ik_safeNumber(num) ik_numberOrStringIsValid(num) ? num : @0
+#define ik_safeBOOL(str) ik_stringIsValid(str) ? [str boolValue] : NO

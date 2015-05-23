@@ -137,10 +137,10 @@ typedef enum
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
+        BOOL validClientId = ik_stringIsValid(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
         NSAssert(validClientId, @"Invalid Instagram Client ID. Please set a valid value for the key \"InstagramKitAppClientId\" in Info.plist");
         
-        BOOL validRedirectURL = IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"];
+        BOOL validRedirectURL = ik_stringIsValid(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"];
         NSAssert(validRedirectURL, @"Invalid Redirect URL. Please set a valid value for the key \"InstagramKitAppRedirectURL\" in Info.plist", self.appRedirectURL);
         
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
@@ -159,7 +159,7 @@ typedef enum
 }
 
 
-- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
+- (void)redirectToLoginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
 {
     NSURL *authURL = [self authorizarionURLForScope:scope];
     self.instagramLoginBlock = block;
@@ -316,10 +316,21 @@ typedef enum
         parameters:params
            success:^(NSURLSessionDataTask *task, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               NSDictionary *pInfo = responseDictionary[kPagination];
-               InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
-               BOOL multiple = ([responseDictionary[kData] isKindOfClass:[NSArray class]]);
-               if (multiple) {
+               NSLog(@"======================================================================");
+               NSLog(@"======================        RESPONSE         =======================");
+               NSLog(@"======================================================================");
+               NSLog(@"%@",responseDictionary);
+               NSLog(@"======================================================================");
+               NSLog(@"======================================================================");
+               
+
+               InstagramPaginationInfo *paginationInfo = nil;
+               if (ik_dictionaryIsValid(responseDictionary[kPagination])) {
+                   paginationInfo = [[InstagramPaginationInfo alloc] initWithInfo:responseDictionary[kPagination]
+                                                                    andObjectType:modelClass];
+               }
+
+               if (ik_arrayIsValid(responseDictionary[kData])) {
                    NSArray *responseObjects = responseDictionary[kData];
                    NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
                    dispatch_async(mBackgroundQueue, ^{
@@ -329,14 +340,16 @@ typedef enum
                                [objects addObject:model];
                            }
                        }
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           success(objects, paginationInfo);
-                       });
+                       if (success) {
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               success(objects, paginationInfo);
+                           });
+                       }
                    });
                }
                else {
                    id model = nil;
-                   if (modelClass && IKNotNull(responseDictionary[kData]))
+                   if (ik_dictionaryIsValid(responseDictionary[kData]) && modelClass)
                    {
                        if (modelClass == [NSDictionary class]) {
                            model = [[NSDictionary alloc] initWithDictionary:responseDictionary[kData]];
@@ -346,11 +359,17 @@ typedef enum
                            model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
                        }
                    }
-                   success(model, paginationInfo);
+                   if (success) {
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           success(model, paginationInfo);
+                       });
+                   }
                }
            }
            failure:^(NSURLSessionDataTask *task, NSError *error) {
-               failure(error, ((NSHTTPURLResponse *)[task response]).statusCode);
+               if (failure) {
+                   failure(error, ((NSHTTPURLResponse *)[task response]).statusCode);
+               }
            }];
 }
 
@@ -573,7 +592,7 @@ typedef enum
                failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@",user.Id]  parameters:nil responseModel:[NSDictionary class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
-        if(success && IKNotNull(response))
+        if(success && ik_validObject(response))
 		{
             [user updateDetails:response];
 			success(user);
