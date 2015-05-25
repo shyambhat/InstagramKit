@@ -170,7 +170,7 @@
 
 - (void)testLoadMediaForUser:(InstagramUser *)user
 {
-    [[InstagramEngine sharedEngine] getMediaForUser:user count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getMediaForUser:user.Id count:15 maxId:self.currentPaginationInfo.nextMaxId withSuccess:^(NSArray *feed, InstagramPaginationInfo *paginationInfo) {
 
         if (paginationInfo) {
             self.currentPaginationInfo = paginationInfo;

@@ -582,22 +582,22 @@ typedef enum
 }
 
 
-- (void)getMediaForUser:(InstagramUser *)user
+- (void)getMediaForUser:(NSString *)userId
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
-    [self getMediaForUser:user count:0 maxId:nil withSuccess:success failure:failure];
+    [self getMediaForUser:userId count:0 maxId:nil withSuccess:success failure:failure];
 }
 
 
-- (void)getMediaForUser:(InstagramUser *)user
+- (void)getMediaForUser:(NSString *)userId
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andMaxIdType:kPaginationMaxId];
-    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",user.Id] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+    [self getPath:[NSString stringWithFormat:@"users/%@/media/recent",userId] parameters:params responseModel:[InstagramMedia class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         if(success)
 		{
 			NSArray *media = response;

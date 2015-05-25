@@ -157,12 +157,12 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 #pragma mark -
 
 
-- (void)getMediaForUser:(InstagramUser *)user
+- (void)getMediaForUser:(NSString *)userId
             withSuccess:(InstagramMediaBlock)success
                 failure:(InstagramFailureBlock)failure;
 
 
-- (void)getMediaForUser:(InstagramUser *)user
+- (void)getMediaForUser:(NSString *)userId
                   count:(NSInteger)count
                   maxId:(NSString *)maxId
             withSuccess:(InstagramMediaBlock)success
