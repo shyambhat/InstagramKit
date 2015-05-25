@@ -94,7 +94,7 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 - (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
 
-- (void)redirectToLoginWithScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
+- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
 
 - (void)cancelLogin;
 

@@ -186,13 +186,14 @@
 
 - (void)testPaginationRequest:(InstagramPaginationInfo *)pInfo
 {
-    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    [[InstagramEngine sharedEngine] getPaginatedItemsForInfo:self.currentPaginationInfo
+                                                 withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
         NSLog(@"%ld more media in Pagination",(unsigned long)media.count);
         self.currentPaginationInfo = paginationInfo;
         [mediaArray addObjectsFromArray:media];
         [self reloadData];
-        
-    } failure:^(NSError *error, NSInteger statusCode) {
+    }
+                                                     failure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"Pagination Failed");
     }];
 }
