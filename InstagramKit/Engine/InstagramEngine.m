@@ -316,14 +316,6 @@ typedef enum
         parameters:params
            success:^(NSURLSessionDataTask *task, id responseObject) {
                NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-               NSLog(@"======================================================================");
-               NSLog(@"======================        RESPONSE         =======================");
-               NSLog(@"======================================================================");
-               NSLog(@"%@",responseDictionary);
-               NSLog(@"======================================================================");
-               NSLog(@"======================================================================");
-               
-
                InstagramPaginationInfo *paginationInfo = nil;
                if (ik_dictionaryIsValid(responseDictionary[kPagination])) {
                    paginationInfo = [[InstagramPaginationInfo alloc] initWithInfo:responseDictionary[kPagination]
