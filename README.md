@@ -1,3 +1,6 @@
+<img src="https://travis-ci.org/shyambhat/InstagramKit.svg?branch=master">
+
+
 InstagramKit
 ==================
 
