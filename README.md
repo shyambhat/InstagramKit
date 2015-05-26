@@ -8,21 +8,16 @@ InstagramKit
 
 An extensive Objective C wrapper for the Instagram API.
 
-Here's a quick example to retrieve the media from a user's feed:
+Here's a quick example to retrieve trending media on Instagram:
 
 ```Objective-C
-
 InstagramEngine *engine = [InstagramEngine sharedEngine];
-engine.accessToken = token; //Token received from redirect url
-
-[engine getMediaForUser:userID 
-            withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-                    // media is an array of InstagramMedia objects 
-                } 
-                failure:^(NSError *error) {
-                    ...
-                }
-];
+[engine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    // media is an array of InstagramMedia objects
+    ...
+} failure:^(NSError *error, NSInteger statusCode) {
+    ...
+}];
 ```
 
 ####Installation
