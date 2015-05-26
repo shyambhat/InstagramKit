@@ -25,18 +25,18 @@ engine.accessToken = token; //Token received from redirect url
 ];
 ```
 
-##Installation
+####Installation
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
-#### Cocoapods Podfile
+####Cocoapods Podfile
 ```ruby
 pod 'InstagramKit', '3.6.3'
 ```
-#### Instagram Developer Registration
+####Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials into your App's Info.plist file.
 
-## Authentication and Usage
+####Authentication and Usage
 
 For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication).
 Download and run the Demo Project to understand how the engine is intended to be used.
@@ -45,16 +45,15 @@ Note: To use POST or DELETE requests to change likes, comments or follows, you m
 
 Read about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
-### Contributions?
+####Contributions?
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `dev` branch.
 
 
-Questions?
-The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is your definitive source of information in case something goes wrong. Please make sure you've read up the document thoroughly before posting issues.
+####Questions?
+The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is your definitive source of information in case something goes wrong. Please make sure you've read up the documentation before posting issues.
 
 ==================
-
 
 InstagramKit uses the public Instagram API and is not affiliated with either Instagram or Facebook.
 
