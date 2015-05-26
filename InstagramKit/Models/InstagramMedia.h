@@ -25,6 +25,7 @@
 
 @class InstagramUser;
 @class InstagramComment;
+@class InstagramLocation;
 
 @interface InstagramMedia : InstagramModel
 

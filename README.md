@@ -6,9 +6,6 @@ InstagramKit
 
 An extensive Objective C wrapper for the Instagram API.
 
-This framework is built atop AFNetworking’s blocks-based architecture and additionally parses the JSON response asynchronously so there’s absolutely no parsing on the main thread.
-It’s neat, fast and works like a charm providing an easy interface to interacting with Instagram’s model objects.
-
 Here's a quick example to retrieve the media from a user's feed:
 
 ```Objective-C
@@ -18,10 +15,10 @@ engine.accessToken = token; //Token received from redirect url
 
 [engine getMediaForUser:userID 
             withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-                // media is an array of InstagramMedia objects 
+                    // media is an array of InstagramMedia objects 
                 } 
                 failure:^(NSError *error) {
-                //Handle error here
+                    ...
                 }
 ];
 ```
@@ -32,11 +29,10 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 
 #### Cocoapods Podfile
 ```ruby
-pod 'InstagramKit', '3.5.0'
+pod 'InstagramKit', '3.6.0'
 ```
 #### Instagram Developer Registration
-Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials in InstagramKit.plist.
-If you prefer the Info.plist for all your app settings, you can include these keys directly in your info.plist file.
+Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials into your App's Info.plist file.
 
 ## Authentication and Usage
 
@@ -53,7 +49,7 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 ### Contributions?
 
-Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
+Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `develop` branch.
 
 
 Questions?

@@ -33,14 +33,9 @@
     mWebView.contentMode = UIViewContentModeScaleAspectFit;
     mWebView.delegate = self;
     
-    self.scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes;
-    
-    NSDictionary *configuration = [InstagramEngine sharedEngineConfiguration];
-    NSString *scopeString = [InstagramEngine stringForScope:self.scope];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@", configuration[kInstagramKitAuthorizationUrlConfigurationKey], configuration[kInstagramKitAppClientIdConfigurationKey], configuration[kInstagramKitAppRedirectUrlConfigurationKey], scopeString]];
+    NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:IKLoginScopeBasic];
+    [mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
-    [mWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    
 }
 
 - (IBAction)back:(id)sender {

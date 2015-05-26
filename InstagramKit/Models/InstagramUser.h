@@ -34,13 +34,7 @@
 @property (readonly) NSInteger followsCount;
 @property (readonly) NSInteger followedByCount;
 
-@property (readonly) NSArray *recentMedia;
-
-- (void)loadUserDetails;
-- (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure;
-
-- (void)loadRecentMedia:(NSInteger)count;
-- (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure;
+- (void)updateDetails:(NSDictionary *)info;
 
 - (BOOL)isEqualToUser:(InstagramUser *)user;
 

@@ -21,66 +21,46 @@
 #import "InstagramUser.h"
 #import "InstagramEngine.h"
 
-@interface InstagramUser()
-@property (nonatomic, strong) NSArray *recentMedia;
-@end
-
 @implementation InstagramUser
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        _username = [[NSString alloc] initWithString:info[kUsername]];
-        _fullName = [[NSString alloc] initWithString:info[kFullName]];
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (IKNotNull(info[kBio]))
-            _bio = [[NSString alloc] initWithString:info[kBio]];;
-        if (IKNotNull(info[kWebsite]))
-            _website = [[NSURL alloc] initWithString:info[kWebsite]];
-
-        // DO NOT PERSIST
-        if (IKNotNull(info[kCounts]))
-        {
-            _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-            _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-            _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-        }
+        [self updateDetails:info];
     }
     return self;
 }
 
-- (void)loadUserDetails
+
+- (void)updateDetails:(NSDictionary *)info
 {
-    [self loadUserDetailsWithSuccess:nil failure:nil];
+    _username = [[NSString alloc] initWithString:info[kUsername]];
+    _fullName = [[NSString alloc] initWithString:info[kFullName]];
+    
+    if (IKNotNull(info[kProfilePictureURL]))
+    {
+        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
+    }
+    
+    if (IKNotNull(info[kBio]))
+    {
+        _bio = [[NSString alloc] initWithString:info[kBio]];
+    }
+    
+    if (IKNotNull(info[kWebsite]))
+    {
+        _website = [[NSURL alloc] initWithString:info[kWebsite]];
+    }
+    
+    if (IKNotNull(info[kCounts]))
+    {
+        _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
+        _followsCount = [(info[kCounts])[kCountFollows] integerValue];
+        _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
+    }
 }
 
-- (void)loadUserDetailsWithSuccess:(void(^)(void))success failure:(void(^)(void))failure
-{
-    [[InstagramEngine sharedEngine] getUserDetails:self.Id withSuccess:^(InstagramUser *userDetail) {
-        _mediaCount = userDetail.mediaCount;
-        _followsCount = userDetail.followsCount;
-        _followedByCount = userDetail.followedByCount;
-        success();
-    } failure:^(NSError* error, NSInteger statusCode) {
-        failure();
-    }];
-}
-
-- (void)loadRecentMedia:(NSInteger)count
-{
-    [self loadRecentMedia:count withSuccess:nil failure:nil];
-}
-
-- (void)loadRecentMedia:(NSInteger)count withSuccess:(void(^)(void))success failure:(void(^)(void))failure
-{
-    [[InstagramEngine sharedEngine] getMediaForUser:self.Id withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-        self.recentMedia = media;
-        success();
-    } failure:^(NSError *error, NSInteger statusCode) {
-        failure();
-    }];
-}
 
 - (BOOL)isEqualToUser:(InstagramUser *)user {
     return [super isEqualToModel:user];
