@@ -20,6 +20,9 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 }];
 ```
 
+The framework is built atop AFNetworking’s blocks-based architecture and additionally, parses JSON data and creates model objects asynchronously so there’s absolutely no parsing on the main thread.
+It’s neat, fast and works like a charm.
+
 ####Installation
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
