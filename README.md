@@ -49,7 +49,7 @@ Download and run the Demo Project to understand how the engine is intended to be
 
 ### Contributions?
 
-Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `develop` branch.
+Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `dev` branch.
 
 
 Questions?
