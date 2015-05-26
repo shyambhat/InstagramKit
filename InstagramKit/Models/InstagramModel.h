@@ -30,68 +30,67 @@
 
 @end
 
+extern NSString *const kID;
+extern NSString *const kCount;
+extern NSString *const kURL;
+extern NSString *const kHeight;
+extern NSString *const kWidth;
+extern NSString *const kData;
 
-NSString *const kID;
-NSString *const kCount;
-NSString *const kURL;
-NSString *const kHeight;
-NSString *const kWidth;
-NSString *const kData;
+extern NSString *const kThumbnail;
+extern NSString *const kLowResolution;
+extern NSString *const kStandardResolution;
 
-NSString *const kThumbnail;
-NSString *const kLowResolution;
-NSString *const kStandardResolution;
+extern NSString *const kMediaTypeImage;
+extern NSString *const kMediaTypeVideo;
 
-NSString *const kMediaTypeImage;
-NSString *const kMediaTypeVideo;
+extern NSString *const kUser;
+extern NSString *const kUserHasLiked;
+extern NSString *const kCreatedDate;
+extern NSString *const kLink;
+extern NSString *const kCaption;
+extern NSString *const kLikes;
+extern NSString *const kComments;
+extern NSString *const kFilter;
+extern NSString *const kTags;
+extern NSString *const kImages;
+extern NSString *const kVideos;
+extern NSString *const kLocation;
+extern NSString *const kType;
 
-NSString *const kUser;
-NSString *const kUserHasLiked;
-NSString *const kCreatedDate;
-NSString *const kLink;
-NSString *const kCaption;
-NSString *const kLikes;
-NSString *const kComments;
-NSString *const kFilter;
-NSString *const kTags;
-NSString *const kImages;
-NSString *const kVideos;
-NSString *const kLocation;
-NSString *const kType;
+extern NSString *const kCreator;
+extern NSString *const kText;
 
-NSString *const kCreator;
-NSString *const kText;
+extern NSString *const kUsername;
+extern NSString *const kFullName;
+extern NSString *const kFirstName;
+extern NSString *const kLastName;
+extern NSString *const kProfilePictureURL;
+extern NSString *const kBio;
+extern NSString *const kWebsite;
 
-NSString *const kUsername;
-NSString *const kFullName;
-NSString *const kFirstName;
-NSString *const kLastName;
-NSString *const kProfilePictureURL;
-NSString *const kBio;
-NSString *const kWebsite;
+extern NSString *const kCounts;
+extern NSString *const kCountMedia;
+extern NSString *const kCountFollows;
+extern NSString *const kCountFollowedBy;
 
-NSString *const kCounts;
-NSString *const kCountMedia;
-NSString *const kCountFollows;
-NSString *const kCountFollowedBy;
+extern NSString *const kTagMediaCount;
+extern NSString *const kTagName;
 
-NSString *const kTagMediaCount;
-NSString *const kTagName;
+extern NSString *const kNextURL;
+extern NSString *const kNextMaxId;
+extern NSString *const kNextMaxLikeId;
+extern NSString *const kNextMaxTagId;
+extern NSString *const kNextCursor;
 
-NSString *const kNextURL;
-NSString *const kNextMaxId;
-NSString *const kNextMaxLikeId;
-NSString *const kNextMaxTagId;
-NSString *const kNextCursor;
+extern NSString *const kMaxId;
+extern NSString *const kMaxLikeId;
+extern NSString *const kMaxTagId;
+extern NSString *const kCursor;
 
-NSString *const kMaxId;
-NSString *const kMaxLikeId;
-NSString *const kMaxTagId;
-NSString *const kCursor;
-
-NSString *const kLocationLatitude;
-NSString *const kLocationLongitude;
-NSString *const kLocationName;
+extern NSString *const kLocationLatitude;
+extern NSString *const kLocationLongitude;
+extern NSString *const kLocationName;
 
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
