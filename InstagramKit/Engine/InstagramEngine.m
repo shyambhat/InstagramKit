@@ -118,11 +118,9 @@ typedef enum
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        BOOL validClientId = IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"];
-        NSAssert(validClientId, @"Invalid Instagram Client ID. Please set a valid value for the key \"InstagramAppClientId\" in Info.plist");
+        NSAssert(IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"], @"Invalid Instagram Client ID. Please set a valid value for the key \"InstagramAppClientId\" in Info.plist");
         
-        BOOL validRedirectURL = IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"];
-        NSAssert(validRedirectURL, @"Invalid Redirect URL. Please set a valid value for the key \"InstagramAppRedirectURL\" in Info.plist", self.appRedirectURL);
+        NSAssert(IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"], @"Invalid Redirect URL. Please set a valid value for the key \"InstagramAppRedirectURL\" in Info.plist", self.appRedirectURL);
         
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
     }
