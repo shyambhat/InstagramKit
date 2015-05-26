@@ -39,15 +39,11 @@ Head over to http://instagram.com/developer/clients/manage/ to register your app
 ## Authentication and Usage
 
 For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication).
+Download and run the Demo Project to understand how the engine is intended to be used.
 
 Note: To use POST or DELETE requests to change likes, comments or follows, you must [apply to Instagram here](https://www.facebook.com/help/instagram/contact/185819881608116#).
 
 Read about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
-
-Download and run the Demo Project to understand how the engine is intended to be used.
-
-<img src='https://raw.githubusercontent.com/shyambhat/InstagramKit/master/InstagramKitDemo/Instagramkit_demo.png' alt='Screenshot' width=310.5 height=625.5 />
-
 
 ### Contributions?
 
