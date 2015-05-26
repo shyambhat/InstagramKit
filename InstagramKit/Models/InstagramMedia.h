@@ -39,7 +39,8 @@
 @property (nonatomic, readonly) NSInteger commentCount;
 @property (nonatomic, readonly) NSArray *comments;
 @property (nonatomic, readonly) NSArray *tags;
-@property (nonatomic, readonly) InstagramLocation *location;
+@property (nonatomic, readonly) CLLocationCoordinate2D location;
+@property (nonatomic, readonly) NSString *locationName;
 @property (nonatomic, readonly) NSString *filter;
 @property (nonatomic, readonly) NSDictionary *images;
 

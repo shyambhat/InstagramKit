@@ -60,7 +60,11 @@
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
-            _location = [[InstagramLocation alloc] initWithInfo:info[kLocation]];
+            _location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
+            if (IKNotNull(info[kLocation][kLocationName]))
+            {
+                _locationName = info[kLocation][kLocationName];
+            }
         }
         
         _filter = info[kFilter];

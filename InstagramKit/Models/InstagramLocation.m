@@ -20,7 +20,9 @@
         coordinates.latitude = [info[kLocationLatitude] doubleValue];
         coordinates.longitude = [info[kLocationLongitude] doubleValue];
         _coordinates = coordinates;
-        _name = [[NSString alloc] initWithString:info[kLocationName]];
+        if (IKNotNull(info[kLocationName])) {
+            _name = [[NSString alloc] initWithString:info[kLocationName]];
+        }
     }
     return self;
 }

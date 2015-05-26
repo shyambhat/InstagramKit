@@ -27,21 +27,7 @@
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        _username = [[NSString alloc] initWithString:info[kUsername]];
-        _fullName = [[NSString alloc] initWithString:info[kFullName]];
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-        if (IKNotNull(info[kBio]))
-            _bio = [[NSString alloc] initWithString:info[kBio]];;
-        if (IKNotNull(info[kWebsite]))
-            _website = [[NSURL alloc] initWithString:info[kWebsite]];
-
-        // DO NOT PERSIST
-        if (IKNotNull(info[kCounts]))
-        {
-            _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-            _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-            _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-        }
+        [self updateDetails:info];
     }
     return self;
 }
@@ -49,6 +35,24 @@
 
 - (void)updateDetails:(NSDictionary *)info
 {
+    _username = [[NSString alloc] initWithString:info[kUsername]];
+    _fullName = [[NSString alloc] initWithString:info[kFullName]];
+    
+    if (IKNotNull(info[kProfilePictureURL]))
+    {
+        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
+    }
+    
+    if (IKNotNull(info[kBio]))
+    {
+        _bio = [[NSString alloc] initWithString:info[kBio]];
+    }
+    
+    if (IKNotNull(info[kWebsite]))
+    {
+        _website = [[NSURL alloc] initWithString:info[kWebsite]];
+    }
+    
     if (IKNotNull(info[kCounts]))
     {
         _mediaCount = [(info[kCounts])[kCountMedia] integerValue];

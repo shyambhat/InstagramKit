@@ -93,7 +93,9 @@ NSString *const kLocationName = @"name";
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        _Id = [[NSString alloc] initWithString:info[kID]];
+        if (IKNotNull(info[kID])) {
+            _Id = [[NSString alloc] initWithString:info[kID]];
+        }
     }
     return self;
 }
