@@ -1,3 +1,6 @@
+<img src="https://travis-ci.org/shyambhat/InstagramKit.svg?branch=master">
+
+
 InstagramKit
 ==================
 
@@ -37,7 +40,7 @@ If you prefer the Info.plist for all your app settings, you can include these ke
 
 ## Authentication and Usage
 
-For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication-and-Usage).
+For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication).
 
 Note: To use POST or DELETE requests to change likes, comments or follows, you must [apply to Instagram here](https://www.facebook.com/help/instagram/contact/185819881608116#).
 
