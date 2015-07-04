@@ -16,5 +16,4 @@ profile
 *.moved-aside
 DerivedData
 .idea/
-
-InstagramKit/InstagramKit.plist
+Pods

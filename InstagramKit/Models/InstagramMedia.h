@@ -44,18 +44,14 @@
 @property (nonatomic, readonly) NSString *filter;
 @property (nonatomic, readonly) NSDictionary *images;
 
+@property (nonatomic, readonly) BOOL isVideo;
+
 @property (nonatomic, readonly) NSURL *thumbnailURL;
 @property (nonatomic, readonly) CGSize thumbnailFrameSize;
-@property (nonatomic, readonly) NSURL *lowResolutionImageURL;
-@property (nonatomic, readonly) CGSize lowResolutionImageFrameSize;
-@property (nonatomic, readonly) NSURL *standardResolutionImageURL;
-@property (nonatomic, readonly) CGSize standardResolutionImageFrameSize;
-
-@property (nonatomic, readonly) BOOL isVideo;
-@property (nonatomic, readonly) NSURL *lowResolutionVideoURL;
-@property (nonatomic, readonly) CGSize lowResolutionVideoFrameSize;
-@property (nonatomic, readonly) NSURL *standardResolutionVideoURL;
-@property (nonatomic, readonly) CGSize standardResolutionVideoFrameSize;
+@property (nonatomic, readonly) NSURL *lowResolutionURL;
+@property (nonatomic, readonly) CGSize lowResolutionFrameSize;
+@property (nonatomic, readonly) NSURL *standardResolutionURL;
+@property (nonatomic, readonly) CGSize standardResolutionFrameSize;
 
 - (BOOL)isEqualToMedia:(InstagramMedia *)media;
 
