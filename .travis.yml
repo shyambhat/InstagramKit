@@ -1,6 +1,6 @@
 
 language: objective-c
-xcode_workspace: InstagramKit-Example/ InstagramKit-Example.xcworkspace # path to your xcodeproj folder
+xcode_workspace: InstagramKit-Example.xcworkspace # path to your xcodeproj folder
 xcode_scheme: InstagramKit-Example
 # before_install:
 #     - gem install cocoapods --quiet
