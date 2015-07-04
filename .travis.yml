@@ -1,12 +1,13 @@
 
 language: objective-c
-xcode_workspace: ./InstagramKit-Example/InstagramKit-Example.xcworkspace
+xcode_workspace: InstagramKit-Example.xcworkspace
 xcode_scheme: InstagramKit-Example
-# before_install:
-#     - gem install cocoapods --quiet
-#     - pod --version
-#     - pod setup
-#     - pod repo update --silent
+before_install:
+    - gem install cocoapods --quiet
+    - pod --version
+    - pod setup
+    - pod install
+    # - pod repo update --silent
 
 # script:
     #- pod lib lint
