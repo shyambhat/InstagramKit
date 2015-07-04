@@ -1,11 +1,11 @@
 
 language: objective-c
 
-before_install:
-    - gem install cocoapods --quiet
-    - pod --version
-    - pod setup
-    - pod repo update --silent
+# before_install:
+#     - gem install cocoapods --quiet
+#     - pod --version
+#     - pod setup
+#     - pod repo update --silent
 
 script:
     #- pod lib lint
