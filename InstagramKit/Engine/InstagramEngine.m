@@ -180,7 +180,7 @@ typedef enum
         return @"basic";
     }
     
-    return [strings componentsJoinedByString:@"+"];
+    return [strings componentsJoinedByString:@" "];
 }
 
 
