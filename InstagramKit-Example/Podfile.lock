@@ -1,0 +1,43 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - InstagramKit (3.6.4):
+    - AFNetworking (~> 2.0)
+
+DEPENDENCIES:
+  - InstagramKit (from `https://github.com/shyambhat/InstagramKit.git`, branch `dev`)
+
+EXTERNAL SOURCES:
+  InstagramKit:
+    :branch: dev
+    :git: https://github.com/shyambhat/InstagramKit.git
+
+CHECKOUT OPTIONS:
+  InstagramKit:
+    :commit: c317856999af7f117acc2517980d07bf2c5c5b55
+    :git: https://github.com/shyambhat/InstagramKit.git
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  InstagramKit: e1ef79cce1a58bfc3511c541d1daa0c20381b4bc
+
+COCOAPODS: 0.37.1
