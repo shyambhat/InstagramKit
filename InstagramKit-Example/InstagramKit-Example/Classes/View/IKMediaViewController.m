@@ -67,7 +67,7 @@
     if (!indexPath.row) {
         IKMediaCell *cell = (IKMediaCell *)[tableView dequeueReusableCellWithIdentifier:@"MediaCell" forIndexPath:indexPath];
         [cell.mediaImageView setImageWithURL:self.media.thumbnailURL];
-        [cell.mediaImageView setImageWithURL:self.media.standardResolutionURL];
+        [cell.mediaImageView setImageWithURL:self.media.standardResolutionImageURL];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
 

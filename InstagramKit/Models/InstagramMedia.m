@@ -87,23 +87,23 @@
     _thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
     
     NSDictionary *lowResInfo = imagesInfo[kLowResolution];
-    _lowResolutionURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
-    _lowResolutionFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    _lowResolutionImageURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
+    _lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = imagesInfo[kStandardResolution];
-    _standardResolutionURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
-    _standardResolutionFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    _standardResolutionImageURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+    _standardResolutionImageFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
 - (void)initializeVideos:(NSDictionary *)videosInfo
 {
     NSDictionary *lowResInfo = videosInfo[kLowResolution];
-    _lowResolutionURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
-    _lowResolutionFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    _lowResolutionVideoURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
+    _lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
-    _standardResolutionURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
-    _standardResolutionFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    _standardResolutionVideoURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+    _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
 
