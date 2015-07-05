@@ -129,6 +129,10 @@
     }
 }
 
+-(IBAction)unwindSegue:(UIStoryboardSegue *)sender
+{
+    [sender.sourceViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - UICollectionViewDataSource Methods -
 

@@ -23,13 +23,8 @@
 #import "Constants.h"
 
 @interface IKLoginViewController () <UIWebViewDelegate>
-{
-    __weak IBOutlet UIWebView *mWebView;
-}
 
-@property (nonatomic, assign) IKLoginScope scope;
-
-- (IBAction)back:(id)sender;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -38,10 +33,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    mWebView.scrollView.bounces = NO;
+    self.webView.scrollView.bounces = NO;
     
     NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:IKLoginScopeBasic];
-    [mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
 }
 
@@ -66,10 +61,6 @@
         }
     }
     return YES;
-}
-
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 @end

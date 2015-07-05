@@ -55,7 +55,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="OeR-Ef-F2w">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Login" id="9wq-oD-noP" userLabel="I">
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="9wq-oD-noP" userLabel="Login">
                             <connections>
                                 <segue destination="Yqa-wS-RqO" kind="modal" identifier="segue.login" id="e5j-qO-vqy"/>
                             </connections>
@@ -154,15 +154,16 @@
                     <navigationItem key="navigationItem" title="Login " id="tLF-sk-vbt">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="y5t-aw-c8c">
                             <connections>
-                                <action selector="back:" destination="Qfj-6N-R6z" id="aTH-Mc-Pjt"/>
+                                <segue destination="bg8-FQ-jcr" kind="unwind" unwindAction="unwindSegue:" id="bs6-0C-g4M"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mWebView" destination="bBm-kX-gC1" id="yHI-j6-Y99"/>
+                        <outlet property="webView" destination="bBm-kX-gC1" id="jm6-gY-iFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aGH-ev-YqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bg8-FQ-jcr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1245" y="-565"/>
         </scene>
@@ -187,7 +188,6 @@
         <!--Navigation Controller-->
         <scene sceneID="9CP-FP-i2A">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yqa-wS-RqO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xgb-Qe-nBg"/>
@@ -200,6 +200,7 @@
                         <segue destination="Qfj-6N-R6z" kind="relationship" relationship="rootViewController" id="6GZ-4R-J9G"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="851" y="-565"/>
         </scene>
