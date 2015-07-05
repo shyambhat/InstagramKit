@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2013 Shyam Bhat
+//    Copyright (c) 2015 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -19,54 +19,57 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKLoginViewController.h"
-#import "IKCollectionViewController.h"
+#import "InstagramKit.h"
+#import "Constants.h"
+
+@interface IKLoginViewController () <UIWebViewDelegate>
+{
+    __weak IBOutlet UIWebView *mWebView;
+}
+
+@property (nonatomic, assign) IKLoginScope scope;
+
+- (IBAction)back:(id)sender;
+
+@end
 
 @implementation IKLoginViewController
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    mWebView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     mWebView.scrollView.bounces = NO;
-    mWebView.contentMode = UIViewContentModeScaleAspectFit;
-    mWebView.delegate = self;
     
     NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:IKLoginScopeBasic];
     [mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
 }
 
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{}];
-}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
     NSString *URLString = [request.URL absoluteString];
-    if ([URLString hasPrefix:[[InstagramEngine sharedEngine] appRedirectURL]]) {
+    if ([URLString hasPrefix:[sharedEngine appRedirectURL]]) {
         NSString *delimiter = @"access_token=";
         NSArray *components = [URLString componentsSeparatedByString:delimiter];
         if (components.count > 1) {
             NSString *accessToken = [components lastObject];
             NSLog(@"ACCESS TOKEN = %@",accessToken);
-            [[InstagramEngine sharedEngine] setAccessToken:accessToken];
+            [sharedEngine setAccessToken:accessToken];
             
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self.collectionViewController reloadMedia];
-            }];
+            [self dismissViewControllerAnimated:YES
+                                     completion:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
+                                                                object:nil];
         }
-        return NO;
     }
     return YES;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
-
-
 
 @end

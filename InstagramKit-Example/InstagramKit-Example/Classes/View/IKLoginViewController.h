@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2013 Shyam Bhat
+//    Copyright (c) 2015 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -19,15 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "InstagramKit.h"
 
-@class IKCollectionViewController;
-@interface IKLoginViewController : UIViewController <UIWebViewDelegate>
-{
-    __weak IBOutlet UIWebView *mWebView;
-}
+@interface IKLoginViewController : UIViewController
 
-@property (nonatomic, assign) IKLoginScope scope;
-@property (nonatomic, weak) IKCollectionViewController *collectionViewController;
-- (IBAction)back:(id)sender;
 @end

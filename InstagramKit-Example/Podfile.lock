@@ -20,24 +20,14 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - InstagramKit (3.6.4):
+  - InstagramKit (3.6.3):
     - AFNetworking (~> 2.0)
 
 DEPENDENCIES:
-  - InstagramKit (from `https://github.com/shyambhat/InstagramKit.git`, branch `dev`)
-
-EXTERNAL SOURCES:
-  InstagramKit:
-    :branch: dev
-    :git: https://github.com/shyambhat/InstagramKit.git
-
-CHECKOUT OPTIONS:
-  InstagramKit:
-    :commit: c317856999af7f117acc2517980d07bf2c5c5b55
-    :git: https://github.com/shyambhat/InstagramKit.git
+  - InstagramKit
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  InstagramKit: e1ef79cce1a58bfc3511c541d1daa0c20381b4bc
+  InstagramKit: d378c535e012cc49926a97fc64a07213e0f050e3
 
 COCOAPODS: 0.37.1

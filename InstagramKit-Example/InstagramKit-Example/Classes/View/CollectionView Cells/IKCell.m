@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2013 Shyam Bhat
+//    Copyright (c) 2015 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -19,23 +19,25 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKCell.h"
+#import "UIImageView+AFNetworking.h"
+
+@interface IKCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@end
 
 @implementation IKCell
-@synthesize imageView;
 
-- (id)initWithFrame:(CGRect)frame
+- (void)setImageUrl:(NSURL *)imageURL
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    [self.imageView setImageWithURL:imageURL];
 }
 
-- (void)layoutSubviews
+- (void)prepareForReuse
 {
-    [super layoutSubviews];
-    self.imageView.frame = self.bounds;
+    [super prepareForReuse];
+    [self.imageView setImage:nil];
 }
 
 @end

@@ -16,12 +16,12 @@
 		82DA953B1B483CA900A6303B /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA95341B483CA900A6303B /* IKLoginViewController.m */; };
 		82DA953C1B483CA900A6303B /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA95361B483CA900A6303B /* IKMediaViewController.m */; };
 		82DA95491B48509100A6303B /* IKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA95461B48509100A6303B /* IKCell.m */; };
-		82DA954A1B48509100A6303B /* IKMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA95481B48509100A6303B /* IKMediaCell.m */; };
 		A500BB11472D0AEF43EE0940 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3E2BF4EAAF2BFE20E11B166 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		17B839D94B3A182F8D8DBFBE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8203CC4F1B48D5C8007FA65B /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		82DA94FF1B483C1C00A6303B /* InstagramKit-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "InstagramKit-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82DA95031B483C1C00A6303B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82DA95041B483C1C00A6303B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -38,8 +38,6 @@
 		82DA95361B483CA900A6303B /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaViewController.m; sourceTree = "<group>"; };
 		82DA95451B48509100A6303B /* IKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCell.h; sourceTree = "<group>"; };
 		82DA95461B48509100A6303B /* IKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCell.m; sourceTree = "<group>"; };
-		82DA95471B48509100A6303B /* IKMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaCell.h; sourceTree = "<group>"; };
-		82DA95481B48509100A6303B /* IKMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaCell.m; sourceTree = "<group>"; };
 		C3E2BF4EAAF2BFE20E11B166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0EDA4E9C0E4C7F0DCD9E8C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +99,7 @@
 				82DA95291B483CA900A6303B /* AppDelegate.h */,
 				82DA952A1B483CA900A6303B /* AppDelegate.m */,
 				82DA952B1B483CA900A6303B /* View */,
+				8203CC4F1B48D5C8007FA65B /* Constants.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -124,8 +123,6 @@
 			children = (
 				82DA95451B48509100A6303B /* IKCell.h */,
 				82DA95461B48509100A6303B /* IKCell.m */,
-				82DA95471B48509100A6303B /* IKMediaCell.h */,
-				82DA95481B48509100A6303B /* IKMediaCell.m */,
 			);
 			path = "CollectionView Cells";
 			sourceTree = "<group>";
@@ -253,7 +250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82DA95371B483CA900A6303B /* AppDelegate.m in Sources */,
-				82DA954A1B48509100A6303B /* IKMediaCell.m in Sources */,
 				82DA95051B483C1C00A6303B /* main.m in Sources */,
 				82DA953B1B483CA900A6303B /* IKLoginViewController.m in Sources */,
 				82DA953C1B483CA900A6303B /* IKMediaViewController.m in Sources */,
