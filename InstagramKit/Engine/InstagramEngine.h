@@ -77,16 +77,22 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 @property (nonatomic, copy) NSString *accessToken;
 
+
 #pragma mark - Login -
 
+
 - (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
+
 
 - (BOOL)receivedValidAccessTokenWithURL:(NSURL *)url
                                   error:(NSError *__autoreleasing *)error;
 
+
 - (BOOL)isSessionValid;
 
+
 - (void)logout;
+
 
 #pragma mark - Media -
 

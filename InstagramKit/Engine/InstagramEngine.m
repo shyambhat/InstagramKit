@@ -54,9 +54,13 @@ NSString *const kPagination = @"pagination";
 typedef enum
 {
     kPaginationMaxId,
+    
     kPaginationMaxLikeId,
+    
     kPaginationMaxTagId,
+    
     kPaginationCursor
+    
 } MaxIdKeyType;
 
 
@@ -104,6 +108,7 @@ typedef enum
 
 
 - (instancetype)init {
+    
     if (self = [super init])
     {
         NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseUrl];
