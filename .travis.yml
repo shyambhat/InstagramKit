@@ -1,9 +1,8 @@
 
 language: objective-c
-xcode_workspace: InstagramKit-Example/InstagramKit-Example.xcworkspace
-xcode_scheme: InstagramKit-Example
+xcode_workspace: InstagramKit.xcworkspace
+xcode_scheme: InstagramKit
 xcode_sdk: iphonesimulator8.1
-podfile: InstagramKit-Example/Podfile
 # before_install:
 #     - gem install cocoapods --quiet
 #     - pod --version

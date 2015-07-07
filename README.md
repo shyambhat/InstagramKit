@@ -33,7 +33,7 @@ pod 'InstagramKit', '~> 3.0'
 ```
 
 ####Compatibility
-Earliest supported deployment target = iOS 6
+Earliest supported deployment target - __iOS 6__
 
 ####Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials into your App's Info.plist file.
