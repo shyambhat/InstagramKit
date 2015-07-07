@@ -43,23 +43,19 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    InstagramEngine *sharedEngine = [InstagramEngine sharedEngine];
-    NSString *URLString = [request.URL absoluteString];
-    if ([URLString hasPrefix:[sharedEngine appRedirectURL]]) {
-        NSString *delimiter = @"access_token=";
-        NSArray *components = [URLString componentsSeparatedByString:delimiter];
-        if (components.count > 1) {
-            NSString *accessToken = [components lastObject];
-            NSLog(@"ACCESS TOKEN = %@",accessToken);
-            [sharedEngine setAccessToken:accessToken];
-            
-            [self dismissViewControllerAnimated:YES
-                                     completion:nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
-                                                                object:nil];
+    NSError *error;
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenWithURL:request.URL error:&error])
+    {
+        if (error) {
+            NSLog(@"%@",error);
         }
+        [self dismissViewControllerAnimated:YES
+                                 completion:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
+                                                            object:nil];
     }
+    
     return YES;
 }
 

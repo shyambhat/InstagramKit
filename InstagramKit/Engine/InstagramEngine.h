@@ -51,8 +51,8 @@ extern NSString *const kInstagramKitErrorDomain;
 typedef enum
 {
     kInstagramKitErrorCodeNone,
-    kInstagramKitErrorCodeAccessNotGranted,
-    kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
+    kInstagramKitAuthenticationFailedError,
+    kInstagramKitAuthenticationCancelledError = NSUserCancelledError,
     
 } InstagramKitErrorCode;
 
@@ -81,19 +81,12 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 - (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
 
-- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
-
-- (void)cancelLogin;
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation;
-
-- (void)logout;
+- (BOOL)receivedValidAccessTokenWithURL:(NSURL *)url
+                                  error:(NSError *__autoreleasing *)error;
 
 - (BOOL)isSessionValid;
 
+- (void)logout;
 
 #pragma mark - Media -
 
