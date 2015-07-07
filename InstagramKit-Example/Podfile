@@ -1,1 +1,1 @@
-pod 'InstagramKit'
+pod 'InstagramKit', :path => '../'
