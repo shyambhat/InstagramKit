@@ -18,26 +18,26 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramComment.h"
-#import "InstagramUser.h"
+#import "IKCell.h"
+#import "UIImageView+AFNetworking.h"
 
-@implementation InstagramComment
+@interface IKCell ()
 
-- (instancetype)initWithInfo:(NSDictionary *)info
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@end
+
+@implementation IKCell
+
+- (void)setImageUrl:(NSURL *)imageURL
 {
-    self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
-        _text = [[NSString alloc] initWithString:info[kText]];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
-    }
-    return self;
+    [self.imageView setImageWithURL:imageURL];
 }
 
-
-- (BOOL)isEqualToComment:(InstagramComment *)comment {
-    return [super isEqualToModel:comment];
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self.imageView setImage:nil];
 }
-
 
 @end

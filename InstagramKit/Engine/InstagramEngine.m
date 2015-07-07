@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2013 Shyam Bhat
+//    Copyright (c) 2015 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -54,9 +54,13 @@ NSString *const kPagination = @"pagination";
 typedef enum
 {
     kPaginationMaxId,
+    
     kPaginationMaxLikeId,
+    
     kPaginationMaxTagId,
+    
     kPaginationCursor
+    
 } MaxIdKeyType;
 
 
@@ -65,7 +69,6 @@ typedef enum
     dispatch_queue_t mBackgroundQueue;
 }
 
-@property (nonatomic, copy) InstagramLoginBlock instagramLoginBlock;
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 
 @end
@@ -105,6 +108,7 @@ typedef enum
 
 
 - (instancetype)init {
+    
     if (self = [super init])
     {
         NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseUrl];
@@ -118,9 +122,9 @@ typedef enum
 
         mBackgroundQueue = dispatch_queue_create("background", NULL);
 
-        NSAssert(IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"], @"Invalid Instagram Client ID. Please set a valid value for the key \"InstagramAppClientId\" in Info.plist");
+        NSAssert(IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"], @"Invalid Instagram Client ID. Please set a valid value for the key \"%@\" in Info.plist",kInstagramAppClientIdConfigurationKey);
         
-        NSAssert(IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"], @"Invalid Redirect URL. Please set a valid value for the key \"InstagramAppRedirectURL\" in Info.plist", self.appRedirectURL);
+        NSAssert(IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"], @"Invalid Redirect URL. Please set a valid value for the key \"%@\" in Info.plist", kInstagramAppRedirectURLConfigurationKey);
         
         NSAssert([NSURL URLWithString:self.authorizationURL], @"Authorization URL invalid: %@", self.authorizationURL);
     }
@@ -139,13 +143,63 @@ typedef enum
 }
 
 
-- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block
+- (BOOL)receivedValidAccessTokenWithURL:(NSURL *)url
+                                  error:(NSError *__autoreleasing *)error
 {
-    NSURL *authURL = [self authorizarionURLForScope:scope];
-    self.instagramLoginBlock = block;
-    [[UIApplication sharedApplication] openURL:authURL];
+    NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
+    
+    if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
+    {
+        return NO;
+    }
+    
+    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
+    if (accessToken)
+    {
+        self.accessToken = accessToken;
+    }
+    else
+    {
+        NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
+        *error = [NSError errorWithDomain:kInstagramKitErrorDomain
+                                     code:kInstagramKitAuthenticationFailedError
+                                 userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
+    }
+    return YES;
+
 }
 
+
+- (BOOL)isSessionValid
+{
+    return self.accessToken != nil;
+}
+
+
+- (void)logout
+{    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.accessToken = nil;
+    
+    NSLog(@"User is now logged out");
+    
+#ifdef DEBUG
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged out" message:@"The user is now logged out. Proceed with dismissing the view. This message only appears in the debug environment." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    
+    [alert show];
+    
+#endif
+    
+}
+
+#pragma mark -
 
 - (NSDictionary *)authorizationParametersWithScope:(IKLoginScope)scope
 {
@@ -181,84 +235,6 @@ typedef enum
     }
     
     return [strings componentsJoinedByString:@"+"];
-}
-
-
-- (void)cancelLogin
-{
-    if (self.instagramLoginBlock)
-    {
-        NSString *localizedDescription = NSLocalizedString(@"User canceled Instagram Login.", @"Error notification for Instagram Login cancelation.");
-        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeUserCancelled userInfo:@{
-                                                                                                                               NSLocalizedDescriptionKey: localizedDescription
-                                                                                                                               }];
-        self.instagramLoginBlock(error);
-    }
-}
-
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-
-    NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
-
-    if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
-    {
-        return NO;
-    }
-    
-    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
-    if (accessToken)
-    {
-        self.accessToken = accessToken;
-        if (self.instagramLoginBlock) self.instagramLoginBlock(nil);
-    }
-    else if (self.instagramLoginBlock)
-    {
-        NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
-        NSError *error = [NSError errorWithDomain:kInstagramKitErrorDomain code:kInstagramKitErrorCodeAccessNotGranted userInfo:@{
-            NSLocalizedDescriptionKey: localizedDescription
-        }];
-        self.instagramLoginBlock(error);
-    }
-    self.instagramLoginBlock = nil;
-    return YES;
-}
-
-
-- (void)logout
-{
-//    Clear all cookies so the next time the user wishes to switch accounts,
-//    they can do so
-    
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies]) {
-        [storage deleteCookie:cookie];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    self.accessToken = nil;
-    
-    NSLog(@"User is now logged out");
-    
-#ifdef DEBUG
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged out" message:@"The user is now logged out. Proceed with dismissing the view. This message only appears in the debug environment." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-    
-    [alert show];
-    
-#endif
-    
-}
-
-
-- (BOOL)isSessionValid
-{
-    return self.accessToken != nil;
 }
 
 

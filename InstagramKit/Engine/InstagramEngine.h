@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2013 Shyam Bhat
+//    Copyright (c) 2015 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -51,8 +51,8 @@ extern NSString *const kInstagramKitErrorDomain;
 typedef enum
 {
     kInstagramKitErrorCodeNone,
-    kInstagramKitErrorCodeAccessNotGranted,
-    kInstagramKitErrorCodeUserCancelled = NSUserCancelledError,
+    kInstagramKitAuthenticationFailedError,
+    kInstagramKitAuthenticationCancelledError = NSUserCancelledError,
     
 } InstagramKitErrorCode;
 
@@ -77,22 +77,21 @@ typedef NS_OPTIONS(NSInteger, IKLoginScope) {
 
 @property (nonatomic, copy) NSString *accessToken;
 
+
 #pragma mark - Login -
+
 
 - (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
 
-- (void)redirectToLoginForScope:(IKLoginScope)scope completionBlock:(InstagramLoginBlock)block;
 
-- (void)cancelLogin;
+- (BOOL)receivedValidAccessTokenWithURL:(NSURL *)url
+                                  error:(NSError *__autoreleasing *)error;
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation;
-
-- (void)logout;
 
 - (BOOL)isSessionValid;
+
+
+- (void)logout;
 
 
 #pragma mark - Media -

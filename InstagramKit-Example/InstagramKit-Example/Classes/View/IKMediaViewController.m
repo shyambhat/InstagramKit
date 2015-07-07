@@ -18,51 +18,39 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramUser.h"
-#import "InstagramEngine.h"
 
-@implementation InstagramUser
+#import "IKMediaViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "InstagramKit.h"
 
-- (instancetype)initWithInfo:(NSDictionary *)info
+
+@interface IKMediaViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (nonatomic, strong) InstagramMedia *media;
+
+@end
+
+
+@implementation IKMediaViewController
+
+
+- (void)viewDidLoad
 {
-    self = [super initWithInfo:info];
-    if (self && IKNotNull(info)) {
-        [self updateDetails:info];
-    }
-    return self;
+    [super viewDidLoad];
+    [self populateViews];
 }
 
 
-- (void)updateDetails:(NSDictionary *)info
+- (void)populateViews
 {
-    _username = [[NSString alloc] initWithString:info[kUsername]];
-    _fullName = [[NSString alloc] initWithString:info[kFullName]];
-    
-    if (IKNotNull(info[kProfilePictureURL]))
-    {
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-    }
-    
-    if (IKNotNull(info[kBio]))
-    {
-        _bio = [[NSString alloc] initWithString:info[kBio]];
-    }
-    
-    if (IKNotNull(info[kWebsite]))
-    {
-        _website = [[NSURL alloc] initWithString:info[kWebsite]];
-    }
-    
-    if (IKNotNull(info[kCounts]))
-    {
-        _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-        _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-        _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
-    }
+    [self setTitle:[NSString stringWithFormat:@"@%@",self.media.user.username]];
+    [self.imageView setImageWithURL:self.media.thumbnailURL];
+    [self.imageView setImageWithURL:self.media.standardResolutionImageURL];
+    [self.captionLabel setText:self.media.caption.text];
 }
 
 
-- (BOOL)isEqualToUser:(InstagramUser *)user {
-    return [super isEqualToModel:user];
-}
+
 @end
