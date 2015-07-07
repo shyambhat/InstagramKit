@@ -1,9 +1,3 @@
-platform :ios, "7.0"
+platform :ios, "6.0"
 
-target 'InstagramKit' do
-  pod 'AFNetworking', '~>2.0'
-end
-
-target 'InstagramKitTests' do
-
-end
+pod 'AFNetworking', '~>2.0'
