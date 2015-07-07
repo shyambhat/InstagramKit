@@ -46,14 +46,17 @@
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenWithURL:request.URL error:&error])
     {
-        if (error) {
+        if (!error) {
+            [self dismissViewControllerAnimated:YES
+                                     completion:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
+                                                                object:nil];
+        }
+        else
+        {
             NSLog(@"%@",error);
         }
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
-                                                            object:nil];
     }
     
     return YES;
