@@ -20,18 +20,11 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - InstagramKit (3.6.4):
-    - AFNetworking (~> 2.0)
 
 DEPENDENCIES:
-  - InstagramKit (from `../`)
-
-EXTERNAL SOURCES:
-  InstagramKit:
-    :path: ../
+  - AFNetworking (~> 2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  InstagramKit: 2d6d1811c37e90335ae06840d2fb64e0b13030b6
 
 COCOAPODS: 0.37.1
