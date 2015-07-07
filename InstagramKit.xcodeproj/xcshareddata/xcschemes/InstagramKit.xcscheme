@@ -20,20 +20,6 @@
                ReferencedContainer = "container:InstagramKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "822466591B4C2D8A00F8B5EA"
-               BuildableName = "InstagramKitTests.xctest"
-               BlueprintName = "InstagramKitTests"
-               ReferencedContainer = "container:InstagramKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,26 +28,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "822466591B4C2D8A00F8B5EA"
-               BuildableName = "InstagramKitTests.xctest"
-               BlueprintName = "InstagramKitTests"
-               ReferencedContainer = "container:InstagramKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8224664E1B4C2D8A00F8B5EA"
-            BuildableName = "libInstagramKit.a"
-            BlueprintName = "InstagramKit"
-            ReferencedContainer = "container:InstagramKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
