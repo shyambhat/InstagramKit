@@ -23,9 +23,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "InstagramModel.h"
 
-@class InstagramUser;
-@class InstagramComment;
-@class InstagramLocation;
+#import "InstagramUser.h"
+#import "InstagramComment.h"
+#import "InstagramLocation.h"
 
 @interface InstagramMedia : InstagramModel
 
