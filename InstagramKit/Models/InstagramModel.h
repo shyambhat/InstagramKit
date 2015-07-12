@@ -57,6 +57,7 @@ extern NSString *const kImages;
 extern NSString *const kVideos;
 extern NSString *const kLocation;
 extern NSString *const kType;
+extern NSString *const kUsersInPhoto;
 
 extern NSString *const kCreator;
 extern NSString *const kText;
