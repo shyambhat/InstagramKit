@@ -107,4 +107,4 @@ NSString *const kRelationshipActionUnfollow = @"unfollow";
 NSString *const kRelationshipActionBlock = @"block";
 NSString *const kRelationshipActionUnblock = @"unblock";
 NSString *const kRelationshipActionApprove = @"approve";
-NSString *const kRelationshipActionDeny = @"deny";
+NSString *const kRelationshipActionIgnore = @"ignore";

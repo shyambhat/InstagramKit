@@ -535,11 +535,11 @@
 }
 
 
-- (void)searchUsersWithString:(NSString *)string
+- (void)searchUsersWithString:(NSString *)name
                   withSuccess:(InstagramUsersBlock)success
                       failure:(InstagramFailureBlock)failure
 {
-    [self getPath:[NSString stringWithFormat:@"users/search?q=%@",string] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
+    [self getPath:[NSString stringWithFormat:@"users/search?q=%@",name] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
         if(success)
 		{
 			NSArray *objects = response;
@@ -679,11 +679,11 @@
 }
 
 
-- (void)getMediaWithTagName:(NSString *)tag
+- (void)getMediaWithTagName:(NSString *)name
                 withSuccess:(InstagramMediaBlock)success
                     failure:(InstagramFailureBlock)failure
 {
-    [self getMediaWithTagName:tag count:0 maxId:nil withSuccess:success failure:failure];
+    [self getMediaWithTagName:name count:0 maxId:nil withSuccess:success failure:failure];
 }
 
 
@@ -805,7 +805,7 @@
 
 
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(InstagramObjectsBlock)success
+            withSuccess:(InstagramUsersBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"media/%@/likes",mediaId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -883,7 +883,7 @@
 
 
 - (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(InstagramObjectsBlock)success
+                   withSuccess:(InstagramUsersBlock)success
                        failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/follows",userId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -902,7 +902,7 @@
 
 
 - (void)getFollowersOfUser:(NSString *)userId
-               withSuccess:(InstagramObjectsBlock)success
+               withSuccess:(InstagramUsersBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/%@/followed-by",userId] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -920,7 +920,7 @@
 }
 
 
-- (void)getFollowRequestsWithSuccess:(InstagramObjectsBlock)success
+- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
                              failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"users/self/requested-by"] parameters:nil responseModel:[InstagramUser class] success:^(id response, InstagramPaginationInfo *paginationInfo) {
@@ -1043,11 +1043,11 @@
 }
 
 
-- (void)denyUser:(NSString *)userId
+- (void)ignoreUser:(NSString *)userId
      withSuccess:(InstagramResponseBlock)success
          failure:(InstagramFailureBlock)failure
 {
-    NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionDeny};
+    NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionIgnore};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId] parameters:params responseModel:nil success:^(NSDictionary *responseObject) {
         if(success)
 		{

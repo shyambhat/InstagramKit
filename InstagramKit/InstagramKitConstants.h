@@ -217,7 +217,7 @@ INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionUnfollow;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionBlock;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionUnblock;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionApprove;
-INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionDeny;
+INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionIgnore;
 
 
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
