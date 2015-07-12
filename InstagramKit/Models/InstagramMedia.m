@@ -22,6 +22,7 @@
 #import "InstagramUser.h"
 #import "InstagramComment.h"
 #import "InstagramLocation.h"
+#import "InstagramUserPosition.h"
 
 @interface InstagramMedia ()
 {
@@ -70,8 +71,8 @@
         }
         mUsersInPhoto = [[NSMutableArray alloc] init];
         for (NSDictionary *userInPhotoInfo in info[kUsersInPhoto]) {
-            InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInPhotoInfo[kUser]];
-            [mUsersInPhoto addObject:user];
+            InstagramUserPosition *userPosition = [[InstagramUserPosition alloc] initWithInfo:userInPhotoInfo];
+            [mUsersInPhoto addObject:userPosition];
         }
         
         _filter = info[kFilter];
