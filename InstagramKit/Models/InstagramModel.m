@@ -48,6 +48,7 @@ NSString *const kImages = @"images";
 NSString *const kVideos = @"videos";
 NSString *const kLocation = @"location";
 NSString *const kType = @"type";
+NSString *const kUsersInPhoto = @"users_in_photo";
 
 NSString *const kCreator = @"from";
 NSString *const kText = @"text";
