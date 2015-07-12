@@ -21,76 +21,65 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
-
-@class InstagramUser;
-@class InstagramMedia;
-@class InstagramPaginationInfo;
-@class InstagramTag;
-@class InstagramLocation;
-
-
-typedef void (^InstagramLoginBlock)(NSError *error);
-typedef void (^InstagramUserBlock)(InstagramUser *user);
-typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
-typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagBlock)(InstagramTag *tag);
-typedef void (^InstagramCommentsBlock)(NSArray *comments);
-typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
-typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
-typedef void (^InstagramLocationsBlock)(NSArray *locations);
-typedef void (^InstagramLocationBlock)(InstagramLocation *location);
-
-extern NSString *const kInstagramAppClientIdConfigurationKey;
-extern NSString *const kInstagramAppRedirectURLConfigurationKey;
-
-extern NSString *const kInstagramKitErrorDomain;
-
-typedef enum
-{
-    kInstagramKitErrorCodeNone,
-    kInstagramKitAuthenticationFailedError,
-    kInstagramKitAuthenticationCancelledError = NSUserCancelledError,
-    
-} InstagramKitErrorCode;
-
-typedef NS_OPTIONS(NSInteger, IKLoginScope) {
-    //    Default, to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.)
-    IKLoginScopeBasic = 0,
-    //    to create or delete comments on a user’s behalf
-    IKLoginScopeComments = 1<<1,
-    //    to follow and unfollow users on a user’s behalf
-    IKLoginScopeRelationships = 1<<2,
-    //    to like and unlike items on a user’s behalf
-    IKLoginScopeLikes = 1<<3
-};
+#import "InstagramKitConstants.h"
 
 @interface InstagramEngine : NSObject
 
-+ (InstagramEngine *)sharedEngine;
+/*!
+ @abstract Gets the singleton instance.
+ */
++ (instancetype)sharedEngine;
 
+/**
+ *  Client Id of your App, as registered with Instagram.
+ */
 @property (nonatomic, copy) NSString *appClientID;
+
+/**
+ *  Redirect URL of your App, as registered with Instagram.
+ */
 @property (nonatomic, copy) NSString *appRedirectURL;
-@property (nonatomic, copy) NSString *authorizationURL;
 
-@property (nonatomic, copy) NSString *accessToken;
-
-
-#pragma mark - Login -
-
-
-- (NSURL *)authorizarionURLForScope:(IKLoginScope)scope;
+/**
+ *  The oauth token stored in the account store credential, if available.
+ *  If not empty, this implies user has granted access.
+ */
+@property (nonatomic, strong) NSString *accessToken;
 
 
-- (BOOL)receivedValidAccessTokenWithURL:(NSURL *)url
-                                  error:(NSError *__autoreleasing *)error;
+#pragma mark - Authentication -
+
+/**
+ *  A convenience method to generate an authentication URL to direct user to Instagram's login screen.
+ *
+ *  @param scope Scope based on permissions required.
+ *
+ *  @return URL to direct user to Instagram's login screen.
+ */
+- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope;
 
 
+/**
+ *  A convenience method to extract and save the access code from an URL received in
+ *  UIWebView's delegate method - webView: shouldStartLoadWithRequest: navigationType:
+ *  @param url   URL from the request object.
+ *  @param error Error in extracting token, if any.
+ *
+ *  @return YES if valid token extracted and saved, otherwise NO.
+ */
+- (BOOL)extractValidAccessTokenFromURL:(NSURL *)url
+                                 error:(NSError *__autoreleasing *)error;
+
+/**
+ *  Validate if authorization is done.
+ *
+ *  @return YES if access token present, otherwise NO.
+ */
 - (BOOL)isSessionValid;
 
-
+/**
+ *  Clears stored access token and browser cookies.
+ */
 - (void)logout;
 
 
