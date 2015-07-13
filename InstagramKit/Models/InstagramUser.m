@@ -32,7 +32,6 @@
     return self;
 }
 
-
 - (void)updateDetails:(NSDictionary *)info
 {
     _username = [[NSString alloc] initWithString:info[kUsername]];
@@ -61,8 +60,51 @@
     }
 }
 
+#pragma mark - Equality
 
 - (BOOL)isEqualToUser:(InstagramUser *)user {
     return [super isEqualToModel:user];
 }
+
+#pragma mark - NSCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [self init])) {
+        _username = [decoder decodeObjectOfClass:[NSString class] forKey:kUsername];
+        _fullName = [decoder decodeObjectOfClass:[NSString class] forKey:kFullName];
+        _profilePictureURL = [decoder decodeObjectOfClass:[NSString class] forKey:kProfilePictureURL];
+        _bio = [decoder decodeObjectOfClass:[NSString class] forKey:kBio];
+        _website = [decoder decodeObjectOfClass:[NSString class] forKey:kWebsite];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:_username forKey:kUsername];
+    [encoder encodeObject:_fullName forKey:kFullName];
+    [encoder encodeObject:_profilePictureURL forKey:kProfilePictureURL];
+    [encoder encodeObject:_bio forKey:kBio];
+    [encoder encodeObject:_website forKey:kWebsite];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    InstagramUser *copy = [super copyWithZone:zone];
+    copy->_username = [_username copy];
+    copy->_fullName = [_fullName copy];
+    copy->_profilePictureURL = [_profilePictureURL copy];
+    copy->_bio = [_bio copy];
+    copy->_website = [_website copy];
+    return copy;
+}
+
 @end
