@@ -165,7 +165,6 @@ INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionUnblock;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionApprove;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionIgnore;
 
-
 #define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
 #define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])
 #define IKValidArray(array) (IKNotNull(array) && [array isKindOfClass:[NSArray class]])

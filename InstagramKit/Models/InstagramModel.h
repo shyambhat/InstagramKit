@@ -21,17 +21,9 @@
 #import <Foundation/Foundation.h>
 #import "InstagramKitConstants.h"
 
-@interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
-
-@property (readonly) NSString* Id;
-
-- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
-
-- (BOOL)isEqualToModel:(InstagramModel *)model;
-
-@end
-
-
+/**
+ *  JSON keys as string constants.
+ */
 INSTAGRAMKIT_EXTERN NSString *const kID;
 INSTAGRAMKIT_EXTERN NSString *const kCount;
 INSTAGRAMKIT_EXTERN NSString *const kURL;
@@ -82,4 +74,26 @@ INSTAGRAMKIT_EXTERN NSString *const kTagName;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
+
+@interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  The unique identifier for each model object.
+ */
+@property (readonly) NSString* Id;
+
+/**
+ *  Initializes a new instance.
+ *  @param info JSON dictionary
+ */
+- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+
+/**
+ *  Comparing Instagram model objects.
+ *  @param model A model object.
+ *  @return YES is Ids match. Else NO.
+ */
+- (BOOL)isEqualToModel:(InstagramModel *)model;
+
+@end
 

@@ -27,15 +27,15 @@
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
         if (nextMaxIdExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+            _nextMaxId = kNextMaxId;
         }
         else if (nextMaxLikeIdExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+            _nextMaxId = kNextMaxLikeId;
         }
         else if (nextCursorExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
+            _nextMaxId = kNextCursor;
         }
         
         if (type) {
@@ -45,5 +45,54 @@
     }
     return nil;
 }
+
+#pragma mark - Equality
+
+- (BOOL)isEqualToPaginationInfo:(InstagramPaginationInfo *)paginationInfo {
+    
+    if (self == paginationInfo) {
+        return YES;
+    }
+    if (paginationInfo && [paginationInfo respondsToSelector:@selector(nextURL)]) {
+        return [_nextURL.path isEqualToString:paginationInfo.nextURL.path];
+    }
+    return NO;
+}
+
+#pragma mark - NSCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [self init])) {
+        _nextURL = [decoder decodeObjectOfClass:[NSURL class] forKey:kNextURL];
+        _nextMaxId = [decoder decodeObjectOfClass:[NSString class] forKey:kNextMaxId];
+        _type = NSClassFromString([decoder decodeObjectOfClass:[NSString class] forKey:@"classType"]);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:_nextURL forKey:kNextURL];
+    [encoder encodeObject:_nextMaxId forKey:kNextMaxId];
+    [encoder encodeObject:NSStringFromClass(_type) forKey:@"classType"];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    InstagramPaginationInfo *copy = [[InstagramPaginationInfo allocWithZone:zone] init];
+    copy->_nextURL = [_nextURL copy];
+    copy->_nextMaxId = [_nextMaxId copy];
+    copy->_type = [_type copy];
+    return copy;
+}
+
 
 @end

@@ -20,66 +20,6 @@
 
 #import "InstagramModel.h"
 
-@implementation InstagramModel
-
-- (instancetype)initWithInfo:(NSDictionary *)info
-{
-    self = [super init];
-    if (self && IKNotNull(info)) {
-        if (IKNotNull(info[kID])) {
-            _Id = [[NSString alloc] initWithString:info[kID]];
-        }
-    }
-    return self;
-}
-
-#pragma mark - Equality
-
-- (BOOL)isEqualToModel:(InstagramModel *)model {
-    
-    if (self == model) {
-        return YES;
-    }
-    if (model && [model respondsToSelector:@selector(Id)]) {
-        return [self.Id isEqualToString:model.Id];
-    }
-    return NO;
-}
-
-#pragma mark - NSCoding
-
-+ (BOOL)supportsSecureCoding
-{
-    return YES;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    if ((self = [self init])) {
-        _Id = [decoder decodeObjectOfClass:[NSString class] forKey:kID];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [encoder encodeObject:_Id forKey:kID];
-}
-
-#pragma mark - NSCopying
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    InstagramModel *copy = [[InstagramModel allocWithZone:zone] init];
-    copy->_Id = [_Id copy];
-    return copy;
-}
-
-
-@end
-
-
-
 NSString *const kID = @"id";
 NSString *const kCount = @"count";
 NSString *const kURL = @"url";
@@ -141,3 +81,61 @@ NSString *const kMaxId = @"max_id";
 NSString *const kMaxLikeId = @"max_like_id";
 NSString *const kMaxTagId = @"max_tag_id";
 NSString *const kCursor = @"cursor";
+
+
+@implementation InstagramModel
+
+- (instancetype)initWithInfo:(NSDictionary *)info
+{
+    self = [super init];
+    if (self && IKNotNull(info)) {
+        if (IKNotNull(info[kID])) {
+            _Id = [[NSString alloc] initWithString:info[kID]];
+        }
+    }
+    return self;
+}
+
+#pragma mark - Equality
+
+- (BOOL)isEqualToModel:(InstagramModel *)model {
+    
+    if (self == model) {
+        return YES;
+    }
+    if (model && [model respondsToSelector:@selector(Id)]) {
+        return [self.Id isEqualToString:model.Id];
+    }
+    return NO;
+}
+
+#pragma mark - NSCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [self init])) {
+        _Id = [decoder decodeObjectOfClass:[NSString class] forKey:kID];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:_Id forKey:kID];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    InstagramModel *copy = [[InstagramModel allocWithZone:zone] init];
+    copy->_Id = [_Id copy];
+    return copy;
+}
+
+@end
