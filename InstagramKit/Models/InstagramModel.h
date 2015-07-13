@@ -19,87 +19,85 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "InstagramKitConstants.h"
 
-@interface InstagramModel : NSObject
+/**
+ *  JSON keys as string constants.
+ */
+INSTAGRAMKIT_EXTERN NSString *const kID;
+INSTAGRAMKIT_EXTERN NSString *const kCount;
+INSTAGRAMKIT_EXTERN NSString *const kURL;
+INSTAGRAMKIT_EXTERN NSString *const kHeight;
+INSTAGRAMKIT_EXTERN NSString *const kWidth;
+INSTAGRAMKIT_EXTERN NSString *const kData;
 
+INSTAGRAMKIT_EXTERN NSString *const kThumbnail;
+INSTAGRAMKIT_EXTERN NSString *const kLowResolution;
+INSTAGRAMKIT_EXTERN NSString *const kStandardResolution;
+
+INSTAGRAMKIT_EXTERN NSString *const kMediaTypeImage;
+INSTAGRAMKIT_EXTERN NSString *const kMediaTypeVideo;
+
+INSTAGRAMKIT_EXTERN NSString *const kUser;
+INSTAGRAMKIT_EXTERN NSString *const kUserHasLiked;
+INSTAGRAMKIT_EXTERN NSString *const kCreatedDate;
+INSTAGRAMKIT_EXTERN NSString *const kLink;
+INSTAGRAMKIT_EXTERN NSString *const kCaption;
+INSTAGRAMKIT_EXTERN NSString *const kLikes;
+INSTAGRAMKIT_EXTERN NSString *const kComments;
+INSTAGRAMKIT_EXTERN NSString *const kFilter;
+INSTAGRAMKIT_EXTERN NSString *const kTags;
+INSTAGRAMKIT_EXTERN NSString *const kImages;
+INSTAGRAMKIT_EXTERN NSString *const kVideos;
+INSTAGRAMKIT_EXTERN NSString *const kLocation;
+INSTAGRAMKIT_EXTERN NSString *const kType;
+
+INSTAGRAMKIT_EXTERN NSString *const kCreator;
+INSTAGRAMKIT_EXTERN NSString *const kText;
+
+INSTAGRAMKIT_EXTERN NSString *const kUsername;
+INSTAGRAMKIT_EXTERN NSString *const kFullName;
+INSTAGRAMKIT_EXTERN NSString *const kFirstName;
+INSTAGRAMKIT_EXTERN NSString *const kLastName;
+INSTAGRAMKIT_EXTERN NSString *const kProfilePictureURL;
+INSTAGRAMKIT_EXTERN NSString *const kBio;
+INSTAGRAMKIT_EXTERN NSString *const kWebsite;
+
+INSTAGRAMKIT_EXTERN NSString *const kCounts;
+INSTAGRAMKIT_EXTERN NSString *const kCountMedia;
+INSTAGRAMKIT_EXTERN NSString *const kCountFollows;
+INSTAGRAMKIT_EXTERN NSString *const kCountFollowedBy;
+
+INSTAGRAMKIT_EXTERN NSString *const kTagMediaCount;
+INSTAGRAMKIT_EXTERN NSString *const kTagName;
+
+INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
+INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
+INSTAGRAMKIT_EXTERN NSString *const kLocationName;
+
+INSTAGRAMKIT_EXTERN NSString *const kUsersInPhoto;
+INSTAGRAMKIT_EXTERN NSString *const kPosition;
+INSTAGRAMKIT_EXTERN NSString *const kX;
+INSTAGRAMKIT_EXTERN NSString *const kY;
+
+@interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  The unique identifier for each model object.
+ */
 @property (readonly) NSString* Id;
 
+/**
+ *  Initializes a new instance.
+ *  @param info JSON dictionary
+ */
 - (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
 
+/**
+ *  Comparing Instagram model objects.
+ *  @param model A model object.
+ *  @return YES is Ids match. Else NO.
+ */
 - (BOOL)isEqualToModel:(InstagramModel *)model;
 
 @end
-
-extern NSString *const kID;
-extern NSString *const kCount;
-extern NSString *const kURL;
-extern NSString *const kHeight;
-extern NSString *const kWidth;
-extern NSString *const kData;
-
-extern NSString *const kThumbnail;
-extern NSString *const kLowResolution;
-extern NSString *const kStandardResolution;
-
-extern NSString *const kMediaTypeImage;
-extern NSString *const kMediaTypeVideo;
-
-extern NSString *const kUser;
-extern NSString *const kUserHasLiked;
-extern NSString *const kCreatedDate;
-extern NSString *const kLink;
-extern NSString *const kCaption;
-extern NSString *const kLikes;
-extern NSString *const kComments;
-extern NSString *const kFilter;
-extern NSString *const kTags;
-extern NSString *const kImages;
-extern NSString *const kVideos;
-extern NSString *const kLocation;
-extern NSString *const kType;
-extern NSString *const kUsersInPhoto;
-extern NSString *const kPosition;
-extern NSString *const kX;
-extern NSString *const kY;
-
-
-extern NSString *const kCreator;
-extern NSString *const kText;
-
-extern NSString *const kUsername;
-extern NSString *const kFullName;
-extern NSString *const kFirstName;
-extern NSString *const kLastName;
-extern NSString *const kProfilePictureURL;
-extern NSString *const kBio;
-extern NSString *const kWebsite;
-
-extern NSString *const kCounts;
-extern NSString *const kCountMedia;
-extern NSString *const kCountFollows;
-extern NSString *const kCountFollowedBy;
-
-extern NSString *const kTagMediaCount;
-extern NSString *const kTagName;
-
-extern NSString *const kNextURL;
-extern NSString *const kNextMaxId;
-extern NSString *const kNextMaxLikeId;
-extern NSString *const kNextMaxTagId;
-extern NSString *const kNextCursor;
-
-extern NSString *const kMaxId;
-extern NSString *const kMaxLikeId;
-extern NSString *const kMaxTagId;
-extern NSString *const kCursor;
-
-extern NSString *const kLocationLatitude;
-extern NSString *const kLocationLongitude;
-extern NSString *const kLocationName;
-
-
-#define IKNotNull(obj) (obj && (![obj isEqual:[NSNull null]]) && (![obj isEqual:@"<null>"]) )
-#define IKValidDictionary(dict) (IKNotNull(dict) && [dict isKindOfClass:[NSDictionary class]])
-#define IKValidArray(array) (IKNotNull(array) && [array isKindOfClass:[NSArray class]])
-#define IKValidString(str) (IKNotNull(str) && [str isKindOfClass:[NSString class]])
-#define IKValidNumber(num) (IKNotNull(num) && [num isKindOfClass:[NSNumber class]])
