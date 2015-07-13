@@ -701,7 +701,7 @@
           withSuccess:(dispatch_block_t)success
               failure:(InstagramFailureBlock)failure
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[kText]];
+    NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[@"text"]];
     [self postPath:[NSString stringWithFormat:@"media/%@/comments",mediaId]
         parameters:params
      responseModel:nil

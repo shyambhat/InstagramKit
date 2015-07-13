@@ -21,6 +21,16 @@
 #import <Foundation/Foundation.h>
 #import "InstagramKitConstants.h"
 
+@interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
+
+@property (readonly) NSString* Id;
+
+- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+
+- (BOOL)isEqualToModel:(InstagramModel *)model;
+
+@end
+
 
 INSTAGRAMKIT_EXTERN NSString *const kID;
 INSTAGRAMKIT_EXTERN NSString *const kCount;
@@ -73,13 +83,3 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 
-
-@interface InstagramModel : NSObject
-
-@property (readonly) NSString* Id;
-
-- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
-
-- (BOOL)isEqualToModel:(InstagramModel *)model;
-
-@end

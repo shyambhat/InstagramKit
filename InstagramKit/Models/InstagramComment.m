@@ -34,9 +34,45 @@
     return self;
 }
 
+#pragma mark - Equality
 
 - (BOOL)isEqualToComment:(InstagramComment *)comment {
     return [super isEqualToModel:comment];
+}
+
+#pragma mark - NSCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [self init])) {
+        _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kCreator];
+        _text = [decoder decodeObjectOfClass:[NSString class] forKey:kText];
+        _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:_user forKey:kCreator];
+    [encoder encodeObject:_text forKey:kText];
+    [encoder encodeObject:_createdDate forKey:kCreatedDate];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    InstagramComment *copy = [super copyWithZone:zone];
+    copy->_user = [_user copy];
+    copy->_text = [_text copy];
+    copy->_createdDate = [_createdDate copy];
+    return copy;
 }
 
 

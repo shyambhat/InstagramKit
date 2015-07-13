@@ -10,7 +10,7 @@
 #import "InstagramModel.h"
 #import <MapKit/MapKit.h>
 
-@interface InstagramLocation : InstagramModel
+@interface InstagramLocation : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 @property (readonly) CLLocationCoordinate2D coordinates;
 @property (readonly) NSString *name;

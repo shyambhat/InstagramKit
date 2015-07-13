@@ -27,9 +27,46 @@
     return self;
 }
 
+#pragma mark - Equality
 
 - (BOOL)isEqualToLocation:(InstagramLocation *)location {
     return [super isEqualToModel:location];
+}
+
+#pragma mark - NSCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [self init])) {
+        CLLocationCoordinate2D coordinates;
+        coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
+        coordinates.longitude = [decoder decodeDoubleForKey:kLocationLongitude];
+        _coordinates = coordinates;
+        _name = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeDouble:_coordinates.latitude forKey:kLocationLatitude];
+    [encoder encodeDouble:_coordinates.longitude forKey:kLocationLongitude];
+    [encoder encodeObject:_name forKey:kLocationName];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    InstagramLocation *copy = [super copyWithZone:zone];
+    copy->_coordinates = _coordinates;
+    copy->_name = [_name copy];
+    return copy;
 }
 
 @end

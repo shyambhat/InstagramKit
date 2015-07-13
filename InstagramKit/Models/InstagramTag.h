@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface InstagramTag : NSObject
+@interface InstagramTag : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 @property (readonly) NSString* name;
 @property (readonly) NSInteger mediaCount;
