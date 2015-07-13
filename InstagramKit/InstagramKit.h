@@ -25,3 +25,4 @@
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
 #import "InstagramLocation.h"
+#import "InstagramUserPosition.h"

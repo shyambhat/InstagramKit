@@ -75,6 +75,11 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 
+INSTAGRAMKIT_EXTERN NSString *const kUsersInPhoto;
+INSTAGRAMKIT_EXTERN NSString *const kPosition;
+INSTAGRAMKIT_EXTERN NSString *const kX;
+INSTAGRAMKIT_EXTERN NSString *const kY;
+
 @interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 /**
@@ -96,4 +101,3 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 - (BOOL)isEqualToModel:(InstagramModel *)model;
 
 @end
-

@@ -75,6 +75,11 @@
 @property (nonatomic, readonly) NSArray *comments;
 
 /**
+ * An array of tagged users on the Media.
+ */
+@property (nonatomic, readonly) NSArray *usersInPhoto;
+
+/**
  *  Tags on the Media.
  */
 @property (nonatomic, readonly) NSArray *tags;
