@@ -15,6 +15,7 @@
 		822466861B4C2FD000F8B5EA /* InstagramPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 822466771B4C2FD000F8B5EA /* InstagramPaginationInfo.m */; };
 		822466881B4C2FD000F8B5EA /* InstagramTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 822466791B4C2FD000F8B5EA /* InstagramTag.m */; };
 		8224668A1B4C2FD000F8B5EA /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224667B1B4C2FD000F8B5EA /* InstagramUser.m */; };
+		8289FCAC1B51C419000903FD /* InstagramKitConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289FCAB1B51C419000903FD /* InstagramKitConstants.m */; };
 		CB701B571A290E15ED62FF1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D71ABA66AA07709C96A1148 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,8 @@
 		822466791B4C2FD000F8B5EA /* InstagramTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramTag.m; sourceTree = "<group>"; };
 		8224667A1B4C2FD000F8B5EA /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUser.h; sourceTree = "<group>"; };
 		8224667B1B4C2FD000F8B5EA /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUser.m; sourceTree = "<group>"; };
+		8289FCAB1B51C419000903FD /* InstagramKitConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramKitConstants.m; sourceTree = "<group>"; };
+		8289FCAD1B51C42E000903FD /* InstagramKitConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstagramKitConstants.h; sourceTree = "<group>"; };
 		8D71ABA66AA07709C96A1148 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A62AD4BB7D5AE07DF04ACAD7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CAAFACF6E29667CA9EEF7C20 /* libPods-InstagramKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				8224666C1B4C2FD000F8B5EA /* InstagramKit.h */,
+				8289FCAD1B51C42E000903FD /* InstagramKitConstants.h */,
+				8289FCAB1B51C419000903FD /* InstagramKitConstants.m */,
 				822466691B4C2FD000F8B5EA /* Engine */,
 				8224666D1B4C2FD000F8B5EA /* Models */,
 			);
@@ -241,6 +246,7 @@
 				822466861B4C2FD000F8B5EA /* InstagramPaginationInfo.m in Sources */,
 				822466801B4C2FD000F8B5EA /* InstagramLocation.m in Sources */,
 				822466841B4C2FD000F8B5EA /* InstagramModel.m in Sources */,
+				8289FCAC1B51C419000903FD /* InstagramKitConstants.m in Sources */,
 				822466881B4C2FD000F8B5EA /* InstagramTag.m in Sources */,
 				822466821B4C2FD000F8B5EA /* InstagramMedia.m in Sources */,
 				8224667E1B4C2FD000F8B5EA /* InstagramComment.m in Sources */,
