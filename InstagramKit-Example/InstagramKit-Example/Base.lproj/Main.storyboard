@@ -55,9 +55,9 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="OeR-Ef-F2w">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Login" id="9wq-oD-noP" userLabel="Login">
+                        <barButtonItem key="leftBarButtonItem" title="Log in" id="9wq-oD-noP" userLabel="Login">
                             <connections>
-                                <segue destination="Yqa-wS-RqO" kind="modal" identifier="segue.login" id="e5j-qO-vqy"/>
+                                <action selector="loginTapped:" destination="4al-wR-gxx" id="6xZ-Bf-YC3"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="More" id="3Nd-Tj-wLc">
@@ -188,7 +188,7 @@
         <!--Navigation Controller-->
         <scene sceneID="9CP-FP-i2A">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yqa-wS-RqO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="Yqa-wS-RqO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xgb-Qe-nBg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ER9-XT-p8R">

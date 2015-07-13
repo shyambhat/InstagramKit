@@ -39,15 +39,15 @@
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
         if (nextMaxIdExists)
         {
-            _nextMaxId = kNextMaxId;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
         }
         else if (nextMaxLikeIdExists)
         {
-            _nextMaxId = kNextMaxLikeId;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
         }
         else if (nextCursorExists)
         {
-            _nextMaxId = kNextCursor;
+            _nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
         }
         
         if (type) {

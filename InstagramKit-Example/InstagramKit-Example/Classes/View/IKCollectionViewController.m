@@ -25,6 +25,7 @@
 #import "InstagramMedia.h"
 #import "IKMediaViewController.h"
 #import "Constants.h"
+#import "IKLoginViewController.h"
 
 #define kNumberOfCellsInARow 3
 #define kFetchItemsCount 15
@@ -47,14 +48,42 @@
 
     self.mediaArray = [[NSMutableArray alloc] init];
     self.instagramEngine = [InstagramEngine sharedEngine];
-    [self setTitle:@"Popular Media"];
     [self updateCollectionViewLayout];
-    [self requestPopularMedia];
     
+    [self loadMedia];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userAuthenticated:)
                                                  name:kInstagramUserAuthenticatedNotification
                                                object:nil];
+}
+
+
+/**
+ *  Depending on whether the Instagram session is authenticated,
+ *  this method loads either the publicly accessible popular media
+ *  or the authenticated user's feed.
+ */
+- (void)loadMedia
+{
+    self.currentPaginationInfo = nil;
+    BOOL isSessionValid = [self.instagramEngine isSessionValid];
+    if (isSessionValid) {
+        [self setTitle:@"My Feed"];
+        [self.navigationItem.leftBarButtonItem setTitle:@"Log out"];
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+        [self.mediaArray removeAllObjects];
+        [self.collectionView reloadData];
+        [self requestSelfFeed];
+    }
+    else
+    {
+        [self setTitle:@"Popular Media"];
+        [self.navigationItem.leftBarButtonItem setTitle:@"Log in"];
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+        [self.mediaArray removeAllObjects];
+        [self.collectionView reloadData];
+        [self requestPopularMedia];
+    }
 }
 
 
@@ -64,7 +93,6 @@
     - requestPopularMedia
     Calls InstagramKit's Helper method to fetch Popular Instagram Media.
  */
-
 - (void)requestPopularMedia
 {
     [self.instagramEngine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo)
@@ -84,7 +112,6 @@
     @discussion The self.currentPaginationInfo object is updated on each successful call
     and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
-
 - (void)requestSelfFeed
 {
     [self.instagramEngine getSelfFeedWithCount:kFetchItemsCount
@@ -110,9 +137,40 @@
     Invoked when user taps the 'More' navigation item.
     @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
  */
-
 - (IBAction)moreTapped:(id)sender {
     [self requestSelfFeed];
+}
+
+
+/**
+ - loginTapped:
+ Invoked when user taps the left navigation item.
+ @discussion Either directs to the Login ViewController or logs out.
+ */
+- (IBAction)loginTapped:(id)sender
+{
+    if (![self.instagramEngine isSessionValid]) {
+        UINavigationController *loginNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
+        [self presentViewController:loginNavigationViewController animated:YES completion:nil];
+    }
+    else
+    {
+        [self.instagramEngine logout];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged out" message:@"The user is now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+
+        [self loadMedia];
+    }
+}
+
+
+#pragma mark - User Authenticated Notification -
+
+
+- (void)userAuthenticated:(NSNotification *)notification
+{
+    [self loadMedia];
 }
 
 
@@ -158,22 +216,5 @@
     CGFloat size = floor((CGRectGetWidth(self.collectionView.bounds)-1) / kNumberOfCellsInARow);
     layout.itemSize = CGSizeMake(size, size);
 }
-
-
-#pragma mark - User Authenticated Notification -
-
-
-- (void)userAuthenticated:(NSNotification *)notification
-{
-    [self setTitle:@"My Feed"];
-    [self.navigationItem setLeftBarButtonItem:nil];
-    [self.navigationItem.rightBarButtonItem setEnabled:YES];
-    [self.mediaArray removeAllObjects];
-    [self.collectionView reloadData];
-    
-    [self requestSelfFeed];
-
-}
-
 
 @end
