@@ -37,16 +37,72 @@ pod 'InstagramKit', '~> 3.0'
 Earliest supported deployment target = iOS 6
 
 ####Instagram Developer Registration
-Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and insert the right credentials into your App's Info.plist file.
+Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
 
-####Authentication and Usage
+```InstagramAppClientId``` is your App's Client Id and ```InstagramAppRedirectURL```, the redirect URI which is obtained on registering your App on Instagram's Developer Dashboard.
+The redirect URI specifies where Instagram should redirect users after they have chosen whether or not to authenticate your application. 
 
-For detailed instructions on configuring, authenticating and using InstagramKit, refer to the [Authentication Guide](https://github.com/shyambhat/InstagramKit/wiki/Authentication).
-Download and run the Demo Project to understand how the engine is intended to be used.
+#### Authentication
 
-Note: To use POST or DELETE requests to change likes, comments or follows, you must [apply to Instagram here](https://www.facebook.com/help/instagram/contact/185819881608116#).
+In order to make Authenticated calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
 
-Read about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
+To do so, redirect the user to 
+```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
+
+
+#### Scope
+All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the IKLoginScope enum. 
+
+_Note that in order to use these extended permissions, first you need to submit your app for review to Instagram._
+
+_For your app to POST or DELETE likes, comments or follows, you must apply to Instagram here : https://www.facebook.com/help/instagram/contact/185819881608116#_
+
+```Objective-C
+// Set scope depending on permissions your App has been granted from Instagram
+// IKLoginScopeBasic is included by default.
+
+IKLoginScope scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes; 
+
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
+[mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
+```
+
+Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
+InstagramKit includes a helper method to validate this token.
+
+```Objective-C
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSError *error;
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenWithURL:request.URL error:&error]) {
+        if (!error) {
+            //success!
+            ...
+        }
+    }
+    return YES;
+}
+
+```
+
+####Usage
+
+Once you're authenticated and InstagramKit has been provided an `accessToken`, it will automatically persist it until you call `-logout` on InstagramEngine. An authenticated call looks no different:
+
+```Objective-C
+InstagramEngine *engine = [InstagramEngine sharedEngine];
+[engine getSelfFeedWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    // media is an array of InstagramMedia objects
+    ...
+} failure:^(NSError *error, NSInteger statusCode) {
+    ...
+}];
+```
+
+####Pagination 
+The `InstagramPaginationInfo` object has everything it needs to make your next pagination call. 
+Read in detail about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
 ####Contributions?
 
