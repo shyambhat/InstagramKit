@@ -28,11 +28,9 @@
 #import "InstagramLocation.h"
 
 @interface InstagramEngine()
-{
-    dispatch_queue_t mBackgroundQueue;
-}
 
-@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong, nonnull) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong, nonnull) dispatch_queue_t backgroundQueue;
 
 @end
 
@@ -82,7 +80,7 @@
         self.appClientID = configuration[kInstagramAppClientIdConfigurationKey];
         self.appRedirectURL = configuration[kInstagramAppRedirectURLConfigurationKey];
 
-        mBackgroundQueue = dispatch_queue_create("background", NULL);
+        self.backgroundQueue = dispatch_queue_create("instagramkit.response.queue", NULL);
 
         NSAssert(IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"], @"Invalid Instagram Client ID. Please set a valid value for the key \"%@\" in Info.plist",kInstagramAppClientIdConfigurationKey);
         
@@ -95,6 +93,12 @@
 
 
 #pragma mark - Authentication -
+
+
+- (NSURL *)authorizarionURL
+{
+    return [self authorizarionURLForScope:InstagramKitLoginScopeBasic];
+}
 
 
 - (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope
@@ -115,10 +119,9 @@
     }
     
     BOOL success = YES;
-    NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
-    if (accessToken)
+    self.accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
+    if (self.accessToken)
     {
-        self.accessToken = accessToken;
         [[NSNotificationCenter defaultCenter] postNotificationName:InstagtamKitUserAuthenticatedNotification object:nil];
     }
     else
@@ -129,9 +132,7 @@
                                  userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
         success = NO;
     }
-
     return success;
-    
 }
 
 
@@ -143,12 +144,10 @@
 
 - (void)logout
 {    
-    NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies]) {
+    [[storage cookies] enumerateObjectsUsingBlock:^(NSHTTPCookie *cookie, NSUInteger idx, BOOL *stop) {
         [storage deleteCookie:cookie];
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    }];
     self.accessToken = nil;
 }
 
@@ -162,63 +161,59 @@
     [self storeAccessToken];
 }
 
+
 - (void)storeAccessToken
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.accessToken forKey:@"com.instagramkit.token"];
 }
+
 
 - (void)retrieveAccessToken
 {
     _accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"com.instagramkit.token"];
 }
 
+
 #pragma mark -
+
 
 - (NSDictionary *)authorizationParametersWithScope:(InstagramKitLoginScope)scope
 {
     NSDictionary *configuration = [self clientConfiguration];
     NSString *scopeString = [self stringForScope:scope];
-    NSDictionary *parameters = @{
-                                 @"client_id": configuration[kInstagramAppClientIdConfigurationKey],
-                                 @"redirect_uri": configuration[kInstagramAppRedirectURLConfigurationKey],
-                                 @"response_type": @"token",
-                                 @"scope": scopeString
-                                };
+    NSDictionary *parameters = @{ @"client_id": configuration[kInstagramAppClientIdConfigurationKey],
+                                  @"redirect_uri": configuration[kInstagramAppRedirectURLConfigurationKey],
+                                  @"response_type": @"token",
+                                  @"scope": scopeString };
     return parameters;
 }
 
 
 - (NSString *)stringForScope:(InstagramKitLoginScope)scope
 {
-    NSArray *typeStrings = @[@"basic",@"comments",@"relationships",@"likes"];
-    NSMutableArray *strings = [NSMutableArray arrayWithCapacity:4];
+    NSArray *typeStrings = @[@"basic", @"comments", @"relationships", @"likes"];
     
-    for (NSUInteger i=0; i < typeStrings.count; i++)
-    {
-        NSUInteger enumBitValueToCheck = 1 << i;
-        if (scope & enumBitValueToCheck)
-        {
-            [strings addObject:[typeStrings objectAtIndex:i]];
-        }
-    }
-    if (!strings.count) {
-        return @"basic";
-    }
-    return [strings componentsJoinedByString:@"+"];
+    NSMutableArray *strings = [NSMutableArray arrayWithCapacity:typeStrings.count];
+    [typeStrings enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSUInteger enumBitValueToCheck = 1 << idx;
+        (scope & enumBitValueToCheck) ? [strings addObject:obj] : 0;
+    }];
+    
+    return (strings.count) ? [strings componentsJoinedByString:@"+"] : typeStrings[0];
 }
 
 
 - (NSDictionary*)queryStringParametersFromString:(NSString*)string {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (NSString * param in [string componentsSeparatedByString:@"&"])
-    {
+    [[string componentsSeparatedByString:@"&"] enumerateObjectsUsingBlock:^(NSString * param, NSUInteger idx, BOOL *stop) {
         NSArray *pairs = [param componentsSeparatedByString:@"="];
-        if ([pairs count] != 2) continue;
+        if ([pairs count] != 2) return;
+        
         NSString *key = [pairs[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *value = [pairs[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [dict setObject:value forKey:key];
-    }
+    }];
     return dict;
 }
 
@@ -261,19 +256,23 @@
     [self.httpManager GET:percentageEscapedPath
                parameters:params
                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                      if (!success) return;
                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+                      
                       NSDictionary *pInfo = responseDictionary[kPagination];
-                      InstagramPaginationInfo *paginationInfo = (pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
-                      NSArray *responseObjects = responseDictionary[kData];
-                      NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
-                      dispatch_async(mBackgroundQueue, ^{
+                      InstagramPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
+                      
+                      NSArray *responseObjects = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
+                      
+                      NSMutableArray *objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
+                      dispatch_async(self.backgroundQueue, ^{
                           [responseObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                               NSDictionary *info = obj;
                               id model = [[modelClass alloc] initWithInfo:info];
                               [objects addObject:model];
                           }];
                           dispatch_async(dispatch_get_main_queue(), ^{
-                              (success)? success(objects, paginationInfo) : 0;
+                              success(objects, paginationInfo);
                           });
                       });
                   }
@@ -294,18 +293,11 @@
     [self.httpManager GET:percentageEscapedPath
                parameters:params
                   success:^(NSURLSessionDataTask *task, id responseObject) {
+                      if (!success) return;
                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                      id model = nil;
-                      if (IKNotNull(responseDictionary[kData]))
-                      {
-                          if (modelClass == [NSDictionary class]) {
-                              model = [responseDictionary copy];
-                          }
-                          else {
-                              model = [[modelClass alloc] initWithInfo:responseDictionary[kData]];
-                          }
-                      }
-                      (success)? success(model) : 0;
+                      NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
+                      id model =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
+                      success(model);
                   }
                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                       (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
@@ -341,8 +333,7 @@
     [self.httpManager DELETE:path
                   parameters:params
                      success:^(NSURLSessionDataTask *task, id responseObject) {
-                         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                         (success)? success(responseDictionary) : 0;
+                         (success)? success((NSDictionary *)responseObject) : 0;
                      }
                      failure:^(NSURLSessionDataTask *task, NSError *error) {
                          (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode) : 0;
@@ -460,7 +451,7 @@
 {
     [self getPath:[NSString stringWithFormat:@"users/%@",userId]
        parameters:nil
-    responseModel:[NSDictionary class]
+    responseModel:[InstagramUser class]
           success:success
           failure:failure];
 }

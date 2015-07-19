@@ -49,6 +49,16 @@
 
 #pragma mark - Authentication -
 
+
+/**
+ *  A convenience method to generate an authentication URL with Basic permissions 
+ *  to direct user to Instagram's login screen.
+ *
+ *  @return URL to direct user to Instagram's login screen.
+ */
+- (NSURL *)authorizarionURL;
+
+
 /**
  *  A convenience method to generate an authentication URL to direct user to Instagram's login screen.
  *
