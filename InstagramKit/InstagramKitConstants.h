@@ -118,20 +118,106 @@ typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
 @class InstagramPaginationInfo;
 @class InstagramTag;
 @class InstagramLocation;
+@class InstagramModel;
 
-typedef void (^InstagramLoginBlock)(NSError *error);
-typedef void (^InstagramUserBlock)(InstagramUser *user);
-typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
+/**
+ *  A generic block used as a callback for receiving a collection of objects.
+ *
+ *  @param paginatedObjects Array of Instagram model objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramPaginatiedResponseBlock)(NSArray *paginatedObjects, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A generic block used as a callback for receiving a single object.
+ *
+ *  @param model    An Instagram model object.
+ */
+typedef void (^InstagramObjectBlock)(id object);
+
+/**
+ *  A callback block providing a collection of Media objects.
+ *
+ *  @param media            An array of InstagramMedia objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
 typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagBlock)(InstagramTag *tag);
-typedef void (^InstagramCommentsBlock)(NSArray *comments);
+
+/**
+ *  A callback block providing a collection of User objects.
+ *
+ *  @param users            An array of User objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
 typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
-typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
-typedef void (^InstagramLocationsBlock)(NSArray *locations);
+
+/**
+ *  A callback block providing a collection of Location objects.
+ *
+ *  @param locations        An array of InstagramLocation objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramLocationsBlock)(NSArray *locations, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a collection of Comment objects.
+ *
+ *  @param comments         An array of InstagramComment objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramCommentsBlock)(NSArray *comments, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a collection of Tag objects.
+ *
+ *  @param tags             An array of Tag objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a User object.
+ *
+ *  @param user     An InstagramUser object.
+ */
+typedef void (^InstagramUserBlock)(InstagramUser *user);
+
+/**
+ *  A callback block providing a Media object.
+ *
+ *  @param media    An InstagraMedia object.
+ */
+typedef void (^InstagramMediaObjectBlock)(InstagramMedia *media);
+
+/**
+ *  A callback block providing a Tag object.
+ *
+ *  @param tag An InstagramTag object.
+ */
+typedef void (^InstagramTagBlock)(InstagramTag *tag);
+
+/**
+ *  A callback block providing a Location object.
+ *
+ *  @param location An InstagramLocation object.
+ */
 typedef void (^InstagramLocationBlock)(InstagramLocation *location);
+
+/**
+ *  A generic failure block for handling server errors.
+ *
+ *  @param error
+ *  @param serverStatusCode 
+ */
+typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
+
+/**
+ *  A generic response block providing the server response dictionary, as is.
+ *
+ *  @param serverResponse Response JSON in dictionary form.
+ */
+typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
+
 
 /**
  *  String constants as represented in JSON.

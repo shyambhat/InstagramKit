@@ -44,19 +44,12 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSError *error;
-    if ([[InstagramEngine sharedEngine] extractValidAccessTokenFromURL:request.URL error:&error])
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
-        if (!error) {
-            [self dismissViewControllerAnimated:YES
-                                     completion:nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
-                                                                object:nil];
-        }
-        else
-        {
-            NSLog(@"%@",error);
-        }
+        [self dismissViewControllerAnimated:YES
+                                 completion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
+                                                            object:nil];
     }
     
     return YES;

@@ -67,8 +67,8 @@
  *
  *  @return YES if valid token extracted and saved, otherwise NO.
  */
-- (BOOL)extractValidAccessTokenFromURL:(NSURL *)url
-                                 error:(NSError *__autoreleasing *)error;
+- (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
+                                  error:(NSError *__autoreleasing *)error;
 
 /**
  *  Validate if authorization is done.
@@ -93,7 +93,7 @@
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getMedia:(NSString *)mediaId
-     withSuccess:(InstagramMediaDetailBlock)success
+     withSuccess:(InstagramMediaObjectBlock)success
          failure:(InstagramFailureBlock)failure;
 
 
@@ -199,11 +199,11 @@
 /**
  *  Get basic information about a user.
  *
- *  @param user     An partially populated User object.
+ *  @param userId   Id of a User object.
  *  @param success  Provides a fully populated User object.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getUserDetails:(InstagramUser *)user
+- (void)getUserDetails:(NSString *)userId
            withSuccess:(InstagramUserBlock)success
                failure:(InstagramFailureBlock)failure;
 
@@ -463,7 +463,7 @@
  */
 - (void)createComment:(NSString *)commentText
               onMedia:(NSString *)mediaId
-          withSuccess:(dispatch_block_t)success
+          withSuccess:(InstagramResponseBlock)success
               failure:(InstagramFailureBlock)failure;
 
 
@@ -483,7 +483,7 @@
  */
 - (void)removeComment:(NSString *)commentId
               onMedia:(NSString *)mediaId
-          withSuccess:(dispatch_block_t)success
+          withSuccess:(InstagramResponseBlock)success
               failure:(InstagramFailureBlock)failure;
 
 
@@ -514,7 +514,7 @@
  *  @param failure  Provides an error and a server status code.
  */
 - (void)likeMedia:(NSString *)mediaId
-      withSuccess:(dispatch_block_t)success
+      withSuccess:(InstagramResponseBlock)success
           failure:(InstagramFailureBlock)failure;
 
 
@@ -530,7 +530,7 @@
  *  @param failure  Provides an error and a server status code.
  */
 - (void)unlikeMedia:(NSString *)mediaId
-        withSuccess:(dispatch_block_t)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(InstagramFailureBlock)failure;
 
 
@@ -702,7 +702,7 @@
  *  @param failure        Provides an error and a server status code.
  */
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
-                     withSuccess:(InstagramObjectsBlock)success
+                     withSuccess:(InstagramPaginatiedResponseBlock)success
                          failure:(InstagramFailureBlock)failure;
 
 
