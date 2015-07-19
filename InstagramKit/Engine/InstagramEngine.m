@@ -63,8 +63,8 @@
     if (info[kInstagramAppRedirectURLConfigurationKey]) {
         configuration[kInstagramAppRedirectURLConfigurationKey] = info[kInstagramAppRedirectURLConfigurationKey];
     }
-    configuration[kInstagramKitBaseUrlConfigurationKey] = kInstagramKitBaseUrl;
-    configuration[kInstagramKitAuthorizationUrlConfigurationKey] = kInstagramKitAuthorizationUrl;
+    configuration[kInstagramKitBaseURLConfigurationKey] = kInstagramKitBaseURL;
+    configuration[kInstagramKitAuthorizationURLConfigurationKey] = kInstagramKitAuthorizationURL;
     
     return [NSDictionary dictionaryWithDictionary:configuration];
 }
@@ -74,7 +74,7 @@
     
     if (self = [super init])
     {
-        NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseUrl];
+        NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseURL];
         self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
@@ -100,7 +100,7 @@
 - (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope
 {
     NSDictionary *parameters = [self authorizationParametersWithScope:scope];
-    NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kInstagramKitAuthorizationUrl parameters:parameters error:nil];
+    NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kInstagramKitAuthorizationURL parameters:parameters error:nil];
     return authRequest.URL;
 }
 
@@ -109,24 +109,28 @@
                                   error:(NSError *__autoreleasing *)error
 {
     NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
-    
     if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
     {
         return NO;
     }
     
+    BOOL success = YES;
     NSString* accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
     if (accessToken)
     {
         self.accessToken = accessToken;
-        return YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:InstagtamKitUserAuthenticatedNotification object:nil];
+    }
+    else
+    {
+        NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
+        *error = [NSError errorWithDomain:InstagtamKitErrorDomain
+                                     code:InstagramKitAuthenticationFailedError
+                                 userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
+        success = NO;
     }
 
-    NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
-    *error = [NSError errorWithDomain:InstagtamKitErrorDomain
-                                 code:InstagramKitAuthenticationFailedError
-                             userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
-    return NO;
+    return success;
     
 }
 
@@ -263,10 +267,11 @@
                       NSArray *responseObjects = responseDictionary[kData];
                       NSMutableArray*objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
                       dispatch_async(mBackgroundQueue, ^{
-                          for (NSDictionary *info in responseObjects) {
+                          [responseObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                              NSDictionary *info = obj;
                               id model = [[modelClass alloc] initWithInfo:info];
                               [objects addObject:model];
-                          }
+                          }];
                           dispatch_async(dispatch_get_main_queue(), ^{
                               (success)? success(objects, paginationInfo) : 0;
                           });

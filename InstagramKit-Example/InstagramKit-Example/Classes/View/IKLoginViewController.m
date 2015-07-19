@@ -20,7 +20,6 @@
 
 #import "IKLoginViewController.h"
 #import "InstagramKit.h"
-#import "Constants.h"
 
 @interface IKLoginViewController () <UIWebViewDelegate>
 
@@ -46,12 +45,8 @@
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
-                                                            object:nil];
+        [self.navigationItem.leftBarButtonItem setTitle:@"Done"];
     }
-    
     return YES;
 }
 

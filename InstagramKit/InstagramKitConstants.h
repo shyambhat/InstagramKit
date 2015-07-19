@@ -29,22 +29,22 @@
 /**
  *  Configuration Key for the Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseUrlConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURLConfigurationKey;
 
 /**
  *  Configuration Key for the Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURLConfigurationKey;
 
 /**
  *  Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseUrl;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURL;
 
 /**
  *  Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationUrl;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURL;
 
 /**
  *  Configuration Key for the Client Id of your App, registered with Instagram.
@@ -58,10 +58,9 @@ INSTAGRAMKIT_EXTERN NSString *const kInstagramAppRedirectURLConfigurationKey;
 
 
 /*!
- @typedef InstagrmaKitLoginScope enum
+ @typedef   InstagrmaKitLoginScope enum
  
- @abstract
- Passed to indicate the scope of the access you are requesting from the user.
+ @abstract  Passed to indicate the scope of the access you are requesting from the user.
  
  @discussion
  All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request. 
@@ -83,15 +82,23 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
 
 
 /*!
- @abstract The error domain for all errors from InstagramKit.
- @discussion Error codes in the range 0-99 are reserved for this domain.
+ @abstract      The name for the notification posted on successfully authenticating an user.
+ @discussion    Posted only if the method -receivedValidAccessTokenFromURL:error: is used for authentication.
+ */
+
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticatedNotification;
+
+
+/*!
+ @abstract      The error domain for all errors from InstagramKit.
+ @discussion    Error codes in the range 0-99 are reserved for this domain.
  */
 
 INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
 
 /*!
- @typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
- @abstract Error codes for InstagtamKitErrorDomain.
+ @typedef       NS_ENUM(NSInteger, InstagtamKitErrorCode)
+ @abstract      Error codes for InstagtamKitErrorDomain.
  */
 
 typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
