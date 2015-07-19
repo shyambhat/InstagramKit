@@ -20,14 +20,15 @@
 
 #import "InstagramKitConstants.h"
 
-NSString *const kInstagramKitBaseUrlConfigurationKey = @"InstagramKitBaseUrl";
-NSString *const kInstagramKitAuthorizationUrlConfigurationKey = @"InstagramKitAuthorizationUrl";
-NSString *const kInstagramKitBaseUrl = @"https://api.instagram.com/v1/";
-NSString *const kInstagramKitAuthorizationUrl = @"https://api.instagram.com/oauth/authorize/";
+NSString *const kInstagramKitBaseURLConfigurationKey = @"InstagramKitBaseUrl";
+NSString *const kInstagramKitAuthorizationURLConfigurationKey = @"InstagramKitAuthorizationUrl";
+NSString *const kInstagramKitBaseURL = @"https://api.instagram.com/v1/";
+NSString *const kInstagramKitAuthorizationURL = @"https://api.instagram.com/oauth/authorize/";
 
 NSString *const kInstagramAppClientIdConfigurationKey = @"InstagramAppClientId";
 NSString *const kInstagramAppRedirectURLConfigurationKey = @"InstagramAppRedirectURL";
 
+NSString *const InstagtamKitUserAuthenticatedNotification = @"com.instagramkit.authentication.success";
 NSString *const InstagtamKitErrorDomain = @"com.instagramkit";
 
 NSString *const kKeyClientID = @"client_id";

@@ -24,7 +24,6 @@
 #import "IKCell.h"
 #import "InstagramMedia.h"
 #import "IKMediaViewController.h"
-#import "Constants.h"
 #import "IKLoginViewController.h"
 
 #define kNumberOfCellsInARow 3
@@ -32,9 +31,9 @@
 
 @interface IKCollectionViewController ()
 
-@property (nonatomic, strong) NSMutableArray *mediaArray;
-@property (nonatomic, strong) InstagramPaginationInfo *currentPaginationInfo;
-@property (nonatomic, weak) InstagramEngine *instagramEngine;
+@property (nonatomic, strong)   NSMutableArray *mediaArray;
+@property (nonatomic, strong)   InstagramPaginationInfo *currentPaginationInfo;
+@property (nonatomic, weak)     InstagramEngine *instagramEngine;
 
 @end
 
@@ -53,7 +52,7 @@
     [self loadMedia];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userAuthenticated:)
-                                                 name:kInstagramUserAuthenticatedNotification
+                                                 name:InstagtamKitUserAuthenticatedNotification
                                                object:nil];
 }
 
