@@ -157,6 +157,11 @@
                                 <segue destination="bg8-FQ-jcr" kind="unwind" unwindAction="unwindSegue:" id="bs6-0C-g4M"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="miF-uD-4yD">
+                            <connections>
+                                <segue destination="bg8-FQ-jcr" kind="unwind" unwindAction="unwindSegue:" id="Qcu-EH-w5a"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="webView" destination="bBm-kX-gC1" id="jm6-gY-iFs"/>

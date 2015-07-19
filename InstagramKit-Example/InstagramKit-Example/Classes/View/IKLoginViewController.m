@@ -33,7 +33,8 @@
 {
     [super viewDidLoad];
     self.webView.scrollView.bounces = NO;
-    
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+
     NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:InstagramKitLoginScopeBasic];
     [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
@@ -45,9 +46,15 @@
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
-        [self.navigationItem.leftBarButtonItem setTitle:@"Done"];
+        [self authenticationSuccess];
     }
     return YES;
+}
+
+- (void)authenticationSuccess
+{
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
 
 @end
