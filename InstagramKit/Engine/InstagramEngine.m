@@ -29,8 +29,8 @@
 
 @interface InstagramEngine()
 
-@property (nonatomic, strong, nonnull) AFHTTPSessionManager *httpManager;
-@property (nonatomic, strong, nonnull) dispatch_queue_t backgroundQueue;
+@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong) dispatch_queue_t backgroundQueue;
 
 @end
 
