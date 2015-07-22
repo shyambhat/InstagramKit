@@ -1,5 +1,5 @@
 
 language: objective-c
 xcode_workspace: InstagramKit.xcworkspace
-xcode_scheme: InstagramKit-Tests
+xcode_scheme: InstagramKitTests
 xcode_sdk: iphonesimulator8.1
