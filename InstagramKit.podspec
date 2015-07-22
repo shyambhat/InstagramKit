@@ -16,5 +16,6 @@ Pod::Spec.new do |s|
   s.exclude_files = 'InstagramKitDemo'
   s.requires_arc = true
   s.dependency 'AFNetworking', '~>2.0'
+  s.dependency 'UICKeyChainStore', '~>2.0'
 
 end

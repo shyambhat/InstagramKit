@@ -30,6 +30,7 @@ NSString *const kInstagramAppRedirectURLConfigurationKey = @"InstagramAppRedirec
 
 NSString *const InstagtamKitUserAuthenticatedNotification = @"com.instagramkit.authentication.success";
 NSString *const InstagtamKitErrorDomain = @"com.instagramkit";
+NSString *const InstagtamKitKeychainStore = @"com.instagramkit.secure";
 
 NSString *const kKeyClientID = @"client_id";
 NSString *const kKeyAccessToken = @"access_token";

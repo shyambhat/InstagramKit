@@ -26,12 +26,13 @@
 #import "InstagramTag.h"
 #import "InstagramPaginationInfo.h"
 #import "InstagramLocation.h"
+#import "UICKeyChainStore.h"
 
 @interface InstagramEngine()
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 @property (nonatomic, strong) dispatch_queue_t backgroundQueue;
-
+@property (nonatomic, strong) UICKeyChainStore *keychainStore;
 @end
 
 
@@ -86,7 +87,9 @@
         
         NSAssert(IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"], @"Invalid Redirect URL. Please set a valid value for the key \"%@\" in Info.plist", kInstagramAppRedirectURLConfigurationKey);
         
-        [self retrieveAccessToken];
+        self.keychainStore = [UICKeyChainStore keyChainStoreWithService:InstagtamKitKeychainStore];
+        _accessToken = self.keychainStore[@"token"];
+
     }
     return self;
 }
@@ -158,19 +161,7 @@
 - (void)setAccessToken:(NSString *)accessToken
 {
     _accessToken = accessToken;
-    [self storeAccessToken];
-}
-
-
-- (void)storeAccessToken
-{
-    [[NSUserDefaults standardUserDefaults] setObject:self.accessToken forKey:@"com.instagramkit.token"];
-}
-
-
-- (void)retrieveAccessToken
-{
-    _accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"com.instagramkit.token"];
+    self.keychainStore[@"token"] = self.accessToken;
 }
 
 

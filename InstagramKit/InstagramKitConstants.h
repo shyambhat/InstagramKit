@@ -85,7 +85,6 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
  @abstract      The name for the notification posted on successfully authenticating an user.
  @discussion    Posted only if the method -receivedValidAccessTokenFromURL:error: is used for authentication.
  */
-
 INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticatedNotification;
 
 
@@ -93,14 +92,19 @@ INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticatedNotification;
  @abstract      The error domain for all errors from InstagramKit.
  @discussion    Error codes in the range 0-99 are reserved for this domain.
  */
-
 INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
+
+
+/*!
+ @abstract      The Keychain Store service from InstagramKit to securely store credentials.
+ */
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitKeychainStore;
+
 
 /*!
  @typedef       NS_ENUM(NSInteger, InstagtamKitErrorCode)
  @abstract      Error codes for InstagtamKitErrorDomain.
  */
-
 typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
 {
     /*!
