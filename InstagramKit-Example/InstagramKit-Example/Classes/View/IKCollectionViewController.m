@@ -86,8 +86,7 @@
 #pragma mark - API Requests -
 
 /**
-    - requestPopularMedia
-    Calls InstagramKit's Helper method to fetch Popular Instagram Media.
+    Calls InstagramKit's helper method to fetch Popular Instagram Media.
  */
 - (void)requestPopularMedia
 {
@@ -103,8 +102,7 @@
 
 
 /**
-    - requestSelfFeed
-    Calls InstagramKit's Helper method to fetch Media in the authenticated user's feed.
+    Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
     @discussion The self.currentPaginationInfo object is updated on each successful call
     and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
@@ -129,7 +127,6 @@
 
 
 /**
-    - moreTapped:
     Invoked when user taps the 'More' navigation item.
     @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
  */
@@ -139,9 +136,8 @@
 
 
 /**
- - loginTapped:
- Invoked when user taps the left navigation item.
- @discussion Either directs to the Login ViewController or logs out.
+    Invoked when user taps the left navigation item.
+    @discussion Either directs to the Login ViewController or logs out.
  */
 - (IBAction)loginTapped:(id)sender
 {

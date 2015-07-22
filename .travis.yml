@@ -4,9 +4,9 @@ xcode_workspace: InstagramKit-Example/InstagramKit-Example.xcworkspace
 xcode_scheme: InstagramKit-Example
 xcode_sdk: iphonesimulator8.1
 podfile: InstagramKit-Example/Podfile
-before_install:
-    - pod repo remove master
-    - pod setup
+# before_install:
+#     - pod repo remove master
+#     - pod setup
 
 # script:
     #- pod lib lint
