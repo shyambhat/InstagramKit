@@ -65,22 +65,19 @@
 - (void)loadMedia
 {
     self.currentPaginationInfo = nil;
+    
     BOOL isSessionValid = [self.instagramEngine isSessionValid];
+    [self setTitle: (isSessionValid) ? @"My Feed" : @"Popular Media"];
+    [self.navigationItem.leftBarButtonItem setTitle: (isSessionValid) ? @"Log out" : @"Log in"];
+    [self.navigationItem.rightBarButtonItem setEnabled: isSessionValid];
+    [self.mediaArray removeAllObjects];
+    [self.collectionView reloadData];
+    
     if (isSessionValid) {
-        [self setTitle:@"My Feed"];
-        [self.navigationItem.leftBarButtonItem setTitle:@"Log out"];
-        [self.navigationItem.rightBarButtonItem setEnabled:YES];
-        [self.mediaArray removeAllObjects];
-        [self.collectionView reloadData];
         [self requestSelfFeed];
     }
     else
     {
-        [self setTitle:@"Popular Media"];
-        [self.navigationItem.leftBarButtonItem setTitle:@"Log in"];
-        [self.navigationItem.rightBarButtonItem setEnabled:NO];
-        [self.mediaArray removeAllObjects];
-        [self.collectionView reloadData];
         [self requestPopularMedia];
     }
 }
@@ -107,7 +104,7 @@
 
 /**
     - requestSelfFeed
-    Calls InstagramKit's Helper method to fetch Media in logged in Users own feed.
+    Calls InstagramKit's Helper method to fetch Media in the authenticated user's feed.
     @discussion The self.currentPaginationInfo object is updated on each successful call
     and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
