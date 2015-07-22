@@ -51,23 +51,6 @@
 }
 
 
-- (NSDictionary*)clientConfiguration {
-
-    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSMutableDictionary *configuration = [NSMutableDictionary dictionary];
-    if (info[kInstagramAppClientIdConfigurationKey]) {
-        configuration[kInstagramAppClientIdConfigurationKey] = info[kInstagramAppClientIdConfigurationKey];
-    }
-    if (info[kInstagramAppRedirectURLConfigurationKey]) {
-        configuration[kInstagramAppRedirectURLConfigurationKey] = info[kInstagramAppRedirectURLConfigurationKey];
-    }
-    configuration[kInstagramKitBaseURLConfigurationKey] = kInstagramKitBaseURL;
-    configuration[kInstagramKitAuthorizationURLConfigurationKey] = kInstagramKitAuthorizationURL;
-    
-    return [NSDictionary dictionaryWithDictionary:configuration];
-}
-
-
 - (instancetype)init {
     
     if (self = [super init])
@@ -76,15 +59,19 @@
         self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
-        NSDictionary *configuration = [self clientConfiguration];
-        self.appClientID = configuration[kInstagramAppClientIdConfigurationKey];
-        self.appRedirectURL = configuration[kInstagramAppRedirectURLConfigurationKey];
+        NSDictionary *info = [[NSBundle bundleForClass:[self class]] infoDictionary];
+        self.appClientID = info[kInstagramAppClientIdConfigurationKey];
+        self.appRedirectURL = info[kInstagramAppRedirectURLConfigurationKey];
 
         self.backgroundQueue = dispatch_queue_create("instagramkit.response.queue", NULL);
-
-        NSAssert(IKNotNull(self.appClientID) && ![self.appClientID isEqualToString:@""] && ![self.appClientID isEqualToString:@"<Client Id here>"], @"Invalid Instagram Client ID. Please set a valid value for the key \"%@\" in Info.plist",kInstagramAppClientIdConfigurationKey);
         
-        NSAssert(IKNotNull(self.appRedirectURL) && ![self.appRedirectURL isEqualToString:@""] && ![self.appRedirectURL isEqualToString:@"<Redirect URL here>"], @"Invalid Redirect URL. Please set a valid value for the key \"%@\" in Info.plist", kInstagramAppRedirectURLConfigurationKey);
+        if (!IKNotNull(self.appClientID) || [self.appClientID isEqualToString:@""]) {
+            NSLog(@"ERROR : InstagramKit - Invalid Client ID. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppClientIdConfigurationKey);
+        }
+        
+        if (!IKNotNull(self.appRedirectURL) || [self.appRedirectURL isEqualToString:@""]) {
+            NSLog(@"ERROR : InstagramKit - Invalid Redirect URL. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppRedirectURLConfigurationKey);
+        }
         
         [self retrieveAccessToken];
     }
@@ -179,10 +166,9 @@
 
 - (NSDictionary *)authorizationParametersWithScope:(InstagramKitLoginScope)scope
 {
-    NSDictionary *configuration = [self clientConfiguration];
     NSString *scopeString = [self stringForScope:scope];
-    NSDictionary *parameters = @{ @"client_id": configuration[kInstagramAppClientIdConfigurationKey],
-                                  @"redirect_uri": configuration[kInstagramAppRedirectURLConfigurationKey],
+    NSDictionary *parameters = @{ @"client_id": self.appClientID,
+                                  @"redirect_uri": self.appRedirectURL,
                                   @"response_type": @"token",
                                   @"scope": scopeString };
     return parameters;
@@ -203,7 +189,7 @@
 }
 
 
-- (NSDictionary*)queryStringParametersFromString:(NSString*)string {
+- (NSDictionary *)queryStringParametersFromString:(NSString*)string {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [[string componentsSeparatedByString:@"&"] enumerateObjectsUsingBlock:^(NSString * param, NSUInteger idx, BOOL *stop) {
@@ -245,11 +231,34 @@
 #pragma mark - Base Calls -
 
 
-- (void)getPaginatedPath:(NSString *)path
+- (void)getPath:(NSString *)path
      parameters:(NSDictionary *)parameters
   responseModel:(Class)modelClass
-        success:(InstagramPaginatiedResponseBlock)success
+        success:(InstagramObjectBlock)success
         failure:(InstagramFailureBlock)failure
+{
+    NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
+    NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self.httpManager GET:percentageEscapedPath
+               parameters:params
+                  success:^(NSURLSessionDataTask *task, id responseObject) {
+                      if (!success) return;
+                      NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+                      NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
+                      id model =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
+                      success(model);
+                  }
+                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                      (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
+                  }];
+}
+
+
+- (void)getPaginatedPath:(NSString *)path
+              parameters:(NSDictionary *)parameters
+           responseModel:(Class)modelClass
+                 success:(InstagramPaginatiedResponseBlock)success
+                 failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
     NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -282,34 +291,11 @@
 }
 
 
-- (void)getPath:(NSString *)path
-     parameters:(NSDictionary *)parameters
-  responseModel:(Class)modelClass
-        success:(InstagramObjectBlock)success
-        failure:(InstagramFailureBlock)failure
-{
-    NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
-    NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.httpManager GET:percentageEscapedPath
-               parameters:params
-                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                      if (!success) return;
-                      NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                      NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
-                      id model =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
-                      success(model);
-                  }
-                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
-                  }];
-}
-
-
 - (void)postPath:(NSString *)path
-     parameters:(NSDictionary *)parameters
-   responseModel:(Class)modelClass
-        success:(InstagramResponseBlock)success
-        failure:(InstagramFailureBlock)failure
+      parameters:(NSDictionary *)parameters
+    responseModel:(Class)modelClass
+         success:(InstagramResponseBlock)success
+         failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
     [self.httpManager POST:path
