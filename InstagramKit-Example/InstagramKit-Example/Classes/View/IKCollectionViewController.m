@@ -65,22 +65,19 @@
 - (void)loadMedia
 {
     self.currentPaginationInfo = nil;
+    
     BOOL isSessionValid = [self.instagramEngine isSessionValid];
+    [self setTitle: (isSessionValid) ? @"My Feed" : @"Popular Media"];
+    [self.navigationItem.leftBarButtonItem setTitle: (isSessionValid) ? @"Log out" : @"Log in"];
+    [self.navigationItem.rightBarButtonItem setEnabled: isSessionValid];
+    [self.mediaArray removeAllObjects];
+    [self.collectionView reloadData];
+    
     if (isSessionValid) {
-        [self setTitle:@"My Feed"];
-        [self.navigationItem.leftBarButtonItem setTitle:@"Log out"];
-        [self.navigationItem.rightBarButtonItem setEnabled:YES];
-        [self.mediaArray removeAllObjects];
-        [self.collectionView reloadData];
         [self requestSelfFeed];
     }
     else
     {
-        [self setTitle:@"Popular Media"];
-        [self.navigationItem.leftBarButtonItem setTitle:@"Log in"];
-        [self.navigationItem.rightBarButtonItem setEnabled:NO];
-        [self.mediaArray removeAllObjects];
-        [self.collectionView reloadData];
         [self requestPopularMedia];
     }
 }
@@ -89,8 +86,7 @@
 #pragma mark - API Requests -
 
 /**
-    - requestPopularMedia
-    Calls InstagramKit's Helper method to fetch Popular Instagram Media.
+    Calls InstagramKit's helper method to fetch Popular Instagram Media.
  */
 - (void)requestPopularMedia
 {
@@ -106,8 +102,7 @@
 
 
 /**
-    - requestSelfFeed
-    Calls InstagramKit's Helper method to fetch Media in logged in Users own feed.
+    Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
     @discussion The self.currentPaginationInfo object is updated on each successful call
     and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
@@ -132,7 +127,6 @@
 
 
 /**
-    - moreTapped:
     Invoked when user taps the 'More' navigation item.
     @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
  */
@@ -142,9 +136,8 @@
 
 
 /**
- - loginTapped:
- Invoked when user taps the left navigation item.
- @discussion Either directs to the Login ViewController or logs out.
+    Invoked when user taps the left navigation item.
+    @discussion Either directs to the Login ViewController or logs out.
  */
 - (IBAction)loginTapped:(id)sender
 {
@@ -156,7 +149,7 @@
     {
         [self.instagramEngine logout];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logged out" message:@"The user is now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:@"You are now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [alert show];
 
         [self loadMedia];

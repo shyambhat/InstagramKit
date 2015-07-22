@@ -5,11 +5,8 @@ xcode_scheme: InstagramKit-Example
 xcode_sdk: iphonesimulator8.1
 podfile: InstagramKit-Example/Podfile
 # before_install:
-#     - gem install cocoapods --quiet
-#     - pod --version
+#     - pod repo remove master
 #     - pod setup
-#     - pod install
-    # - pod repo update --silent
 
 # script:
     #- pod lib lint
