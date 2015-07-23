@@ -27,10 +27,18 @@
 #import "InstagramPaginationInfo.h"
 #import "InstagramLocation.h"
 
+#if INSTAGRAMKIT_UICKEYCHAINSTORE
+#import "UICKeyChainStore.h"
+#endif
+
 @interface InstagramEngine()
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 @property (nonatomic, strong) dispatch_queue_t backgroundQueue;
+
+#if INSTAGRAMKIT_UICKEYCHAINSTORE
+@property (nonatomic, strong) UICKeyChainStore *keychainStore;
+#endif
 
 @end
 
@@ -73,7 +81,10 @@
             NSLog(@"ERROR : InstagramKit - Invalid Redirect URL. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppRedirectURLConfigurationKey);
         }
         
-        [self retrieveAccessToken];
+#if INSTAGRAMKIT_UICKEYCHAINSTORE
+        self.keychainStore = [UICKeyChainStore keyChainStoreWithService:InstagtamKitKeychainStore];
+        _accessToken = self.keychainStore[@"token"];
+#endif
     }
     return self;
 }
@@ -106,10 +117,10 @@
     }
     
     BOOL success = YES;
-    self.accessToken = [self queryStringParametersFromString:url.fragment][@"access_token"];
-    if (self.accessToken)
+    NSString *token = [self queryStringParametersFromString:url.fragment][@"access_token"];
+    if (token)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:InstagtamKitUserAuthenticatedNotification object:nil];
+        self.accessToken = token;
     }
     else
     {
@@ -135,6 +146,7 @@
     [[storage cookies] enumerateObjectsUsingBlock:^(NSHTTPCookie *cookie, NSUInteger idx, BOOL *stop) {
         [storage deleteCookie:cookie];
     }];
+    
     self.accessToken = nil;
 }
 
@@ -145,19 +157,12 @@
 - (void)setAccessToken:(NSString *)accessToken
 {
     _accessToken = accessToken;
-    [self storeAccessToken];
-}
 
+#if INSTAGRAMKIT_UICKEYCHAINSTORE
+    self.keychainStore[@"token"] = self.accessToken;
+#endif
 
-- (void)storeAccessToken
-{
-    [[NSUserDefaults standardUserDefaults] setObject:self.accessToken forKey:@"com.instagramkit.token"];
-}
-
-
-- (void)retrieveAccessToken
-{
-    _accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"com.instagramkit.token"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:InstagtamKitUserAuthenticationChangedNotification object:nil];
 }
 
 

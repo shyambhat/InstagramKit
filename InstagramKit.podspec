@@ -16,5 +16,15 @@ Pod::Spec.new do |s|
   s.exclude_files = 'InstagramKitDemo'
   s.requires_arc = true
   s.dependency 'AFNetworking', '~>2.0'
+  s.default_subspec = 'Exclude-UICKeyChainStore'
 
+  s.subspec 'Exclude-UICKeyChainStore' do |exclude_uickeychainstore|
+  # default lean subspec for users who don't need UICKeyChainStore
+  end
+
+  s.subspec 'UICKeyChainStore' do |uickeychainstore|
+    uickeychainstore.xcconfig	=
+        { 'OTHER_CFLAGS' => '$(inherited) -INSTAGRAMKIT_INCLUDE_UICKEYCHAINSTORE' }
+    uickeychainstore.dependency 'UICKeyChainStore', '~>2.0'
+  end
 end

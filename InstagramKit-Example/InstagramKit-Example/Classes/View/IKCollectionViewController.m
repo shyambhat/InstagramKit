@@ -51,8 +51,8 @@
     
     [self loadMedia];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userAuthenticated:)
-                                                 name:InstagtamKitUserAuthenticatedNotification
+                                             selector:@selector(userAuthenticationChanged:)
+                                                 name:InstagtamKitUserAuthenticationChangedNotification
                                                object:nil];
 }
 
@@ -151,8 +151,6 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:@"You are now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [alert show];
-
-        [self loadMedia];
     }
 }
 
@@ -160,7 +158,7 @@
 #pragma mark - User Authenticated Notification -
 
 
-- (void)userAuthenticated:(NSNotification *)notification
+- (void)userAuthenticationChanged:(NSNotification *)notification
 {
     [self loadMedia];
 }

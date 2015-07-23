@@ -26,6 +26,8 @@
 #define INSTAGRAMKIT_EXTERN extern __attribute__((visibility ("default")))
 #endif
 
+#define INSTAGRAMKIT_UICKEYCHAINSTORE __has_include("UICKeyChainStore.h")
+
 /**
  *  Configuration Key for the Instagram API's Base URL.
  */
@@ -82,25 +84,28 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
 
 
 /*!
- @abstract      The name for the notification posted on successfully authenticating an user.
- @discussion    Posted only if the method -receivedValidAccessTokenFromURL:error: is used for authentication.
+ @abstract      The notification posted on changing the authentication token.
  */
-
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticatedNotification;
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticationChangedNotification;
 
 
 /*!
  @abstract      The error domain for all errors from InstagramKit.
  @discussion    Error codes in the range 0-99 are reserved for this domain.
  */
-
 INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
+
+
+/*!
+ @abstract      The Keychain Store service from InstagramKit to securely store credentials.
+ */
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitKeychainStore;
+
 
 /*!
  @typedef       NS_ENUM(NSInteger, InstagtamKitErrorCode)
  @abstract      Error codes for InstagtamKitErrorDomain.
  */
-
 typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
 {
     /*!
