@@ -22,17 +22,20 @@
 #import "InstagramUser.h"
 #import "InstagramComment.h"
 #import "InstagramLocation.h"
+#import "InstagramUserPosition.h"
 
 @interface InstagramMedia ()
 {
     NSMutableArray *mLikes;
     NSMutableArray *mComments;
+    NSMutableArray *mUsersInPhoto;
 }
 @end
 
 @implementation InstagramMedia
 @synthesize likes = mLikes;
 @synthesize comments = mComments;
+@synthesize usersInPhoto = mUsersInPhoto;
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
@@ -65,6 +68,11 @@
             {
                 _locationName = info[kLocation][kLocationName];
             }
+        }
+        mUsersInPhoto = [[NSMutableArray alloc] init];
+        for (NSDictionary *userInPhotoInfo in info[kUsersInPhoto]) {
+            InstagramUserPosition *userPosition = [[InstagramUserPosition alloc] initWithInfo:userInPhotoInfo];
+            [mUsersInPhoto addObject:userPosition];
         }
         
         _filter = info[kFilter];
