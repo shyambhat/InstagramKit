@@ -23,7 +23,7 @@
 #import "InstagramKit.h"
 #import "InstagramEngine+Internal.h"
 
-#define kTestRequestTimeout 60
+#define kTestRequestTimeout 5
 
 static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
 
