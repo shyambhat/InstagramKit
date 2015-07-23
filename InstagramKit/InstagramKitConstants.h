@@ -26,6 +26,8 @@
 #define INSTAGRAMKIT_EXTERN extern __attribute__((visibility ("default")))
 #endif
 
+#define INSTAGRAMKIT_UICKEYCHAINSTORE __has_include("UICKeyChainStore.h")
+
 /**
  *  Configuration Key for the Instagram API's Base URL.
  */
@@ -82,10 +84,9 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
 
 
 /*!
- @abstract      The name for the notification posted on successfully authenticating an user.
- @discussion    Posted only if the method -receivedValidAccessTokenFromURL:error: is used for authentication.
+ @abstract      The notification posted on changing the authentication token.
  */
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticatedNotification;
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticationChangedNotification;
 
 
 /*!
