@@ -440,7 +440,7 @@
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getCommentsOnMedia:(NSString *)mediaId
-               withSuccess:(InstagramCommentsBlock)success
+               withSuccess:(InstagramObjectsBlock)success
                    failure:(InstagramFailureBlock)failure;
 
 

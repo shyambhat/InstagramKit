@@ -682,7 +682,7 @@
 
 
 - (void)getCommentsOnMedia:(NSString *)mediaId
-               withSuccess:(InstagramCommentsBlock)success
+               withSuccess:(InstagramObjectsBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     [self getPath:[NSString stringWithFormat:@"media/%@/comments",mediaId]
@@ -690,7 +690,7 @@
     responseModel:[InstagramComment class]
           success:^(id response, InstagramPaginationInfo *paginationInfo) {
               NSArray *objects = response;
-              success(objects);
+              success(objects, paginationInfo);
           }
           failure:failure];
 }
