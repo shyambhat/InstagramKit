@@ -54,7 +54,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-    if ((self = [self init])) {
+    if ((self = [super initWithCoder:decoder])) {
         CLLocationCoordinate2D coordinates;
         coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
         coordinates.longitude = [decoder decodeDoubleForKey:kLocationLongitude];
@@ -66,6 +66,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
+    [super encodeWithCoder:encoder];
+
     [encoder encodeDouble:_coordinates.latitude forKey:kLocationLatitude];
     [encoder encodeDouble:_coordinates.longitude forKey:kLocationLongitude];
     [encoder encodeObject:_name forKey:kLocationName];

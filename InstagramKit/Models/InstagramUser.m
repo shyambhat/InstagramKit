@@ -75,7 +75,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-    if ((self = [self init])) {
+    if ((self = [super initWithCoder:decoder])) {
         _username = [decoder decodeObjectOfClass:[NSString class] forKey:kUsername];
         _fullName = [decoder decodeObjectOfClass:[NSString class] forKey:kFullName];
         _profilePictureURL = [decoder decodeObjectOfClass:[NSString class] forKey:kProfilePictureURL];
@@ -87,6 +87,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
+    [super encodeWithCoder:encoder];
+
     [encoder encodeObject:_username forKey:kUsername];
     [encoder encodeObject:_fullName forKey:kFullName];
     [encoder encodeObject:_profilePictureURL forKey:kProfilePictureURL];

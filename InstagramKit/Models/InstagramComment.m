@@ -49,7 +49,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-    if ((self = [self init])) {
+    if ((self = [super initWithCoder:decoder])) {
         _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kCreator];
         _text = [decoder decodeObjectOfClass:[NSString class] forKey:kText];
         _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
@@ -59,6 +59,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
+    [super encodeWithCoder:encoder];
+
     [encoder encodeObject:_user forKey:kCreator];
     [encoder encodeObject:_text forKey:kText];
     [encoder encodeObject:_createdDate forKey:kCreatedDate];
