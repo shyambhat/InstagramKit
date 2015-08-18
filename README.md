@@ -51,7 +51,7 @@ To do so, redirect the user to
 
 
 #### Scope
-All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the IKLoginScope enum. 
+All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the InstagramKitLoginScope enum. 
 
 _Note that in order to use these extended permissions, first you need to submit your app for review to Instagram._
 
@@ -59,9 +59,9 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 ```Objective-C
 // Set scope depending on permissions your App has been granted from Instagram
-// IKLoginScopeBasic is included by default.
+// InstagramKitLoginScopeBasic is included by default.
 
-IKLoginScope scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes; 
+InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
 
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
 [mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
