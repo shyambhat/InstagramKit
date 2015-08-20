@@ -20,7 +20,6 @@
 
 #import "IKLoginViewController.h"
 #import "InstagramKit.h"
-#import "Constants.h"
 
 @interface IKLoginViewController () <UIWebViewDelegate>
 
@@ -34,8 +33,9 @@
 {
     [super viewDidLoad];
     self.webView.scrollView.bounces = NO;
-    
-    NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:InstagramKitLoginScopeBasic];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+
+    NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
     [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
 }
@@ -44,22 +44,17 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSError *error;
-    if ([[InstagramEngine sharedEngine] extractValidAccessTokenFromURL:request.URL error:&error])
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
-        if (!error) {
-            [self dismissViewControllerAnimated:YES
-                                     completion:nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kInstagramUserAuthenticatedNotification
-                                                                object:nil];
-        }
-        else
-        {
-            NSLog(@"%@",error);
-        }
+        [self authenticationSuccess];
     }
-    
     return YES;
+}
+
+- (void)authenticationSuccess
+{
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
 
 @end

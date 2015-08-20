@@ -121,7 +121,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-    if ((self = [self init])) {
+    if ((self = [super initWithCoder:decoder])) {
         _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kUser];
         _userHasLiked = [decoder decodeBoolForKey:kUserHasLiked];
         _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
@@ -165,6 +165,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
+    [super encodeWithCoder:encoder];
+
     [encoder encodeObject:_user forKey:kUser];
     [encoder encodeBool:_userHasLiked forKey:kUserHasLiked];
     [encoder encodeObject:_createdDate forKey:kCreatedDate];
