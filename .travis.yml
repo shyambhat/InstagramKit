@@ -3,7 +3,7 @@ language: objective-c
 xcode_workspace: InstagramKit.xcworkspace
 xcode_scheme: InstagramKit
 xcode_sdk: iphonesimulator8.1
-test-sdk: iphonesimulator8.1
+test_sdk: iphonesimulator7.0
 # before_install:
 #     - pod repo remove master
 #     - pod setup
