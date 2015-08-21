@@ -24,7 +24,7 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 The framework is built atop AFNetworking’s blocks-based architecture and additionally, parses JSON data and creates model objects asynchronously so there’s absolutely no parsing on the main thread.
 It’s neat, fast and works like a charm.
 
-####Installation
+##Installation
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
@@ -42,18 +42,31 @@ pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
 InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access. 
 If you opt to use the optional pod, InstagramKit resumes your authenticated sessions across App launches, without needing any additional code.
 
-####Compatibility
-Earliest supported deployment target = iOS 7.0
-
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
 
 ```InstagramAppClientId``` is your App's Client Id and ```InstagramAppRedirectURL```, the redirect URI which is obtained on registering your App on Instagram's Developer Dashboard.
 The redirect URI specifies where Instagram should redirect users after they have chosen whether or not to authenticate your application. 
 
+##Usage
+
+#### Unauthenticated Requests
+
+Some API calls only require the use of a Client Id, which simply associates the call with your specific App.
+
+```Objective-C
+InstagramEngine *engine = [InstagramEngine sharedEngine];
+[engine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+    // media is an array of InstagramMedia objects
+    ...
+} failure:^(NSError *error, NSInteger statusCode) {
+    ...
+}];
+```
+
 #### Authentication
 
-In order to make Authenticated calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
+For most API calls, you will need an Access Token and often times a User Id. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
 
 To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
 or allow InstagramEngine's helper method do the hard work for you - 
@@ -94,10 +107,9 @@ InstagramEngine includes a helper method to validate this token.
     }
     return YES;
 }
-
 ```
 
-####Usage
+#### Authenticated Requests
 
 Once you're authenticated and InstagramKit has been provided an `accessToken`, it will automatically persist it until you call `-logout` on InstagramEngine. An authenticated call looks no different:
 
@@ -114,6 +126,14 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 ####Pagination 
 The `InstagramPaginationInfo` object has everything it needs to make your next pagination call. 
 Read in detail about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
+
+
+####Changelog
+**Version 3.6.6**
+- Persisting access token using UICKeyChainStore. UICKeyChainStore is added as an optional sub-spec.
+- Discontinued support for iOS 6, to comply with AFNetworking's compatible SDKs.
+- More changes here : https://github.com/shyambhat/InstagramKit/releases/tag/3.6.6
+
 
 ####Contributions?
 
