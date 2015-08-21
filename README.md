@@ -33,11 +33,14 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 pod 'InstagramKit', '~> 3.0'
 ```
 If your App uses authorization and you'd like the storage and retrieval of the access token to and from the Keychain to be automatically handled for you by InstagramKit, include the following pods instead -
+
 ```ruby
 pod 'InstagramKit', '~> 3.0'
 pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
 ```
-InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access.
+ 
+InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access. 
+If you opt to use the optional pod, InstagramKit resumes your authenticated sessions across App launches, without needing any additional code.
 
 ####Compatibility
 Earliest supported deployment target = iOS 7.0
