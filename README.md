@@ -32,11 +32,18 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 ```ruby
 pod 'InstagramKit', '~> 3.0'
 ```
-
+If your App uses authorization and you'd like the storage and retrieval of the access token to and from the Keychain to be automatically handled for you by InstagramKit, include the following pods instead -
+```ruby
+pod 'InstagramKit', '~> 3.0'
+pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
+```
 ####Compatibility
-Earliest supported deployment target = iOS 6
+Earliest supported deployment target = iOS 7.0
 
-####Instagram Developer Registration
+#### Changelog
+InstagramKit 3.6.6 includes vast improvements in code and an optional sub-dependency to [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) to store the authorization token to the device's keychain.
+
+#### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
 
 ```InstagramAppClientId``` is your App's Client Id and ```InstagramAppRedirectURL```, the redirect URI which is obtained on registering your App on Instagram's Developer Dashboard.
@@ -51,7 +58,7 @@ To do so, redirect the user to
 
 
 #### Scope
-All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the InstagramKitLoginScope enum. 
+All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the InstagramKitScope enum. 
 
 _Note that in order to use these extended permissions, first you need to submit your app for review to Instagram._
 
@@ -59,9 +66,9 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 ```Objective-C
 // Set scope depending on permissions your App has been granted from Instagram
-// InstagramKitLoginScopeBasic is included by default.
+// InstagramKitScopeBasic is included by default.
 
-InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
+InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
 
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
 [mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
