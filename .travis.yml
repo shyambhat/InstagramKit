@@ -1,7 +1,7 @@
 
 language: objective-c
 xcode_workspace: InstagramKit.xcworkspace
-xcode_scheme: InstagramKit
+xcode_scheme: InstagramKitTests
 osx_image: beta-xcode6.3
 xcode_sdk: iphonesimulator8.3
 # before_install:
