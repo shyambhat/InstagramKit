@@ -56,7 +56,7 @@ The redirect URI specifies where Instagram should redirect users after they have
 In order to make Authenticated calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
 
 To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
-or allow InstagramKitEngine's helper method do the hard work for you - 
+or allow InstagramEngine's helper method do the hard work for you - 
 
 ```Objective-C
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
@@ -81,7 +81,7 @@ NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope]
 ```
 
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
-InstagramKit includes a helper method to validate this token.
+InstagramEngine includes a helper method to validate this token.
 
 ```Objective-C
 
@@ -89,10 +89,8 @@ InstagramKit includes a helper method to validate this token.
 {
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error]) {
-        if (!error) {
-            //success!
-            ...
-        }
+        // success!
+        ...
     }
     return YES;
 }
