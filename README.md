@@ -32,11 +32,20 @@ Getting started is easy. Just include the files from the directory 'InstagramKit
 ```ruby
 pod 'InstagramKit', '~> 3.0'
 ```
+If your App uses authorization and you'd like the storage and retrieval of the access token to and from the Keychain to be automatically handled for you by InstagramKit, include the following pods instead -
+
+```ruby
+pod 'InstagramKit', '~> 3.0'
+pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
+```
+ 
+InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access. 
+If you opt to use the optional pod, InstagramKit resumes your authenticated sessions across App launches, without needing any additional code.
 
 ####Compatibility
-Earliest supported deployment target = iOS 6
+Earliest supported deployment target = iOS 7.0
 
-####Instagram Developer Registration
+#### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
 
 ```InstagramAppClientId``` is your App's Client Id and ```InstagramAppRedirectURL```, the redirect URI which is obtained on registering your App on Instagram's Developer Dashboard.
@@ -46,12 +55,16 @@ The redirect URI specifies where Instagram should redirect users after they have
 
 In order to make Authenticated calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
 
-To do so, redirect the user to 
-```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
+To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
+or allow InstagramKitEngine's helper method do the hard work for you - 
 
+```Objective-C
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
+[self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
+```
 
-#### Scope
-All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the IKLoginScope enum. 
+#### Scopes
+All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the InstagramKitScope enum. 
 
 _Note that in order to use these extended permissions, first you need to submit your app for review to Instagram._
 
@@ -59,12 +72,12 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 ```Objective-C
 // Set scope depending on permissions your App has been granted from Instagram
-// IKLoginScopeBasic is included by default.
+// InstagramKitScopeBasic is included by default.
 
-IKLoginScope scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes; 
+InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
 
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
-[mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
+[self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
@@ -75,7 +88,7 @@ InstagramKit includes a helper method to validate this token.
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSError *error;
-    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenWithURL:request.URL error:&error]) {
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error]) {
         if (!error) {
             //success!
             ...

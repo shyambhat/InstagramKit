@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "0640"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -22,14 +23,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8224664E1B4C2D8A00F8B5EA"
-               BuildableName = "libInstagramKit.a"
-               BlueprintName = "InstagramKit"
+               BlueprintIdentifier = "82D75EE11B5BF8000028EA29"
+               BuildableName = "InstagramKitTests.xctest"
+               BlueprintName = "InstagramKitTests"
                ReferencedContainer = "container:InstagramKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -41,13 +42,23 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "82D75EE11B5BF8000028EA29"
+               BuildableName = "InstagramKitTests.xctest"
+               BlueprintName = "InstagramKitTests"
+               ReferencedContainer = "container:InstagramKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8224664E1B4C2D8A00F8B5EA"
-            BuildableName = "libInstagramKit.a"
-            BlueprintName = "InstagramKit"
+            BlueprintIdentifier = "82D75EE11B5BF8000028EA29"
+            BuildableName = "InstagramKitTests.xctest"
+            BlueprintName = "InstagramKitTests"
             ReferencedContainer = "container:InstagramKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +75,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8224664E1B4C2D8A00F8B5EA"
-            BuildableName = "libInstagramKit.a"
-            BlueprintName = "InstagramKit"
+            BlueprintIdentifier = "82D75EE11B5BF8000028EA29"
+            BuildableName = "InstagramKitTests.xctest"
+            BlueprintName = "InstagramKitTests"
             ReferencedContainer = "container:InstagramKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,10 +97,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8224664E1B4C2D8A00F8B5EA"
-            BuildableName = "libInstagramKit.a"
-            BlueprintName = "InstagramKit"
-            ReferencedContainer = "container:InstagramKit.xcodeproj">
+            BlueprintIdentifier = "EF1A34CCB6F2BFB920146BF7"
+            BuildableName = "libPods.a"
+            BlueprintName = "Pods"
+            ReferencedContainer = "container:Pods/Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

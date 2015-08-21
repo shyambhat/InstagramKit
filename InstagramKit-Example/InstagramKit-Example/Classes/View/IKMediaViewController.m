@@ -26,9 +26,9 @@
 
 @interface IKMediaViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (nonatomic, strong) InstagramMedia *media;
+@property (weak, nonatomic)     IBOutlet UIImageView *imageView;
+@property (weak, nonatomic)     IBOutlet UILabel *captionLabel;
+@property (nonatomic, strong)   InstagramMedia *media;
 
 @end
 

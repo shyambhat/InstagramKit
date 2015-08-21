@@ -26,25 +26,27 @@
 #define INSTAGRAMKIT_EXTERN extern __attribute__((visibility ("default")))
 #endif
 
+#define INSTAGRAMKIT_UICKEYCHAINSTORE __has_include("UICKeyChainStore.h")
+
 /**
  *  Configuration Key for the Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseUrlConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURLConfigurationKey;
 
 /**
  *  Configuration Key for the Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationUrlConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURLConfigurationKey;
 
 /**
  *  Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseUrl;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURL;
 
 /**
  *  Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationUrl;
+INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURL;
 
 /**
  *  Configuration Key for the Client Id of your App, registered with Instagram.
@@ -58,10 +60,9 @@ INSTAGRAMKIT_EXTERN NSString *const kInstagramAppRedirectURLConfigurationKey;
 
 
 /*!
- @typedef InstagrmaKitLoginScope enum
+ @typedef   InstagrmaKitLoginScope enum
  
- @abstract
- Passed to indicate the scope of the access you are requesting from the user.
+ @abstract  Passed to indicate the scope of the access you are requesting from the user.
  
  @discussion
  All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request. 
@@ -83,17 +84,28 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
 
 
 /*!
- @abstract The error domain for all errors from InstagramKit.
- @discussion Error codes in the range 0-99 are reserved for this domain.
+ @abstract      The notification posted on changing the authentication token.
  */
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticationChangedNotification;
 
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
 
 /*!
- @typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
- @abstract Error codes for InstagtamKitErrorDomain.
+ @abstract      The error domain for all errors from InstagramKit.
+ @discussion    Error codes in the range 0-99 are reserved for this domain.
  */
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
 
+
+/*!
+ @abstract      The Keychain Store service from InstagramKit to securely store credentials.
+ */
+INSTAGRAMKIT_EXTERN NSString *const InstagtamKitKeychainStore;
+
+
+/*!
+ @typedef       NS_ENUM(NSInteger, InstagtamKitErrorCode)
+ @abstract      Error codes for InstagtamKitErrorDomain.
+ */
 typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
 {
     /*!
@@ -118,20 +130,106 @@ typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
 @class InstagramPaginationInfo;
 @class InstagramTag;
 @class InstagramLocation;
+@class InstagramModel;
 
-typedef void (^InstagramLoginBlock)(NSError *error);
-typedef void (^InstagramUserBlock)(InstagramUser *user);
-typedef void (^InstagramMediaDetailBlock)(InstagramMedia *media);
+/**
+ *  A generic block used as a callback for receiving a collection of objects.
+ *
+ *  @param paginatedObjects Array of Instagram model objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramPaginatiedResponseBlock)(NSArray *paginatedObjects, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A generic block used as a callback for receiving a single object.
+ *
+ *  @param model    An Instagram model object.
+ */
+typedef void (^InstagramObjectBlock)(id object);
+
+/**
+ *  A callback block providing a collection of Media objects.
+ *
+ *  @param media            An array of InstagramMedia objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
 typedef void (^InstagramMediaBlock)(NSArray *media, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramObjectsBlock)(NSArray *objects, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramTagBlock)(InstagramTag *tag);
-typedef void (^InstagramCommentsBlock)(NSArray *comments);
+
+/**
+ *  A callback block providing a collection of User objects.
+ *
+ *  @param users            An array of User objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
 typedef void (^InstagramUsersBlock)(NSArray *users, InstagramPaginationInfo *paginationInfo);
-typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
-typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
-typedef void (^InstagramLocationsBlock)(NSArray *locations);
+
+/**
+ *  A callback block providing a collection of Location objects.
+ *
+ *  @param locations        An array of InstagramLocation objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramLocationsBlock)(NSArray *locations, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a collection of Comment objects.
+ *
+ *  @param comments         An array of InstagramComment objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramCommentsBlock)(NSArray *comments, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a collection of Tag objects.
+ *
+ *  @param tags             An array of Tag objects.
+ *  @param paginationInfo   A PaginationInfo object.
+ */
+typedef void (^InstagramTagsBlock)(NSArray *tags, InstagramPaginationInfo *paginationInfo);
+
+/**
+ *  A callback block providing a User object.
+ *
+ *  @param user     An InstagramUser object.
+ */
+typedef void (^InstagramUserBlock)(InstagramUser *user);
+
+/**
+ *  A callback block providing a Media object.
+ *
+ *  @param media    An InstagraMedia object.
+ */
+typedef void (^InstagramMediaObjectBlock)(InstagramMedia *media);
+
+/**
+ *  A callback block providing a Tag object.
+ *
+ *  @param tag An InstagramTag object.
+ */
+typedef void (^InstagramTagBlock)(InstagramTag *tag);
+
+/**
+ *  A callback block providing a Location object.
+ *
+ *  @param location An InstagramLocation object.
+ */
 typedef void (^InstagramLocationBlock)(InstagramLocation *location);
+
+/**
+ *  A generic failure block for handling server errors.
+ *
+ *  @param error
+ *  @param serverStatusCode 
+ */
+typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
+
+/**
+ *  A generic response block providing the server response dictionary, as is.
+ *
+ *  @param serverResponse Response JSON in dictionary form.
+ */
+typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
+
 
 /**
  *  String constants as represented in JSON.
