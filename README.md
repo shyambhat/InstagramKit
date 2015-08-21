@@ -37,11 +37,10 @@ If your App uses authorization and you'd like the storage and retrieval of the a
 pod 'InstagramKit', '~> 3.0'
 pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
 ```
+InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access.
+
 ####Compatibility
 Earliest supported deployment target = iOS 7.0
-
-#### Changelog
-InstagramKit 3.6.6 includes vast improvements in code and an optional sub-dependency to [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) to store the authorization token to the device's keychain.
 
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
