@@ -55,11 +55,15 @@ The redirect URI specifies where Instagram should redirect users after they have
 
 In order to make Authenticated calls to the API, you need an Access Token and often times a User ID. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
 
-To do so, redirect the user to 
-```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
+To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
+or allow InstagramKitEngine's helper method do the hard work for you - 
 
+```Objective-C
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
+[self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
+```
 
-#### Scope
+#### Scopes
 All apps have basic read access by default, but if you plan on asking for extended access such as liking, commenting, or managing friendships, you need to specify these scopes in your authorization request using the InstagramKitScope enum. 
 
 _Note that in order to use these extended permissions, first you need to submit your app for review to Instagram._
@@ -73,7 +77,7 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
 
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
-[mWebView loadRequest:[NSURLRequest requestWithURL:authURL]];
+[self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
@@ -84,7 +88,7 @@ InstagramKit includes a helper method to validate this token.
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSError *error;
-    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenWithURL:request.URL error:&error]) {
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error]) {
         if (!error) {
             //success!
             ...
