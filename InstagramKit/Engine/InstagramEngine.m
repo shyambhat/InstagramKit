@@ -82,7 +82,7 @@
         }
         
 #if INSTAGRAMKIT_UICKEYCHAINSTORE
-        self.keychainStore = [UICKeyChainStore keyChainStoreWithService:InstagtamKitKeychainStore];
+        self.keychainStore = [UICKeyChainStore keyChainStoreWithService:InstagramKitKeychainStore];
         _accessToken = self.keychainStore[@"token"];
 #endif
     }
@@ -125,7 +125,7 @@
     else
     {
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
-        *error = [NSError errorWithDomain:InstagtamKitErrorDomain
+        *error = [NSError errorWithDomain:InstagramKitErrorDomain
                                      code:InstagramKitAuthenticationFailedError
                                  userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
         success = NO;
@@ -162,7 +162,7 @@
     self.keychainStore[@"token"] = self.accessToken;
 #endif
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:InstagtamKitUserAuthenticationChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:InstagramKitUserAuthenticationChangedNotification object:nil];
 }
 
 

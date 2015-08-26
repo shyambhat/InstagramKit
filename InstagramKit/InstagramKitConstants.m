@@ -28,9 +28,9 @@ NSString *const kInstagramKitAuthorizationURL = @"https://api.instagram.com/oaut
 NSString *const kInstagramAppClientIdConfigurationKey = @"InstagramAppClientId";
 NSString *const kInstagramAppRedirectURLConfigurationKey = @"InstagramAppRedirectURL";
 
-NSString *const InstagtamKitUserAuthenticationChangedNotification = @"com.instagramkit.token.change";
-NSString *const InstagtamKitErrorDomain = @"com.instagramkit";
-NSString *const InstagtamKitKeychainStore = @"com.instagramkit.secure";
+NSString *const InstagramKitUserAuthenticationChangedNotification = @"com.instagramkit.token.change";
+NSString *const InstagramKitErrorDomain = @"com.instagramkit";
+NSString *const InstagramKitKeychainStore = @"com.instagramkit.secure";
 
 NSString *const kKeyClientID = @"client_id";
 NSString *const kKeyAccessToken = @"access_token";

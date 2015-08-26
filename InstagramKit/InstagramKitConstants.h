@@ -86,27 +86,27 @@ typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
 /*!
  @abstract      The notification posted on changing the authentication token.
  */
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitUserAuthenticationChangedNotification;
+INSTAGRAMKIT_EXTERN NSString *const InstagramKitUserAuthenticationChangedNotification;
 
 
 /*!
  @abstract      The error domain for all errors from InstagramKit.
  @discussion    Error codes in the range 0-99 are reserved for this domain.
  */
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitErrorDomain;
+INSTAGRAMKIT_EXTERN NSString *const InstagramKitErrorDomain;
 
 
 /*!
  @abstract      The Keychain Store service from InstagramKit to securely store credentials.
  */
-INSTAGRAMKIT_EXTERN NSString *const InstagtamKitKeychainStore;
+INSTAGRAMKIT_EXTERN NSString *const InstagramKitKeychainStore;
 
 
 /*!
- @typedef       NS_ENUM(NSInteger, InstagtamKitErrorCode)
- @abstract      Error codes for InstagtamKitErrorDomain.
+ @typedef       NS_ENUM(NSInteger, InstagramKitErrorCode)
+ @abstract      Error codes for InstagramKitErrorDomain.
  */
-typedef NS_ENUM(NSInteger, InstagtamKitErrorCode)
+typedef NS_ENUM(NSInteger, InstagramKitErrorCode)
 {
     /*!
      @abstract Reserved.
