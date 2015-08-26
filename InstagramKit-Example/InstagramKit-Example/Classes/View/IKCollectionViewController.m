@@ -52,7 +52,7 @@
     [self loadMedia];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userAuthenticationChanged:)
-                                                 name:InstagtamKitUserAuthenticationChangedNotification
+                                                 name:InstagramKitUserAuthenticationChangedNotification
                                                object:nil];
 }
 
