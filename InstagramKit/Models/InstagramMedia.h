@@ -90,6 +90,11 @@
 @property (nonatomic, readonly) NSString *locationName;
 
 /**
+ *  Media Location id.
+ */
+@property (nonatomic, readonly) NSString *locationId;
+
+/**
  *  Filter applied on Media during creation.
  */
 @property (nonatomic, readonly) NSString *filter;

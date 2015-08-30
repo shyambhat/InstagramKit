@@ -65,6 +65,9 @@
             {
                 _locationName = info[kLocation][kLocationName];
             }
+            if (IKNotNull(info[kLocation][kID])) {
+                _locationId = info[kLocation][kID];
+            }
         }
         
         _filter = info[kFilter];
