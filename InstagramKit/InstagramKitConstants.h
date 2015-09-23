@@ -70,7 +70,7 @@ INSTAGRAMKIT_EXTERN NSString *const kInstagramAppRedirectURLConfigurationKey;
  https://instagram.com/developer/authentication/#scope
  
  */
-typedef NS_ENUM(NSUInteger, InstagramKitLoginScope)
+typedef NS_OPTIONS(NSUInteger, InstagramKitLoginScope)
 {
     /*! Indicates permission to read data on a user’s behalf, e.g. recent media, following lists (granted by default) */
     InstagramKitLoginScopeBasic = 0,
