@@ -89,9 +89,7 @@ NSString *const kCursor = @"cursor";
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        if (IKNotNull(info[kID])) {
-            _Id = [[NSString alloc] initWithString:info[kID]];
-        }
+        _Id = IKNotNull(info[kID]) ? [[NSString alloc] initWithString:info[kID]] : nil;
     }
     return self;
 }
