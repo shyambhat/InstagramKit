@@ -365,6 +365,7 @@
     [self getMediaAtLocation:location
                        count:0
                        maxId:nil
+                    distance:1000
                  withSuccess:success
                      failure:failure];
 }
