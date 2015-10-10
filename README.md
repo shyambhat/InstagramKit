@@ -72,7 +72,7 @@ To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_
 or allow InstagramEngine's helper method do the hard work for you - 
 
 ```Objective-C
-NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURL];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
@@ -89,7 +89,7 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
 
-NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 

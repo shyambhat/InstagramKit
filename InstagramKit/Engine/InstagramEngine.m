@@ -93,13 +93,13 @@
 #pragma mark - Authentication -
 
 
-- (NSURL *)authorizarionURL
+- (NSURL *)authorizationURL
 {
-    return [self authorizarionURLForScope:InstagramKitLoginScopeBasic];
+    return [self authorizationURLForScope:InstagramKitLoginScopeBasic];
 }
 
 
-- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope
+- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope
 {
     NSDictionary *parameters = [self authorizationParametersWithScope:scope];
     NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kInstagramKitAuthorizationURL parameters:parameters error:nil];

@@ -56,7 +56,7 @@
  *
  *  @return URL to direct user to Instagram's login screen.
  */
-- (NSURL *)authorizarionURL;
+- (NSURL *)authorizationURL;
 
 
 /**
@@ -66,7 +66,7 @@
  *
  *  @return URL to direct user to Instagram's login screen.
  */
-- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope;
+- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
 
 
 /**

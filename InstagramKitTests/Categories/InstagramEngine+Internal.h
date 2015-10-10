@@ -22,7 +22,7 @@
 
 @interface InstagramEngine (Internal)
 
-- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope;
+- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
 
 - (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
                                   error:(NSError *__autoreleasing *)error;
