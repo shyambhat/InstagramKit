@@ -383,7 +383,24 @@
                    success:success
                    failure:failure];
 }
-                         
+
+
+- (void)getMediaAtLocation:(CLLocationCoordinate2D)location
+                     count:(NSInteger)count
+                     maxId:(NSString *)maxId
+                  distance:(NSInteger)distance
+               withSuccess:(InstagramMediaBlock)success
+                   failure:(InstagramFailureBlock)failure
+{
+    NSDictionary *params = [self parametersFromCount:count maxId:maxId andPaginationKey:kPaginationKeyMaxId];
+    [self getPaginatedPath:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f&distance=%d",location.latitude,location.longitude, distance]
+                parameters:params
+             responseModel:[InstagramMedia class]
+                   success:success
+                   failure:failure];
+}
+
+
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                        withSuccess:(InstagramLocationsBlock)success
                            failure:(InstagramFailureBlock)failure

@@ -36,7 +36,7 @@ If your App uses authorization and you'd like the storage and retrieval of the a
 
 ```ruby
 pod 'InstagramKit', '~> 3.0'
-pod 'InstagramKit/UICKeyChainStore', '~> 2.0'
+pod 'InstagramKit/UICKeyChainStore'
 ```
  
 InstagramKit uses [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) as an optional sub-dependency for Keychain access. 
