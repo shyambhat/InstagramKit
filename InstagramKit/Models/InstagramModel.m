@@ -133,7 +133,7 @@ NSString *const kCursor = @"cursor";
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramModel *copy = [[InstagramModel allocWithZone:zone] init];
+    InstagramModel *copy = [[[self class] allocWithZone:zone] init];
     copy->_Id = [_Id copy];
     return copy;
 }
