@@ -190,7 +190,7 @@
         (scope & enumBitValueToCheck) ? [strings addObject:obj] : 0;
     }];
     
-    return (strings.count) ? [strings componentsJoinedByString:@"+"] : typeStrings[0];
+    return (strings.count) ? [strings componentsJoinedByString:@" "] : typeStrings[0];
 }
 
 
