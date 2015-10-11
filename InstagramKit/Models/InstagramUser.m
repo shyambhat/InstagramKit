@@ -37,20 +37,9 @@
     _username = [[NSString alloc] initWithString:info[kUsername]];
     _fullName = [[NSString alloc] initWithString:info[kFullName]];
     
-    if (IKNotNull(info[kProfilePictureURL]))
-    {
-        _profilePictureURL = [[NSURL alloc] initWithString:info[kProfilePictureURL]];
-    }
-    
-    if (IKNotNull(info[kBio]))
-    {
-        _bio = [[NSString alloc] initWithString:info[kBio]];
-    }
-    
-    if (IKNotNull(info[kWebsite]))
-    {
-        _website = [[NSURL alloc] initWithString:info[kWebsite]];
-    }
+    _profilePictureURL = (IKNotNull(info[kProfilePictureURL])) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
+    _bio = (IKNotNull(info[kBio])) ? [[NSString alloc] initWithString:info[kBio]] : nil;
+    _website = (IKNotNull(info[kWebsite])) ? [[NSURL alloc] initWithString:info[kWebsite]] : nil;
     
     if (IKNotNull(info[kCounts]))
     {
