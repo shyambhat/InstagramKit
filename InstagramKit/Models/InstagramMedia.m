@@ -60,14 +60,9 @@
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
+            _locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
+            _locationName = IKNotNull(info[kLocation][kLocationName]) ? info[kLocation][kLocationName] : nil;
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
-            if (IKNotNull(info[kLocation][kLocationName]))
-            {
-                _locationName = info[kLocation][kLocationName];
-            }
-            if (IKNotNull(info[kLocation][kID])) {
-                _locationId = info[kLocation][kID];
-            }
         }
         
         _filter = info[kFilter];

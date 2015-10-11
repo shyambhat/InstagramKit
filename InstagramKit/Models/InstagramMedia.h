@@ -85,14 +85,14 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D location;
 
 /**
- *  Media Location name.
- */
-@property (nonatomic, readonly) NSString *locationName;
-
-/**
  *  Media Location id.
  */
 @property (nonatomic, readonly) NSString *locationId;
+
+/**
+ *  Media Location name.
+ */
+@property (nonatomic, readonly) NSString *locationName;
 
 /**
  *  Filter applied on Media during creation.
