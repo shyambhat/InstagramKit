@@ -266,7 +266,7 @@
 		822466471B4C2D8A00F8B5EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = InstagramKit;
 				TargetAttributes = {
 					8224664E1B4C2D8A00F8B5EA = {
