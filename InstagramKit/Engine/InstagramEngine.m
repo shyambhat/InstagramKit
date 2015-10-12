@@ -509,10 +509,11 @@
 - (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
                        failure:(InstagramFailureBlock)failure
 {
-    [self getSelfFeedWithCount:0
-                         maxId:nil
-                       success:success
-                       failure:failure];
+    [self getPaginatedPath:@"users/self/feed"
+                parameters:nil
+             responseModel:[InstagramMedia class]
+                   success:success
+                   failure:failure];
 }
 
 
