@@ -51,22 +51,22 @@
 
 
 /**
- *  A convenience method to generate an authentication URL with Basic permissions 
+ *  A convenience method to generate an authorization URL with Basic permissions
  *  to direct user to Instagram's login screen.
  *
  *  @return URL to direct user to Instagram's login screen.
  */
-- (NSURL *)authorizarionURL;
+- (NSURL *)authorizationURL;
 
 
 /**
- *  A convenience method to generate an authentication URL to direct user to Instagram's login screen.
+ *  A convenience method to generate an authorization URL to direct user to Instagram's login screen.
  *
  *  @param scope Scope based on permissions required.
  *
  *  @return URL to direct user to Instagram's login screen.
  */
-- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope;
+- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
 
 
 /**
