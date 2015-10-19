@@ -225,11 +225,14 @@
 
 - (NSDictionary *)parametersFromCount:(NSInteger)count maxId:(NSString *)maxId andPaginationKey:(NSString *)key
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (count) {
+        [params setObject:[NSString stringWithFormat:@"%ld",(long)count] forKey:kCount];
+    }
     if (maxId) {
         [params setObject:maxId forKey:key];
     }
-    return params ? [NSDictionary dictionaryWithDictionary:params] : nil;
+    return [params copy];
 }
 
 
