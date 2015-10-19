@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### [Unreleased]
 **on `dev` branch**
 
-## [3.6.8] - 2015-10-19
+## [3.6.9] - 2015-10-19
 
 #### Added
 - Xcode 7 changes to Project file.
