@@ -93,13 +93,13 @@
 #pragma mark - Authentication -
 
 
-- (NSURL *)authorizarionURL
+- (NSURL *)authorizationURL
 {
-    return [self authorizarionURLForScope:InstagramKitLoginScopeBasic];
+    return [self authorizationURLForScope:InstagramKitLoginScopeBasic];
 }
 
 
-- (NSURL *)authorizarionURLForScope:(InstagramKitLoginScope)scope
+- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope
 {
     NSDictionary *parameters = [self authorizationParametersWithScope:scope];
     NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kInstagramKitAuthorizationURL parameters:parameters error:nil];
@@ -190,7 +190,7 @@
         (scope & enumBitValueToCheck) ? [strings addObject:obj] : 0;
     }];
     
-    return (strings.count) ? [strings componentsJoinedByString:@"+"] : typeStrings[0];
+    return (strings.count) ? [strings componentsJoinedByString:@" "] : typeStrings[0];
 }
 
 
@@ -225,11 +225,14 @@
 
 - (NSDictionary *)parametersFromCount:(NSInteger)count maxId:(NSString *)maxId andPaginationKey:(NSString *)key
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)count], kCount, nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (count) {
+        [params setObject:[NSString stringWithFormat:@"%ld",(long)count] forKey:kCount];
+    }
     if (maxId) {
         [params setObject:maxId forKey:key];
     }
-    return params ? [NSDictionary dictionaryWithDictionary:params] : nil;
+    return [params copy];
 }
 
 
@@ -365,6 +368,7 @@
     [self getMediaAtLocation:location
                        count:0
                        maxId:nil
+                    distance:1000
                  withSuccess:success
                      failure:failure];
 }
@@ -373,17 +377,19 @@
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
                      count:(NSInteger)count
                      maxId:(NSString *)maxId
+                  distance:(CGFloat)distance
                withSuccess:(InstagramMediaBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self parametersFromCount:count maxId:maxId andPaginationKey:kPaginationKeyMaxId];
-    [self getPaginatedPath:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f",location.latitude,location.longitude]
+    [self getPaginatedPath:[NSString stringWithFormat:@"media/search?lat=%f&lng=%f&distance=%f",location.latitude,location.longitude, distance]
                 parameters:params
              responseModel:[InstagramMedia class]
                    success:success
                    failure:failure];
 }
-                         
+
+
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                        withSuccess:(InstagramLocationsBlock)success
                            failure:(InstagramFailureBlock)failure

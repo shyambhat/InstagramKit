@@ -89,9 +89,7 @@ NSString *const kCursor = @"cursor";
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        if (IKNotNull(info[kID])) {
-            _Id = [[NSString alloc] initWithString:info[kID]];
-        }
+        _Id = IKNotNull(info[kID]) ? [[NSString alloc] initWithString:info[kID]] : nil;
     }
     return self;
 }
@@ -133,7 +131,7 @@ NSString *const kCursor = @"cursor";
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramModel *copy = [[InstagramModel allocWithZone:zone] init];
+    InstagramModel *copy = [[[self class] allocWithZone:zone] init];
     copy->_Id = [_Id copy];
     return copy;
 }

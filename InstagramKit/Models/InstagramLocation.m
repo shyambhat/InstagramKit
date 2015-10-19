@@ -32,9 +32,7 @@
         coordinates.latitude = [info[kLocationLatitude] doubleValue];
         coordinates.longitude = [info[kLocationLongitude] doubleValue];
         _coordinates = coordinates;
-        if (IKNotNull(info[kLocationName])) {
-            _name = [[NSString alloc] initWithString:info[kLocationName]];
-        }
+        _name =  (IKNotNull(info[kLocationName])) ? [[NSString alloc] initWithString:info[kLocationName]] : nil;
     }
     return self;
 }

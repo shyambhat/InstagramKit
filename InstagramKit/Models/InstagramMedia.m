@@ -60,11 +60,9 @@
         _tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
+            _locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
+            _locationName = IKNotNull(info[kLocation][kLocationName]) ? info[kLocation][kLocationName] : nil;
             _location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
-            if (IKNotNull(info[kLocation][kLocationName]))
-            {
-                _locationName = info[kLocation][kLocationName];
-            }
         }
         
         _filter = info[kFilter];
@@ -83,26 +81,26 @@
 - (void)initializeImages:(NSDictionary *)imagesInfo
 {
     NSDictionary *thumbInfo = imagesInfo[kThumbnail];
-    _thumbnailURL = [[NSURL alloc] initWithString:thumbInfo[kURL]];
+    _thumbnailURL = (IKNotNull(thumbInfo[kURL])) ? [[NSURL alloc] initWithString:thumbInfo[kURL]] : nil;
     _thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
     
     NSDictionary *lowResInfo = imagesInfo[kLowResolution];
-    _lowResolutionImageURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
+    _lowResolutionImageURL = IKNotNull(lowResInfo[kURL])? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
     _lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = imagesInfo[kStandardResolution];
-    _standardResolutionImageURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+    _standardResolutionImageURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
     _standardResolutionImageFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
 - (void)initializeVideos:(NSDictionary *)videosInfo
 {
     NSDictionary *lowResInfo = videosInfo[kLowResolution];
-    _lowResolutionVideoURL = [[NSURL alloc] initWithString:lowResInfo[kURL]];
+    _lowResolutionVideoURL = IKNotNull(lowResInfo[kURL]) ? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
     _lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
-    _standardResolutionVideoURL = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+    _standardResolutionVideoURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
     _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 

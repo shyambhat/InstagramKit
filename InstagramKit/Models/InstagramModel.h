@@ -86,7 +86,7 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
  *  Initializes a new instance.
  *  @param info JSON dictionary
  */
-- (instancetype)initWithInfo:(NSDictionary *)info NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithInfo:(NSDictionary *)info;
 
 /**
  *  Comparing Instagram model objects.
