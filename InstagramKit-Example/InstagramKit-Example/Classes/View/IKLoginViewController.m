@@ -35,7 +35,7 @@
     self.webView.scrollView.bounces = NO;
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
 
-    NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
+    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURL];
     [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
 }
