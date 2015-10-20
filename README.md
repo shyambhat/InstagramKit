@@ -129,11 +129,21 @@ Read in detail about implementing Pagination for your requests effortlessly in t
 
 
 ####Changelog
-**Version 3.6.6**
-- Persisting access token using UICKeyChainStore. UICKeyChainStore is added as an optional sub-spec.
-- Discontinued support for iOS 6, to comply with AFNetworking's compatible SDKs.
-- More changes here : https://github.com/shyambhat/InstagramKit/releases/tag/3.6.6
+**Version 3.6.9**
 
+##### Added
+- Xcode 7 changes to Project file.
+- Added CHANGELOG.md
+
+##### Changed
+- `-getMediaAtLocation: count: maxId: withSuccess: failure:` changed to `-getMediaAtLocation: count: maxId: distance: withSuccess: failure:`
+- #167 Typo fixed `-authorizarionURL` to `authorizationURL`. By @natan.
+
+##### Fixed
+- #146 Checks for media URLs in initializing InstagramMedia objects.
+- #148 Fix Token Get in Authorisation scopes. By @DanTakagaki.
+- #165 Parameter Count must be larger than zero. Fixes #150. By @shyambhat
+- #164 InstagramModel copyWithZone updated to allocate correct type of object. By @urklc.
 
 ####Contributions?
 
