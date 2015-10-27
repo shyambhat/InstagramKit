@@ -146,7 +146,7 @@ typedef void (^InstagramPaginatiedResponseBlock)(NSArray<InstagramModel *> *pagi
  *
  *  @param model    An Instagram model object.
  */
-typedef void (^InstagramObjectBlock)(__kindof InstagramModel *object);
+typedef void (^InstagramObjectBlock)(id object);
 
 /**
  *  A callback block providing a collection of Media objects.
