@@ -20,6 +20,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 #ifdef __cplusplus
 #define INSTAGRAMKIT_EXTERN extern "C" __attribute__((visibility ("default")))
 #else
@@ -269,3 +271,5 @@ INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionIgnore;
 #define IKValidArray(array) (IKNotNull(array) && [array isKindOfClass:[NSArray class]])
 #define IKValidString(str) (IKNotNull(str) && [str isKindOfClass:[NSString class]])
 #define IKValidNumber(num) (IKNotNull(num) && [num isKindOfClass:[NSNumber class]])
+
+NS_ASSUME_NONNULL_END
