@@ -161,7 +161,7 @@ Download and run the Example Project to understand how the engine is intended to
 
 <img src='https://raw.githubusercontent.com/shyambhat/InstagramKit/master/InstagramKit-Example/Instagramkit_example.png' alt='InstagramKit-Example' width=310.5 height=625.5 />
 
-####Changelog
+##Changelog
 **Version 3.6.9**
 
 ##### Added
@@ -178,7 +178,7 @@ Download and run the Example Project to understand how the engine is intended to
 - #165 Parameter Count must be larger than zero. Fixes #150. By @shyambhat
 - #164 InstagramModel copyWithZone updated to allocate correct type of object. By @urklc.
 
-####Contributions?
+##Contributions?
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `dev` branch.
 
