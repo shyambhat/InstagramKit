@@ -125,7 +125,35 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 
 ####Pagination 
 The `InstagramPaginationInfo` object has everything it needs to make your next pagination call. 
-Read in detail about implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
+
+If you need to make fetch a paginated feed of results, use the variation of the method which accepts `count` and `maxId` as parameters.
+For instance, use `getMediaForUser:count:maxId:withSuccess:failure:` passing the next maxID to the `maxId` parameter each time, obtained from `paginationInfo.nextMaxId` of the newest paginationInfo object.
+
+```    
+[engine getMediaForUser:user.Id 
+                  count:15 
+                  maxId:self.currentPaginationInfo.nextMaxId 
+            withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) 
+               {
+                     if (paginationInfo) {
+                         self.currentPaginationInfo = paginationInfo;
+                     }
+                     ...
+               } 
+               failure:^(NSError *error) 
+               {
+                     ...
+               }];
+```
+
+_The first request will go with `maxId` as nil._
+
+_Each endpoint in the Instagram API that supports pagination, usually supports a count parameter.
+You can use this method and pass a count parameter to each paginated request.
+You can also use it in cases where you do not need pagination, but need to specify a feed count to the first request._
+
+
+Read in detail about more ways of implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
 
 ####Changelog
