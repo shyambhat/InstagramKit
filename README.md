@@ -155,6 +155,11 @@ You can also use it in cases where you do not need pagination, but need to speci
 
 Read in detail about more ways of implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
+####Demo
+
+Download and run the Example Project to understand how the engine is intended to be used.
+
+<img src='https://raw.githubusercontent.com/shyambhat/InstagramKit/master/InstagramKit-Example/Instagramkit_example.png' alt='InstagramKit-Example' width=310.5 height=625.5 />
 
 ####Changelog
 **Version 3.6.9**
