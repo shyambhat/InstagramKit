@@ -21,6 +21,8 @@
 #import <Foundation/Foundation.h>
 #import "InstagramKitConstants.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  JSON keys as string constants.
  */
@@ -97,3 +99,4 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 
 @end
 
+NS_ASSUME_NONNULL_END

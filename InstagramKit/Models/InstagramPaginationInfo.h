@@ -20,6 +20,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramPaginationInfo : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 /**
@@ -53,3 +55,5 @@
 - (BOOL)isEqualToPaginationInfo:(InstagramPaginationInfo *)paginationInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END
