@@ -869,6 +869,7 @@
                          failure:(InstagramFailureBlock)failure
 {
     NSString *relativePath = [[paginationInfo.nextURL absoluteString] stringByReplacingOccurrencesOfString:[self.httpManager.baseURL absoluteString] withString:@""];
+    relativePath = [relativePath stringByRemovingPercentEncoding];
     [self getPaginatedPath:relativePath
                 parameters:nil
              responseModel:paginationInfo.type
