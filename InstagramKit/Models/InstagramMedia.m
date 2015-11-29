@@ -38,7 +38,9 @@
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        
+
+        _mediaId = [[NSString alloc] initWithString:info[kID]];
+
         _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
         _userHasLiked = [info[kUserHasLiked] boolValue];
         _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
@@ -120,6 +122,7 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
+        _mediaId = [decoder decodeObjectOfClass:[NSString class] forKey:kID];
         _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kUser];
         _userHasLiked = [decoder decodeBoolForKey:kUserHasLiked];
         _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
@@ -165,6 +168,7 @@
 {
     [super encodeWithCoder:encoder];
 
+    [encoder encodeObject:_mediaId forKey:kID];
     [encoder encodeObject:_user forKey:kUser];
     [encoder encodeBool:_userHasLiked forKey:kUserHasLiked];
     [encoder encodeObject:_createdDate forKey:kCreatedDate];
@@ -203,6 +207,7 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramMedia *copy = [super copyWithZone:zone];
+    copy->_mediaId = [_mediaId copy];
     copy->_user = [_user copy];
     copy->_userHasLiked = _userHasLiked;
     copy->_createdDate = [_createdDate copy];
