@@ -44,7 +44,7 @@
  *  The oauth token stored in the account store credential, if available.
  *  If not empty, this implies user has granted access.
  */
-@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, copy) NSString *accessToken;
 
 
 #pragma mark - Authentication -

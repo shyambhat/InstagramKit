@@ -22,7 +22,11 @@
 #import "InstagramModel.h"
 
 @interface InstagramPaginationInfo ()
-@property (nonatomic, strong) Class type;
+
+@property (atomic, strong) NSURL* nextURL;
+@property (atomic, copy) NSString *nextMaxId;
+@property (atomic, strong) Class type;
+
 @end
 
 @implementation InstagramPaginationInfo
@@ -33,21 +37,21 @@
     BOOL infoExists = IKNotNull(info) && IKNotNull(info[kNextURL]);
     if (self && infoExists){
         
-        _nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
+        self.nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
         BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
         BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
         if (nextMaxIdExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+            self.nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
         }
         else if (nextMaxLikeIdExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+            self.nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
         }
         else if (nextCursorExists)
         {
-            _nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
+            self.nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
         }
         
         if (type) {
@@ -66,7 +70,7 @@
         return YES;
     }
     if (paginationInfo && [paginationInfo respondsToSelector:@selector(nextURL)]) {
-        return [_nextURL.path isEqualToString:paginationInfo.nextURL.path];
+        return [self.nextURL.path isEqualToString:paginationInfo.nextURL.path];
     }
     return NO;
 }
@@ -81,18 +85,18 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [self init])) {
-        _nextURL = [decoder decodeObjectOfClass:[NSURL class] forKey:kNextURL];
-        _nextMaxId = [decoder decodeObjectOfClass:[NSString class] forKey:kNextMaxId];
-        _type = NSClassFromString([decoder decodeObjectOfClass:[NSString class] forKey:@"classType"]);
+        self.nextURL = [decoder decodeObjectOfClass:[NSURL class] forKey:kNextURL];
+        self.nextMaxId = [decoder decodeObjectOfClass:[NSString class] forKey:kNextMaxId];
+        self.type = NSClassFromString([decoder decodeObjectOfClass:[NSString class] forKey:@"classType"]);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:_nextURL forKey:kNextURL];
-    [encoder encodeObject:_nextMaxId forKey:kNextMaxId];
-    [encoder encodeObject:NSStringFromClass(_type) forKey:@"classType"];
+    [encoder encodeObject:self.nextURL forKey:kNextURL];
+    [encoder encodeObject:self.nextMaxId forKey:kNextMaxId];
+    [encoder encodeObject:NSStringFromClass(self.type) forKey:@"classType"];
 }
 
 #pragma mark - NSCopying
@@ -100,11 +104,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramPaginationInfo *copy = [[InstagramPaginationInfo allocWithZone:zone] init];
-    copy->_nextURL = [_nextURL copy];
-    copy->_nextMaxId = [_nextMaxId copy];
-    copy->_type = [_type copy];
+    copy->_nextURL = [self.nextURL copy];
+    copy->_nextMaxId = [self.nextMaxId copy];
+    copy->_type = [self.type copy];
     return copy;
 }
-
 
 @end

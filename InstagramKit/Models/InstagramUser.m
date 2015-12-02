@@ -21,6 +21,19 @@
 #import "InstagramUser.h"
 #import "InstagramEngine.h"
 
+@interface InstagramUser()
+
+@property (nonatomic, copy) NSString* username;
+@property (nonatomic, copy) NSString* fullName;
+@property (nonatomic, strong) NSURL* profilePictureURL;
+@property (nonatomic, copy) NSString* bio;
+@property (nonatomic, strong) NSURL* website;
+@property (nonatomic, assign) NSInteger mediaCount;
+@property (nonatomic, assign) NSInteger followsCount;
+@property (nonatomic, assign) NSInteger followedByCount;
+
+@end
+
 @implementation InstagramUser
 
 - (instancetype)initWithInfo:(NSDictionary *)info
@@ -34,18 +47,18 @@
 
 - (void)updateDetails:(NSDictionary *)info
 {
-    _username = [[NSString alloc] initWithString:info[kUsername]];
-    _fullName = [[NSString alloc] initWithString:info[kFullName]];
+    self.username = [[NSString alloc] initWithString:info[kUsername]];
+    self.fullName = [[NSString alloc] initWithString:info[kFullName]];
     
-    _profilePictureURL = (IKNotNull(info[kProfilePictureURL])) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
-    _bio = (IKNotNull(info[kBio])) ? [[NSString alloc] initWithString:info[kBio]] : nil;
-    _website = (IKNotNull(info[kWebsite])) ? [[NSURL alloc] initWithString:info[kWebsite]] : nil;
+    self.profilePictureURL = (IKNotNull(info[kProfilePictureURL])) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
+    self.bio = (IKNotNull(info[kBio])) ? [[NSString alloc] initWithString:info[kBio]] : nil;
+    self.website = (IKNotNull(info[kWebsite])) ? [[NSURL alloc] initWithString:info[kWebsite]] : nil;
     
     if (IKNotNull(info[kCounts]))
     {
-        _mediaCount = [(info[kCounts])[kCountMedia] integerValue];
-        _followsCount = [(info[kCounts])[kCountFollows] integerValue];
-        _followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
+        self.mediaCount = [(info[kCounts])[kCountMedia] integerValue];
+        self.followsCount = [(info[kCounts])[kCountFollows] integerValue];
+        self.followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
     }
 }
 
@@ -65,11 +78,11 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        _username = [decoder decodeObjectOfClass:[NSString class] forKey:kUsername];
-        _fullName = [decoder decodeObjectOfClass:[NSString class] forKey:kFullName];
-        _profilePictureURL = [decoder decodeObjectOfClass:[NSString class] forKey:kProfilePictureURL];
-        _bio = [decoder decodeObjectOfClass:[NSString class] forKey:kBio];
-        _website = [decoder decodeObjectOfClass:[NSString class] forKey:kWebsite];
+        self.username = [decoder decodeObjectOfClass:[NSString class] forKey:kUsername];
+        self.fullName = [decoder decodeObjectOfClass:[NSString class] forKey:kFullName];
+        self.profilePictureURL = [decoder decodeObjectOfClass:[NSString class] forKey:kProfilePictureURL];
+        self.bio = [decoder decodeObjectOfClass:[NSString class] forKey:kBio];
+        self.website = [decoder decodeObjectOfClass:[NSString class] forKey:kWebsite];
     }
     return self;
 }
@@ -78,11 +91,11 @@
 {
     [super encodeWithCoder:encoder];
 
-    [encoder encodeObject:_username forKey:kUsername];
-    [encoder encodeObject:_fullName forKey:kFullName];
-    [encoder encodeObject:_profilePictureURL forKey:kProfilePictureURL];
-    [encoder encodeObject:_bio forKey:kBio];
-    [encoder encodeObject:_website forKey:kWebsite];
+    [encoder encodeObject:self.username forKey:kUsername];
+    [encoder encodeObject:self.fullName forKey:kFullName];
+    [encoder encodeObject:self.profilePictureURL forKey:kProfilePictureURL];
+    [encoder encodeObject:self.bio forKey:kBio];
+    [encoder encodeObject:self.website forKey:kWebsite];
 }
 
 #pragma mark - NSCopying
@@ -90,11 +103,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramUser *copy = [super copyWithZone:zone];
-    copy->_username = [_username copy];
-    copy->_fullName = [_fullName copy];
-    copy->_profilePictureURL = [_profilePictureURL copy];
-    copy->_bio = [_bio copy];
-    copy->_website = [_website copy];
+    copy->_username = [self.username copy];
+    copy->_fullName = [self.fullName copy];
+    copy->_profilePictureURL = [self.profilePictureURL copy];
+    copy->_bio = [self.bio copy];
+    copy->_website = [self.website copy];
     return copy;
 }
 

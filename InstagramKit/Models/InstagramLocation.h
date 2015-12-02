@@ -27,12 +27,12 @@
 /**
  *  Geographic coordinates if the Location.
  */
-@property (readonly) CLLocationCoordinate2D coordinates;
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinates;
 
 /**
  *  Location name as provided by the API.
  */
-@property (readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSString *name;
 
 /**
  *  Comparing InstagramLocation objects.

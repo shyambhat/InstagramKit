@@ -30,7 +30,7 @@
 /**
  *  Offset from which the next paginated Media is to be received.
  */
-@property (readonly) NSString *nextMaxId;
+@property (copy, readonly) NSString *nextMaxId;
 
 /**
  *  Class of Objects which are being paginated.

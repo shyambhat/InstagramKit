@@ -21,6 +21,13 @@
 #import "InstagramLocation.h"
 #import "InstagramModel.h"
 
+@interface InstagramLocation ()
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinates;
+@property (nonatomic, copy) NSString *name;
+
+@end
+
 @implementation InstagramLocation
 
 - (id)initWithInfo:(NSDictionary *)info
@@ -31,8 +38,8 @@
         CLLocationCoordinate2D coordinates;
         coordinates.latitude = [info[kLocationLatitude] doubleValue];
         coordinates.longitude = [info[kLocationLongitude] doubleValue];
-        _coordinates = coordinates;
-        _name =  (IKNotNull(info[kLocationName])) ? [[NSString alloc] initWithString:info[kLocationName]] : nil;
+        self.coordinates = coordinates;
+        self.name =  (IKNotNull(info[kLocationName])) ? [[NSString alloc] initWithString:info[kLocationName]] : nil;
     }
     return self;
 }
@@ -56,8 +63,8 @@
         CLLocationCoordinate2D coordinates;
         coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
         coordinates.longitude = [decoder decodeDoubleForKey:kLocationLongitude];
-        _coordinates = coordinates;
-        _name = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
+        self.coordinates = coordinates;
+        self.name = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
     }
     return self;
 }
@@ -66,9 +73,9 @@
 {
     [super encodeWithCoder:encoder];
 
-    [encoder encodeDouble:_coordinates.latitude forKey:kLocationLatitude];
-    [encoder encodeDouble:_coordinates.longitude forKey:kLocationLongitude];
-    [encoder encodeObject:_name forKey:kLocationName];
+    [encoder encodeDouble:self.coordinates.latitude forKey:kLocationLatitude];
+    [encoder encodeDouble:self.coordinates.longitude forKey:kLocationLongitude];
+    [encoder encodeObject:self.name forKey:kLocationName];
 }
 
 #pragma mark - NSCopying
@@ -76,8 +83,8 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramLocation *copy = [super copyWithZone:zone];
-    copy->_coordinates = _coordinates;
-    copy->_name = [_name copy];
+    copy->_coordinates = self.coordinates;
+    copy->_name = [self.name copy];
     return copy;
 }
 

@@ -37,7 +37,7 @@
 /**
  *  Is Media liked by the authenticated user.
  */
-@property (nonatomic) BOOL userHasLiked;
+@property (nonatomic, readonly) BOOL userHasLiked;
 
 /**
  *  Date of creation of Media.
@@ -47,7 +47,7 @@
 /**
  *  Web Link to the Media.
  */
-@property (nonatomic, readonly) NSString* link;
+@property (nonatomic, readonly, copy) NSString* link;
 
 /**
  *  Caption created by creator of the Media.
@@ -87,17 +87,17 @@
 /**
  *  Media Location id.
  */
-@property (nonatomic, readonly) NSString *locationId;
+@property (nonatomic, readonly, copy) NSString *locationId;
 
 /**
  *  Media Location name.
  */
-@property (nonatomic, readonly) NSString *locationName;
+@property (nonatomic, readonly, copy) NSString *locationName;
 
 /**
  *  Filter applied on Media during creation.
  */
-@property (nonatomic, readonly) NSString *filter;
+@property (nonatomic, readonly, copy) NSString *filter;
 
 /**
  *  Link to the thumbnail image of the Media.

@@ -80,7 +80,7 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 /**
  *  The unique identifier for each model object.
  */
-@property (readonly) NSString* Id;
+@property (atomic, readonly, copy) NSString* Id;
 
 /**
  *  Initializes a new instance.
@@ -96,4 +96,3 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 - (BOOL)isEqualToModel:(InstagramModel *)model;
 
 @end
-
