@@ -1,6 +1,7 @@
 InstagramKit
 ==================
 
+[![Twitter: @bhatthead](https://img.shields.io/badge/contact-@bhatthead-blue.svg?style=flat)]
 [![CI Status](http://img.shields.io/travis/shyambhat/InstagramKit.svg?style=flat)](https://travis-ci.org/shyambhat/InstagramKit.svg)
 [![Version](https://img.shields.io/cocoapods/v/InstagramKit.svg?style=flat)](http://cocoadocs.org/docsets/InstagramKit)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
