@@ -30,6 +30,11 @@
 @interface InstagramMedia : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
+ *  Media unique id.
+ */
+@property (nonatomic, readonly) NSString* mediaId;
+
+/**
  *  Creator of the Media.
  */
 @property (nonatomic, readonly) InstagramUser* user;
