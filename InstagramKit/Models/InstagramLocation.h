@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Location name as provided by the API.
  */
-@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly, nullable) NSString *name;
 
 /**
  *  Comparing InstagramLocation objects.

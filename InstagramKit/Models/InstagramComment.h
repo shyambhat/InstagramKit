@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class InstagramUser;
 
 @interface InstagramComment : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+
 /**
  *  Creation date.
  */

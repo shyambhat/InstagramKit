@@ -27,17 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  URL to receive next set of paginated items.
  */
-@property (readonly) NSURL* nextURL;
+@property (nonatomic, readonly) NSURL* nextURL;
 
 /**
  *  Offset from which the next paginated Media is to be received.
  */
-@property (copy, readonly) NSString *nextMaxId;
+@property (nonatomic, readonly, copy) NSString *nextMaxId;
 
 /**
  *  Class of Objects which are being paginated.
  */
-@property (readonly) Class type;
+@property (nonatomic, readonly) Class type;
 
 /**
  *  Initializes a new InstagramPaginationInfo object.

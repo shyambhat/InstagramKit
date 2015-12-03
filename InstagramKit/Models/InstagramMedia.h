@@ -23,11 +23,11 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "InstagramModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class InstagramUser;
 @class InstagramComment;
 @class InstagramLocation;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface InstagramMedia : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Caption created by creator of the Media.
  */
-@property (nullable, nonatomic, readonly) InstagramComment* caption;
+@property (nonatomic, readonly, nullable) InstagramComment* caption;
 
 /**
  *  Number of likes on the Media.
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  List of users who have liked the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramUser *> *likes;
+@property (nonatomic, readonly, nullable) NSArray<InstagramUser *> *likes;
 
 /**
  *  Number of comments on the Media.
@@ -74,12 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  An array of comments on the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramComment *> *comments;
+@property (nonatomic, readonly, nullable) NSArray<InstagramComment *> *comments;
 
 /**
  *  Tags on the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramTag *> *tags;
+@property (nonatomic, readonly, nullable) NSArray<InstagramTag *> *tags;
 
 /**
  *  Media Location coordinates
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Filter applied on Media during creation.
  */
-@property (nullable, nonatomic, readonly, copy) NSString *filter;
+@property (nonatomic, readonly, copy, nullable) NSString *filter;
 
 /**
  *  Link to the thumbnail image of the Media.
@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Link to the low resolution video of the Media, if Media is a video.
  */
-@property (nullable, nonatomic, readonly) NSURL *lowResolutionVideoURL;
+@property (nonatomic, readonly, nullable) NSURL *lowResolutionVideoURL;
 
 /**
  *  Size of the low resolution video frame.
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Link to the standard resolution video of the Media, if Media is a video.
  */
-@property (nullable, nonatomic, readonly) NSURL *standardResolutionVideoURL;
+@property (nonatomic, readonly, nullable) NSURL *standardResolutionVideoURL;
 
 /**
  *  Size of the standard resolution video frame.

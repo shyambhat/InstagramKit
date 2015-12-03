@@ -240,6 +240,7 @@ typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
 
 INSTAGRAMKIT_EXTERN NSString *const kKeyClientID;
 INSTAGRAMKIT_EXTERN NSString *const kKeyAccessToken;
+INSTAGRAMKIT_EXTERN NSString *const kKeychainTokenKey;
 
 INSTAGRAMKIT_EXTERN NSString *const kNextURL;
 INSTAGRAMKIT_EXTERN NSString *const kNextMaxId;

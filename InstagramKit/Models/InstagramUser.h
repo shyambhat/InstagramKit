@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  User's full name.
  */
-@property (nonatomic, readonly, copy, nullable) NSString* fullName;
+@property (nonatomic, copy, readonly, nullable) NSString* fullName;
 
 /**
  *  Link to the User's profile picture.
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  User's short bio, if provided.
  */
-@property (nonatomic, readonly, copy, nullable) NSString* bio;
+@property (nonatomic, copy, readonly, nullable) NSString* bio;
 
 /**
  *  User's website, if provided.
