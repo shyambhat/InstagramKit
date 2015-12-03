@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Creator of the Media.
  */
-@property (nonatomic, readonly) InstagramUser* user;
+@property (nonatomic, readonly) InstagramUser *user;
 
 /**
  *  Is Media liked by the authenticated user.
@@ -49,12 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Web Link to the Media.
  */
-@property (nonatomic, readonly, copy) NSString* link;
+@property (nonatomic, readonly, copy) NSString *link;
 
 /**
  *  Caption created by creator of the Media.
  */
-@property (nonatomic, readonly, nullable) InstagramComment* caption;
+@property (nonatomic, readonly, nullable) InstagramComment *caption;
 
 /**
  *  Number of likes on the Media.
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  List of users who have liked the Media.
  */
-@property (nonatomic, readonly, nullable) NSArray<InstagramUser *> *likes;
+@property (nonatomic, readonly, nullable) NSArray <InstagramUser *> *likes;
 
 /**
  *  Number of comments on the Media.
@@ -74,12 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  An array of comments on the Media.
  */
-@property (nonatomic, readonly, nullable) NSArray<InstagramComment *> *comments;
+@property (nonatomic, readonly, nullable) NSArray <InstagramComment *> *comments;
 
 /**
  *  Tags on the Media.
  */
-@property (nonatomic, readonly, nullable) NSArray<InstagramTag *> *tags;
+@property (nonatomic, readonly, nullable) NSArray <InstagramTag *> *tags;
 
 /**
  *  Media Location coordinates

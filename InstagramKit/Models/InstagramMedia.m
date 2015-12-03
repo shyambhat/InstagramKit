@@ -25,11 +25,11 @@
 
 @interface InstagramMedia ()
 
-@property (nonatomic, strong) InstagramUser* user;
+@property (nonatomic, strong) InstagramUser *user;
 @property (nonatomic, assign) BOOL userHasLiked;
 @property (nonatomic, strong) NSDate *createdDate;
-@property (nonatomic, copy) NSString* link;
-@property (nonatomic, strong) InstagramComment* caption;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, strong) InstagramComment *caption;
 @property (nonatomic, strong) NSMutableArray *mLikes;
 @property (nonatomic, strong) NSMutableArray *mComments;
 @property (nonatomic, strong) NSArray *tags;
@@ -86,7 +86,7 @@
         
         [self initializeImages:info[kImages]];
         
-        NSString* mediaType = info[kType];
+        NSString *mediaType = info[kType];
         self.isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]];
         if (self.isVideo) {
             [self initializeVideos:info[kVideos]];

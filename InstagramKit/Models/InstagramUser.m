@@ -23,11 +23,11 @@
 
 @interface InstagramUser()
 
-@property (nonatomic, copy) NSString* username;
-@property (nonatomic, copy) NSString* fullName;
-@property (nonatomic, strong) NSURL* profilePictureURL;
-@property (nonatomic, copy) NSString* bio;
-@property (nonatomic, strong) NSURL* website;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic, strong) NSURL *profilePictureURL;
+@property (nonatomic, copy) NSString *bio;
+@property (nonatomic, strong) NSURL *website;
 @property (nonatomic, assign) NSInteger mediaCount;
 @property (nonatomic, assign) NSInteger followsCount;
 @property (nonatomic, assign) NSInteger followedByCount;

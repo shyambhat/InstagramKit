@@ -82,7 +82,7 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 /**
  *  The unique identifier for each model object.
  */
-@property (atomic, readonly, copy) NSString* Id;
+@property (atomic, readonly, copy) NSString *Id;
 
 /**
  *  Initializes a new instance.

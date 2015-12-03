@@ -29,27 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  User's unique username.
  */
-@property (nonatomic, copy, readonly) NSString* username;
+@property (nonatomic, copy, readonly) NSString *username;
 
 /**
  *  User's full name.
  */
-@property (nonatomic, copy, readonly, nullable) NSString* fullName;
+@property (nonatomic, copy, readonly, nullable) NSString *fullName;
 
 /**
  *  Link to the User's profile picture.
  */
-@property (nonatomic, readonly, nullable) NSURL* profilePictureURL;
+@property (nonatomic, readonly, nullable) NSURL *profilePictureURL;
 
 /**
  *  User's short bio, if provided.
  */
-@property (nonatomic, copy, readonly, nullable) NSString* bio;
+@property (nonatomic, copy, readonly, nullable) NSString *bio;
 
 /**
  *  User's website, if provided.
  */
-@property (nonatomic, readonly, nullable) NSURL* website;
+@property (nonatomic, readonly, nullable) NSURL *website;
 
 /**
  *  Number of Media uploaded by the User.

@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Tag name
  */
-@property (nonatomic, readonly, copy) NSString* name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /**
  *  Number of Media tagged by this Tag.

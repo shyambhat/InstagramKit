@@ -24,7 +24,7 @@
 
 @interface InstagramTag()
 
-@property (nonatomic, copy) NSString* name;
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger mediaCount;
 
 @end
