@@ -22,6 +22,8 @@
 #import "InstagramModel.h"
 #import <MapKit/MapKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramLocation : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
@@ -42,3 +44,5 @@
 - (BOOL)isEqualToLocation:(InstagramLocation *)location;
 
 @end
+
+NS_ASSUME_NONNULL_END

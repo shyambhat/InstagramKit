@@ -23,6 +23,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "InstagramModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class InstagramUser;
 @class InstagramComment;
 @class InstagramLocation;
@@ -52,7 +54,7 @@
 /**
  *  Caption created by creator of the Media.
  */
-@property (nonatomic, readonly) InstagramComment* caption;
+@property (nullable, nonatomic, readonly) InstagramComment* caption;
 
 /**
  *  Number of likes on the Media.
@@ -62,7 +64,7 @@
 /**
  *  List of users who have liked the Media.
  */
-@property (nonatomic, readonly) NSArray *likes;
+@property (nonatomic, readonly) NSArray<InstagramUser *> *likes;
 
 /**
  *  Number of comments on the Media.
@@ -72,12 +74,12 @@
 /**
  *  An array of comments on the Media.
  */
-@property (nonatomic, readonly) NSArray *comments;
+@property (nonatomic, readonly) NSArray<InstagramComment *> *comments;
 
 /**
  *  Tags on the Media.
  */
-@property (nonatomic, readonly) NSArray *tags;
+@property (nonatomic, readonly) NSArray<InstagramTag *> *tags;
 
 /**
  *  Media Location coordinates
@@ -87,17 +89,17 @@
 /**
  *  Media Location id.
  */
-@property (nonatomic, readonly, copy) NSString *locationId;
+@property (nonatomic, readonly, copy, nullable) NSString *locationId;
 
 /**
  *  Media Location name.
  */
-@property (nonatomic, readonly, copy) NSString *locationName;
+@property (nonatomic, readonly, copy, nullable) NSString *locationName;
 
 /**
  *  Filter applied on Media during creation.
  */
-@property (nonatomic, readonly, copy) NSString *filter;
+@property (nullable, nonatomic, readonly, copy) NSString *filter;
 
 /**
  *  Link to the thumbnail image of the Media.
@@ -137,7 +139,7 @@
 /**
  *  Link to the low resolution video of the Media, if Media is a video.
  */
-@property (nonatomic, readonly) NSURL *lowResolutionVideoURL;
+@property (nullable, nonatomic, readonly) NSURL *lowResolutionVideoURL;
 
 /**
  *  Size of the low resolution video frame.
@@ -147,7 +149,7 @@
 /**
  *  Link to the standard resolution video of the Media, if Media is a video.
  */
-@property (nonatomic, readonly) NSURL *standardResolutionVideoURL;
+@property (nullable, nonatomic, readonly) NSURL *standardResolutionVideoURL;
 
 /**
  *  Size of the standard resolution video frame.
@@ -162,3 +164,5 @@
 - (BOOL)isEqualToMedia:(InstagramMedia *)media;
 
 @end
+
+NS_ASSUME_NONNULL_END

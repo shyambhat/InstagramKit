@@ -21,6 +21,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramTag : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 /**
@@ -41,3 +43,5 @@
 - (BOOL)isEqualToTag:(InstagramTag *)tag;
 
 @end
+
+NS_ASSUME_NONNULL_END

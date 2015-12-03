@@ -22,6 +22,8 @@
 
 #import "InstagramModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramUser : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
@@ -32,22 +34,22 @@
 /**
  *  User's full name.
  */
-@property (nonatomic, copy, readonly) NSString* fullName;
+@property (nonatomic, readonly, copy, nullable) NSString* fullName;
 
 /**
  *  Link to the User's profile picture.
  */
-@property (nonatomic, readonly) NSURL* profilePictureURL;
+@property (nonatomic, readonly, nullable) NSURL* profilePictureURL;
 
 /**
  *  User's short bio, if provided.
  */
-@property (nonatomic, copy, readonly) NSString* bio;
+@property (nonatomic, readonly, copy, nullable) NSString* bio;
 
 /**
  *  User's website, if provided.
  */
-@property (nonatomic, readonly) NSURL* website;
+@property (nonatomic, readonly, nullable) NSURL* website;
 
 /**
  *  Number of Media uploaded by the User.
@@ -81,3 +83,5 @@
 - (BOOL)isEqualToUser:(InstagramUser *)user;
 
 @end
+
+NS_ASSUME_NONNULL_END
