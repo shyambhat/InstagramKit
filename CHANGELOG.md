@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Unit tests for Media and User methods in InstagramEngine. By @shyambhat
 - #177 Fix issue with pagination. Avoid percent-encoding twice. By @snoonz
 
+#### Added
+- #180 ```InstagramUser loadDetailsWithCompletion:``` to fetch User details and update the same user object.
+
 ## [3.6.9] - 2015-10-19
 
 #### Added
