@@ -384,6 +384,20 @@
                    failure:failure];
 }
 
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(InstagramFailureBlock)failure
+{
+    [self getPaginatedPath:[NSString stringWithFormat:@"locations/%@/media/recent", locationId]
+                parameters:nil
+             responseModel:[InstagramMedia class]
+                   success:success
+                   failure:failure];
+}
+
+
+#pragma mark - Locations -
+
 
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                        withSuccess:(InstagramLocationsBlock)success
@@ -421,17 +435,6 @@
            failure:failure];
  }
                          
-
-- (void)getMediaAtLocationWithId:(NSString*)locationId
-                     withSuccess:(InstagramMediaBlock)success
-                     failure:(InstagramFailureBlock)failure
- {
-     [self getPaginatedPath:[NSString stringWithFormat:@"locations/%@/media/recent", locationId]
-                 parameters:nil
-              responseModel:[InstagramMedia class]
-                    success:success
-                    failure:failure];
- }
 
 
 #pragma mark - Users -

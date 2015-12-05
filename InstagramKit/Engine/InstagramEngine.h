@@ -154,6 +154,17 @@ NS_ASSUME_NONNULL_BEGIN
                withSuccess:(InstagramMediaBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
+/**
+ *  Get a list of recent media objects from a given location.
+ *
+ *  @param locationId   Id of a Location object.
+ *  @param success      Provides an array of Media objects and Pagination info.
+ *  @param failure      Provides an error and a server status code.
+ */
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(nullable InstagramFailureBlock)failure;
+
 
 #pragma mark - Locations -
 
@@ -194,18 +205,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getLocationWithId:(NSString*)locationId
               withSuccess:(InstagramLocationBlock)success
                   failure:(nullable InstagramFailureBlock)failure;
-
-
-/**
- *  Get a list of recent media objects from a given location.
- *
- *  @param locationId   Id of a Location object.
- *  @param success      Provides an array of Media objects and Pagination info.
- *  @param failure      Provides an error and a server status code.
- */
-- (void)getMediaAtLocationWithId:(NSString*)locationId
-                     withSuccess:(InstagramMediaBlock)success
-                         failure:(nullable InstagramFailureBlock)failure;
 
 
 #pragma mark - Users -
