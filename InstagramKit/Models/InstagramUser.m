@@ -76,7 +76,7 @@
 
 
 - (void)loadDetailsWithCompletion:(void (^)())success
-                            failure:(nullable InstagramFailureBlock)failure
+                          failure:(nullable InstagramFailureBlock)failure
 {
     [[InstagramEngine sharedEngine] getUserDetails:self.Id
                                        withSuccess:^(InstagramUser * _Nonnull userDetail) {

@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param info JSON dictionary
  */
 - (void)loadDetailsWithCompletion:(void (^)())success
-                            failure:(nullable InstagramFailureBlock)failure;
+                          failure:(nullable InstagramFailureBlock)failure;
 
 
 /**
