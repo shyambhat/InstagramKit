@@ -40,7 +40,7 @@
 
 - (void)testGetUserDetails
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Test testGetUserDetails"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getUserDetails"];
     
     [[InstagramEngine sharedEngine] getUserDetails:self.user.Id
                     withSuccess:^(InstagramUser * _Nonnull responseUser) {
@@ -65,5 +65,26 @@
                                  }];
 }
 
+
+- (void)testUpdateUserWithDetails
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test updateUserWithDetails"];
+    
+    [self.user loadDetailsWithCompletion:^{
+        XCTAssertTrue(self.user.mediaCount);
+        XCTAssertTrue(self.user.followsCount);
+        XCTAssertTrue(self.user.followedByCount);
+        
+        [expectation fulfill];
+
+    } failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+        
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestRequestTimeout
+                                 handler:^(NSError *error) {
+                                     XCTAssertNil(error, @"expectation not fulfilled: %@", error);
+                                 }];
+}
 
 @end

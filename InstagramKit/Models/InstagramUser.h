@@ -70,10 +70,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger followedByCount;
 
 /**
- *  Convenience method to update the details received for the User object.
+ *  Convenience method to load details and update object.
  *  @param info JSON dictionary
  */
-- (void)updateDetails:(NSDictionary *)info;
+- (void)loadDetailsWithCompletion:(void (^)())success
+                            failure:(nullable InstagramFailureBlock)failure;
+
 
 /**
  *  Comparing InstagramUser objects.

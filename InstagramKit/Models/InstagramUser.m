@@ -40,12 +40,12 @@
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        [self updateDetails:info];
+        [self updateDetailsWithInfo:info];
     }
     return self;
 }
 
-- (void)updateDetails:(NSDictionary *)info
+- (void)updateDetailsWithInfo:(NSDictionary *)info
 {
     self.username = [[NSString alloc] initWithString:info[kUsername]];
     self.fullName = [[NSString alloc] initWithString:info[kFullName]];
@@ -60,6 +60,29 @@
         self.followsCount = [(info[kCounts])[kCountFollows] integerValue];
         self.followedByCount = [(info[kCounts])[kCountFollowedBy] integerValue];
     }
+}
+
+- (void)updateDetailsWithUser:(InstagramUser *)user
+{
+    self.username = user.username;
+    self.fullName = user.fullName;
+    self.profilePictureURL = user.profilePictureURL;
+    self.bio = user.bio;
+    self.website = user.website;
+    self.mediaCount = user.mediaCount;
+    self.followsCount = user.followsCount;
+    self.followedByCount = user.followedByCount;
+}
+
+
+- (void)loadDetailsWithCompletion:(void (^)())success
+                            failure:(nullable InstagramFailureBlock)failure
+{
+    [[InstagramEngine sharedEngine] getUserDetails:self.Id
+                                       withSuccess:^(InstagramUser * _Nonnull userDetail) {
+                                           [self updateDetailsWithUser:userDetail];
+                                           success();
+                                       } failure:failure];
 }
 
 #pragma mark - Equality
