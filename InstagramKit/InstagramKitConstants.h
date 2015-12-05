@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 #define INSTAGRAMKIT_EXTERN extern __attribute__((visibility ("default")))
 #endif
 
+#define INSTAGRAMKIT_TEST_TARGET [[[NSProcessInfo processInfo] arguments] containsObject:@"-FNTesting"]
+
 #define INSTAGRAMKIT_UICKEYCHAINSTORE __has_include("UICKeyChainStore.h")
 
 /**
