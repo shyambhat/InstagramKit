@@ -22,14 +22,21 @@
 #import "InstagramTag.h"
 #import "InstagramModel.h"
 
+@interface InstagramTag()
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) NSInteger mediaCount;
+
+@end
+
 @implementation InstagramTag
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        _name = [[NSString alloc] initWithString:info[kTagName]];
-        _mediaCount = [info[kTagMediaCount] integerValue];
+        self.name = [[NSString alloc] initWithString:info[kTagName]];
+        self.mediaCount = [info[kTagMediaCount] integerValue];
     }
     return self;
 }
@@ -41,7 +48,7 @@
         return YES;
     }
     if (tag && [tag respondsToSelector:@selector(name)]) {
-        return [_name isEqualToString:tag.name];
+        return [self.name isEqualToString:tag.name];
     }
     return NO;
 }
@@ -56,16 +63,16 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [self init])) {
-        _name = [decoder decodeObjectOfClass:[NSString class] forKey:kTagName];
-        _mediaCount = [decoder decodeIntegerForKey:kTagMediaCount];
+        self.name = [decoder decodeObjectOfClass:[NSString class] forKey:kTagName];
+        self.mediaCount = [decoder decodeIntegerForKey:kTagMediaCount];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:_name forKey:kTagName];
-    [encoder encodeInteger:_mediaCount forKey:kTagMediaCount];
+    [encoder encodeObject:self.name forKey:kTagName];
+    [encoder encodeInteger:self.mediaCount forKey:kTagMediaCount];
 }
 
 #pragma mark - NSCopying
@@ -73,8 +80,8 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramTag *copy = [[InstagramTag allocWithZone:zone] init];
-    copy->_name = [_name copy];
-    copy->_mediaCount = _mediaCount;
+    copy->_name = [self.name copy];
+    copy->_mediaCount = self.mediaCount;
     return copy;
 }
 

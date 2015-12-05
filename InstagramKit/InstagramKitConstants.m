@@ -34,6 +34,7 @@ NSString *const InstagramKitKeychainStore = @"com.instagramkit.secure";
 
 NSString *const kKeyClientID = @"client_id";
 NSString *const kKeyAccessToken = @"access_token";
+NSString *const kKeychainTokenKey = @"token";
 
 NSString *const kPagination = @"pagination";
 NSString *const kPaginationKeyMaxId = @"max_id";

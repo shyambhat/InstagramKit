@@ -29,45 +29,45 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  User's unique username.
  */
-@property (readonly) NSString* username;
+@property (nonatomic, copy, readonly) NSString *username;
 
 /**
  *  User's full name.
  */
-@property (nullable, readonly) NSString* fullName;
+@property (nonatomic, copy, readonly, nullable) NSString *fullName;
 
 /**
  *  Link to the User's profile picture.
  */
-@property (nullable, readonly) NSURL* profilePictureURL;
+@property (nonatomic, readonly, nullable) NSURL *profilePictureURL;
 
 /**
  *  User's short bio, if provided.
  */
-@property (nullable, readonly) NSString* bio;
+@property (nonatomic, copy, readonly, nullable) NSString *bio;
 
 /**
  *  User's website, if provided.
  */
-@property (nullable, readonly) NSURL* website;
+@property (nonatomic, readonly, nullable) NSURL *website;
 
 /**
  *  Number of Media uploaded by the User.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger mediaCount;
+@property (nonatomic, readonly) NSInteger mediaCount;
 
 /**
  *  Number of Instagram Users, this User follows.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger followsCount;
+@property (nonatomic, readonly) NSInteger followsCount;
 
 /**
  *  Followers count of this User.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger followedByCount;
+@property (nonatomic, readonly) NSInteger followedByCount;
 
 /**
  *  Convenience method to update the details received for the User object.

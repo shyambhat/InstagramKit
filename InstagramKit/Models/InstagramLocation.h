@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Geographic coordinates if the Location.
  */
-@property (readonly) CLLocationCoordinate2D coordinates;
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinates;
 
 /**
  *  Location name as provided by the API.
  */
-@property (readonly) NSString *name;
+@property (nonatomic, copy, readonly, nullable) NSString *name;
 
 /**
  *  Comparing InstagramLocation objects.

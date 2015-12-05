@@ -23,23 +23,23 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "InstagramModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class InstagramUser;
 @class InstagramComment;
 @class InstagramLocation;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface InstagramMedia : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  Creator of the Media.
  */
-@property (nonatomic, readonly) InstagramUser* user;
+@property (nonatomic, readonly) InstagramUser *user;
 
 /**
  *  Is Media liked by the authenticated user.
  */
-@property (nonatomic) BOOL userHasLiked;
+@property (nonatomic, readonly) BOOL userHasLiked;
 
 /**
  *  Date of creation of Media.
@@ -49,12 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Web Link to the Media.
  */
-@property (nonatomic, readonly) NSString* link;
+@property (nonatomic, readonly, copy) NSString *link;
 
 /**
  *  Caption created by creator of the Media.
  */
-@property (nullable, nonatomic, readonly) InstagramComment* caption;
+@property (nonatomic, readonly, nullable) InstagramComment *caption;
 
 /**
  *  Number of likes on the Media.
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  List of users who have liked the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramUser *> *likes;
+@property (nonatomic, readonly, nullable) NSArray <InstagramUser *> *likes;
 
 /**
  *  Number of comments on the Media.
@@ -74,12 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  An array of comments on the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramComment *> *comments;
+@property (nonatomic, readonly, nullable) NSArray <InstagramComment *> *comments;
 
 /**
  *  Tags on the Media.
  */
-@property (nonatomic, readonly) NSArray<InstagramTag *> *tags;
+@property (nonatomic, readonly, nullable) NSArray <InstagramTag *> *tags;
 
 /**
  *  Media Location coordinates
@@ -89,17 +89,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Media Location id.
  */
-@property (nullable, nonatomic, readonly) NSString *locationId;
+@property (nonatomic, readonly, copy, nullable) NSString *locationId;
 
 /**
  *  Media Location name.
  */
-@property (nullable, nonatomic, readonly) NSString *locationName;
+@property (nonatomic, readonly, copy, nullable) NSString *locationName;
 
 /**
  *  Filter applied on Media during creation.
  */
-@property (nullable, nonatomic, readonly) NSString *filter;
+@property (nonatomic, readonly, copy, nullable) NSString *filter;
 
 /**
  *  Link to the thumbnail image of the Media.
@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Link to the low resolution video of the Media, if Media is a video.
  */
-@property (nullable, nonatomic, readonly) NSURL *lowResolutionVideoURL;
+@property (nonatomic, readonly, nullable) NSURL *lowResolutionVideoURL;
 
 /**
  *  Size of the low resolution video frame.
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Link to the standard resolution video of the Media, if Media is a video.
  */
-@property (nullable, nonatomic, readonly) NSURL *standardResolutionVideoURL;
+@property (nonatomic, readonly, nullable) NSURL *standardResolutionVideoURL;
 
 /**
  *  Size of the standard resolution video frame.

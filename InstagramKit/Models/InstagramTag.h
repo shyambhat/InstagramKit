@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Tag name
  */
-@property (readonly) NSString* name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /**
  *  Number of Media tagged by this Tag.
  */
-@property (readonly) NSInteger mediaCount;
+@property (nonatomic, readonly) NSInteger mediaCount;
 
 /**
  *  Comparing InstagramTag objects.

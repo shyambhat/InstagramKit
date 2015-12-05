@@ -26,20 +26,21 @@ NS_ASSUME_NONNULL_BEGIN
 @class InstagramUser;
 
 @interface InstagramComment : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+
 /**
  *  Creation date.
  */
-@property (nonatomic, strong) NSDate *createdDate;
+@property (nonatomic, readonly) NSDate *createdDate;
 
 /**
  *  Creator of the comment.
  */
-@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, readonly) InstagramUser *user;
 
 /**
  *  Comment text.
  */
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, copy, readonly) NSString *text;
 
 /**
  *  Comparing InstagramComment objects.

@@ -23,7 +23,9 @@
 #import <UIKit/UIKit.h>
 #import "InstagramKitConstants.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface InstagramEngine : NSObject
 
@@ -35,18 +37,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Client Id of your App, as registered with Instagram.
  */
-@property (nullable, nonatomic, copy) NSString *appClientID;
+@property (nonatomic, copy, readonly) NSString *appClientID;
 
 /**
  *  Redirect URL of your App, as registered with Instagram.
  */
-@property (nullable, nonatomic, copy) NSString *appRedirectURL;
+@property (nonatomic, copy, readonly) NSString *appRedirectURL;
 
 /**
  *  The oauth token stored in the account store credential, if available.
  *  If not empty, this implies user has granted access.
  */
-@property (nullable, nonatomic, strong) NSString *accessToken;
+@property (nonatomic, copy, nullable) NSString *accessToken;
 
 
 #pragma mark - Authentication -
@@ -105,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getMedia:(NSString *)mediaId
-     withSuccess:(nullable InstagramMediaObjectBlock)success
+     withSuccess:(InstagramMediaObjectBlock)success
          failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -115,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getPopularMediaWithSuccess:(nullable InstagramMediaBlock)success
+- (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
                            failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -131,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getMediaAtLocation:(CLLocationCoordinate2D)location
-               withSuccess:(nullable InstagramMediaBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
 /**
@@ -149,8 +151,19 @@ NS_ASSUME_NONNULL_BEGIN
                      count:(NSInteger)count
                      maxId:(nullable NSString *)maxId
                   distance:(CGFloat)distance
-               withSuccess:(nullable InstagramMediaBlock)success
+               withSuccess:(InstagramMediaBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
+
+/**
+ *  Get a list of recent media objects from a given location.
+ *
+ *  @param locationId   Id of a Location object.
+ *  @param success      Provides an array of Media objects and Pagination info.
+ *  @param failure      Provides an error and a server status code.
+ */
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(nullable InstagramFailureBlock)failure;
 
 
 #pragma mark - Locations -
@@ -164,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
-                      withSuccess:(nullable InstagramLocationsBlock)success
+                      withSuccess:(InstagramLocationsBlock)success
                           failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -178,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                  distanceInMeters:(NSInteger)distance
-                      withSuccess:(nullable InstagramLocationsBlock)success
+                      withSuccess:(InstagramLocationsBlock)success
                           failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -190,20 +203,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure      Provides an error and a server status code.
  */
 - (void)getLocationWithId:(NSString*)locationId
-              withSuccess:(nullable InstagramLocationBlock)success
+              withSuccess:(InstagramLocationBlock)success
                   failure:(nullable InstagramFailureBlock)failure;
-
-
-/**
- *  Get a list of recent media objects from a given location.
- *
- *  @param locationId   Id of a Location object.
- *  @param success      Provides an array of Media objects and Pagination info.
- *  @param failure      Provides an error and a server status code.
- */
-- (void)getMediaAtLocationWithId:(NSString*)locationId
-                     withSuccess:(nullable InstagramMediaBlock)success
-                         failure:(nullable InstagramFailureBlock)failure;
 
 
 #pragma mark - Users -
@@ -217,7 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getUserDetails:(NSString *)userId
-           withSuccess:(nullable InstagramUserBlock)success
+           withSuccess:(InstagramUserBlock)success
                failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -232,7 +233,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getMediaForUser:(NSString *)userId
-            withSuccess:(nullable InstagramMediaBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -248,7 +249,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getMediaForUser:(NSString *)userId
                   count:(NSInteger)count
                   maxId:(nullable NSString *)maxId
-            withSuccess:(nullable InstagramMediaBlock)success
+            withSuccess:(InstagramMediaBlock)success
                 failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -263,7 +264,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)searchUsersWithString:(NSString *)name
-                  withSuccess:(nullable InstagramUsersBlock)success
+                  withSuccess:(InstagramUsersBlock)success
                       failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -276,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an User object.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getSelfUserDetailsWithSuccess:(nullable InstagramUserBlock)success
+- (void)getSelfUserDetailsWithSuccess:(InstagramUserBlock)success
                               failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -289,7 +290,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getSelfFeedWithSuccess:(nullable InstagramMediaBlock)success
+- (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
                        failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -303,7 +304,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getSelfFeedWithCount:(NSInteger)count
                        maxId:(nullable NSString *)maxId
-                     success:(nullable InstagramMediaBlock)success
+                     success:(InstagramMediaBlock)success
                      failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -318,7 +319,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getMediaLikedBySelfWithSuccess:(nullable InstagramMediaBlock)success
+- (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
                                failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -334,7 +335,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getMediaLikedBySelfWithCount:(NSInteger)count
                                maxId:(nullable NSString *)maxId
-                             success:(nullable InstagramMediaBlock)success
+                             success:(InstagramMediaBlock)success
                              failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -347,7 +348,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getSelfRecentMediaWithSuccess:(nullable InstagramMediaBlock)success
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
                               failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -361,7 +362,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)getSelfRecentMediaWithCount:(NSInteger)count
                               maxId:(nullable NSString *)maxId
-                            success:(nullable InstagramMediaBlock)success
+                            success:(InstagramMediaBlock)success
                             failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -376,7 +377,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getTagDetailsWithName:(NSString *)name
-                  withSuccess:(nullable InstagramTagBlock)success
+                  withSuccess:(InstagramTagBlock)success
                       failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -391,7 +392,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getMediaWithTagName:(NSString *)name
-                withSuccess:(nullable InstagramMediaBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -407,7 +408,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getMediaWithTagName:(NSString *)tag
                       count:(NSInteger)count
                       maxId:(nullable NSString *)maxId
-                withSuccess:(nullable InstagramMediaBlock)success
+                withSuccess:(InstagramMediaBlock)success
                     failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -422,7 +423,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)searchTagsWithName:(NSString *)name
-               withSuccess:(nullable InstagramTagsBlock)success
+               withSuccess:(InstagramTagsBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -438,7 +439,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)searchTagsWithName:(NSString *)name
                      count:(NSInteger)count
                      maxId:(nullable NSString *)maxId
-               withSuccess:(nullable InstagramTagsBlock)success
+               withSuccess:(InstagramTagsBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -453,7 +454,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getCommentsOnMedia:(NSString *)mediaId
-               withSuccess:(nullable InstagramCommentsBlock)success
+               withSuccess:(InstagramCommentsBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -476,7 +477,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)createComment:(NSString *)commentText
               onMedia:(NSString *)mediaId
-          withSuccess:(nullable InstagramResponseBlock)success
+          withSuccess:(InstagramResponseBlock)success
               failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -496,7 +497,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)removeComment:(NSString *)commentId
               onMedia:(NSString *)mediaId
-          withSuccess:(nullable InstagramResponseBlock)success
+          withSuccess:(InstagramResponseBlock)success
               failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -511,7 +512,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(nullable InstagramUsersBlock)success
+            withSuccess:(InstagramUsersBlock)success
                 failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -527,7 +528,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)likeMedia:(NSString *)mediaId
-      withSuccess:(nullable InstagramResponseBlock)success
+      withSuccess:(InstagramResponseBlock)success
           failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -543,7 +544,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)unlikeMedia:(NSString *)mediaId
-        withSuccess:(nullable InstagramResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -558,7 +559,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getRelationshipStatusOfUser:(NSString *)userId
-                        withSuccess:(nullable InstagramResponseBlock)success
+                        withSuccess:(InstagramResponseBlock)success
                             failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -570,7 +571,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(nullable InstagramUsersBlock)success
+                   withSuccess:(InstagramUsersBlock)success
                        failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -582,7 +583,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getFollowersOfUser:(NSString *)userId
-               withSuccess:(nullable InstagramUsersBlock)success
+               withSuccess:(InstagramUsersBlock)success
                    failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -592,7 +593,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of User objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getFollowRequestsWithSuccess:(nullable InstagramUsersBlock)success
+- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
                              failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -610,7 +611,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)followUser:(NSString *)userId
-       withSuccess:(nullable InstagramResponseBlock)success
+       withSuccess:(InstagramResponseBlock)success
            failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -628,7 +629,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)unfollowUser:(NSString *)userId
-         withSuccess:(nullable InstagramResponseBlock)success
+         withSuccess:(InstagramResponseBlock)success
              failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -646,7 +647,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)blockUser:(NSString *)userId
-      withSuccess:(nullable InstagramResponseBlock)success
+      withSuccess:(InstagramResponseBlock)success
           failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -664,7 +665,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)unblockUser:(NSString *)userId
-        withSuccess:(nullable InstagramResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -682,7 +683,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)approveUser:(NSString *)userId
-        withSuccess:(nullable InstagramResponseBlock)success
+        withSuccess:(InstagramResponseBlock)success
             failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -700,7 +701,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)ignoreUser:(NSString *)userId
-     withSuccess:(nullable InstagramResponseBlock)success
+     withSuccess:(InstagramResponseBlock)success
          failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -715,7 +716,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure        Provides an error and a server status code.
  */
 - (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
-                     withSuccess:(nullable InstagramPaginatiedResponseBlock)success
+                     withSuccess:(InstagramPaginatiedResponseBlock)success
                          failure:(nullable InstagramFailureBlock)failure;
 
 
