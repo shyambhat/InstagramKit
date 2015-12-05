@@ -77,7 +77,8 @@
         self.tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
-            self.locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
+            id locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
+            self.locationId = ([locationId isKindOfClass:[NSString class]]) ? locationId : [locationId stringValue];
             self.locationName = IKNotNull(info[kLocation][kLocationName]) ? info[kLocation][kLocationName] : nil;
             self.location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
         }

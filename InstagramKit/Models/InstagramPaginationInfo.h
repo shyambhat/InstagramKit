@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Class of Objects which are being paginated.
  */
-@property (nonatomic, readonly) Class type;
+@property (nonatomic, readonly, nullable) Class type;
 
 /**
  *  Initializes a new InstagramPaginationInfo object.

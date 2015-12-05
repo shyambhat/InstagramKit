@@ -23,9 +23,9 @@
 
 @interface InstagramPaginationInfo ()
 
-@property (atomic, strong) NSURL* nextURL;
-@property (atomic, copy) NSString *nextMaxId;
-@property (atomic, strong) Class type;
+@property (nonatomic, strong, nonnull) NSURL* nextURL;
+@property (nonatomic, copy, nonnull) NSString *nextMaxId;
+@property (nonatomic, strong, nullable) Class type;
 
 @end
 
@@ -41,18 +41,21 @@
         BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
         BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);
+        id nextMaxIdObject = nil;
         if (nextMaxIdExists)
         {
-            self.nextMaxId = [[NSString alloc] initWithString:info[kNextMaxId]];
+            nextMaxIdObject = info[kNextMaxId];
         }
         else if (nextMaxLikeIdExists)
         {
-            self.nextMaxId = [[NSString alloc] initWithString:info[kNextMaxLikeId]];
+            nextMaxIdObject = info[kNextMaxLikeId];
         }
         else if (nextCursorExists)
         {
-            self.nextMaxId = [[NSString alloc] initWithString:info[kNextCursor]];
+            nextMaxIdObject = info[kNextCursor];
         }
+        
+        self.nextMaxId = ([nextMaxIdObject isKindOfClass:[NSString class]]) ? nextMaxIdObject : [nextMaxIdObject stringValue];
         
         if (type) {
             self.type = type;

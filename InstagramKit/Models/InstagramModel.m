@@ -94,7 +94,9 @@ NSString *const kCursor = @"cursor";
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        self.Id = IKNotNull(info[kID]) ? [[NSString alloc] initWithString:info[kID]] : nil;
+        id IdObject = IKNotNull(info[kID]) ? info[kID] : nil;
+        self.Id = ([IdObject isKindOfClass:[NSString class]]) ? IdObject : [IdObject stringValue];
+
     }
     return self;
 }
