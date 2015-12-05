@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		820790831C13315C00934CE9 /* InstagramEngineUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 820790821C13315C00934CE9 /* InstagramEngineUserTests.m */; };
+		820790CC1C13647F00934CE9 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 820790CB1C13647F00934CE9 /* libAFNetworking.a */; };
 		8224667C1B4C2FD000F8B5EA /* InstagramEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224666B1B4C2FD000F8B5EA /* InstagramEngine.m */; };
 		8224667E1B4C2FD000F8B5EA /* InstagramComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8224666F1B4C2FD000F8B5EA /* InstagramComment.m */; };
 		822466801B4C2FD000F8B5EA /* InstagramLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 822466711B4C2FD000F8B5EA /* InstagramLocation.m */; };
@@ -52,6 +53,7 @@
 		145EB38F1C91913BF0978870 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		22D3CF98EC764B4481277054 /* Pods-InstagramKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramKit/Pods-InstagramKit.release.xcconfig"; sourceTree = "<group>"; };
 		820790821C13315C00934CE9 /* InstagramEngineUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineUserTests.m; sourceTree = "<group>"; };
+		820790CB1C13647F00934CE9 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/libAFNetworking.a"; sourceTree = "<group>"; };
 		8224664F1B4C2D8A00F8B5EA /* libInstagramKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInstagramKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8224666A1B4C2FD000F8B5EA /* InstagramEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramEngine.h; sourceTree = "<group>"; };
 		8224666B1B4C2FD000F8B5EA /* InstagramEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngine.m; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				820790CC1C13647F00934CE9 /* libAFNetworking.a in Frameworks */,
 				82D75EFE1B5BFEF90028EA29 /* MobileCoreServices.framework in Frameworks */,
 				82D75EF71B5BFE0D0028EA29 /* SystemConfiguration.framework in Frameworks */,
 				82D75EE81B5BF8000028EA29 /* libInstagramKit.a in Frameworks */,
@@ -216,6 +219,7 @@
 		B7153832B971838CED8AEC18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				820790CB1C13647F00934CE9 /* libAFNetworking.a */,
 				82D75EFC1B5BFEE80028EA29 /* Security.framework */,
 				82D75EFA1B5BFEE40028EA29 /* MobileCoreServices.framework */,
 				82D75EF81B5BFEDF0028EA29 /* CoreGraphics.framework */,
@@ -495,7 +499,10 @@
 				INFOPLIST_FILE = InstagramKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InstagramKit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -511,7 +518,10 @@
 				INFOPLIST_FILE = InstagramKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InstagramKit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
