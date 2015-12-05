@@ -69,6 +69,10 @@
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
         NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+        if (INSTAGRAMKIT_TEST_TARGET) {
+            info = [[NSBundle bundleForClass:[self class]] infoDictionary];
+        }
+        
         self.appClientID = info[kInstagramAppClientIdConfigurationKey];
         self.appRedirectURL = info[kInstagramAppRedirectURLConfigurationKey];
         
