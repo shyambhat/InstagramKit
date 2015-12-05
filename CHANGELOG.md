@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 ### [Unreleased]
 **on `dev` branch**
+- Complete Swift compatibility.
+- #179 Add Nullability and Lightweight Generics for Xcode 7. By @Adlai-Holler
+- Unit tests for Media and User methods in InstagramEngine. By @shyambhat
+- #177 Fix issue with pagination. Avoid percent-encoding twice. By @snoonz
 
 ## [3.6.9] - 2015-10-19
 
