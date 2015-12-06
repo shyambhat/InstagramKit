@@ -25,6 +25,7 @@
 
 @class InstagramUser;
 @class InstagramComment;
+@class UserInPhoto;
 @class InstagramLocation;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -75,6 +76,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  An array of comments on the Media.
  */
 @property (nonatomic, readonly, nullable) NSArray <InstagramComment *> *comments;
+
+/**
+ *  An array of users in the Media.
+ */
+@property (nonatomic, readonly, nullable) NSArray <UserInPhoto *> *usersInPhoto;
 
 /**
  *  Tags on the Media.

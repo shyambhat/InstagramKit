@@ -64,6 +64,11 @@ NSString *const kCountMedia = @"media";
 NSString *const kCountFollows = @"follows";
 NSString *const kCountFollowedBy = @"followed_by";
 
+NSString *const kUsersInPhoto = @"users_in_photo";
+NSString *const kPosition = @"position";
+NSString *const kX = @"x";
+NSString *const kY = @"y";
+
 NSString *const kTagMediaCount = @"media_count";
 NSString *const kTagName = @"name";
 
