@@ -65,7 +65,9 @@
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:nil];
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                     XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -87,7 +89,9 @@
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:nil];
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                     XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -109,7 +113,9 @@
                               XCTAssertTrue([paginatedObjects[0] isKindOfClass:modelClass]);
                               [expectation fulfill];
                           }
-                          failure:nil];
+                          failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                              XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
