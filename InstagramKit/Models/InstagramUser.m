@@ -78,11 +78,12 @@
 - (void)loadDetailsWithCompletion:(void (^)())success
                           failure:(nullable InstagramFailureBlock)failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self.Id
-                                       withSuccess:^(InstagramUser * _Nonnull userDetail) {
-                                           [self updateDetailsWithUser:userDetail];
-                                           success();
-                                       } failure:failure];
+    [[InstagramEngine sharedEngine] getUserWithId:self.Id
+                                          success:^(InstagramUser *_Nonnull userDetail) {
+                                              [self updateDetailsWithUser:userDetail];
+                                              success();
+                                          }
+                                          failure:failure];
 }
 
 #pragma mark - Equality

@@ -41,16 +41,16 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test getMedia"];
     NSString *testMediaId = @"1032802639895336381_1194245772";
-    [[InstagramEngine sharedEngine] getMedia:testMediaId
-              withSuccess:^(InstagramMedia * _Nonnull media) {
-                  XCTAssertNotNil(media);
-                  XCTAssertTrue([media isKindOfClass:[InstagramMedia class]]);
-                  XCTAssertTrue([media.Id isEqualToString:testMediaId]);
-                  [expectation fulfill];
-              }
-                  failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
-                      XCTAssertNil(error);
-              }];
+    [[InstagramEngine sharedEngine] getMediaWithId:testMediaId
+                                           success:^(InstagramMedia *_Nonnull media) {
+                                               XCTAssertNotNil(media);
+                                               XCTAssertTrue([media isKindOfClass:[InstagramMedia class]]);
+                                               XCTAssertTrue([media.Id isEqualToString:testMediaId]);
+                                               [expectation fulfill];
+                                           }
+                                           failure:^(NSError *_Nonnull error, NSInteger serverStatusCode) {
+                                               XCTAssertNil(error);
+                                           }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -62,25 +62,25 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test getMediaAtLocation"];
     NSInteger testCount = 10;
-    [[InstagramEngine sharedEngine] getMediaAtLocation:CLLocationCoordinate2DMake(52.5220257,13.4437056)
-                              count:testCount
-                              maxId:nil
-                           distance:2000
-                        withSuccess:^(NSArray<InstagramMedia *> * _Nonnull media, InstagramPaginationInfo * _Nonnull paginationInfo) {
-                            XCTAssertNotNil(media);
-                            XCTAssertTrue([media isKindOfClass:[NSArray class]]);
-                            
-                            InstagramMedia *mediaObject = media[0];
-                            XCTAssertNotNil(mediaObject);
-                            XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
-                            
-                            XCTAssertEqual([media count], testCount);
-                            [expectation fulfill];
+    [[InstagramEngine sharedEngine] getMediaWithLocation:CLLocationCoordinate2DMake(52.5220257, 13.4437056)
+                                                   count:testCount
+                                                   maxId:nil
+                                                distance:2000
+                                                 success:^(NSArray<InstagramMedia *> *_Nonnull media, InstagramPaginationInfo *_Nonnull paginationInfo) {
+                                                     XCTAssertNotNil(media);
+                                                     XCTAssertTrue([media isKindOfClass:[NSArray class]]);
 
-                        }
-                            failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
-                                XCTAssertNil(error);
-                        }];
+                                                     InstagramMedia *mediaObject = media[0];
+                                                     XCTAssertNotNil(mediaObject);
+                                                     XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
+
+                                                     XCTAssertEqual([media count], testCount);
+                                                     [expectation fulfill];
+
+                                                 }
+                                                 failure:^(NSError *_Nonnull error, NSInteger serverStatusCode) {
+                                                     XCTAssertNil(error);
+                                                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -92,22 +92,22 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test testGetMediaAtLocationWithId"];
     NSString * testLocationId = @"65045";
-    [[InstagramEngine sharedEngine] getMediaAtLocationWithId:testLocationId
-                        withSuccess:^(NSArray<InstagramMedia *> * _Nonnull media, InstagramPaginationInfo * _Nonnull paginationInfo) {
-                            XCTAssertNotNil(media);
-                            XCTAssertTrue([media isKindOfClass:[NSArray class]]);
-                            
-                            InstagramMedia *mediaObject = media[0];
-                            XCTAssertNotNil(mediaObject);
-                            XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
-                            
-                            XCTAssertTrue([mediaObject.locationId isEqualToString:testLocationId]);
-                            [expectation fulfill];
-                            
-                        }
-                            failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
-                                XCTAssertNil(error);
-                        }];
+    [[InstagramEngine sharedEngine] getMediaWithLocationId:testLocationId
+                                                   success:^(NSArray<InstagramMedia *> *_Nonnull media, InstagramPaginationInfo *_Nonnull paginationInfo) {
+                                                       XCTAssertNotNil(media);
+                                                       XCTAssertTrue([media isKindOfClass:[NSArray class]]);
+
+                                                       InstagramMedia *mediaObject = media[0];
+                                                       XCTAssertNotNil(mediaObject);
+                                                       XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
+
+                                                       XCTAssertTrue([mediaObject.locationId isEqualToString:testLocationId]);
+                                                       [expectation fulfill];
+
+                                                   }
+                                                   failure:^(NSError *_Nonnull error, NSInteger serverStatusCode) {
+                                                       XCTAssertNil(error);
+                                                   }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {

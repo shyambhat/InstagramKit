@@ -54,25 +54,24 @@
 - (void)testGetUserDetails
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test getUserDetails"];
-    
-    [[InstagramEngine sharedEngine] getUserDetails:self.user.Id
-                    withSuccess:^(InstagramUser * _Nonnull responseUser) {
-                        XCTAssertNotNil(responseUser);
-                        XCTAssertTrue([responseUser isKindOfClass:[InstagramUser class]]);
-                        
-                        XCTAssertTrue([responseUser.Id isEqualToString:self.user.Id]);
-                        
-                        XCTAssertTrue(responseUser.mediaCount);
-                        XCTAssertTrue(responseUser.followsCount);
-                        XCTAssertTrue(responseUser.followedByCount);
-                        
-                        [expectation fulfill];
-                        
-                    } failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
-                        XCTAssertNil(error);
-                        
-                    }];
-    
+    [[InstagramEngine sharedEngine] getUserWithId:self.user.Id
+                                          success:^(InstagramUser *_Nonnull responseUser) {
+                                              XCTAssertNotNil(responseUser);
+                                              XCTAssertTrue([responseUser isKindOfClass:[InstagramUser class]]);
+
+                                              XCTAssertTrue([responseUser.Id isEqualToString:self.user.Id]);
+
+                                              XCTAssertTrue(responseUser.mediaCount);
+                                              XCTAssertTrue(responseUser.followsCount);
+                                              XCTAssertTrue(responseUser.followedByCount);
+
+                                              [expectation fulfill];
+
+                                          }
+                                          failure:^(NSError *_Nonnull error, NSInteger serverStatusCode) {
+                                              XCTAssertNil(error);
+                                          }];
+
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
                                      XCTAssertNil(error, @"expectation not fulfilled: %@", error);
@@ -92,7 +91,7 @@
         [expectation fulfill];
 
     } failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
-        
+        XCTAssertNil(error);
     }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
