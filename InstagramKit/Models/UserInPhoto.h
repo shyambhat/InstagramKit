@@ -19,6 +19,8 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#include <CoreGraphics/CoreGraphics.h>
+
 #import "InstagramModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
