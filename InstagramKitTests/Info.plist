@@ -24,5 +24,10 @@
 	<string>830f11f01cb34d6ab29666a7ea1052ac</string>
 	<key>InstagramAppRedirectURL</key>
 	<string>http://test.com</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
