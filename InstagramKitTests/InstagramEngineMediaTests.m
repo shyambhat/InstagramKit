@@ -62,7 +62,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test getMediaAtLocation"];
     NSInteger testCount = 10;
-    [[InstagramEngine sharedEngine] getMediaAtLocation:CLLocationCoordinate2DMake(52.5220257,13.4437056)
+    [[InstagramEngine sharedEngine] getMediaAtLocation:CLLocationCoordinate2DMake(52.520645,13.409779)
                               count:testCount
                               maxId:nil
                            distance:2000
