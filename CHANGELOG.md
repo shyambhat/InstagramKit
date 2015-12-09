@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-### [Unreleased]
+#### [Unreleased]
 **on `dev` branch**
+
+- Support for Instagram Platform updates - http://developers.instagram.com/post/133424514006/instagram-platform-update 
+
+## [3.7] - 2015-12-09
 - Complete Swift compatibility.
 - #179 Add Nullability and Lightweight Generics for Xcode 7. By @Adlai-Holler
 - Unit tests for Media and User methods in InstagramEngine. By @shyambhat
