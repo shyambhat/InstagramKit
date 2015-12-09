@@ -20,22 +20,24 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramPaginationInfo : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  URL to receive next set of paginated items.
  */
-@property (readonly) NSURL* nextURL;
+@property (nonatomic, readonly) NSURL* nextURL;
 
 /**
  *  Offset from which the next paginated Media is to be received.
  */
-@property (readonly) NSString *nextMaxId;
+@property (nonatomic, readonly, copy) NSString *nextMaxId;
 
 /**
  *  Class of Objects which are being paginated.
  */
-@property (readonly) Class type;
+@property (nonatomic, readonly, nullable) Class type;
 
 /**
  *  Initializes a new InstagramPaginationInfo object.
@@ -53,3 +55,5 @@
 - (BOOL)isEqualToPaginationInfo:(InstagramPaginationInfo *)paginationInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

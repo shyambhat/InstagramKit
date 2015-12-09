@@ -22,56 +22,60 @@
 
 #import "InstagramModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramUser : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  User's unique username.
  */
-@property (readonly) NSString* username;
+@property (nonatomic, copy, readonly) NSString *username;
 
 /**
  *  User's full name.
  */
-@property (readonly) NSString* fullName;
+@property (nonatomic, copy, readonly, nullable) NSString *fullName;
 
 /**
  *  Link to the User's profile picture.
  */
-@property (readonly) NSURL* profilePictureURL;
+@property (nonatomic, readonly, nullable) NSURL *profilePictureURL;
 
 /**
  *  User's short bio, if provided.
  */
-@property (readonly) NSString* bio;
+@property (nonatomic, copy, readonly, nullable) NSString *bio;
 
 /**
  *  User's website, if provided.
  */
-@property (readonly) NSURL* website;
+@property (nonatomic, readonly, nullable) NSURL *website;
 
 /**
  *  Number of Media uploaded by the User.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger mediaCount;
+@property (nonatomic, readonly) NSInteger mediaCount;
 
 /**
  *  Number of Instagram Users, this User follows.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger followsCount;
+@property (nonatomic, readonly) NSInteger followsCount;
 
 /**
  *  Followers count of this User.
  *  This value is not persisted while saving the state of the User object.
  */
-@property (readonly) NSInteger followedByCount;
+@property (nonatomic, readonly) NSInteger followedByCount;
 
 /**
- *  Convenience method to update the details received for the User object.
+ *  Convenience method to load details and update object.
  *  @param info JSON dictionary
  */
-- (void)updateDetails:(NSDictionary *)info;
+- (void)loadDetailsWithCompletion:(void (^)())success
+                          failure:(nullable InstagramFailureBlock)failure;
+
 
 /**
  *  Comparing InstagramUser objects.
@@ -81,3 +85,5 @@
 - (BOOL)isEqualToUser:(InstagramUser *)user;
 
 @end
+
+NS_ASSUME_NONNULL_END

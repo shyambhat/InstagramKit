@@ -18,36 +18,40 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramLocation.h"
+#import "UserInPhoto.h"
 #import "InstagramModel.h"
+#import "InstagramUser.h"
 
-@interface InstagramLocation ()
+@interface UserInPhoto ()
 
-@property (nonatomic, assign) CLLocationCoordinate2D coordinates;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, assign) CGPoint position;
 
 @end
 
-@implementation InstagramLocation
+@implementation UserInPhoto
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
 
-        CLLocationCoordinate2D coordinates;
-        coordinates.latitude = [info[kLocationLatitude] doubleValue];
-        coordinates.longitude = [info[kLocationLongitude] doubleValue];
-        self.coordinates = coordinates;
-        self.name =  (IKNotNull(info[kLocationName])) ? [[NSString alloc] initWithString:info[kLocationName]] : nil;
+        NSDictionary *positionInfo = info[kPosition];
+        CGPoint position;
+        position.x = [positionInfo[kX] floatValue];
+        position.y = [info[kY] floatValue];
+        self.position = position;
+        self.user =  [[InstagramUser alloc] initWithInfo:info[kUser]];
     }
     return self;
 }
 
 #pragma mark - Equality
 
-- (BOOL)isEqualToLocation:(InstagramLocation *)location {
-    return [super isEqualToModel:location];
+- (BOOL)isEqualToUserInPhoto:(UserInPhoto *)userInPhoto {
+    return [self.user isEqualToUser:userInPhoto.user]
+    && self.position.x == userInPhoto.position.x
+    && self.position.y == userInPhoto.position.y;
 }
 
 #pragma mark - NSCoding
@@ -60,11 +64,11 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        CLLocationCoordinate2D coordinates;
-        coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
-        coordinates.longitude = [decoder decodeDoubleForKey:kLocationLongitude];
-        self.coordinates = coordinates;
-        self.name = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
+        CGPoint position;
+        position.x = [decoder decodeDoubleForKey:kX];
+        position.y = [decoder decodeDoubleForKey:kY];
+        self.position = position;
+        self.user = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
     }
     return self;
 }
@@ -73,18 +77,18 @@
 {
     [super encodeWithCoder:encoder];
 
-    [encoder encodeDouble:self.coordinates.latitude forKey:kLocationLatitude];
-    [encoder encodeDouble:self.coordinates.longitude forKey:kLocationLongitude];
-    [encoder encodeObject:self.name forKey:kLocationName];
+    [encoder encodeDouble:self.position.x forKey:kX];
+    [encoder encodeDouble:self.position.y forKey:kY];
+    [encoder encodeObject:self.user forKey:kUser];
 }
 
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramLocation *copy = [super copyWithZone:zone];
-    copy->_coordinates = self.coordinates;
-    copy->_name = [self.name copy];
+    UserInPhoto *copy = [super copyWithZone:zone];
+    copy->_position = self.position;
+    copy->_user = [self.user copy];
     return copy;
 }
 

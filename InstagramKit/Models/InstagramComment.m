@@ -21,15 +21,23 @@
 #import "InstagramComment.h"
 #import "InstagramUser.h"
 
+@interface InstagramComment ()
+
+@property (nonatomic, strong) NSDate *createdDate;
+@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, copy) NSString *text;
+
+@end
+
 @implementation InstagramComment
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        _user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
-        _text = [[NSString alloc] initWithString:info[kText]];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
+        self.user = [[InstagramUser alloc] initWithInfo:info[kCreator]];
+        self.text = [[NSString alloc] initWithString:info[kText]];
+        self.createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
     }
     return self;
 }
@@ -50,9 +58,9 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kCreator];
-        _text = [decoder decodeObjectOfClass:[NSString class] forKey:kText];
-        _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
+        self.user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kCreator];
+        self.text = [decoder decodeObjectOfClass:[NSString class] forKey:kText];
+        self.createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
     }
     return self;
 }
@@ -61,9 +69,9 @@
 {
     [super encodeWithCoder:encoder];
 
-    [encoder encodeObject:_user forKey:kCreator];
-    [encoder encodeObject:_text forKey:kText];
-    [encoder encodeObject:_createdDate forKey:kCreatedDate];
+    [encoder encodeObject:self.user forKey:kCreator];
+    [encoder encodeObject:self.text forKey:kText];
+    [encoder encodeObject:self.createdDate forKey:kCreatedDate];
 }
 
 #pragma mark - NSCopying
@@ -71,9 +79,9 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramComment *copy = [super copyWithZone:zone];
-    copy->_user = [_user copy];
-    copy->_text = [_text copy];
-    copy->_createdDate = [_createdDate copy];
+    copy->_user = [self.user copy];
+    copy->_text = [self.text copy];
+    copy->_createdDate = [self.createdDate copy];
     return copy;
 }
 

@@ -22,26 +22,19 @@
 #import <XCTest/XCTest.h>
 #import "InstagramKit.h"
 #import "InstagramEngine+Internal.h"
+#import "InstagramKitTestsConstants.h"
 
-#define kTestRequestTimeout 15
-
-static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
-
-@interface InstagramKitTests : XCTestCase
-
-@property (nonatomic, strong) InstagramEngine *engine;
+@interface InstagramEngineBaseTests : XCTestCase
 
 @end
 
-@implementation InstagramKitTests
+@implementation InstagramEngineBaseTests
 
 - (void)setUp {
     [super setUp];
-    self.engine = [InstagramEngine sharedEngine];
 }
 
 - (void)tearDown {
-    self.engine = nil;
 }
 
 
@@ -59,13 +52,12 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
 }
 
 
-- (void)testUnauthorizedGetMediaRequest
+- (void)testGetPathWithMedia
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"completed request"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPath with Media Request"];
     Class modelClass = [InstagramMedia class];
-    self.engine.accessToken = nil;
 
-    [self.engine getPath:@"media/1032802639895336381_1194245772"
+    [[InstagramEngine sharedEngine] getPath:@"media/1032802639895336381_1194245772"
               parameters:nil
            responseModel:modelClass
                  success:^(id object) {
@@ -73,7 +65,9 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:nil];
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                     XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -82,13 +76,12 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
 }
 
 
-- (void)testUnauthorizedGetUserRequest
+- (void)testGetPathWithUser
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"completed request"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPath with User Request"];
     Class modelClass = [InstagramUser class];
-    self.engine.accessToken = nil;
     
-    [self.engine getPath:@"users/1194245772"
+    [[InstagramEngine sharedEngine] getPath:@"users/1194245772"
               parameters:nil
            responseModel:modelClass
                  success:^(id object) {
@@ -96,7 +89,9 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:nil];
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                     XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {
@@ -105,12 +100,12 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
 }
 
 
-- (void)testUnauthorizedPaginatedRequest
+- (void)testGetPaginatedPath
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"completed request"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPaginatedPath with Popular Media"];
     Class modelClass = [InstagramMedia class];
-    self.engine.accessToken = nil;
-    [self.engine getPaginatedPath:@"media/popular"
+
+    [[InstagramEngine sharedEngine] getPaginatedPath:@"media/popular"
                        parameters:nil
                     responseModel:modelClass
                           success:^(NSArray *paginatedObjects, InstagramPaginationInfo *paginationInfo) {
@@ -118,7 +113,9 @@ static NSString *const kTestAccessToken = @"InstagramKitBaseUrl";
                               XCTAssertTrue([paginatedObjects[0] isKindOfClass:modelClass]);
                               [expectation fulfill];
                           }
-                          failure:nil];
+                          failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                              XCTAssertNil(error);
+                 }];
     
     [self waitForExpectationsWithTimeout:kTestRequestTimeout
                                  handler:^(NSError *error) {

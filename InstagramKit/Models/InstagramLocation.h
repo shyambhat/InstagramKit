@@ -22,17 +22,19 @@
 #import "InstagramModel.h"
 #import <MapKit/MapKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface InstagramLocation : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  Geographic coordinates if the Location.
  */
-@property (readonly) CLLocationCoordinate2D coordinates;
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinates;
 
 /**
  *  Location name as provided by the API.
  */
-@property (readonly) NSString *name;
+@property (nonatomic, copy, readonly, nullable) NSString *name;
 
 /**
  *  Comparing InstagramLocation objects.
@@ -42,3 +44,5 @@
 - (BOOL)isEqualToLocation:(InstagramLocation *)location;
 
 @end
+
+NS_ASSUME_NONNULL_END

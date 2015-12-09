@@ -64,6 +64,11 @@ NSString *const kCountMedia = @"media";
 NSString *const kCountFollows = @"follows";
 NSString *const kCountFollowedBy = @"followed_by";
 
+NSString *const kUsersInPhoto = @"users_in_photo";
+NSString *const kPosition = @"position";
+NSString *const kX = @"x";
+NSString *const kY = @"y";
+
 NSString *const kTagMediaCount = @"media_count";
 NSString *const kTagName = @"name";
 
@@ -82,6 +87,11 @@ NSString *const kMaxLikeId = @"max_like_id";
 NSString *const kMaxTagId = @"max_tag_id";
 NSString *const kCursor = @"cursor";
 
+@interface InstagramModel ()
+
+@property (atomic, copy) NSString *Id;
+
+@end
 
 @implementation InstagramModel
 
@@ -89,7 +99,9 @@ NSString *const kCursor = @"cursor";
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        _Id = IKNotNull(info[kID]) ? [[NSString alloc] initWithString:info[kID]] : nil;
+        id IdObject = IKNotNull(info[kID]) ? info[kID] : nil;
+        self.Id = ([IdObject isKindOfClass:[NSString class]]) ? IdObject : [IdObject stringValue];
+
     }
     return self;
 }
@@ -117,14 +129,14 @@ NSString *const kCursor = @"cursor";
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [self init])) {
-        _Id = [decoder decodeObjectOfClass:[NSString class] forKey:kID];
+        self.Id = [decoder decodeObjectOfClass:[NSString class] forKey:kID];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:_Id forKey:kID];
+    [encoder encodeObject:self.Id forKey:kID];
 }
 
 #pragma mark - NSCopying
@@ -132,7 +144,7 @@ NSString *const kCursor = @"cursor";
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramModel *copy = [[[self class] allocWithZone:zone] init];
-    copy->_Id = [_Id copy];
+    copy->_Id = [self.Id copy];
     return copy;
 }
 

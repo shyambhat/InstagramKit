@@ -18,29 +18,34 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 #import <Foundation/Foundation.h>
+#include <CoreGraphics/CoreGraphics.h>
+
+#import "InstagramModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InstagramTag : NSObject <NSCopying, NSSecureCoding, NSObject>
+@class InstagramUser;
+
+@interface UserInPhoto : InstagramModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
- *  Tag name
+ *  User in photo.
  */
-@property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly) InstagramUser *user;
 
 /**
- *  Number of Media tagged by this Tag.
+ *  Position of a user in a photo defined by x and y coordinates.
  */
-@property (nonatomic, readonly) NSInteger mediaCount;
+@property (nonatomic, readonly) CGPoint position;
+
 
 /**
- *  Comparing InstagramTag objects.
- *  @param tag  An InstagramTag object.
- *  @return     YES is tag names match. Else NO.
+ *  Comparing UserInPhoto objects.
+ *  @param  An UserInPhoto object.
+ *  @return YES is Ids match. Else NO.
  */
-- (BOOL)isEqualToTag:(InstagramTag *)tag;
+- (BOOL)isEqualToUserInPhoto:(UserInPhoto *)userInPhoto;
 
 @end
 

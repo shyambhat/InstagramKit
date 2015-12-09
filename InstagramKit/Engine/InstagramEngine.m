@@ -33,11 +33,12 @@
 
 @interface InstagramEngine()
 
-@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
-@property (nonatomic, strong) dispatch_queue_t backgroundQueue;
+@property (nonatomic, copy, nonnull) NSString *appClientID;
+@property (nonatomic, copy, nonnull) NSString *appRedirectURL;
+@property (nonatomic, strong, nonnull) AFHTTPSessionManager *httpManager;
 
 #if INSTAGRAMKIT_UICKEYCHAINSTORE
-@property (nonatomic, strong) UICKeyChainStore *keychainStore;
+@property (nonatomic, strong, nonnull) UICKeyChainStore *keychainStore;
 #endif
 
 @end
@@ -68,25 +69,42 @@
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
 
         NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-        self.appClientID = info[kInstagramAppClientIdConfigurationKey];
-        self.appRedirectURL = info[kInstagramAppRedirectURLConfigurationKey];
-
-        self.backgroundQueue = dispatch_queue_create("instagramkit.response.queue", NULL);
-        
-        if (!IKNotNull(self.appClientID) || [self.appClientID isEqualToString:@""]) {
-            NSLog(@"ERROR : InstagramKit - Invalid Client ID. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppClientIdConfigurationKey);
+        if (INSTAGRAMKIT_TEST_TARGET) {
+            info = [[NSBundle bundleForClass:[self class]] infoDictionary];
         }
         
-        if (!IKNotNull(self.appRedirectURL) || [self.appRedirectURL isEqualToString:@""]) {
-            NSLog(@"ERROR : InstagramKit - Invalid Redirect URL. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppRedirectURLConfigurationKey);
+        self.appClientID = info[kInstagramAppClientIdConfigurationKey];
+        self.appRedirectURL = info[kInstagramAppRedirectURLConfigurationKey];
+        
+        if (!self.appClientID || [self.appClientID isEqualToString:@""]) {
+            NSLog(@"[InstagramKit] ERROR : Invalid Client ID. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppClientIdConfigurationKey);
+        }
+        
+        if (!self.appRedirectURL || [self.appRedirectURL isEqualToString:@""]) {
+            NSLog(@"[InstagramKit] ERROR : Invalid Redirect URL. Please set a valid value for the key \"%@\" in the App's Info.plist file",kInstagramAppRedirectURLConfigurationKey);
         }
         
 #if INSTAGRAMKIT_UICKEYCHAINSTORE
         self.keychainStore = [UICKeyChainStore keyChainStoreWithService:InstagramKitKeychainStore];
-        _accessToken = self.keychainStore[@"token"];
+        self.accessToken = self.keychainStore[kKeychainTokenKey];
 #endif
     }
     return self;
+}
+
+
+#pragma mark -
+
+
+- (void)setAccessToken:(NSString *)accessToken
+{
+    _accessToken = accessToken;
+    
+#if INSTAGRAMKIT_UICKEYCHAINSTORE
+    self.keychainStore[kKeychainTokenKey] = self.accessToken;
+#endif
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:InstagramKitUserAuthenticationChangedNotification object:nil];
 }
 
 
@@ -148,21 +166,6 @@
     }];
     
     self.accessToken = nil;
-}
-
-
-#pragma mark -
-
-
-- (void)setAccessToken:(NSString *)accessToken
-{
-    _accessToken = accessToken;
-
-#if INSTAGRAMKIT_UICKEYCHAINSTORE
-    self.keychainStore[@"token"] = self.accessToken;
-#endif
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:InstagramKitUserAuthenticationChangedNotification object:nil];
 }
 
 
@@ -253,8 +256,8 @@
                       if (!success) return;
                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                       NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
-                      id model =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
-                      success(model);
+                      id modelObject =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
+                      success(modelObject);
                   }
                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                       (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
@@ -280,16 +283,14 @@
                       InstagramPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
                       
                       NSArray *responseObjects = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
-                      
                       NSMutableArray *objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
-                      dispatch_async(self.backgroundQueue, ^{
-                          [responseObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                              NSDictionary *info = obj;
-                              id model = [[modelClass alloc] initWithInfo:info];
-                              [objects addObject:model];
+                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                          [responseObjects enumerateObjectsUsingBlock:^(NSDictionary * dataDictionary, NSUInteger idx, BOOL *stop) {
+                              id modelObject = [[modelClass alloc] initWithInfo:dataDictionary];
+                              [objects addObject:modelObject];
                           }];
                           dispatch_async(dispatch_get_main_queue(), ^{
-                              success(objects, paginationInfo);
+                              success([objects copy], paginationInfo);
                           });
                       });
                   }
@@ -301,7 +302,6 @@
 
 - (void)postPath:(NSString *)path
       parameters:(NSDictionary *)parameters
-    responseModel:(Class)modelClass
          success:(InstagramResponseBlock)success
          failure:(InstagramFailureBlock)failure
 {
@@ -319,7 +319,6 @@
 
 - (void)deletePath:(NSString *)path
       parameters:(NSDictionary *)parameters
-   responseModel:(Class)modelClass
            success:(InstagramResponseBlock)success
            failure:(InstagramFailureBlock)failure
 {
@@ -389,6 +388,20 @@
                    failure:failure];
 }
 
+- (void)getMediaAtLocationWithId:(NSString*)locationId
+                     withSuccess:(InstagramMediaBlock)success
+                         failure:(InstagramFailureBlock)failure
+{
+    [self getPaginatedPath:[NSString stringWithFormat:@"locations/%@/media/recent", locationId]
+                parameters:nil
+             responseModel:[InstagramMedia class]
+                   success:success
+                   failure:failure];
+}
+
+
+#pragma mark - Locations -
+
 
 - (void)searchLocationsAtLocation:(CLLocationCoordinate2D)loction
                        withSuccess:(InstagramLocationsBlock)success
@@ -426,17 +439,6 @@
            failure:failure];
  }
                          
-
-- (void)getMediaAtLocationWithId:(NSString*)locationId
-                     withSuccess:(InstagramMediaBlock)success
-                     failure:(InstagramFailureBlock)failure
- {
-     [self getPaginatedPath:[NSString stringWithFormat:@"locations/%@/media/recent", locationId]
-                 parameters:nil
-              responseModel:[InstagramMedia class]
-                    success:success
-                    failure:failure];
- }
 
 
 #pragma mark - Users -
@@ -675,7 +677,6 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjects:@[commentText] forKeys:@[@"text"]];
     [self postPath:[NSString stringWithFormat:@"media/%@/comments",mediaId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -688,8 +689,7 @@
 {
     [self deletePath:[NSString stringWithFormat:@"media/%@/comments/%@",mediaId,commentId]
           parameters:nil
-       responseModel:nil
-             success:success
+               success:success
              failure:failure];
 }
 
@@ -715,7 +715,6 @@
 {
     [self postPath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
         parameters:nil
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -727,8 +726,7 @@
 {
     [self deletePath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
           parameters:nil
-       responseModel:nil
-             success:success
+               success:success
              failure:failure];
 }
 
@@ -790,7 +788,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionFollow};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -803,7 +800,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionUnfollow};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -816,7 +812,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionBlock};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -829,7 +824,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionUnblock};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -842,7 +836,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionApprove};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -855,7 +848,6 @@
     NSDictionary *params = @{kRelationshipActionKey:kRelationshipActionIgnore};
     [self postPath:[NSString stringWithFormat:@"users/%@/relationship",userId]
         parameters:params
-     responseModel:nil
            success:success
            failure:failure];
 }
@@ -869,6 +861,7 @@
                          failure:(InstagramFailureBlock)failure
 {
     NSString *relativePath = [[paginationInfo.nextURL absoluteString] stringByReplacingOccurrencesOfString:[self.httpManager.baseURL absoluteString] withString:@""];
+    relativePath = [relativePath stringByRemovingPercentEncoding];
     [self getPaginatedPath:relativePath
                 parameters:nil
              responseModel:paginationInfo.type

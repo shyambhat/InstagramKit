@@ -21,57 +21,84 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "InstagramComment.h"
+#import "UserInPhoto.h"
 #import "InstagramLocation.h"
 
 @interface InstagramMedia ()
-{
-    NSMutableArray *mLikes;
-    NSMutableArray *mComments;
-}
+
+@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, assign) BOOL userHasLiked;
+@property (nonatomic, strong) NSDate *createdDate;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, strong) InstagramComment *caption;
+@property (nonatomic, strong) NSMutableArray *mLikes;
+@property (nonatomic, strong) NSMutableArray *mComments;
+@property (nonatomic, strong) NSMutableArray *mUsersInPhoto;
+@property (nonatomic, strong) NSArray *tags;
+@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, copy) NSString *locationId;
+@property (nonatomic, copy) NSString *locationName;
+@property (nonatomic, copy) NSString *filter;
+@property (nonatomic, strong) NSURL *thumbnailURL;
+@property (nonatomic, assign) CGSize thumbnailFrameSize;
+@property (nonatomic, strong) NSURL *lowResolutionImageURL;
+@property (nonatomic, assign) CGSize lowResolutionImageFrameSize;
+@property (nonatomic, strong) NSURL *standardResolutionImageURL;
+@property (nonatomic, assign) CGSize standardResolutionImageFrameSize;
+@property (nonatomic, assign) BOOL isVideo;
+@property (nonatomic, strong) NSURL *lowResolutionVideoURL;
+@property (nonatomic, assign) CGSize lowResolutionVideoFrameSize;
+@property (nonatomic, strong) NSURL *standardResolutionVideoURL;
+@property (nonatomic, assign) CGSize standardResolutionVideoFrameSize;
+
 @end
 
 @implementation InstagramMedia
-@synthesize likes = mLikes;
-@synthesize comments = mComments;
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
         
-        _user = [[InstagramUser alloc] initWithInfo:info[kUser]];
-        _userHasLiked = [info[kUserHasLiked] boolValue];
-        _createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
-        _link = [[NSString alloc] initWithString:info[kLink]];
-        _caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
-        _likesCount = [(info[kLikes])[kCount] integerValue];
-        mLikes = [[NSMutableArray alloc] init];
+        self.user = [[InstagramUser alloc] initWithInfo:info[kUser]];
+        self.userHasLiked = [info[kUserHasLiked] boolValue];
+        self.createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
+        self.link = [[NSString alloc] initWithString:info[kLink]];
+        self.caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
+        self.mLikes = [[NSMutableArray alloc] init];
         for (NSDictionary *userInfo in (info[kLikes])[kData]) {
             InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
-            [mLikes addObject:user];
+            [self.mLikes addObject:user];
         }
         
-        _commentCount = [(info[kComments])[kCount] integerValue];
-        mComments = [[NSMutableArray alloc] init];
+        self.mComments = [[NSMutableArray alloc] init];
         for (NSDictionary *commentInfo in (info[kComments])[kData]) {
             InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
-            [mComments addObject:comment];
+            [self.mComments addObject:comment];
         }
-        _tags = [[NSArray alloc] initWithArray:info[kTags]];
+        
+        self.mUsersInPhoto = [[NSMutableArray alloc] init];
+        for (NSDictionary *userInfo in info[kUsersInPhoto]) {
+            UserInPhoto *userInPhoto = [[UserInPhoto alloc] initWithInfo:userInfo];
+            [self.mUsersInPhoto addObject:userInPhoto];
+        }
+
+        self.tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
-            _locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
-            _locationName = IKNotNull(info[kLocation][kLocationName]) ? info[kLocation][kLocationName] : nil;
-            _location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
+            id locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
+            self.locationId = ([locationId isKindOfClass:[NSString class]]) ? locationId : [locationId stringValue];
+            self.locationName = IKNotNull(info[kLocation][kLocationName]) ? info[kLocation][kLocationName] : nil;
+            self.location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
         }
         
-        _filter = info[kFilter];
+        self.filter = info[kFilter];
         
         [self initializeImages:info[kImages]];
         
-        NSString* mediaType = info[kType];
-        _isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]];
-        if (_isVideo) {
+        NSString *mediaType = info[kType];
+        self.isVideo = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]];
+        if (self.isVideo) {
             [self initializeVideos:info[kVideos]];
         }
     }
@@ -81,27 +108,54 @@
 - (void)initializeImages:(NSDictionary *)imagesInfo
 {
     NSDictionary *thumbInfo = imagesInfo[kThumbnail];
-    _thumbnailURL = (IKNotNull(thumbInfo[kURL])) ? [[NSURL alloc] initWithString:thumbInfo[kURL]] : nil;
-    _thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
+    self.thumbnailURL = (IKNotNull(thumbInfo[kURL])) ? [[NSURL alloc] initWithString:thumbInfo[kURL]] : nil;
+    self.thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
     
     NSDictionary *lowResInfo = imagesInfo[kLowResolution];
-    _lowResolutionImageURL = IKNotNull(lowResInfo[kURL])? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
-    _lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    self.lowResolutionImageURL = IKNotNull(lowResInfo[kURL])? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
+    self.lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = imagesInfo[kStandardResolution];
-    _standardResolutionImageURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
-    _standardResolutionImageFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    self.standardResolutionImageURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
+    self.standardResolutionImageFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
 - (void)initializeVideos:(NSDictionary *)videosInfo
 {
     NSDictionary *lowResInfo = videosInfo[kLowResolution];
-    _lowResolutionVideoURL = IKNotNull(lowResInfo[kURL]) ? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
-    _lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+    self.lowResolutionVideoURL = IKNotNull(lowResInfo[kURL]) ? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
+    self.lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
-    _standardResolutionVideoURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
-    _standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+    self.standardResolutionVideoURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
+    self.standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+}
+
+#pragma Getters 
+
+- (NSArray *)likes
+{
+    return [NSArray arrayWithArray:self.mLikes];
+}
+
+- (NSInteger)likesCount
+{
+    return [self.mLikes count];
+}
+
+- (NSArray *)comments
+{
+    return [NSArray arrayWithArray:self.mComments];
+}
+
+- (NSInteger)commentCount
+{
+    return [self.mComments count];
+}
+
+- (NSArray *)usersInPhoto
+{
+    return [NSArray arrayWithArray:self.mUsersInPhoto];
 }
 
 #pragma mark - Equality
@@ -120,42 +174,41 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        _user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kUser];
-        _userHasLiked = [decoder decodeBoolForKey:kUserHasLiked];
-        _createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
-        _link = [decoder decodeObjectOfClass:[NSString class] forKey:kLink];
-        _caption = [decoder decodeObjectOfClass:[NSString class] forKey:kCaption];
-        _likesCount = [decoder decodeIntegerForKey:[NSString stringWithFormat:@"%@%@",kLikes,kCount]];
-        mLikes = [[decoder decodeObjectOfClass:[NSArray class] forKey:kLikes] mutableCopy];
-        _commentCount = [decoder decodeIntegerForKey:[NSString stringWithFormat:@"%@%@",kComments,kCount]];
-        mComments = [[decoder decodeObjectOfClass:[NSArray class] forKey:kComments] mutableCopy];
-        _tags = [decoder decodeObjectOfClass:[NSArray class] forKey:kTags];
+        self.user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kUser];
+        self.userHasLiked = [decoder decodeBoolForKey:kUserHasLiked];
+        self.createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
+        self.link = [decoder decodeObjectOfClass:[NSString class] forKey:kLink];
+        self.caption = [decoder decodeObjectOfClass:[NSString class] forKey:kCaption];
+        self.mLikes = [[decoder decodeObjectOfClass:[NSArray class] forKey:kLikes] mutableCopy];
+        self.mComments = [[decoder decodeObjectOfClass:[NSArray class] forKey:kComments] mutableCopy];
+        self.mUsersInPhoto = [[decoder decodeObjectOfClass:[NSArray class] forKey:kUsersInPhoto] mutableCopy];
+        self.tags = [decoder decodeObjectOfClass:[NSArray class] forKey:kTags];
         
         CLLocationCoordinate2D coordinates;
         coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
         coordinates.longitude = [decoder decodeDoubleForKey:kLocationLongitude];
-        _location = coordinates;
-        _locationName = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
+        self.location = coordinates;
+        self.locationName = [decoder decodeObjectOfClass:[NSString class] forKey:kLocationName];
         
-        _filter = [decoder decodeObjectOfClass:[NSString class] forKey:kFilter];
+        self.filter = [decoder decodeObjectOfClass:[NSString class] forKey:kFilter];
         
-        _thumbnailURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kThumbnail]];
-        _thumbnailFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kThumbnail]];
+        self.thumbnailURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kThumbnail]];
+        self.thumbnailFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kThumbnail]];
         
-        _isVideo = [decoder decodeBoolForKey:kMediaTypeVideo];
+        self.isVideo = [decoder decodeBoolForKey:kMediaTypeVideo];
         
-        if (!_isVideo) {
-            _lowResolutionImageURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
-            _lowResolutionImageFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
-            _standardResolutionImageURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
-            _standardResolutionImageFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
+        if (!self.isVideo) {
+            self.lowResolutionImageURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
+            self.lowResolutionImageFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
+            self.standardResolutionImageURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
+            self.standardResolutionImageFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
         }
         else
         {
-            _lowResolutionVideoURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
-            _lowResolutionVideoFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
-            _standardResolutionVideoURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
-            _standardResolutionVideoFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
+            self.lowResolutionVideoURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
+            self.lowResolutionVideoFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
+            self.standardResolutionVideoURL = [decoder decodeObjectOfClass:[NSString class] forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
+            self.standardResolutionVideoFrameSize = [decoder decodeCGSizeForKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
         }
     }
     return self;
@@ -165,35 +218,35 @@
 {
     [super encodeWithCoder:encoder];
 
-    [encoder encodeObject:_user forKey:kUser];
-    [encoder encodeBool:_userHasLiked forKey:kUserHasLiked];
-    [encoder encodeObject:_createdDate forKey:kCreatedDate];
-    [encoder encodeObject:_link forKey:kLink];
-    [encoder encodeObject:_caption forKey:kCaption];
-    [encoder encodeInteger:_likesCount forKey:[NSString stringWithFormat:@"%@%@",kLikes,kCount]];
-    [encoder encodeObject:mLikes forKey:kLikes];
-    [encoder encodeInteger:_commentCount forKey:[NSString stringWithFormat:@"%@%@",kComments,kCount]];
-    [encoder encodeObject:_tags forKey:kTags];
-    [encoder encodeDouble:_location.latitude forKey:kLocationLatitude];
-    [encoder encodeDouble:_location.longitude forKey:kLocationLongitude];
-    [encoder encodeObject:_locationName forKey:kLocationName];
-    [encoder encodeObject:_filter forKey:kFilter];
-    [encoder encodeObject:_thumbnailURL forKey:[NSString stringWithFormat:@"%@url",kThumbnail]];
-    [encoder encodeCGSize:_thumbnailFrameSize forKey:[NSString stringWithFormat:@"%@size",kThumbnail]];
-    [encoder encodeBool:_isVideo forKey:kMediaTypeVideo];
+    [encoder encodeObject:self.user forKey:kUser];
+    [encoder encodeBool:self.userHasLiked forKey:kUserHasLiked];
+    [encoder encodeObject:self.createdDate forKey:kCreatedDate];
+    [encoder encodeObject:self.link forKey:kLink];
+    [encoder encodeObject:self.caption forKey:kCaption];
+    [encoder encodeObject:self.mLikes forKey:kLikes];
+    [encoder encodeObject:self.mComments forKey:kComments];
+    [encoder encodeObject:self.mUsersInPhoto forKey:kUsersInPhoto];
+    [encoder encodeObject:self.tags forKey:kTags];
+    [encoder encodeDouble:self.location.latitude forKey:kLocationLatitude];
+    [encoder encodeDouble:self.location.longitude forKey:kLocationLongitude];
+    [encoder encodeObject:self.locationName forKey:kLocationName];
+    [encoder encodeObject:self.filter forKey:kFilter];
+    [encoder encodeObject:self.thumbnailURL forKey:[NSString stringWithFormat:@"%@url",kThumbnail]];
+    [encoder encodeCGSize:self.thumbnailFrameSize forKey:[NSString stringWithFormat:@"%@size",kThumbnail]];
+    [encoder encodeBool:self.isVideo forKey:kMediaTypeVideo];
 
-    if (!_isVideo) {
-        [encoder encodeObject:_lowResolutionImageURL forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
-        [encoder encodeCGSize:_lowResolutionImageFrameSize forKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
-        [encoder encodeObject:_standardResolutionImageURL forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
-        [encoder encodeCGSize:_standardResolutionImageFrameSize forKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
+    if (!self.isVideo) {
+        [encoder encodeObject:self.lowResolutionImageURL forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
+        [encoder encodeCGSize:self.lowResolutionImageFrameSize forKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
+        [encoder encodeObject:self.standardResolutionImageURL forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
+        [encoder encodeCGSize:self.standardResolutionImageFrameSize forKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
     }
     else
     {
-        [encoder encodeObject:_lowResolutionVideoURL forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
-        [encoder encodeCGSize:_lowResolutionVideoFrameSize forKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
-        [encoder encodeObject:_standardResolutionVideoURL forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
-        [encoder encodeCGSize:_standardResolutionVideoFrameSize forKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
+        [encoder encodeObject:self.lowResolutionVideoURL forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];
+        [encoder encodeCGSize:self.lowResolutionVideoFrameSize forKey:[NSString stringWithFormat:@"%@size",kLowResolution]];
+        [encoder encodeObject:self.standardResolutionVideoURL forKey:[NSString stringWithFormat:@"%@url",kStandardResolution]];
+        [encoder encodeCGSize:self.standardResolutionVideoFrameSize forKey:[NSString stringWithFormat:@"%@size",kStandardResolution]];
     }
 
 }
@@ -203,30 +256,29 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     InstagramMedia *copy = [super copyWithZone:zone];
-    copy->_user = [_user copy];
-    copy->_userHasLiked = _userHasLiked;
-    copy->_createdDate = [_createdDate copy];
-    copy->_link = [_link copy];
-    copy->_caption = [_caption copy];
-    copy->_likesCount = _likesCount;
-    copy->mLikes = [mLikes copy];
-    copy->_commentCount = _commentCount;
-    copy->mComments = [mComments copy];
-    copy->_tags = [_tags copy];
-    copy->_location = _location;
-    copy->_locationName = [_locationName copy];
-    copy->_filter = [_filter copy];
-    copy->_thumbnailURL = [_thumbnailURL copy];
-    copy->_thumbnailFrameSize = _thumbnailFrameSize;
-    copy->_isVideo = _isVideo;
-    copy->_lowResolutionImageURL = [_lowResolutionImageURL copy];
-    copy->_lowResolutionImageFrameSize = _lowResolutionImageFrameSize;
-    copy->_standardResolutionImageURL = [_standardResolutionImageURL copy];
-    copy->_standardResolutionImageFrameSize = _standardResolutionImageFrameSize;
-    copy->_lowResolutionVideoURL = [_lowResolutionVideoURL copy];
-    copy->_lowResolutionVideoFrameSize = _lowResolutionVideoFrameSize;
-    copy->_standardResolutionVideoURL = [_standardResolutionVideoURL copy];
-    copy->_standardResolutionVideoFrameSize = _standardResolutionVideoFrameSize;
+    copy->_user = [self.user copy];
+    copy->_userHasLiked = self.userHasLiked;
+    copy->_createdDate = [self.createdDate copy];
+    copy->_link = [self.link copy];
+    copy->_caption = [self.caption copy];
+    copy->_mLikes = [self.mLikes copy];
+    copy->_mComments = [self.mComments copy];
+    copy->_mUsersInPhoto = [self.mUsersInPhoto copy];
+    copy->_tags = [self.tags copy];
+    copy->_location = self.location;
+    copy->_locationName = [self.locationName copy];
+    copy->_filter = [self.filter copy];
+    copy->_thumbnailURL = [self.thumbnailURL copy];
+    copy->_thumbnailFrameSize = self.thumbnailFrameSize;
+    copy->_isVideo = self.isVideo;
+    copy->_lowResolutionImageURL = [self.lowResolutionImageURL copy];
+    copy->_lowResolutionImageFrameSize = self.lowResolutionImageFrameSize;
+    copy->_standardResolutionImageURL = [self.standardResolutionImageURL copy];
+    copy->_standardResolutionImageFrameSize = self.standardResolutionImageFrameSize;
+    copy->_lowResolutionVideoURL = [self.lowResolutionVideoURL copy];
+    copy->_lowResolutionVideoFrameSize = self.lowResolutionVideoFrameSize;
+    copy->_standardResolutionVideoURL = [self.standardResolutionVideoURL copy];
+    copy->_standardResolutionVideoFrameSize = self.standardResolutionVideoFrameSize;
     return copy;
 }
 
