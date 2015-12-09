@@ -21,6 +21,7 @@
 #import "InstagramMedia.h"
 #import "InstagramUser.h"
 #import "InstagramComment.h"
+#import "UserInPhoto.h"
 #import "InstagramLocation.h"
 
 @interface InstagramMedia ()
@@ -32,6 +33,7 @@
 @property (nonatomic, strong) InstagramComment *caption;
 @property (nonatomic, strong) NSMutableArray *mLikes;
 @property (nonatomic, strong) NSMutableArray *mComments;
+@property (nonatomic, strong) NSMutableArray *mUsersInPhoto;
 @property (nonatomic, strong) NSArray *tags;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 @property (nonatomic, copy) NSString *locationId;
@@ -74,6 +76,13 @@
             InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
             [self.mComments addObject:comment];
         }
+        
+        self.mUsersInPhoto = [[NSMutableArray alloc] init];
+        for (NSDictionary *userInfo in info[kUsersInPhoto]) {
+            UserInPhoto *userInPhoto = [[UserInPhoto alloc] initWithInfo:userInfo];
+            [self.mUsersInPhoto addObject:userInPhoto];
+        }
+
         self.tags = [[NSArray alloc] initWithArray:info[kTags]];
         
         if (IKNotNull(info[kLocation])) {
@@ -144,6 +153,11 @@
     return [self.mComments count];
 }
 
+- (NSArray *)usersInPhoto
+{
+    return [NSArray arrayWithArray:self.mUsersInPhoto];
+}
+
 #pragma mark - Equality
 
 - (BOOL)isEqualToMedia:(InstagramMedia *)media {
@@ -167,6 +181,7 @@
         self.caption = [decoder decodeObjectOfClass:[NSString class] forKey:kCaption];
         self.mLikes = [[decoder decodeObjectOfClass:[NSArray class] forKey:kLikes] mutableCopy];
         self.mComments = [[decoder decodeObjectOfClass:[NSArray class] forKey:kComments] mutableCopy];
+        self.mUsersInPhoto = [[decoder decodeObjectOfClass:[NSArray class] forKey:kUsersInPhoto] mutableCopy];
         self.tags = [decoder decodeObjectOfClass:[NSArray class] forKey:kTags];
         
         CLLocationCoordinate2D coordinates;
@@ -210,6 +225,7 @@
     [encoder encodeObject:self.caption forKey:kCaption];
     [encoder encodeObject:self.mLikes forKey:kLikes];
     [encoder encodeObject:self.mComments forKey:kComments];
+    [encoder encodeObject:self.mUsersInPhoto forKey:kUsersInPhoto];
     [encoder encodeObject:self.tags forKey:kTags];
     [encoder encodeDouble:self.location.latitude forKey:kLocationLatitude];
     [encoder encodeDouble:self.location.longitude forKey:kLocationLongitude];
@@ -247,6 +263,7 @@
     copy->_caption = [self.caption copy];
     copy->_mLikes = [self.mLikes copy];
     copy->_mComments = [self.mComments copy];
+    copy->_mUsersInPhoto = [self.mUsersInPhoto copy];
     copy->_tags = [self.tags copy];
     copy->_location = self.location;
     copy->_locationName = [self.locationName copy];

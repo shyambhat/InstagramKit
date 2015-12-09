@@ -23,6 +23,8 @@
 		82D75EE81B5BF8000028EA29 /* libInstagramKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8224664F1B4C2D8A00F8B5EA /* libInstagramKit.a */; };
 		82D75EF71B5BFE0D0028EA29 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D75EF61B5BFE0D0028EA29 /* SystemConfiguration.framework */; };
 		82D75EFE1B5BFEF90028EA29 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D75EFA1B5BFEE40028EA29 /* MobileCoreServices.framework */; };
+		82DC34581C14E76C006AAFE6 /* UserInPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DC34571C14E76C006AAFE6 /* UserInPhoto.m */; };
+		82DC34591C14E76C006AAFE6 /* UserInPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DC34571C14E76C006AAFE6 /* UserInPhoto.m */; };
 		CB701B571A290E15ED62FF1E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D71ABA66AA07709C96A1148 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		82D75EFA1B5BFEE40028EA29 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		82D75EFC1B5BFEE80028EA29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		82D75F031B5C56C10028EA29 /* InstagramEngine+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InstagramEngine+Internal.h"; sourceTree = "<group>"; };
+		82DC34561C14E76C006AAFE6 /* UserInPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInPhoto.h; sourceTree = "<group>"; };
+		82DC34571C14E76C006AAFE6 /* UserInPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInPhoto.m; sourceTree = "<group>"; };
 		8D71ABA66AA07709C96A1148 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A62AD4BB7D5AE07DF04ACAD7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CAAFACF6E29667CA9EEF7C20 /* libPods-InstagramKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +187,8 @@
 				822466791B4C2FD000F8B5EA /* InstagramTag.m */,
 				8224667A1B4C2FD000F8B5EA /* InstagramUser.h */,
 				8224667B1B4C2FD000F8B5EA /* InstagramUser.m */,
+				82DC34561C14E76C006AAFE6 /* UserInPhoto.h */,
+				82DC34571C14E76C006AAFE6 /* UserInPhoto.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 			files = (
 				822466861B4C2FD000F8B5EA /* InstagramPaginationInfo.m in Sources */,
 				822466801B4C2FD000F8B5EA /* InstagramLocation.m in Sources */,
+				82DC34581C14E76C006AAFE6 /* UserInPhoto.m in Sources */,
 				822466841B4C2FD000F8B5EA /* InstagramModel.m in Sources */,
 				8289FCAC1B51C419000903FD /* InstagramKitConstants.m in Sources */,
 				822466881B4C2FD000F8B5EA /* InstagramTag.m in Sources */,
@@ -371,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82DC34591C14E76C006AAFE6 /* UserInPhoto.m in Sources */,
 				82D75EE71B5BF8000028EA29 /* InstagramEngineBaseTests.m in Sources */,
 				82C63A1D1C130C2900D4CDDB /* InstagramEngineMediaTests.m in Sources */,
 				820790831C13315C00934CE9 /* InstagramEngineUserTests.m in Sources */,

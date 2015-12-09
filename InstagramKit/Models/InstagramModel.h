@@ -70,6 +70,11 @@ INSTAGRAMKIT_EXTERN NSString *const kCountMedia;
 INSTAGRAMKIT_EXTERN NSString *const kCountFollows;
 INSTAGRAMKIT_EXTERN NSString *const kCountFollowedBy;
 
+INSTAGRAMKIT_EXTERN NSString *const kUsersInPhoto;
+INSTAGRAMKIT_EXTERN NSString *const kPosition;
+INSTAGRAMKIT_EXTERN NSString *const kX;
+INSTAGRAMKIT_EXTERN NSString *const kY;
+
 INSTAGRAMKIT_EXTERN NSString *const kTagMediaCount;
 INSTAGRAMKIT_EXTERN NSString *const kTagName;
 
