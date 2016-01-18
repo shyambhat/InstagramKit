@@ -8,12 +8,13 @@ All notable changes to this project will be documented in this file.
 **on `dev` branch**
 
 - Support for Instagram Platform updates - http://developers.instagram.com/post/133424514006/instagram-platform-update 
+- [#201](https://github.com/shyambhat/InstagramKit/pull/201) Solved issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
 
 ## [3.7] - 2015-12-09
 - Complete Swift compatibility.
-- #179 Add Nullability and Lightweight Generics for Xcode 7. By @Adlai-Holler
-- Unit tests for Media and User methods in InstagramEngine. By @shyambhat
-- #177 Fix issue with pagination. Avoid percent-encoding twice. By @snoonz
+- [#179](https://github.com/shyambhat/InstagramKit/pull/179) Add Nullability and Lightweight Generics for Xcode 7. By [@Adlai-Holler](https://github.com/Adlai-Holler)
+- Unit tests for Media and User methods in InstagramEngine. By [@shyambhat](https://github.com/shyambhat)
+- [#177](https://github.com/shyambhat/InstagramKit/pull/177) Fix issue with pagination. Avoid percent-encoding twice. By [@snoonz](https://github.com/snoonz)
 
 #### Added
 - #188 ```InstagramUser loadDetailsWithCompletion:``` to fetch User details and update the same user object.
