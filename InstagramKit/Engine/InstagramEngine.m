@@ -129,13 +129,27 @@
                                   error:(NSError *__autoreleasing *)error
 {
     NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
-    if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
+    
+    // For app:// formatted urls the appRedirectURL.host is nil
+    if (![appRedirectURL.scheme isEqual:url.scheme] || (![appRedirectURL.host isEqual:url.host] && appRedirectURL.host != nil))
     {
         return NO;
     }
     
-    BOOL success = YES;
-    NSString *token = [self queryStringParametersFromString:url.fragment][@"access_token"];
+    NSString *urlFormatted = @"";
+    // For app:// formatted urls the url.fragment is also nil
+    if (url.fragment)
+    {
+        urlFormatted = url.fragment;
+    }
+    else
+    {
+        urlFormatted = url.resourceSpecifier;
+    }
+    
+    BOOL success = urlFormatted.length > 0;
+    
+    NSString *token = [self queryStringParametersFromString:urlFormatted][@"access_token"];
     if (token)
     {
         self.accessToken = token;
@@ -206,6 +220,12 @@
         
         NSString *key = [pairs[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *value = [pairs[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        // Must manually clean when passed string is url.resourceSpecifier
+        if ([[key substringToIndex:1] isEqualToString: @"#"]) {
+            key = [key substringFromIndex:1];
+        }
+        
         [dict setObject:value forKey:key];
     }];
     return dict;
