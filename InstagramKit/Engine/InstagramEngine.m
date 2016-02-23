@@ -124,44 +124,52 @@
     return authRequest.URL;
 }
 
-
 - (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
                                   error:(NSError *__autoreleasing *)error
 {
-    NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
+    return [self validAccessTokenFromURL:url
+                         expectedBaseURL:nil
+                                   error:error];
+}
+
+- (BOOL)validAccessTokenFromURL:(NSURL *)url
+                expectedBaseURL:(NSString *)expectedBaseURL
+                          error:(NSError *__autoreleasing *)error
+{
+    NSString *redirectPath = (expectedBaseURL) ? expectedBaseURL : self.appRedirectURL;
+    NSURL *appRedirectURL = [NSURL URLWithString:redirectPath];
     
-    // For app:// formatted urls the appRedirectURL.host is nil
-    if (![appRedirectURL.scheme isEqual:url.scheme] || (![appRedirectURL.host isEqual:url.host] && appRedirectURL.host != nil))
-    {
+    // For app:// base url the host is nil
+    if (![appRedirectURL.scheme isEqual:url.scheme] || (![appRedirectURL.host isEqual:url.host] && appRedirectURL.host != nil)) {
         return NO;
     }
     
     NSString *urlFormatted = @"";
-    // For app:// formatted urls the url.fragment is also nil
-    if (url.fragment)
-    {
+    
+    // For app:// base url the fragment is also nil
+    if (url.fragment) {
         urlFormatted = url.fragment;
-    }
-    else
-    {
+        
+    } else {
         urlFormatted = url.resourceSpecifier;
     }
     
     BOOL success = urlFormatted.length > 0;
     
     NSString *token = [self queryStringParametersFromString:urlFormatted][@"access_token"];
-    if (token)
-    {
+    
+    if (token) {
         self.accessToken = token;
-    }
-    else
-    {
+        
+    } else {
+        success = NO;
+        
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
         *error = [NSError errorWithDomain:InstagramKitErrorDomain
                                      code:InstagramKitAuthenticationFailedError
                                  userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
-        success = NO;
     }
+    
     return success;
 }
 
