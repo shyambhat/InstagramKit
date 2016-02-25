@@ -109,6 +109,10 @@
         self.bio = [decoder decodeObjectOfClass:[NSString class] forKey:kBio];
         self.website = [decoder decodeObjectOfClass:[NSString class] forKey:kWebsite];
         self.accessToken = [decoder decodeObjectOfClass:[NSString class] forKey:kAccessToken];
+        self.followedByCount = [[decoder decodeObjectOfClass:[NSNumber class] forKey:kCountFollowedBy] integerValue];
+        self.followsCount = [[decoder decodeObjectOfClass:[NSNumber class] forKey:kCountFollows] integerValue];
+        self.mediaCount = [[decoder decodeObjectOfClass:[NSNumber class] forKey:kCountMedia] integerValue];
+        
     }
     return self;
 }
@@ -123,6 +127,9 @@
     [encoder encodeObject:self.bio forKey:kBio];
     [encoder encodeObject:self.website forKey:kWebsite];
     [encoder encodeObject:self.accessToken forKey:kAccessToken];
+    [encoder encodeObject:@(self.followedByCount) forKey:kCountFollowedBy];
+    [encoder encodeObject:@(self.followsCount) forKey:kCountFollows];
+    [encoder encodeObject:@(self.mediaCount) forKey:kCountMedia];
 }
 
 #pragma mark - NSCopying
