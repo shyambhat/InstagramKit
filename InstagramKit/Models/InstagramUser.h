@@ -69,6 +69,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSInteger followedByCount;
 
+
+/**
+ *  Access token for this user
+ */
+@property (nonatomic, copy) NSString *accessToken;
+
+
+
 /**
  *  Convenience method to load details and update object.
  *  @param info JSON dictionary

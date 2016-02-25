@@ -81,6 +81,8 @@ INSTAGRAMKIT_EXTERN NSString *const kTagName;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
+INSTAGRAMKIT_EXTERN NSString *const kAccessToken;
+
 
 @interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
 

@@ -32,6 +32,8 @@
 @property (nonatomic, assign) NSInteger followsCount;
 @property (nonatomic, assign) NSInteger followedByCount;
 
+
+
 @end
 
 @implementation InstagramUser
@@ -106,6 +108,7 @@
         self.profilePictureURL = [decoder decodeObjectOfClass:[NSString class] forKey:kProfilePictureURL];
         self.bio = [decoder decodeObjectOfClass:[NSString class] forKey:kBio];
         self.website = [decoder decodeObjectOfClass:[NSString class] forKey:kWebsite];
+        self.accessToken = [decoder decodeObjectOfClass:[NSString class] forKey:kAccessToken];
     }
     return self;
 }
@@ -119,6 +122,7 @@
     [encoder encodeObject:self.profilePictureURL forKey:kProfilePictureURL];
     [encoder encodeObject:self.bio forKey:kBio];
     [encoder encodeObject:self.website forKey:kWebsite];
+    [encoder encodeObject:self.accessToken forKey:kAccessToken];
 }
 
 #pragma mark - NSCopying
