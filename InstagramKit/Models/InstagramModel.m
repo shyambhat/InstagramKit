@@ -75,6 +75,7 @@ NSString *const kTagName = @"name";
 NSString *const kLocationLatitude = @"latitude";
 NSString *const kLocationLongitude = @"longitude";
 NSString *const kLocationName = @"name";
+NSString *const kAccessToken = @"access_token";
 
 NSString *const kNextURL = @"next_url";
 NSString *const kNextMaxId = @"next_max_id";
