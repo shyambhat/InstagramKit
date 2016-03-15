@@ -83,7 +83,11 @@ typedef NS_OPTIONS(NSUInteger, InstagramKitLoginScope)
     /*! Indicates permission to follow and unfollow accounts on a user’s behalf */
     InstagramKitLoginScopeRelationships = 1<<2,
     /*! Indicates permission to like and unlike media on a user’s behalf */
-    InstagramKitLoginScopeLikes = 1<<3
+    InstagramKitLoginScopeLikes = 1<<3,
+    /*! Indicates permission to access public content on a user’s behalf */
+    InstagramKitLoginScopePublicContent = 1<<4,
+    /*! Indicates permission to access user's follower/following lists */
+    InstagramKitLoginScopeFollowerList = 1<<5
 };
 
 
