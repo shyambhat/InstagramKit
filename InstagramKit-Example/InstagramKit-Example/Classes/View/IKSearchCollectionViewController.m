@@ -86,7 +86,9 @@
 
 #pragma mark - API Requests -
 
-
+/**
+ @discussion You can get an error if the user's media you are trying to get, are from a private user account.
+ */
 - (void)requestUserMediaRecent
 {
     [self.instagramEngine getMediaForUser:self.user.Id
