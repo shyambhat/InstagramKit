@@ -33,10 +33,14 @@
 {
     [super viewDidLoad];
     self.webView.scrollView.bounces = NO;
-    
-    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopeBasic];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 
+    [self requestAuthorization];
+}
+
+- (void)requestAuthorization
+{
+    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopePublicContent];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 }
 
 
@@ -45,10 +49,26 @@
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
-        [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
-        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if (error)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+        [[InstagramEngine sharedEngine] logout];
+        [self requestAuthorization];
     }
     return YES;
 }
+
+
+#pragma mark - IBAction Methods -
+
+- (IBAction)refreshAuthorizationURL:(id)sender
+{
+    [self requestAuthorization];
+}
+
 
 @end

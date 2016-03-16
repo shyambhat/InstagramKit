@@ -22,7 +22,11 @@
 #import "InstagramKit.h"
 #import "IKSearchTagCell.h"
 #import "IKSearchUserCell.h"
-#import "AFURLResponseSerialization.h"
+#import "IKSearchCollectionViewController.h"
+
+#define kSignUser '@'
+#define kSignHash '#'
+
 
 @interface IKSearchViewController ()
 
@@ -77,16 +81,16 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if (self.searchBar.text.length > 0) {
-        char symbol = [self.searchBar.text characterAtIndex:0];
+        char sign = [self.searchBar.text characterAtIndex:0];
         NSString *searchString = [self.searchBar.text substringFromIndex:1];
         
-        if (symbol != '@' && symbol != '#') {
-            symbol = '@';
+        if (sign != kSignUser && sign != kSignHash) {
+            sign = kSignUser;
             searchString = self.searchBar.text;
-            [self.searchBar setText:[NSString stringWithFormat:@"%c%@", symbol, searchString]];
+            [self.searchBar setText:[NSString stringWithFormat:@"%c%@", sign, searchString]];
         }
         if (searchString.length > 0) {
-            (symbol == '@') ? [self requestSearchUsers:searchString] : [self requestSearchTags:searchString];
+            (sign == kSignUser) ? [self requestSearchUsers:searchString] : [self requestSearchTags:searchString];
         }
     } else {
         [self.elementArray removeAllObjects];
@@ -128,20 +132,34 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    id objClass = self.elementArray[indexPath.row];
+    if ([objClass isKindOfClass:[InstagramUser class]]) {
+        return 60;
+    }
+    return 44;
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - UIStoryboardSegue -
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segue.search.user.details"]) {
+        IKSearchCollectionViewController *searchCollectionViewController = (IKSearchCollectionViewController *)segue.destinationViewController;
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        InstagramUser *user = self.elementArray[selectedIndexPath.item];
+        [searchCollectionViewController setInstagramUser:user];
+    }
+    if ([segue.identifier isEqualToString:@"segue.search.tag.details"]) {
+        IKSearchCollectionViewController *searchCollectionViewController = (IKSearchCollectionViewController *)segue.destinationViewController;
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        InstagramTag *tag = self.elementArray[selectedIndexPath.item];
+        [searchCollectionViewController setInstagramTag:tag];
+    }
+}
+
 
 @end

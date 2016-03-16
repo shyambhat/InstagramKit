@@ -37,7 +37,7 @@
 
 - (void)setMediaCount:(NSInteger)mediaCount
 {
-    [self.labelMediaCount setText:[NSString stringWithFormat:@"%ld", mediaCount]];
+    [self.labelMediaCount setText:[NSString stringWithFormat:@"%ld", (long)mediaCount]];
 }
 
 

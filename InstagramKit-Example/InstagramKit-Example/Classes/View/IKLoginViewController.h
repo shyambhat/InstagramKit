@@ -22,4 +22,6 @@
 
 @interface IKLoginViewController : UIViewController
 
+- (IBAction)refreshAuthorizationURL:(id)sender;
+
 @end

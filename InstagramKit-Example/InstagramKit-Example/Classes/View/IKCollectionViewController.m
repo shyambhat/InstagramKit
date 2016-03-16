@@ -30,9 +30,9 @@
 
 @interface IKCollectionViewController ()
 
-@property (nonatomic, strong)   NSMutableArray *mediaArray;
-@property (nonatomic, strong)   InstagramPaginationInfo *currentPaginationInfo;
-@property (nonatomic, weak)     InstagramEngine *instagramEngine;
+@property (nonatomic, strong) NSMutableArray *mediaArray;
+@property (nonatomic, strong) InstagramPaginationInfo *currentPaginationInfo;
+@property (nonatomic, weak) InstagramEngine *instagramEngine;
 
 @end
 
@@ -48,11 +48,18 @@
     self.instagramEngine = [InstagramEngine sharedEngine];
     [self updateCollectionViewLayout];
     
-    [self loadMedia];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userAuthenticationChanged:)
                                                  name:InstagramKitUserAuthenticationChangedNotification
                                                object:nil];
+    
+    [self loadMedia];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (![self.instagramEngine isSessionValid]) [self login];
 }
 
 
@@ -65,21 +72,13 @@
 {
     self.currentPaginationInfo = nil;
     
-    BOOL isSessionValid = [self.instagramEngine isSessionValid];
-    
-    [self setTitle: (isSessionValid) ? @"My Recent Media" : @""];
-    [self.navigationItem.leftBarButtonItem setTitle: (isSessionValid) ? @"Log out" : @"Log in"];
-    [self.navigationItem.rightBarButtonItem setEnabled: FALSE];
+    [self setTitle:@"My Media"];
+    [self.navigationItem.leftBarButtonItem setTitle:@"Log out"];
+    [self.navigationItem.rightBarButtonItem setEnabled: NO];
     [self.mediaArray removeAllObjects];
     [self.collectionView reloadData];
     
-    if (isSessionValid) {
-        [self requestSelfRecentMedia];
-    }
-    else
-    {
-        [self loginTapped:nil];
-    }
+    if ([self.instagramEngine isSessionValid]) [self requestSelfRecentMedia];
 }
 
 
@@ -98,12 +97,14 @@
                                               success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
                                                   
                                                   self.currentPaginationInfo = paginationInfo;
-                                                  [self.navigationItem.rightBarButtonItem setEnabled:(paginationInfo) ? TRUE : FALSE];
+                                                  [self.navigationItem.rightBarButtonItem setEnabled:(paginationInfo) ? YES : NO];
                                                   
-                                                  [self.mediaArray addObjectsFromArray:media];
-                                                  [self.collectionView reloadData];
-                                                  
-                                                  [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.mediaArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+                                                  if (media.count > 0) {
+                                                      [self.mediaArray addObjectsFromArray:media];
+                                                      [self.collectionView reloadData];
+                                                      
+                                                      [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.mediaArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+                                                  }
                                                   
                                               } failure:^(NSError *error, NSInteger statusCode) {
                                                   NSLog(@"Request Self Recent Media Failed");
@@ -124,21 +125,19 @@
  Invoked when user taps the left navigation item.
  @discussion Either directs to the Login ViewController or logs out.
  */
-- (IBAction)loginTapped:(id)sender
+- (IBAction)logoutTapped:(id)sender
 {
-    if (![self.instagramEngine isSessionValid]) {
-        UINavigationController *loginNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
-        [self presentViewController:loginNavigationViewController animated:YES completion:nil];
-    }
-    else
-    {
-        [self.instagramEngine logout];
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:@"You are now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        [self loginTapped:nil];
-    }
+    [self.instagramEngine logout];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:@"You are now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+
+- (void)login
+{
+    UINavigationController *loginNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
+    [self.navigationController presentViewController:loginNavigationViewController animated:YES completion:nil];
 }
 
 
@@ -147,7 +146,14 @@
 
 - (void)userAuthenticationChanged:(NSNotification *)notification
 {
-    [self loadMedia];
+    if ([self.instagramEngine isSessionValid])
+    {
+        [self loadMedia];
+    }
+    else
+    {
+        [self login];
+    }
 }
 
 
@@ -164,10 +170,6 @@
     }
 }
 
-- (IBAction)unwindSegue:(UIStoryboardSegue *)sender
-{
-    [sender.sourceViewController dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark - UICollectionViewDataSource Methods -
 

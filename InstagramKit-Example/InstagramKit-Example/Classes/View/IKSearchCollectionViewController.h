@@ -18,45 +18,15 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKMediaViewController.h"
-#import "UIImageView+AFNetworking.h"
-#import "InstagramKit.h"
+#import <UIKit/UIKit.h>
 
+@class InstagramUser;
+@class InstagramTag;
 
-@interface IKMediaViewController ()
+@interface IKSearchCollectionViewController : UICollectionViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (nonatomic, strong) InstagramMedia *media;
-
-@end
-
-
-@implementation IKMediaViewController
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self populateViews];
-}
-
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    [self.captionLabel sizeToFit];
-}
-
-
-- (void)populateViews
-{
-    [self setTitle:[NSString stringWithFormat:@"@%@",self.media.user.username]];
-    [self.imageView setImageWithURL:self.media.thumbnailURL];
-    [self.imageView setImageWithURL:self.media.standardResolutionImageURL];
-    [self.captionLabel setText:self.media.caption.text];
-}
-
+- (void)setInstagramUser:(InstagramUser *)user;
+- (void)setInstagramTag:(InstagramTag *)tag;
 
 
 @end

@@ -25,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *labelUsername;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewUser;
+@property (weak, nonatomic) IBOutlet UILabel *labelMediaCount;
 
 @end
 

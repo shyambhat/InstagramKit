@@ -10,6 +10,7 @@
 		4982C90C1C98693300D618E0 /* IKSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982C90B1C98693300D618E0 /* IKSearchViewController.m */; };
 		4982C9161C986BB900D618E0 /* IKCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982C9151C986BB900D618E0 /* IKCollectionCell.m */; };
 		4982C9191C98767500D618E0 /* IKSearchTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4982C9181C98767500D618E0 /* IKSearchTagCell.m */; };
+		49CC76451C991A9400C39781 /* IKSearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC76441C991A9400C39781 /* IKSearchCollectionViewController.m */; };
 		49EDCD7A1C98B42F005A9BB6 /* IKSearchUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EDCD791C98B42F005A9BB6 /* IKSearchUserCell.m */; };
 		82DA95051B483C1C00A6303B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82DA95041B483C1C00A6303B /* main.m */; };
 		82DA950E1B483C1C00A6303B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82DA950C1B483C1C00A6303B /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 		4982C9151C986BB900D618E0 /* IKCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCollectionCell.m; sourceTree = "<group>"; };
 		4982C9171C98767500D618E0 /* IKSearchTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IKSearchTagCell.h; path = "SearchView Cells/IKSearchTagCell.h"; sourceTree = "<group>"; };
 		4982C9181C98767500D618E0 /* IKSearchTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IKSearchTagCell.m; path = "SearchView Cells/IKSearchTagCell.m"; sourceTree = "<group>"; };
+		49CC76431C991A9400C39781 /* IKSearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKSearchCollectionViewController.h; sourceTree = "<group>"; };
+		49CC76441C991A9400C39781 /* IKSearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKSearchCollectionViewController.m; sourceTree = "<group>"; };
 		49EDCD781C98B42F005A9BB6 /* IKSearchUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IKSearchUserCell.h; path = "SearchView Cells/IKSearchUserCell.h"; sourceTree = "<group>"; };
 		49EDCD791C98B42F005A9BB6 /* IKSearchUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IKSearchUserCell.m; path = "SearchView Cells/IKSearchUserCell.m"; sourceTree = "<group>"; };
 		82DA94FF1B483C1C00A6303B /* InstagramKit-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "InstagramKit-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +136,8 @@
 				82DA95361B483CA900A6303B /* IKMediaViewController.m */,
 				4982C90A1C98693300D618E0 /* IKSearchViewController.h */,
 				4982C90B1C98693300D618E0 /* IKSearchViewController.m */,
+				49CC76431C991A9400C39781 /* IKSearchCollectionViewController.h */,
+				49CC76441C991A9400C39781 /* IKSearchCollectionViewController.m */,
 				82DA95441B48509100A6303B /* CollectionView Cells */,
 				4982C9101C986B1F00D618E0 /* SearchView Cells */,
 			);
@@ -292,6 +297,7 @@
 				4982C9191C98767500D618E0 /* IKSearchTagCell.m in Sources */,
 				49EDCD7A1C98B42F005A9BB6 /* IKSearchUserCell.m in Sources */,
 				4982C9161C986BB900D618E0 /* IKCollectionCell.m in Sources */,
+				49CC76451C991A9400C39781 /* IKSearchCollectionViewController.m in Sources */,
 				82DA953C1B483CA900A6303B /* IKMediaViewController.m in Sources */,
 				82DA953A1B483CA900A6303B /* IKCollectionViewController.m in Sources */,
 				4982C90C1C98693300D618E0 /* IKSearchViewController.m in Sources */,
