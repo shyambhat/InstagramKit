@@ -23,14 +23,14 @@
 
 @interface IKSearchUserCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *labelUsername;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewUser;
-@property (weak, nonatomic) IBOutlet UILabel *labelMediaCount;
+@property (nonatomic, weak) IBOutlet UILabel *labelUsername;
+@property (nonatomic, weak) IBOutlet UIImageView *imageViewUser;
+@property (nonatomic, weak) IBOutlet UILabel *labelMediaCount;
 
 @end
 
-@implementation IKSearchUserCell
 
+@implementation IKSearchUserCell
 
 - (void)setUsername:(NSString *)username
 {
@@ -42,6 +42,5 @@
 {
     [self.imageViewUser setImageWithURL:imageURL];
 }
-
 
 @end

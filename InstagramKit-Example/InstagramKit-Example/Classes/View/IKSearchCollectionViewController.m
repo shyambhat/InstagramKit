@@ -24,8 +24,8 @@
 #import "InstagramMedia.h"
 #import "IKMediaViewController.h"
 
-#define kNumberOfCellsInARow 3
-#define kFetchItemsCount 15
+#define kNumberOfCellsInARow 4
+#define kFetchItemsCount 20
 
 @interface IKSearchCollectionViewController ()
 
@@ -39,7 +39,6 @@
 
 
 @implementation IKSearchCollectionViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,6 +108,7 @@
                                   NSLog(@"Request User Media Recent Failed");
                               }];
 }
+
 
 - (void)requestTagMediaRecent
 {

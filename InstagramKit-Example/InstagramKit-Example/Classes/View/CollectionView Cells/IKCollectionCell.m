@@ -23,9 +23,10 @@
 
 @interface IKCollectionCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 
 @end
+
 
 @implementation IKCollectionCell
 

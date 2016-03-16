@@ -27,18 +27,18 @@
 #define kSignUser '@'
 #define kSignHash '#'
 
+@interface IKSearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
-@interface IKSearchViewController ()
-
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong)   NSMutableArray *elementArray;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *elementArray;
 
 @end
 
+
 @implementation IKSearchViewController
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.elementArray = [[NSMutableArray alloc] init];
     
@@ -56,6 +56,7 @@
                                                [self.elementArray removeAllObjects];
                                                [self.elementArray addObjectsFromArray:tags];
                                                [self.tableView reloadData];
+                                               
                                            } failure:^(NSError *error, NSInteger statusCode) {
                                                NSLog(@"Request Search Tags Failed");
                                            }];
@@ -69,6 +70,7 @@
                                                   [self.elementArray removeAllObjects];
                                                   [self.elementArray addObjectsFromArray:users];
                                                   [self.tableView reloadData];
+                                                  
                                               } failure:^(NSError *error, NSInteger statusCode) {
                                                   NSLog(@"Request Search Users Failed");
                                               }];
@@ -84,6 +86,7 @@
         char sign = [self.searchBar.text characterAtIndex:0];
         NSString *searchString = [self.searchBar.text substringFromIndex:1];
         
+        // If the user doesn't specify if he wants to search a user or a hash, we put one them by default.
         if (sign != kSignUser && sign != kSignHash) {
             sign = kSignUser;
             searchString = self.searchBar.text;
@@ -92,6 +95,7 @@
         if (searchString.length > 0) {
             (sign == kSignUser) ? [self requestSearchUsers:searchString] : [self requestSearchTags:searchString];
         }
+        
     } else {
         [self.elementArray removeAllObjects];
         [self.tableView reloadData];
@@ -126,9 +130,8 @@
         [tagCell setMediaCount:tag.mediaCount];
         return tagCell;
         
-    } else {
-        return nil;
     }
+    return nil;
 }
 
 
@@ -138,7 +141,7 @@
     if ([objClass isKindOfClass:[InstagramUser class]]) {
         return 60;
     }
-    return 44;
+    return tableView.rowHeight;
 }
 
 
@@ -160,6 +163,5 @@
         [searchCollectionViewController setInstagramTag:tag];
     }
 }
-
 
 @end

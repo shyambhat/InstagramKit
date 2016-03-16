@@ -22,10 +22,11 @@
 
 @interface IKSearchTagCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *labelTag;
-@property (weak, nonatomic) IBOutlet UILabel *labelMediaCount;
+@property (nonatomic, weak) IBOutlet UILabel *labelTag;
+@property (nonatomic, weak) IBOutlet UILabel *labelMediaCount;
 
 @end
+
 
 @implementation IKSearchTagCell
 
@@ -39,6 +40,5 @@
 {
     [self.labelMediaCount setText:[NSString stringWithFormat:@"%ld", (long)mediaCount]];
 }
-
 
 @end

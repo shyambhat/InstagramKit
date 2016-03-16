@@ -56,6 +56,13 @@
     [self loadMedia];
 }
 
+
+/**
+ Once the view has been added to the view hierarchy, if the
+ user is not logged in, we'll show the appropieta authentication view.
+ @discussion This check is here and not in viewDidLoad:, to avoid
+ a hierarchy window warning.
+ */
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -64,9 +71,8 @@
 
 
 /**
- *  Depending on whether the Instagram session is authenticated,
- *  this method loads either the publicly accessible popular media
- *  or the authenticated user's feed.
+ This method prepares the view and loads (if the user is authenticated)
+ the user recent media.
  */
 - (void)loadMedia
 {
@@ -86,9 +92,10 @@
 
 
 /**
- Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
+ Calls InstagramKit's helper method to fetch recent Media in the authenticated user's.
  @discussion The self.currentPaginationInfo object is updated on each successful call
- and it's updated nextMaxId is passed as a parameter to the next paginated request.
+ and it's updated nextMaxId is passed as a parameter to the next paginated request. Once
+ the paginationInfo received is 'nil', there is no more media to load.
  */
 - (void)requestSelfRecentMedia
 {
@@ -97,9 +104,12 @@
                                               success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
                                                   
                                                   self.currentPaginationInfo = paginationInfo;
+                                                  // Disable 'More' navigation item when there is no more pagination.
                                                   [self.navigationItem.rightBarButtonItem setEnabled:(paginationInfo) ? YES : NO];
                                                   
-                                                  if (media.count > 0) {
+                                                  // Prevent EXC_BAD_ACCESS when the media array received is empty.
+                                                  if (media.count > 0)
+                                                  {
                                                       [self.mediaArray addObjectsFromArray:media];
                                                       [self.collectionView reloadData];
                                                       
@@ -114,16 +124,16 @@
 
 /**
  Invoked when user taps the 'More' navigation item.
- @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
+ @discussion The requestSelfRecentMedia method is called with updated pagination parameters (nextMaxId).
  */
-- (IBAction)moreTapped:(id)sender {
+- (IBAction)moreTapped:(id)sender
+{
     [self requestSelfRecentMedia];
 }
 
 
 /**
- Invoked when user taps the left navigation item.
- @discussion Either directs to the Login ViewController or logs out.
+ Invoked when user taps the left navigation item. It logs out the current authenticated user.
  */
 - (IBAction)logoutTapped:(id)sender
 {
@@ -134,6 +144,9 @@
 }
 
 
+/**
+ Method to present a new UINavigationController where the user has to authenticate against Instagram.
+ */
 - (void)login
 {
     UINavigationController *loginNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
@@ -144,6 +157,9 @@
 #pragma mark - User Authenticated Notification -
 
 
+/**
+ Depending if the user has a valid session, we show the user's media or the Instagram's login page.
+ */
 - (void)userAuthenticationChanged:(NSNotification *)notification
 {
     if ([self.instagramEngine isSessionValid])

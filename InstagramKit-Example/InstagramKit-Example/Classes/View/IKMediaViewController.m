@@ -22,18 +22,16 @@
 #import "UIImageView+AFNetworking.h"
 #import "InstagramKit.h"
 
-
 @interface IKMediaViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UILabel *captionLabel;
 @property (nonatomic, strong) InstagramMedia *media;
 
 @end
 
 
 @implementation IKMediaViewController
-
 
 - (void)viewDidLoad
 {
@@ -56,7 +54,5 @@
     [self.imageView setImageWithURL:self.media.standardResolutionImageURL];
     [self.captionLabel setText:self.media.caption.text];
 }
-
-
 
 @end

@@ -28,5 +28,4 @@
 - (void)setInstagramUser:(InstagramUser *)user;
 - (void)setInstagramTag:(InstagramTag *)tag;
 
-
 @end

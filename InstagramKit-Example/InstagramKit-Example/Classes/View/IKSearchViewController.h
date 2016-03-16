@@ -20,6 +20,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IKSearchViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface IKSearchViewController : UITableViewController
 
 @end

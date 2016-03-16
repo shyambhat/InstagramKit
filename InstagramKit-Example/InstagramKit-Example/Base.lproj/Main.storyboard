@@ -186,7 +186,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gby-HI-TVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="857"/>
+            <point key="canvasLocation" x="-85" y="857"/>
         </scene>
         <!--Search Collection View Controller-->
         <scene sceneID="qkO-3a-XCV">
@@ -363,7 +363,6 @@
         <!--Navigation Controller-->
         <scene sceneID="9CP-FP-i2A">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="LoginNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="Yqa-wS-RqO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xgb-Qe-nBg"/>
@@ -376,6 +375,7 @@
                         <segue destination="Qfj-6N-R6z" kind="relationship" relationship="rootViewController" id="6GZ-4R-J9G"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="krw-cl-279" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-85" y="-565"/>
         </scene>

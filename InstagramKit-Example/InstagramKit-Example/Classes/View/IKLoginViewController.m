@@ -23,7 +23,7 @@
 
 @interface IKLoginViewController () <UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 
@@ -37,6 +37,7 @@
     [self requestAuthorization];
 }
 
+
 - (void)requestAuthorization
 {
     NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopePublicContent];
@@ -44,31 +45,41 @@
 }
 
 
+#pragma mark - WebViewDelegate Methods -
+
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSError *error;
     if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
     {
+        // Automatically dismiss this webview
         [self dismissViewControllerAnimated:YES completion:nil];
+        return YES;
     }
     
     if (error)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [alert show];
-        [[InstagramEngine sharedEngine] logout];
         [self requestAuthorization];
     }
+    
     return YES;
 }
 
 
 #pragma mark - IBAction Methods -
 
+
+/**
+ Method where we clean the HTTP Cookie and reload again the authorization URL.
+ @discussion Help when the user goes to 'Forgot password' or other links inside the webview.
+ */
 - (IBAction)refreshAuthorizationURL:(id)sender
 {
+    [[InstagramEngine sharedEngine] logout];
     [self requestAuthorization];
 }
-
 
 @end
