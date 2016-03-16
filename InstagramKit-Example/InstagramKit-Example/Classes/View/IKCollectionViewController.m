@@ -18,10 +18,9 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 #import "IKCollectionViewController.h"
 #import "InstagramKit.h"
-#import "IKCell.h"
+#import "IKCollectionCell.h"
 #import "InstagramMedia.h"
 #import "IKMediaViewController.h"
 #import "IKLoginViewController.h"
@@ -44,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.mediaArray = [[NSMutableArray alloc] init];
     self.instagramEngine = [InstagramEngine sharedEngine];
     [self updateCollectionViewLayout];
@@ -67,77 +66,63 @@
     self.currentPaginationInfo = nil;
     
     BOOL isSessionValid = [self.instagramEngine isSessionValid];
-    [self setTitle: (isSessionValid) ? @"My Feed" : @"Popular Media"];
+    
+    [self setTitle: (isSessionValid) ? @"My Recent Media" : @""];
     [self.navigationItem.leftBarButtonItem setTitle: (isSessionValid) ? @"Log out" : @"Log in"];
-    [self.navigationItem.rightBarButtonItem setEnabled: isSessionValid];
+    [self.navigationItem.rightBarButtonItem setEnabled: FALSE];
     [self.mediaArray removeAllObjects];
     [self.collectionView reloadData];
     
     if (isSessionValid) {
-        [self requestSelfFeed];
+        [self requestSelfRecentMedia];
     }
     else
     {
-        [self requestPopularMedia];
+        [self loginTapped:nil];
     }
 }
 
 
 #pragma mark - API Requests -
 
+
 /**
-    Calls InstagramKit's helper method to fetch Popular Instagram Media.
+ Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
+ @discussion The self.currentPaginationInfo object is updated on each successful call
+ and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
-- (void)requestPopularMedia
+- (void)requestSelfRecentMedia
 {
-    [self.instagramEngine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo)
-                                                        {
-                                                            [self.mediaArray addObjectsFromArray:media];
-                                                            [self.collectionView reloadData];
-                                                        }
-                                                       failure:^(NSError *error, NSInteger statusCode) {
-                                                            NSLog(@"Load Popular Media Failed");
-                                                       }];
+    [self.instagramEngine getSelfRecentMediaWithCount:kFetchItemsCount
+                                                maxId:self.currentPaginationInfo.nextMaxId
+                                              success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+                                                  
+                                                  self.currentPaginationInfo = paginationInfo;
+                                                  [self.navigationItem.rightBarButtonItem setEnabled:(paginationInfo) ? TRUE : FALSE];
+                                                  
+                                                  [self.mediaArray addObjectsFromArray:media];
+                                                  [self.collectionView reloadData];
+                                                  
+                                                  [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.mediaArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+                                                  
+                                              } failure:^(NSError *error, NSInteger statusCode) {
+                                                  NSLog(@"Request Self Recent Media Failed");
+                                              }];
 }
 
 
 /**
-    Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
-    @discussion The self.currentPaginationInfo object is updated on each successful call
-    and it's updated nextMaxId is passed as a parameter to the next paginated request.
- */
-- (void)requestSelfFeed
-{
-    [self.instagramEngine getSelfFeedWithCount:kFetchItemsCount
-                                         maxId:self.currentPaginationInfo.nextMaxId
-                                       success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-                                           
-                                           self.currentPaginationInfo = paginationInfo;
-
-                                           [self.mediaArray addObjectsFromArray:media];
-                                           [self.collectionView reloadData];
-                                           
-                                           [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.mediaArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-
-                                       }
-                                       failure:^(NSError *error, NSInteger statusCode) {
-                                           NSLog(@"Request Self Feed Failed");
-                                       }];
-}
-
-
-/**
-    Invoked when user taps the 'More' navigation item.
-    @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
+ Invoked when user taps the 'More' navigation item.
+ @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
  */
 - (IBAction)moreTapped:(id)sender {
-    [self requestSelfFeed];
+    [self requestSelfRecentMedia];
 }
 
 
 /**
-    Invoked when user taps the left navigation item.
-    @discussion Either directs to the Login ViewController or logs out.
+ Invoked when user taps the left navigation item.
+ @discussion Either directs to the Login ViewController or logs out.
  */
 - (IBAction)loginTapped:(id)sender
 {
@@ -151,6 +136,8 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"InstagramKit" message:@"You are now logged out." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
         [alert show];
+        
+        [self loginTapped:nil];
     }
 }
 
@@ -177,7 +164,7 @@
     }
 }
 
--(IBAction)unwindSegue:(UIStoryboardSegue *)sender
+- (IBAction)unwindSegue:(UIStoryboardSegue *)sender
 {
     [sender.sourceViewController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -193,7 +180,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    IKCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CPCELL" forIndexPath:indexPath];
+    IKCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CPCELL" forIndexPath:indexPath];
     InstagramMedia *media = self.mediaArray[indexPath.row];
     [cell setImageUrl:media.thumbnailURL];
     return cell;

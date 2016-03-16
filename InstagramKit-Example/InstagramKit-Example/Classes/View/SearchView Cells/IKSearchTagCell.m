@@ -18,37 +18,27 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKLoginViewController.h"
-#import "InstagramKit.h"
+#import "IKSearchTagCell.h"
 
-@interface IKLoginViewController () <UIWebViewDelegate>
+@interface IKSearchTagCell ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UILabel *labelTag;
+@property (weak, nonatomic) IBOutlet UILabel *labelMediaCount;
 
 @end
 
-@implementation IKLoginViewController
+@implementation IKSearchTagCell
 
-- (void)viewDidLoad
+- (void)setTagName:(NSString *)tag
 {
-    [super viewDidLoad];
-    self.webView.scrollView.bounces = NO;
-    
-    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopeBasic];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
-
+    [self.labelTag setText:tag];
 }
 
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (void)setMediaCount:(NSInteger)mediaCount
 {
-    NSError *error;
-    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
-    {
-        [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
-        
-    }
-    return YES;
+    [self.labelMediaCount setText:[NSString stringWithFormat:@"%ld", mediaCount]];
 }
+
 
 @end

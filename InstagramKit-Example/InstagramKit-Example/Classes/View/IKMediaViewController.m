@@ -18,7 +18,6 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 #import "IKMediaViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "InstagramKit.h"
@@ -40,6 +39,13 @@
 {
     [super viewDidLoad];
     [self populateViews];
+}
+
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self.captionLabel sizeToFit];
 }
 
 

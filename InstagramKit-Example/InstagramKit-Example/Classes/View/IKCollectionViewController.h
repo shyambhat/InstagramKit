@@ -22,6 +22,6 @@
 
 @interface IKCollectionViewController : UICollectionViewController
 
--(IBAction)unwindSegue:(UIStoryboardSegue *)sender;
+- (IBAction)unwindSegue:(UIStoryboardSegue *)sender;
 
 @end

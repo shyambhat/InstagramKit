@@ -18,26 +18,29 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKCell.h"
+#import "IKSearchUserCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface IKCell ()
+@interface IKSearchUserCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *labelUsername;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewUser;
 
 @end
 
-@implementation IKCell
+@implementation IKSearchUserCell
 
-- (void)setImageUrl:(NSURL *)imageURL
+
+- (void)setUsername:(NSString *)username
 {
-    [self.imageView setImageWithURL:imageURL];
+    [self.labelUsername setText:username];
 }
 
-- (void)prepareForReuse
+
+- (void)setUserImageUrl:(NSURL *)imageURL
 {
-    [super prepareForReuse];
-    [self.imageView setImage:nil];
+    [self.imageViewUser setImageWithURL:imageURL];
 }
+
 
 @end

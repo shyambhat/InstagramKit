@@ -20,8 +20,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IKCell : UICollectionViewCell
+@interface IKSearchTagCell : UITableViewCell
 
-- (void)setImageUrl:(NSURL *)imageURL;
+- (void)setTagName:(NSString *)tag;
+- (void)setMediaCount:(NSInteger)mediaCount;
 
 @end

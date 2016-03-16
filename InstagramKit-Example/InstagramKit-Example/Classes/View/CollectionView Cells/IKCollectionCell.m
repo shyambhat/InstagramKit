@@ -18,37 +18,26 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKLoginViewController.h"
-#import "InstagramKit.h"
+#import "IKCollectionCell.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface IKLoginViewController () <UIWebViewDelegate>
+@interface IKCollectionCell ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
-@implementation IKLoginViewController
+@implementation IKCollectionCell
 
-- (void)viewDidLoad
+- (void)setImageUrl:(NSURL *)imageURL
 {
-    [super viewDidLoad];
-    self.webView.scrollView.bounces = NO;
-    
-    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopeBasic];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
-
+    [self.imageView setImageWithURL:imageURL];
 }
 
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (void)prepareForReuse
 {
-    NSError *error;
-    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error])
-    {
-        [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
-        
-    }
-    return YES;
+    [super prepareForReuse];
+    [self.imageView setImage:nil];
 }
 
 @end
