@@ -32,7 +32,9 @@
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, strong) InstagramComment *caption;
 @property (nonatomic, strong) NSMutableArray *mLikes;
+@property (nonatomic, assign) NSInteger likesCount;
 @property (nonatomic, strong) NSMutableArray *mComments;
+@property (nonatomic, assign) NSInteger commentsCount;
 @property (nonatomic, strong) NSMutableArray *mUsersInPhoto;
 @property (nonatomic, strong) NSArray *tags;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
@@ -65,16 +67,27 @@
         self.createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
         self.link = [[NSString alloc] initWithString:info[kLink]];
         self.caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
+        
         self.mLikes = [[NSMutableArray alloc] init];
-        for (NSDictionary *userInfo in (info[kLikes])[kData]) {
-            InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
-            [self.mLikes addObject:user];
+        NSDictionary *likesDictionary = info[kLikes];
+        if ([likesDictionary isKindOfClass:[NSDictionary class]]) {
+            for (NSDictionary *userInfo in likesDictionary[kData]) {
+                InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
+                [self.mLikes addObject:user];
+            }
+            NSNumber *likesCount = likesDictionary[kCount];
+            self.likesCount = likesCount.integerValue;
         }
         
+        NSDictionary *commentsDictionary = info[kComments];
         self.mComments = [[NSMutableArray alloc] init];
-        for (NSDictionary *commentInfo in (info[kComments])[kData]) {
-            InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
-            [self.mComments addObject:comment];
+        if ([commentsDictionary isKindOfClass:[NSDictionary class]]) {
+            for (NSDictionary *commentInfo in commentsDictionary[kData]) {
+                InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
+                [self.mComments addObject:comment];
+            }
+            NSNumber *commentsCount = commentsDictionary[kCount];
+            self.commentsCount = commentsCount.integerValue;
         }
         
         self.mUsersInPhoto = [[NSMutableArray alloc] init];
@@ -136,11 +149,6 @@
 - (NSArray *)likes
 {
     return [NSArray arrayWithArray:self.mLikes];
-}
-
-- (NSInteger)likesCount
-{
-    return [self.mLikes count];
 }
 
 - (NSArray *)comments
