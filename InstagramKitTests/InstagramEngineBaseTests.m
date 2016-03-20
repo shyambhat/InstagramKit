@@ -95,6 +95,24 @@
     XCTAssertNil(testEngine.accessToken);
 }
 
+- (void)testQueryStringParameters
+{
+    InstagramEngine *testEngine = [InstagramEngine sharedEngine];
+
+    // test query string with #
+    NSString *testQueryString = @"#access_token=0123456789.abcd123.instagramkitabcd123";
+    NSDictionary *queryDictionary = [testEngine queryStringParametersFromString:testQueryString];
+    XCTAssertNotNil(queryDictionary);
+    XCTAssertTrue([queryDictionary[@"access_token"] isEqualToString:@"0123456789.abcd123.instagramkitabcd123"]);
+
+    // test query string without #
+    testQueryString = @"access_token=0123456789.abcd123.instagramkitabcd123";
+    queryDictionary = [testEngine queryStringParametersFromString:testQueryString];
+    XCTAssertNotNil(queryDictionary);
+    XCTAssertTrue([queryDictionary[@"access_token"] isEqualToString:@"0123456789.abcd123.instagramkitabcd123"]);
+
+}
+
 - (void)testGetPathWithMedia
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPath with Media Request"];
