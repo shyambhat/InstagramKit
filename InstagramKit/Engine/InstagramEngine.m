@@ -252,7 +252,7 @@
     NSString *percentageEscapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self.httpManager GET:percentageEscapedPath
                parameters:params
-                  progress:nil
+                 progress:nil
                   success:^(NSURLSessionDataTask *task, id responseObject) {
                       if (!success) return;
                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
