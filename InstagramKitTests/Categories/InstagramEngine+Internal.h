@@ -22,13 +22,9 @@
 
 @interface InstagramEngine (Internal)
 
-- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
-
 - (BOOL)validAccessTokenFromURL:(NSURL *)url
                 appRedirectPath:(NSString *)appRedirectPath
                           error:(NSError *__autoreleasing *)error;
-
-- (void)logout;
 
 - (NSString *)stringForScope:(InstagramKitLoginScope)scope;
 
