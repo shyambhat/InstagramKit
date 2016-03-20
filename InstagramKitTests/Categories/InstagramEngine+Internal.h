@@ -24,11 +24,8 @@
 
 - (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
 
-- (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
-                                  error:(NSError *__autoreleasing *)error;
-
 - (BOOL)validAccessTokenFromURL:(NSURL *)url
-                expectedBaseURL:(NSString *)expectedBaseURL
+                appRedirectPath:(NSString *)appRedirectPath
                           error:(NSError *__autoreleasing *)error;
 
 - (void)logout;

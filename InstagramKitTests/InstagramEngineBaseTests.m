@@ -64,10 +64,6 @@
     NSString *appPath = [NSString stringWithFormat:@"%@%@",appBaseRedirectURL,testAccessToken];
     NSURL *appURL = [NSURL URLWithString:appPath];
     
-    // Malicious examples provided by the Apple Secure Coding Guide - URLs and File Handling
-    // https://developer.apple.com/library/ios/documentation/Security/Conceptual/SecureCodingGuide/Articles/ValidatingInput.html
-    NSURL *maliciousResponseObjectSSL = [NSURL URLWithString:@"app://cmd/set_preference?use_ssl=false"];
-
     NSError *error;
     
     // Test http:// base url with access token
@@ -82,16 +78,19 @@
     XCTAssertNil(testEngine.accessToken);
 
     // Test app:// base url with access token
-    XCTAssertTrue([testEngine validAccessTokenFromURL:appURL expectedBaseURL:appBaseRedirectURL error:&error]);
+    XCTAssertTrue([testEngine validAccessTokenFromURL:appURL appRedirectPath:appBaseRedirectURL error:&error]);
     XCTAssertNotNil(testEngine.accessToken);
     testEngine.accessToken = nil;
 
     // Test app:// base url without access token
-    XCTAssertFalse([testEngine validAccessTokenFromURL:[NSURL URLWithString:appBaseRedirectURL] expectedBaseURL:appBaseRedirectURL error:&error]);
+    XCTAssertFalse([testEngine validAccessTokenFromURL:[NSURL URLWithString:appBaseRedirectURL] appRedirectPath:appBaseRedirectURL error:&error]);
     XCTAssertNil(testEngine.accessToken);
     
     // Test malicious url
-    XCTAssertFalse([testEngine validAccessTokenFromURL:maliciousResponseObjectSSL expectedBaseURL:appBaseRedirectURL error:&error]);
+    // Malicious examples provided by the Apple Secure Coding Guide - URLs and File Handling
+    // https://developer.apple.com/library/ios/documentation/Security/Conceptual/SecureCodingGuide/Articles/ValidatingInput.html
+    NSURL *maliciousResponseObjectSSL = [NSURL URLWithString:@"app://cmd/set_preference?use_ssl=false"];
+    XCTAssertFalse([testEngine validAccessTokenFromURL:maliciousResponseObjectSSL appRedirectPath:appBaseRedirectURL error:&error]);
     XCTAssertFalse(testEngine.isSessionValid);
     XCTAssertNil(testEngine.accessToken);
 }

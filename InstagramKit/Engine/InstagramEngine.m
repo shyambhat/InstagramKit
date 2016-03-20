@@ -124,52 +124,48 @@
     return authRequest.URL;
 }
 
+
 - (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
                                   error:(NSError *__autoreleasing *)error
 {
     return [self validAccessTokenFromURL:url
-                         expectedBaseURL:nil
+                         appRedirectPath:self.appRedirectURL
                                    error:error];
 }
 
 - (BOOL)validAccessTokenFromURL:(NSURL *)url
-                expectedBaseURL:(NSString *)expectedBaseURL
+                appRedirectPath:(NSString *)appRedirectPath
                           error:(NSError *__autoreleasing *)error
 {
-    NSString *redirectPath = (expectedBaseURL) ? expectedBaseURL : self.appRedirectURL;
-    NSURL *appRedirectURL = [NSURL URLWithString:redirectPath];
+    NSURL *appRedirectURL = [NSURL URLWithString:appRedirectPath];
     
-    // For app:// base url the host is nil
-    if (![appRedirectURL.scheme isEqual:url.scheme] || (![appRedirectURL.host isEqual:url.host] && appRedirectURL.host != nil)) {
+    BOOL identicalURLSchemes = [appRedirectURL.scheme isEqual:url.scheme];
+    BOOL identicalURLHosts = [appRedirectURL.host isEqual:url.host];
+    // For app:// base URL, the host is nil.
+    BOOL isAppURL = (BOOL)(appRedirectURL.host == nil);
+    if (!identicalURLSchemes || (!isAppURL && !identicalURLHosts)) {
         return NO;
     }
     
-    NSString *urlFormatted = @"";
-    
-    // For app:// base url the fragment is also nil
+    NSString *formattedURL = nil;
+    // For app:// base url the fragment is nil
     if (url.fragment) {
-        urlFormatted = url.fragment;
-        
+        formattedURL = url.fragment;
     } else {
-        urlFormatted = url.resourceSpecifier;
+        formattedURL = url.resourceSpecifier;
     }
     
-    BOOL success = urlFormatted.length > 0;
-    
-    NSString *token = [self queryStringParametersFromString:urlFormatted][@"access_token"];
-    
-    if (token) {
+    NSString *token = [self queryStringParametersFromString:formattedURL][@"access_token"];
+    BOOL success = token.length;
+    if (success) {
         self.accessToken = token;
-        
-    } else {
-        success = NO;
-        
+    }
+    else {
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
         *error = [NSError errorWithDomain:InstagramKitErrorDomain
                                      code:InstagramKitAuthenticationFailedError
                                  userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
     }
-    
     return success;
 }
 
