@@ -128,25 +128,43 @@
 - (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
                                   error:(NSError *__autoreleasing *)error
 {
-    NSURL *appRedirectURL = [NSURL URLWithString:self.appRedirectURL];
-    if (![appRedirectURL.scheme isEqual:url.scheme] || ![appRedirectURL.host isEqual:url.host])
-    {
+    return [self validAccessTokenFromURL:url
+                         appRedirectPath:self.appRedirectURL
+                                   error:error];
+}
+
+- (BOOL)validAccessTokenFromURL:(NSURL *)url
+                appRedirectPath:(NSString *)appRedirectPath
+                          error:(NSError *__autoreleasing *)error
+{
+    NSURL *appRedirectURL = [NSURL URLWithString:appRedirectPath];
+    
+    BOOL identicalURLSchemes = [appRedirectURL.scheme isEqual:url.scheme];
+    BOOL identicalURLHosts = [appRedirectURL.host isEqual:url.host];
+    // For app:// base URL, the host is nil.
+    BOOL isAppURL = (BOOL)(appRedirectURL.host == nil);
+    if (!identicalURLSchemes || (!isAppURL && !identicalURLHosts)) {
         return NO;
     }
     
-    BOOL success = YES;
-    NSString *token = [self queryStringParametersFromString:url.fragment][@"access_token"];
-    if (token)
-    {
+    NSString *formattedURL = nil;
+    // For app:// base url the fragment is nil
+    if (url.fragment) {
+        formattedURL = url.fragment;
+    } else {
+        formattedURL = url.resourceSpecifier;
+    }
+    
+    NSString *token = [self queryStringParametersFromString:formattedURL][@"access_token"];
+    BOOL success = token.length;
+    if (success) {
         self.accessToken = token;
     }
-    else
-    {
+    else {
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
         *error = [NSError errorWithDomain:InstagramKitErrorDomain
                                      code:InstagramKitAuthenticationFailedError
                                  userInfo:@{NSLocalizedDescriptionKey: localizedDescription}];
-        success = NO;
     }
     return success;
 }
@@ -185,7 +203,7 @@
 
 - (NSString *)stringForScope:(InstagramKitLoginScope)scope
 {
-    NSArray *typeStrings = @[@"basic", @"comments", @"relationships", @"likes"];
+    NSArray *typeStrings = @[@"basic", @"comments", @"relationships", @"likes", @"public_content", @"follower_list"];
     
     NSMutableArray *strings = [NSMutableArray arrayWithCapacity:typeStrings.count];
     [typeStrings enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -206,6 +224,12 @@
         
         NSString *key = [pairs[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *value = [pairs[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        // Must manually clean when passed string is url.resourceSpecifier
+        if ([[key substringToIndex:1] isEqualToString: @"#"]) {
+            key = [key substringFromIndex:1];
+        }
+        
         [dict setObject:value forKey:key];
     }];
     return dict;

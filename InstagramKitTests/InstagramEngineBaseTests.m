@@ -51,6 +51,67 @@
     XCTAssert(testEngine.appRedirectURL);
 }
 
+- (void)testReceivedValidAccessToken
+{
+    InstagramEngine *testEngine = [InstagramEngine sharedEngine];
+    
+    NSString *appBaseRedirectURL = @"app://";
+    NSString *testAccessToken = @"#access_token=0123456789.abcd123.instagramkitabcd123";
+    
+    NSString *httpPath = [NSString stringWithFormat:@"%@%@",testEngine.appRedirectURL,testAccessToken];
+    NSURL *httpURL = [NSURL URLWithString:httpPath];
+
+    NSString *appPath = [NSString stringWithFormat:@"%@%@",appBaseRedirectURL,testAccessToken];
+    NSURL *appURL = [NSURL URLWithString:appPath];
+    
+    NSError *error;
+    
+    // Test http:// base url with access token
+    XCTAssertTrue([testEngine receivedValidAccessTokenFromURL:httpURL error:&error]);
+    XCTAssertTrue(testEngine.isSessionValid);
+    XCTAssertNotNil(testEngine.accessToken);
+    testEngine.accessToken = nil;
+    
+    // Test http:// base url without access token
+    XCTAssertFalse([testEngine receivedValidAccessTokenFromURL:[NSURL URLWithString:testEngine.appRedirectURL] error:&error]);
+    XCTAssertFalse(testEngine.isSessionValid);
+    XCTAssertNil(testEngine.accessToken);
+
+    // Test app:// base url with access token
+    XCTAssertTrue([testEngine validAccessTokenFromURL:appURL appRedirectPath:appBaseRedirectURL error:&error]);
+    XCTAssertNotNil(testEngine.accessToken);
+    testEngine.accessToken = nil;
+
+    // Test app:// base url without access token
+    XCTAssertFalse([testEngine validAccessTokenFromURL:[NSURL URLWithString:appBaseRedirectURL] appRedirectPath:appBaseRedirectURL error:&error]);
+    XCTAssertNil(testEngine.accessToken);
+    
+    // Test malicious url
+    // Malicious examples provided by the Apple Secure Coding Guide - URLs and File Handling
+    // https://developer.apple.com/library/ios/documentation/Security/Conceptual/SecureCodingGuide/Articles/ValidatingInput.html
+    NSURL *maliciousResponseObjectSSL = [NSURL URLWithString:@"app://cmd/set_preference?use_ssl=false"];
+    XCTAssertFalse([testEngine validAccessTokenFromURL:maliciousResponseObjectSSL appRedirectPath:appBaseRedirectURL error:&error]);
+    XCTAssertFalse(testEngine.isSessionValid);
+    XCTAssertNil(testEngine.accessToken);
+}
+
+- (void)testQueryStringParameters
+{
+    InstagramEngine *testEngine = [InstagramEngine sharedEngine];
+
+    // test query string with #
+    NSString *testQueryString = @"#access_token=0123456789.abcd123.instagramkitabcd123";
+    NSDictionary *queryDictionary = [testEngine queryStringParametersFromString:testQueryString];
+    XCTAssertNotNil(queryDictionary);
+    XCTAssertTrue([queryDictionary[@"access_token"] isEqualToString:@"0123456789.abcd123.instagramkitabcd123"]);
+
+    // test query string without #
+    testQueryString = @"access_token=0123456789.abcd123.instagramkitabcd123";
+    queryDictionary = [testEngine queryStringParametersFromString:testQueryString];
+    XCTAssertNotNil(queryDictionary);
+    XCTAssertTrue([queryDictionary[@"access_token"] isEqualToString:@"0123456789.abcd123.instagramkitabcd123"]);
+
+}
 
 - (void)testGetPathWithMedia
 {
