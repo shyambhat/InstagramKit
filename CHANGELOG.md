@@ -6,12 +6,14 @@ All notable changes to this project will be documented in this file.
 
 #### [Unreleased]
 **on `dev` branch**
-- Support for Instagram Platform updates - http://developers.instagram.com/post/133424514006/instagram-platform-update 
+- [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
 
 ## [3.8] - 2016-03-20
-- [#201](https://github.com/shyambhat/InstagramKit/pull/201) Solved issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
+- [#201](https://github.com/shyambhat/InstagramKit/pull/201) Fixed issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
 - [#203](https://github.com/shyambhat/InstagramKit/pull/203) Fixed issue with likes count By [@mgarciam](https://github.com/mgarciam)
-- [#215](https://github.com/shyambhat/InstagramKit/pull/215) Support for AFNetworking 3.0 By [@Beniamiiin](https://github.com/Beniamiiin)
+- [#211](https://github.com/shyambhat/InstagramKit/pull/211) Added support for app:// formatted custom redirect URLs. By [@gugges](https://github.com/gugges)
+- [#215](https://github.com/shyambhat/InstagramKit/pull/215) Added support for AFNetworking 3.0 By [@Beniamiiin](https://github.com/Beniamiiin)
+- More Unit tests.
 
 ## [3.7] - 2015-12-09
 - Complete Swift compatibility.
