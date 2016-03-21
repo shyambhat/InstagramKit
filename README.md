@@ -57,23 +57,9 @@ You may refer to Instagram's API changelog here - https://www.instagram.com/deve
 
 ##Usage
 
-#### Unauthenticated Requests
-
-Some API calls only require the use of a Client Id, which simply associates the call with your specific App.
-
-```Objective-C
-InstagramEngine *engine = [InstagramEngine sharedEngine];
-[engine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
-    // media is an array of InstagramMedia objects
-    ...
-} failure:^(NSError *error, NSInteger statusCode) {
-    ...
-}];
-```
-
 #### Authentication
 
-For most API calls, you will need an Access Token and often times a User Id. To get your Access Token, the user needs to authenticate your app to access his Instagram account. 
+For each API call, you will need an Access Token and specific scope permissions. To get the Access Token, the user needs to authenticate your app to access his Instagram account with the specified permissions.
 
 To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_id=[Client ID]&redirect_uri=[Redirect URI]&response_type=token``` 
 or allow InstagramEngine's helper method do the hard work for you - 
