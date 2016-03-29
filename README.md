@@ -65,7 +65,7 @@ To do so, redirect the user to ```https://instagram.com/oauth/authorize/?client_
 or allow InstagramEngine's helper method do the hard work for you - 
 
 ```Objective-C
-NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURL];
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURL];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
