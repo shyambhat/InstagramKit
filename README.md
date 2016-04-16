@@ -90,6 +90,7 @@ Once the user grants your app permission, they will be redirected to a url in th
 InstagramEngine includes a helper method to validate this token.
 
 ```Objective-C
+// UIWebView
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -100,6 +101,21 @@ InstagramEngine includes a helper method to validate this token.
     }
     return YES;
 }
+
+// WKWebView
+
+-(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler {
+ 
+    
+    NSError *error;
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:navigationAction.request.URL error:&error]) {
+        // success!
+        ...
+    }
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
 ```
 
 #### Authenticated Requests
