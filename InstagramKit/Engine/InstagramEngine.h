@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return YES if valid token extracted and saved, otherwise NO.
  */
 - (BOOL)receivedValidAccessTokenFromURL:(NSURL *)url
-                                  error:(NSError * _Nullable __autoreleasing *)error;
+                                  error:(NSError * _Nullable __autoreleasing *)error NS_SWIFT_NOTHROW;
 
 /**
  *  Validate if authorization is done.
