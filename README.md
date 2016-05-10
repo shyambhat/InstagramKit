@@ -80,9 +80,9 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 // Set scope depending on permissions your App has been granted from Instagram
 // InstagramKitScopeBasic is included by default.
 
-InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
+InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
 
-NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
