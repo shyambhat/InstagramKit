@@ -7,12 +7,12 @@ All notable changes to this project will be documented in this file.
 #### [Unreleased]
 **on `dev` branch**
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
-- [#227](https://github.com/shyambhat/InstagramKit/pull/227) Add NS_SWIFT_NOTHROW for disabling error throw handling in swift.  By [@derek-chim](https://github.com/derek-chim)
+- [#227](https://github.com/shyambhat/InstagramKit/pull/227) Add `NS_SWIFT_NOTHROW` for disabling error throw handling in swift.  By [@derek-chim](https://github.com/derek-chim)
 
 ## [3.8] - 2016-03-20
 - [#201](https://github.com/shyambhat/InstagramKit/pull/201) Fixed issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
 - [#203](https://github.com/shyambhat/InstagramKit/pull/203) Fixed issue with likes count By [@mgarciam](https://github.com/mgarciam)
-- [#211](https://github.com/shyambhat/InstagramKit/pull/211) Added support for app:// formatted custom redirect URLs. By [@gugges](https://github.com/gugges)
+- [#211](https://github.com/shyambhat/InstagramKit/pull/211) Added support for `app://` formatted custom redirect URLs. By [@gugges](https://github.com/gugges)
 - [#215](https://github.com/shyambhat/InstagramKit/pull/215) Added support for AFNetworking 3.0 By [@Beniamiiin](https://github.com/Beniamiiin)
 - More Unit tests.
 
