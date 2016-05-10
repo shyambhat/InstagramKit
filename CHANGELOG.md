@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 #### [Unreleased]
 **on `dev` branch**
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
+- [#227](https://github.com/shyambhat/InstagramKit/pull/227) Add NS_SWIFT_NOTHROW for disabling error throw handling in swift.  By [@derek-chim](https://github.com/derek-chim)
 
 ## [3.8] - 2016-03-20
 - [#201](https://github.com/shyambhat/InstagramKit/pull/201) Fixed issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
