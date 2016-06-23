@@ -229,8 +229,9 @@ typedef void (^InstagramLocationBlock)(InstagramLocation *location);
  *
  *  @param error
  *  @param serverStatusCode 
+ *  @param response
  */
-typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode);
+typedef void (^InstagramFailureBlock)(NSError* error, NSInteger serverStatusCode, NSDictionary *response);
 
 /**
  *  A generic response block providing the server response dictionary, as is.

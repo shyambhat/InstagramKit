@@ -126,7 +126,7 @@
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode, NSDictionary *response) {
                      XCTAssertNil(error);
                  }];
     
@@ -150,7 +150,7 @@
                      XCTAssertTrue([object isKindOfClass:modelClass]);
                      [expectation fulfill];
                  }
-                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                 failure:^(NSError * _Nonnull error, NSInteger serverStatusCode, NSDictionary *response) {
                      XCTAssertNil(error);
                  }];
     
@@ -174,7 +174,7 @@
                               XCTAssertTrue([paginatedObjects[0] isKindOfClass:modelClass]);
                               [expectation fulfill];
                           }
-                          failure:^(NSError * _Nonnull error, NSInteger serverStatusCode) {
+                          failure:^(NSError * _Nonnull error, NSInteger serverStatusCode, NSDictionary *response) {
                               XCTAssertNil(error);
                  }];
     

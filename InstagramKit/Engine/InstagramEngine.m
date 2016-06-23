@@ -285,7 +285,10 @@
                       success(modelObject);
                   }
                   failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
+                      NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                      NSDictionary *serializedResponseData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+                      
+                      (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, serializedResponseData) : 0;
                   }];
 }
 
@@ -320,8 +323,10 @@
                           });
                       });
                   }
-                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      (failure)? failure(error, ((NSHTTPURLResponse *)[task response]).statusCode) : 0;
+                  failure:^(NSURLSessionDataTask *task, NSError *error) {                         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                      NSDictionary *serializedResponseData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+                      
+                      (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, serializedResponseData) : 0;
                   }];
 }
 
@@ -339,7 +344,10 @@
                        (success)? success((NSDictionary *)responseObject) : 0;
                    }
                    failure:^(NSURLSessionDataTask *task, NSError *error) {
-                       (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode) : 0;
+                       NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                       NSDictionary *serializedResponseData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+                       
+                       (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, serializedResponseData) : 0;
                    }];
 }
 
@@ -356,7 +364,10 @@
                          (success)? success((NSDictionary *)responseObject) : 0;
                      }
                      failure:^(NSURLSessionDataTask *task, NSError *error) {
-                         (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode) : 0;
+                         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                         NSDictionary *serializedResponseData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+
+                         (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, serializedResponseData) : 0;
                      }];
 }
 
