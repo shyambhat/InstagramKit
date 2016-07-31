@@ -40,6 +40,7 @@ NSString *const kCreatedDate = @"created_time";
 NSString *const kLink = @"link";
 NSString *const kCaption = @"caption";
 NSString *const kLikes = @"likes";
+NSString *const kLikesCount = @"likes_count";
 NSString *const kComments = @"comments";
 NSString *const kFilter = @"filter";
 NSString *const kTags = @"tags";
