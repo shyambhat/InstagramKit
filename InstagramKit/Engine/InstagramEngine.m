@@ -797,7 +797,7 @@
 - (void)getFollowersOfSelf:(InstagramUsersBlock)success
                    failure:(InstagramFailureBlock)failure
 {
-    [self getPaginatedPath:[NSString stringWithFormat:@"users/self/followed-by",userId]
+    [self getPaginatedPath:[NSString stringWithFormat:@"users/self/followed-by"]
                 parameters:nil
              responseModel:[InstagramUser class]
                    success:success
