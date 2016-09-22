@@ -537,31 +537,6 @@
           failure:failure];
 }
 
-
-- (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
-                       failure:(InstagramFailureBlock)failure
-{
-    [self getSelfFeedWithCount:0
-                         maxId:nil
-                       success:success
-                       failure:failure];
-}
-
-
-- (void)getSelfFeedWithCount:(NSInteger)count
-                       maxId:(NSString *)maxId
-                     success:(InstagramMediaBlock)success
-                     failure:(InstagramFailureBlock)failure
-{
-    NSDictionary *params = [self parametersFromCount:count maxId:maxId andPaginationKey:kPaginationKeyMaxId];
-    [self getPaginatedPath:[NSString stringWithFormat:@"users/self/feed"]
-                parameters:params
-             responseModel:[InstagramMedia class]
-                   success:success
-                   failure:failure];
-}
-
-
 - (void)getMediaLikedBySelfWithSuccess:(InstagramMediaBlock)success
                                failure:(InstagramFailureBlock)failure
 {
