@@ -562,6 +562,15 @@ NS_ASSUME_NONNULL_BEGIN
                         withSuccess:(InstagramResponseBlock)success
                             failure:(nullable InstagramFailureBlock)failure;
 
+/**
+ *  Get the list of users this self follows.
+ *
+ *  @param success  Provides an array of User objects and Pagination info.
+ *  @param failure  Provides an error and a server status code.
+ */
+- (void)getUsersFollowedByUser:(InstagramUsersBlock)success
+                       failure:(nullable InstagramFailureBlock)failure;
+
 
 /**
  *  Get the list of users this user follows.
@@ -574,6 +583,15 @@ NS_ASSUME_NONNULL_BEGIN
                    withSuccess:(InstagramUsersBlock)success
                        failure:(nullable InstagramFailureBlock)failure;
 
+/**
+ *  Get the list of users this self is followed by.
+ *
+ *  @param userId   Id of the User object.
+ *  @param success  Provides an array of User objects and Pagination info.
+ *  @param failure  Provides an error and a server status code.
+ */
+- (void)getFollowersOfUser:(InstagramUsersBlock)success
+                   failure:(nullable InstagramFailureBlock)failure;
 
 /**
  *  Get the list of users this user is followed by.
