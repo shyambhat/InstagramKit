@@ -757,34 +757,10 @@
                    failure:failure];
 }
 
-
-- (void)getUsersFollowedByUser:(NSString *)userId
-                   withSuccess:(InstagramUsersBlock)success
-                       failure:(InstagramFailureBlock)failure
-{
-    [self getPaginatedPath:[NSString stringWithFormat:@"users/%@/follows",userId]
-                parameters:nil
-             responseModel:[InstagramUser class]
-                   success:success
-                   failure:failure];
-}
-
 - (void)getFollowersOfSelf:(InstagramUsersBlock)success
                    failure:(InstagramFailureBlock)failure
 {
     [self getPaginatedPath:[NSString stringWithFormat:@"users/self/followed-by"]
-                parameters:nil
-             responseModel:[InstagramUser class]
-                   success:success
-                   failure:failure];
-}
-
-
-- (void)getFollowersOfUser:(NSString *)userId
-               withSuccess:(InstagramUsersBlock)success
-                   failure:(InstagramFailureBlock)failure
-{
-    [self getPaginatedPath:[NSString stringWithFormat:@"users/%@/followed-by",userId]
                 parameters:nil
              responseModel:[InstagramUser class]
                    success:success
