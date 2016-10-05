@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Tags on the Media.
  */
-@property (nonatomic, readonly, nullable) NSArray <InstagramTag *> *tags;
+@property (nonatomic, readonly, nullable) NSArray <NSString *> *tags;
 
 /**
  *  Media Location coordinates
