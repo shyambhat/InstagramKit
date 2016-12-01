@@ -113,12 +113,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Get a list of currently popular media.
+ *  Note : Deprecated for Apps created on or after Nov 17, 2015 [https://www.instagram.com/developer/changelog/]
  *
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getPopularMediaWithSuccess:(InstagramMediaBlock)success
-                           failure:(nullable InstagramFailureBlock)failure;
+                           failure:(nullable InstagramFailureBlock)failure INSTAGRAMKIT_DEPRECATED;
 
 
 #pragma mark -
@@ -274,12 +275,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Get the authenticated user's feed.
+ *  Note : Deprecated for Apps created on or after Nov 17, 2015 [https://www.instagram.com/developer/changelog/]
  *
  *  @param success  Provides an array of Media objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getSelfFeedWithSuccess:(InstagramMediaBlock)success
-                       failure:(nullable InstagramFailureBlock)failure;
+                       failure:(nullable InstagramFailureBlock)failure INSTAGRAMKIT_DEPRECATED;
 
 
 /**

@@ -244,6 +244,15 @@ typedef void (^InstagramResponseBlock)(NSDictionary *serverResponse);
  *  String constants as represented in JSON.
  */
 
+/**
+ *  @def INSTAGRAMKIT_DEPRECATED
+ *  @hideinitializer
+ *  @brief Marks a method declaration as deprecated.
+ **/
+
+#define INSTAGRAMKIT_DEPRECATED __attribute__( (deprecated) )
+
+
 INSTAGRAMKIT_EXTERN NSString *const kKeyClientID;
 INSTAGRAMKIT_EXTERN NSString *const kKeyAccessToken;
 INSTAGRAMKIT_EXTERN NSString *const kKeychainTokenKey;
