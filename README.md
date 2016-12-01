@@ -122,7 +122,7 @@ The `InstagramPaginationInfo` object has everything it needs to make your next p
 If you need to make fetch a paginated feed of results, use the variation of the method which accepts `count` and `maxId` as parameters.
 For instance, use `getMediaForUser:count:maxId:withSuccess:failure:` passing the next maxID to the `maxId` parameter each time, obtained from `paginationInfo.nextMaxId` of the newest paginationInfo object.
 
-```    
+```Objective-C
 [engine getMediaForUser:user.Id 
                   count:15 
                   maxId:self.currentPaginationInfo.nextMaxId 
