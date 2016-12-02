@@ -124,7 +124,7 @@ Once you're authenticated and InstagramKit has been provided an `accessToken`, i
 
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
-[engine getSelfFeedWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+[engine getSelfRecentMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
     // media is an array of InstagramMedia objects
     ...
 } failure:^(NSError *error, NSInteger statusCode) {
