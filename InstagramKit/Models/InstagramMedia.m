@@ -24,6 +24,11 @@
 #import "UserInPhoto.h"
 #import "InstagramLocation.h"
 
+#if !TARGET_OS_IPHONE
+#define decodeCGSizeForKey decodeSizeForKey
+#define encodeCGSize encodeSize
+#endif
+
 @interface InstagramMedia ()
 
 @property (nonatomic, strong) InstagramUser *user;

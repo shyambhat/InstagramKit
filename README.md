@@ -80,15 +80,16 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 // Set scope depending on permissions your App has been granted from Instagram
 // InstagramKitScopeBasic is included by default.
 
-InstagramKitScope scope = InstagramKitScopeRelationships | InstagramKitScopeComments | InstagramKitScopeLikes; 
+InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
 
-NSURL *authURL = [[InstagramEngine sharedEngine] authorizarionURLForScope:scope];
+NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
 ```
 
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
 InstagramEngine includes a helper method to validate this token.
 
+#####UIWebView
 ```Objective-C
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -102,13 +103,28 @@ InstagramEngine includes a helper method to validate this token.
 }
 ```
 
+#####WKWebView
+```Objective-C
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler
+{   
+    NSError *error;
+    if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:navigationAction.request.URL error:&error]) {
+        // success!
+        ...
+    }    
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+```
+
 #### Authenticated Requests
 
 Once you're authenticated and InstagramKit has been provided an `accessToken`, it will automatically persist it until you call `-logout` on InstagramEngine. An authenticated call looks no different:
 
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
-[engine getSelfFeedWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+[engine getSelfRecentMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
     // media is an array of InstagramMedia objects
     ...
 } failure:^(NSError *error, NSInteger statusCode) {
@@ -154,7 +170,7 @@ Download and run the Example Project to understand how the engine is intended to
 
 ##Contributions?
 
-Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in. Please submit pull requests to the `dev` branch.
+Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
 
 ####Questions?
