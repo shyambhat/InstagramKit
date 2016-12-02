@@ -78,7 +78,7 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 ```Objective-C
 // Set scope depending on permissions your App has been granted from Instagram
-// InstagramKitScopeBasic is included by default.
+// InstagramKitLoginScopeBasic is included by default.
 
 InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
 
