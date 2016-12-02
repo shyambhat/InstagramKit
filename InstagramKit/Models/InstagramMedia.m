@@ -156,11 +156,6 @@
     return [NSArray arrayWithArray:self.mComments];
 }
 
-- (NSInteger)commentCount
-{
-    return [self.mComments count];
-}
-
 - (NSArray *)usersInPhoto
 {
     return [NSArray arrayWithArray:self.mUsersInPhoto];
