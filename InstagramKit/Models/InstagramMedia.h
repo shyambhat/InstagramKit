@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Number of comments on the Media.
  */
-@property (nonatomic, readonly) NSInteger commentCount;
+@property (nonatomic, readonly) NSInteger commentsCount;
 
 /**
  *  An array of comments on the Media.
