@@ -46,6 +46,8 @@ If you opt to use the optional pod, InstagramKit resumes your authenticated sess
 #### Instagram Developer Registration
 Head over to http://instagram.com/developer/clients/manage/ to register your app with Instagram and set the right credentials for ```InstagramAppClientId``` and ```InstagramAppRedirectURL``` in your App's Info.plist file. 
 
+If you installed InstagramKit via Cocoapods set those credentials in the `Pods/InstagramKit/Support Files/Info.plist`
+
 ```InstagramAppClientId``` is your App's Client Id and ```InstagramAppRedirectURL```, the redirect URI which is obtained on registering your App on Instagram's Developer Dashboard.
 The redirect URI specifies where Instagram should redirect users after they have chosen whether or not to authenticate your application. 
 
