@@ -368,6 +368,15 @@ NS_ASSUME_NONNULL_BEGIN
                             failure:(nullable InstagramFailureBlock)failure;
 
 
+#pragma mark - 
+
+- (void)getSelfRecentMediaWithSuccess:(InstagramMediaBlock)success
+							  failure:(InstagramFailureBlock)failure;
+
+- (void)getSelfRecentMediaWithSuccess:(NSInteger)count maxId:(NSString *)maxId
+							  success:(InstagramMediaBlock)success
+							  failure:(InstagramFailureBlock)failure;
+
 #pragma mark - Tags -
 
 
