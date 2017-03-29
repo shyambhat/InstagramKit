@@ -180,7 +180,9 @@
 {    
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     [[storage cookies] enumerateObjectsUsingBlock:^(NSHTTPCookie *cookie, NSUInteger idx, BOOL *stop) {
-        [storage deleteCookie:cookie];
+        if ([cookie.domain rangeOfString:@"instagram.com"].location != NSNotFound) {
+            [storage deleteCookie:cookie];
+        }
     }];
     
     self.accessToken = nil;
