@@ -167,6 +167,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getMediaWithLocationId:(NSString *)locationId
                        success:(InstagramMediaBlock)success
                        failure:(nullable InstagramFailureBlock)failure;
+/**
+ *  Get a list of recent media objects from a given nextURL.
+ *
+ *  @param nextURL      URL for next part of media objects in a given location. Next url is taken from pagination info.
+ *  @param success      Provides an array of Media objects and Pagination info.
+ *  @param failure      Provides an error and a server status code.
+ */
+
+
+- (void)getMediaWithNextURL:(NSString *)nextURL
+                    success:(InstagramMediaBlock)success
+                    failure:(InstagramFailureBlock)failure;
 
 
 #pragma mark - Locations -

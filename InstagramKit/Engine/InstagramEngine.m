@@ -426,6 +426,18 @@
                    failure:failure];
 }
 
+- (void)getMediaWithNextURL:(NSString *)nextURL
+                    success:(InstagramMediaBlock)success
+                    failure:(InstagramFailureBlock)failure
+{
+    NSString *nextURLEndPoint = [nextURL stringByReplacingOccurrencesOfString:kInstagramKitBaseURL withString:@""];
+    [self getPaginatedPath:nextURLEndPoint
+                parameters:nil
+             responseModel:[InstagramMedia class]
+                   success:success
+                   failure:failure];
+}
+
 
 #pragma mark - Locations -
 
