@@ -196,6 +196,7 @@
         self.mComments = [[decoder decodeObjectOfClass:[NSArray class] forKey:kComments] mutableCopy];
         self.mUsersInPhoto = [[decoder decodeObjectOfClass:[NSArray class] forKey:kUsersInPhoto] mutableCopy];
         self.tags = [decoder decodeObjectOfClass:[NSArray class] forKey:kTags];
+        self.likesCount = [decoder decodeIntegerForKey:kLikesCount];
         
         CLLocationCoordinate2D coordinates;
         coordinates.latitude = [decoder decodeDoubleForKey:kLocationLatitude];
@@ -247,6 +248,7 @@
     [encoder encodeObject:self.thumbnailURL forKey:[NSString stringWithFormat:@"%@url",kThumbnail]];
     [encoder encodeCGSize:self.thumbnailFrameSize forKey:[NSString stringWithFormat:@"%@size",kThumbnail]];
     [encoder encodeBool:self.isVideo forKey:kMediaTypeVideo];
+    [encoder encodeInteger:self.likesCount forKey:kLikesCount];
 
     if (!self.isVideo) {
         [encoder encodeObject:self.lowResolutionImageURL forKey:[NSString stringWithFormat:@"%@url",kLowResolution]];

@@ -46,6 +46,8 @@ INSTAGRAMKIT_EXTERN NSString *const kCreatedDate;
 INSTAGRAMKIT_EXTERN NSString *const kLink;
 INSTAGRAMKIT_EXTERN NSString *const kCaption;
 INSTAGRAMKIT_EXTERN NSString *const kLikes;
+INSTAGRAMKIT_EXTERN NSString *const kLikesCount;
+
 INSTAGRAMKIT_EXTERN NSString *const kComments;
 INSTAGRAMKIT_EXTERN NSString *const kFilter;
 INSTAGRAMKIT_EXTERN NSString *const kTags;
