@@ -48,7 +48,7 @@
 - (void)updateDetailsWithInfo:(NSDictionary *)info
 {
     self.username = [[NSString alloc] initWithString:info[kUsername]];
-    self.fullName = (IKNotNull(info[kProfilePictureURL])) ? [[NSString alloc] initWithString:info[kFullName]] : nil;
+    self.fullName = (IKNotNull(info[kFullName])) ? [[NSString alloc] initWithString:info[kFullName]] : nil;
     
     self.profilePictureURL = (IKNotNull(info[kProfilePictureURL])) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
     self.bio = (IKNotNull(info[kBio])) ? [[NSString alloc] initWithString:info[kBio]] : nil;
