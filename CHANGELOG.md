@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 **on `dev` branch**
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
 
+## [3.8.1] - 2018-04-24
+- [#278](https://github.com/shyambhat/InstagramKit/pull/278) Fixed crash for missing full_name in InstagramUser. By [@stremsdoerfer](https://github.com/stremsdoerfer)
+
 ## [3.8] - 2016-03-20
 - [#201](https://github.com/shyambhat/InstagramKit/pull/201) Fixed issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
 - [#203](https://github.com/shyambhat/InstagramKit/pull/203) Fixed issue with likes count By [@mgarciam](https://github.com/mgarciam)
