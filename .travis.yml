@@ -3,4 +3,4 @@ language: objective-c
 # before_install:
 #     - pod repo remove master
 #     - pod setup
-script: xcodebuild test -workspace InstagramKit-Example/InstagramKit-Example.xcworkspace -scheme InstagramKit-Example -sdk iphonesimulator -destination "name=iPhone SE"
+script: xcodebuild test -workspace InstagramKit.xcworkspace -scheme InstagramKit -sdk iphonesimulator -destination "name=iPhone SE"
