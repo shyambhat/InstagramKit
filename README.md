@@ -30,11 +30,11 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 The framework is built atop AFNetworking’s blocks-based architecture and additionally, parses JSON data and creates model objects asynchronously so there’s absolutely no parsing on the main thread.
 It’s neat, fast and works like a charm.
 
-##Installation
+## Installation
 
 Getting started is easy. Just include the files from the directory 'InstagramKit' into your project and you'll be up and running. You may need to add AFNetworking to your project as well if you haven't already.
 
-####CocoaPods Podfile
+#### CocoaPods Podfile
 ```ruby
 pod 'InstagramKit', '~> 3.0'
 ```
@@ -60,7 +60,7 @@ http://developers.instagram.com/post/133424514006/instagram-platform-update
 Due to Instagram's recent update to it's API, new Apps will no longer be able to access unauthenticated requests and a few other endpoints supported by InstagramKit. An update to InstagramKit to support these changes is on it's way. 
 You may refer to Instagram's API changelog here - https://www.instagram.com/developer/changelog/
 
-##Usage
+## Usage
 
 #### Authentication
 
@@ -94,7 +94,7 @@ NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope]
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
 InstagramEngine includes a helper method to validate this token.
 
-#####UIWebView
+##### UIWebView
 ```Objective-C
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -108,7 +108,7 @@ InstagramEngine includes a helper method to validate this token.
 }
 ```
 
-#####WKWebView
+##### WKWebView
 ```Objective-C
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler
@@ -137,7 +137,7 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 }];
 ```
 
-####Pagination 
+#### Pagination 
 The `InstagramPaginationInfo` object has everything it needs to make your next pagination call. 
 
 If you need to make fetch a paginated feed of results, use the variation of the method which accepts `count` and `maxId` as parameters.
@@ -169,16 +169,16 @@ You can also use it in cases where you do not need pagination, but need to speci
 
 Read in detail about more ways of implementing Pagination for your requests effortlessly in the [Pagination Wiki](https://github.com/shyambhat/InstagramKit/wiki/Pagination).
 
-####Demo
+#### Demo
 
 Download and run the Example Project to understand how the engine is intended to be used.
 
-##Contributions?
+## Contributions?
 
 Glad you asked. Check out the [open Issues](https://github.com/shyambhat/InstagramKit/issues?state=open) and jump right in.
 
 
-####Questions?
+#### Questions?
 The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is your definitive source of information in case something goes wrong. Please make sure you've read up the documentation before posting issues.
 
 ==================
