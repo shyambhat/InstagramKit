@@ -160,7 +160,7 @@
     if (success) {
         self.accessToken = token;
     }
-    else {
+    else if (error) {
         NSString *localizedDescription = NSLocalizedString(@"Authorization not granted.", @"Error notification to indicate Instagram OAuth token was not provided.");
         *error = [NSError errorWithDomain:InstagramKitErrorDomain
                                      code:InstagramKitAuthenticationFailedError
