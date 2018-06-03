@@ -67,11 +67,11 @@
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
         
-        self.user = [[InstagramUser alloc] initWithInfo:info[kUser]];
+        self.user = IKNotNull(info[kUser]) ? [[InstagramUser alloc] initWithInfo:info[kUser]] : nil;
         self.userHasLiked = [info[kUserHasLiked] boolValue];
-        self.createdDate = [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]];
-        self.link = [[NSString alloc] initWithString:info[kLink]];
-        self.caption = [[InstagramComment alloc] initWithInfo:info[kCaption]];
+        self.createdDate = IKNotNull(info[kCreatedDate]) ? [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]] : nil;
+        self.link = IKNotNull(info[kLink]) ? [[NSString alloc] initWithString:info[kLink]] : nil;
+        self.caption = IKNotNull(info[kCaption]) ? [[InstagramComment alloc] initWithInfo:info[kCaption]] : nil;
         
         self.mLikes = [[NSMutableArray alloc] init];
         NSDictionary *likesDictionary = info[kLikes];
@@ -101,7 +101,7 @@
             [self.mUsersInPhoto addObject:userInPhoto];
         }
 
-        self.tags = [[NSArray alloc] initWithArray:info[kTags]];
+        self.tags = IKNotNull(info[kTags]) ? [[NSArray alloc] initWithArray:info[kTags]] : nil;
         
         if (IKNotNull(info[kLocation])) {
             id locationId = IKNotNull(info[kLocation][kID]) ? info[kLocation][kID] : nil;
@@ -110,7 +110,7 @@
             self.location = CLLocationCoordinate2DMake([(info[kLocation])[kLocationLatitude] doubleValue], [(info[kLocation])[kLocationLongitude] doubleValue]);
         }
         
-        self.filter = info[kFilter];
+        self.filter = IKNotNull(info[kFilter]) ? info[kFilter] : nil;
         
         [self initializeImages:info[kImages]];
         
@@ -126,11 +126,11 @@
 - (void)initializeImages:(NSDictionary *)imagesInfo
 {
     NSDictionary *thumbInfo = imagesInfo[kThumbnail];
-    self.thumbnailURL = (IKNotNull(thumbInfo[kURL])) ? [[NSURL alloc] initWithString:thumbInfo[kURL]] : nil;
+    self.thumbnailURL = IKNotNull(thumbInfo[kURL]) ? [[NSURL alloc] initWithString:thumbInfo[kURL]] : nil;
     self.thumbnailFrameSize = CGSizeMake([thumbInfo[kWidth] floatValue], [thumbInfo[kHeight] floatValue]);
     
     NSDictionary *lowResInfo = imagesInfo[kLowResolution];
-    self.lowResolutionImageURL = IKNotNull(lowResInfo[kURL])? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
+    self.lowResolutionImageURL = IKNotNull(lowResInfo[kURL]) ? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
     self.lowResolutionImageFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
     
     NSDictionary *standardResInfo = imagesInfo[kStandardResolution];

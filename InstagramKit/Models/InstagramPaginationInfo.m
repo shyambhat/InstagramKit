@@ -37,7 +37,7 @@
     BOOL infoExists = IKNotNull(info) && IKNotNull(info[kNextURL]);
     if (self && infoExists){
         
-        self.nextURL = [[NSURL alloc] initWithString:info[kNextURL]];
+        self.nextURL = IKNotNull(info[kNextURL]) ? [[NSURL alloc] initWithString:info[kNextURL]] : nil;
         BOOL nextMaxIdExists = IKNotNull(info[kNextMaxId]);
         BOOL nextMaxLikeIdExists = IKNotNull(info[kNextMaxLikeId]);
         BOOL nextCursorExists = IKNotNull(info[kNextCursor]);

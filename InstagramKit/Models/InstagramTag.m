@@ -35,7 +35,7 @@
 {
     self = [super init];
     if (self && IKNotNull(info)) {
-        self.name = [[NSString alloc] initWithString:info[kTagName]];
+        self.name = IKNotNull(info[kTagName]) ? [[NSString alloc] initWithString:info[kTagName]] : nil;
         self.mediaCount = [info[kTagMediaCount] integerValue];
     }
     return self;

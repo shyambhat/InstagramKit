@@ -47,12 +47,12 @@
 
 - (void)updateDetailsWithInfo:(NSDictionary *)info
 {
-    self.username = [[NSString alloc] initWithString:info[kUsername]];
-    self.fullName = (IKNotNull(info[kFullName])) ? [[NSString alloc] initWithString:info[kFullName]] : nil;
+    self.username = IKNotNull(info[kUsername]) ? [[NSString alloc] initWithString:info[kUsername]] : nil;
+    self.fullName = IKNotNull(info[kFullName]) ? [[NSString alloc] initWithString:info[kFullName]] : nil;
     
-    self.profilePictureURL = (IKNotNull(info[kProfilePictureURL])) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
-    self.bio = (IKNotNull(info[kBio])) ? [[NSString alloc] initWithString:info[kBio]] : nil;
-    self.website = (IKNotNull(info[kWebsite])) ? [[NSURL alloc] initWithString:info[kWebsite]] : nil;
+    self.profilePictureURL = IKNotNull(info[kProfilePictureURL]) ? [[NSURL alloc] initWithString:info[kProfilePictureURL]] : nil;
+    self.bio = IKNotNull(info[kBio]) ? [[NSString alloc] initWithString:info[kBio]] : nil;
+    self.website = IKNotNull(info[kWebsite]) ? [[NSURL alloc] initWithString:info[kWebsite]] : nil;
     
     if (IKNotNull(info[kCounts]))
     {
@@ -75,7 +75,7 @@
 }
 
 
-- (void)loadDetailsWithCompletion:(void (^)())success
+- (void)loadDetailsWithCompletion:(void (^)(void))success
                           failure:(nullable InstagramFailureBlock)failure
 {
     [[InstagramEngine sharedEngine] getUserDetails:self.Id
