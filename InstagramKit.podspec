@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'InstagramKit'
-  s.version      = '3.8.1'
+  s.version      = '3.8.2'
   s.summary      = 'Instagram iOS SDK.'
   s.description  = <<-DESC
 
