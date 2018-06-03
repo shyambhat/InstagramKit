@@ -1,0 +1,20 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'InstagramKit_Example' do
+    pod 'InstagramKit', :path => '../'
+    pod 'InstagramKit/UICKeyChainStore', :path => '../'
+
+  target 'InstagramKit_Tests' do
+    inherit! :search_paths
+    
+  end
+end
+
+post_install do |pi|
+    pi.pods_project.targets.each do |t|
+        t.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+    end
+end

@@ -1,6 +1,14 @@
+# references:
+# * https://www.objc.io/issues/6-build-tools/travis-ci/
+# * https://github.com/supermarin/xcpretty#usage
 
+osx_image: xcode9.3
 language: objective-c
-# before_install:
-#     - pod repo remove master
-#     - pod setup
-script: xcodebuild build -workspace InstagramKit.xcworkspace -scheme InstagramKit -sdk iphonesimulator -destination "name=iPhone SE"
+# cache: cocoapods
+podfile: Example/Podfile
+before_install:
+- gem install cocoapods # Since Travis is not always on latest version
+- pod install --project-directory=Example
+script:
+- set -o pipefail && xcodebuild -workspace Example/InstagramKit.xcworkspace -scheme InstagramKit-Example -sdk iphonesimulator11.3 ONLY_ACTIVE_ARCH=NO | xcpretty
+- pod lib lint
