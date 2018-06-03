@@ -9,6 +9,12 @@ All notable changes to this project will be documented in this file.
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
 - [#227](https://github.com/shyambhat/InstagramKit/pull/227) Add `NS_SWIFT_NOTHROW` for disabling error throw handling in swift.  By [@derek-chim](https://github.com/derek-chim)
 
+## [3.8.2] - 2018-06-03
+- [#278](https://github.com/shyambhat/InstagramKit/pull/278) Not null checks during initialization across all model objects. By [@shyambhat](https://github.com/shyambhat)
+
+## [3.8.1] - 2018-04-24
+- [#278](https://github.com/shyambhat/InstagramKit/pull/278) Fixed crash for missing full_name in InstagramUser. By [@stremsdoerfer](https://github.com/stremsdoerfer)
+
 ## [3.8] - 2016-03-20
 - [#201](https://github.com/shyambhat/InstagramKit/pull/201) Fixed issue [#194](https://github.com/shyambhat/InstagramKit/pull/194): New Permissions For Instagram. By [@zzdjk6](https://github.com/zzdjk6)
 - [#203](https://github.com/shyambhat/InstagramKit/pull/203) Fixed issue with likes count By [@mgarciam](https://github.com/mgarciam)

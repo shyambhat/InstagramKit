@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Convenience method to load details and update object.
  *  @param info JSON dictionary
  */
-- (void)loadDetailsWithCompletion:(void (^)())success
+- (void)loadDetailsWithCompletion:(void (^)(void))success
                           failure:(nullable InstagramFailureBlock)failure;
 
 
