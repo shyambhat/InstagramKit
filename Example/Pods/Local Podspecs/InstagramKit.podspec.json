@@ -16,7 +16,7 @@
     "tag": "4.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "InstagramKit/Classes/**/*",
   "dependencies": {
@@ -36,7 +36,7 @@
       },
       "dependencies": {
         "UICKeyChainStore": [
-          "~>3.0"
+          "~>2.0"
         ]
       }
     }

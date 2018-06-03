@@ -14,7 +14,7 @@ An extensive Objective C SDK for the Instagram API.
   s.source           = { :git => 'https://github.com/shyambhat/InstagramKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.source_files = 'InstagramKit/Classes/**/*'
   s.dependency 'AFNetworking', '~>3.0'
   s.default_subspec = 'InstagramKit-without-UICKeyChainStore'
@@ -26,7 +26,7 @@ An extensive Objective C SDK for the Instagram API.
   s.subspec 'UICKeyChainStore' do |uickeychainstore|
       uickeychainstore.xcconfig    =
       { 'OTHER_CFLAGS' => '$(inherited) -INSTAGRAMKIT_INCLUDE_UICKEYCHAINSTORE' }
-      uickeychainstore.dependency 'UICKeyChainStore', '~>3.0'
+      uickeychainstore.dependency 'UICKeyChainStore', '~>2.0'
   end
   
   # s.resource_bundles = {

@@ -19,9 +19,14 @@ PODS:
     - InstagramKit/InstagramKit-without-UICKeyChainStore (= 4.0)
   - InstagramKit/InstagramKit-without-UICKeyChainStore (4.0):
     - AFNetworking (~> 3.0)
+  - InstagramKit/UICKeyChainStore (4.0):
+    - AFNetworking (~> 3.0)
+    - UICKeyChainStore (~> 2.0)
+  - UICKeyChainStore (2.1.1)
 
 DEPENDENCIES:
   - InstagramKit (from `../`)
+  - InstagramKit/UICKeyChainStore (from `../`)
 
 EXTERNAL SOURCES:
   InstagramKit:
@@ -29,8 +34,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  InstagramKit: 57073325eb85bae0c8f11f9c05876222f7a219af
+  InstagramKit: 2072df650fbd6bae8041051906743559300468e0
+  UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
 
-PODFILE CHECKSUM: 791feecacb9ab230fd21e0282ca0afee82e23ec1
+PODFILE CHECKSUM: d0b35d0fbaf301c0739b425acfbddae14b2d94ad
 
 COCOAPODS: 1.4.0
