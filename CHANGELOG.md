@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-#### [Unreleased]
-**on `dev` branch**
+## [4.0]
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
+- [#254](https://github.com/shyambhat/InstagramKit/pull/254) Up to date with modify APIs from Instagram. By [@ht22pt](https://github.com/ht22pt) 
+- [#218]( https://github.com/shyambhat/InstagramKit/pull/218) Update + new functionalities for InstagramKit-Example. By [@marcgovi](https://github.com/marcgovi)
+- [#273] Fix example project. By [@ricsantos](https://github.com/ricsantos) 
+- [#239](https://github.com/shyambhat/InstagramKit/issues/239) Implemented issue. By [@afilipowicz](https://github.com/afilipowicz)
 - [#227](https://github.com/shyambhat/InstagramKit/pull/227) Add `NS_SWIFT_NOTHROW` for disabling error throw handling in swift.  By [@derek-chim](https://github.com/derek-chim)
 
 ## [3.8.2] - 2018-06-03
