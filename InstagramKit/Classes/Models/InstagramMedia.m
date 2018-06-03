@@ -36,11 +36,11 @@
 @property (nonatomic, strong) NSDate *createdDate;
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, strong) InstagramComment *caption;
-@property (nonatomic, strong) NSMutableArray *mLikes;
+@property (nonatomic, strong) NSArray *likes;
 @property (nonatomic, assign) NSInteger likesCount;
-@property (nonatomic, strong) NSMutableArray *mComments;
+@property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, assign) NSInteger commentsCount;
-@property (nonatomic, strong) NSMutableArray *mUsersInPhoto;
+@property (nonatomic, strong) NSArray *usersInPhoto;
 @property (nonatomic, strong) NSArray *tags;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 @property (nonatomic, copy) NSString *locationId;
@@ -73,33 +73,36 @@
         self.link = IKNotNull(info[kLink]) ? [[NSString alloc] initWithString:info[kLink]] : nil;
         self.caption = IKNotNull(info[kCaption]) ? [[InstagramComment alloc] initWithInfo:info[kCaption]] : nil;
         
-        self.mLikes = [[NSMutableArray alloc] init];
         NSDictionary *likesDictionary = info[kLikes];
         if ([likesDictionary isKindOfClass:[NSDictionary class]]) {
+            NSMutableArray *mLikes = [[NSMutableArray alloc] init];
             for (NSDictionary *userInfo in likesDictionary[kData]) {
                 InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
-                [self.mLikes addObject:user];
+                [mLikes addObject:user];
             }
+            self.likes = [NSArray arrayWithArray:mLikes];
             NSNumber *likesCount = likesDictionary[kCount];
             self.likesCount = likesCount.integerValue;
         }
         
         NSDictionary *commentsDictionary = info[kComments];
-        self.mComments = [[NSMutableArray alloc] init];
         if ([commentsDictionary isKindOfClass:[NSDictionary class]]) {
+            NSMutableArray *mComments = [[NSMutableArray alloc] init];
             for (NSDictionary *commentInfo in commentsDictionary[kData]) {
                 InstagramComment *comment = [[InstagramComment alloc] initWithInfo:commentInfo];
-                [self.mComments addObject:comment];
+                [mComments addObject:comment];
             }
+            self.comments = [NSArray arrayWithArray:mComments];
             NSNumber *commentsCount = commentsDictionary[kCount];
             self.commentsCount = commentsCount.integerValue;
         }
         
-        self.mUsersInPhoto = [[NSMutableArray alloc] init];
+        NSMutableArray *mUsersInPhoto = [[NSMutableArray alloc] init];
         for (NSDictionary *userInfo in info[kUsersInPhoto]) {
             UserInPhoto *userInPhoto = [[UserInPhoto alloc] initWithInfo:userInfo];
-            [self.mUsersInPhoto addObject:userInPhoto];
+            [mUsersInPhoto addObject:userInPhoto];
         }
+        self.usersInPhoto = mUsersInPhoto;
 
         self.tags = IKNotNull(info[kTags]) ? [[NSArray alloc] initWithArray:info[kTags]] : nil;
         
@@ -149,28 +152,6 @@
     self.standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
-#pragma Getters 
-
-- (NSArray *)likes
-{
-    return [NSArray arrayWithArray:self.mLikes];
-}
-
-- (NSArray *)comments
-{
-    return [NSArray arrayWithArray:self.mComments];
-}
-
-- (NSInteger)commentsCount
-{
-    return [self.mComments count];
-}
-
-- (NSArray *)usersInPhoto
-{
-    return [NSArray arrayWithArray:self.mUsersInPhoto];
-}
-
 #pragma mark - Equality
 
 - (BOOL)isEqualToMedia:(InstagramMedia *)media {
@@ -192,9 +173,9 @@
         self.createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
         self.link = [decoder decodeObjectOfClass:[NSString class] forKey:kLink];
         self.caption = [decoder decodeObjectOfClass:[NSString class] forKey:kCaption];
-        self.mLikes = [[decoder decodeObjectOfClass:[NSArray class] forKey:kLikes] mutableCopy];
-        self.mComments = [[decoder decodeObjectOfClass:[NSArray class] forKey:kComments] mutableCopy];
-        self.mUsersInPhoto = [[decoder decodeObjectOfClass:[NSArray class] forKey:kUsersInPhoto] mutableCopy];
+        self.likes = [decoder decodeObjectOfClass:[NSArray class] forKey:kLikes];
+        self.comments = [decoder decodeObjectOfClass:[NSArray class] forKey:kComments];
+        self.usersInPhoto = [decoder decodeObjectOfClass:[NSArray class] forKey:kUsersInPhoto];
         self.tags = [decoder decodeObjectOfClass:[NSArray class] forKey:kTags];
         self.likesCount = [decoder decodeIntegerForKey:kLikesCount];
         
@@ -237,9 +218,9 @@
     [encoder encodeObject:self.createdDate forKey:kCreatedDate];
     [encoder encodeObject:self.link forKey:kLink];
     [encoder encodeObject:self.caption forKey:kCaption];
-    [encoder encodeObject:self.mLikes forKey:kLikes];
-    [encoder encodeObject:self.mComments forKey:kComments];
-    [encoder encodeObject:self.mUsersInPhoto forKey:kUsersInPhoto];
+    [encoder encodeObject:self.likes forKey:kLikes];
+    [encoder encodeObject:self.comments forKey:kComments];
+    [encoder encodeObject:self.usersInPhoto forKey:kUsersInPhoto];
     [encoder encodeObject:self.tags forKey:kTags];
     [encoder encodeDouble:self.location.latitude forKey:kLocationLatitude];
     [encoder encodeDouble:self.location.longitude forKey:kLocationLongitude];
@@ -276,9 +257,9 @@
     copy->_createdDate = [self.createdDate copy];
     copy->_link = [self.link copy];
     copy->_caption = [self.caption copy];
-    copy->_mLikes = [self.mLikes copy];
-    copy->_mComments = [self.mComments copy];
-    copy->_mUsersInPhoto = [self.mUsersInPhoto copy];
+    copy->_likes = [self.likes copy];
+    copy->_comments = [self.comments copy];
+    copy->_usersInPhoto = [self.usersInPhoto copy];
     copy->_tags = [self.tags copy];
     copy->_location = self.location;
     copy->_locationName = [self.locationName copy];
