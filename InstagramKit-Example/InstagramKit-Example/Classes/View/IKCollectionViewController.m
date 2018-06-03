@@ -74,11 +74,12 @@
     [self.collectionView reloadData];
     
     if (isSessionValid) {
-        [self requestSelfFeed];
+        [self requestSelfRecentMedia];
     }
     else
     {
-        [self requestPopularMedia];
+    // Not support with new API
+       // [self requestPopularMedia];
     }
 }
 
@@ -88,6 +89,7 @@
 /**
     Calls InstagramKit's helper method to fetch Popular Instagram Media.
  */
+/*
 - (void)requestPopularMedia
 {
     [self.instagramEngine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo)
@@ -99,16 +101,16 @@
                                                             NSLog(@"Load Popular Media Failed");
                                                        }];
 }
-
+*/
 
 /**
     Calls InstagramKit's helper method to fetch Media in the authenticated user's feed.
     @discussion The self.currentPaginationInfo object is updated on each successful call
     and it's updated nextMaxId is passed as a parameter to the next paginated request.
  */
-- (void)requestSelfFeed
+- (void)requestSelfRecentMedia
 {
-    [self.instagramEngine getSelfFeedWithCount:kFetchItemsCount
+    [self.instagramEngine getSelfRecentMediaWithCount:kFetchItemsCount
                                          maxId:self.currentPaginationInfo.nextMaxId
                                        success:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
                                            
@@ -121,7 +123,7 @@
 
                                        }
                                        failure:^(NSError *error, NSInteger statusCode) {
-                                           NSLog(@"Request Self Feed Failed");
+                                           NSLog(@"Request Self Recent media Failed");
                                        }];
 }
 
@@ -131,7 +133,7 @@
     @discussion The requestSelfFeed method is called with updated pagination parameters (nextMaxId).
  */
 - (IBAction)moreTapped:(id)sender {
-    [self requestSelfFeed];
+    [self requestSelfRecentMedia];
 }
 
 
