@@ -18,13 +18,39 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKComment.h"
-#import "IKMedia.h"
-#import "IKUser.h"
-#import "IKTag.h"
-#import "IKCredentialsStore.h"
-#import "IKAuthorizationHelper.h"
-#import "IKLocation.h"
-#import "IKPaginationInfo.h"
-//#import "IKSelfEndpoint.h"
-#import "IKUserEndpoints.h"
+
+#import "IKMediaViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "InstagramKit.h"
+
+
+@interface IKMediaViewController ()
+
+@property (weak, nonatomic)     IBOutlet UIImageView *imageView;
+@property (weak, nonatomic)     IBOutlet UILabel *captionLabel;
+@property (nonatomic, strong)   IKMedia *media;
+
+@end
+
+
+@implementation IKMediaViewController
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self populateViews];
+}
+
+
+- (void)populateViews
+{
+    [self setTitle:[NSString stringWithFormat:@"@%@",self.media.user.username]];
+    [self.imageView setImageWithURL:self.media.thumbnailURL];
+    [self.imageView setImageWithURL:self.media.standardResolutionImageURL];
+    [self.captionLabel setText:self.media.caption.text];
+}
+
+
+
+@end

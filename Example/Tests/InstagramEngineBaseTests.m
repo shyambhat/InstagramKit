@@ -108,7 +108,7 @@
 //- (void)testGetPathWithMedia
 //{
 //    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPath with Media Request"];
-//    Class modelClass = [InstagramMedia class];
+//    Class modelClass = [IKMedia class];
 //
 //    [[InstagramEngine sharedEngine] getPath:@"media/1032802639895336381_1194245772"
 //              parameters:nil
@@ -156,7 +156,7 @@
 //- (void)testGetPaginatedPath
 //{
 //    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getPaginatedPath with Popular Media"];
-//    Class modelClass = [InstagramMedia class];
+//    Class modelClass = [IKMedia class];
 //
 //    [[InstagramEngine sharedEngine] getPaginatedPath:@"media/popular"
 //                       parameters:nil

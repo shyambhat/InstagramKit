@@ -18,13 +18,35 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "IKComment.h"
-#import "IKMedia.h"
-#import "IKUser.h"
-#import "IKTag.h"
-#import "IKCredentialsStore.h"
-#import "IKAuthorizationHelper.h"
-#import "IKLocation.h"
-#import "IKPaginationInfo.h"
-//#import "IKSelfEndpoint.h"
-#import "IKUserEndpoints.h"
+#import <Foundation/Foundation.h>
+#include <CoreGraphics/CoreGraphics.h>
+
+#import "IKModel.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class IKUser;
+
+@interface IKUserInPhoto : IKModel <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  User in photo.
+ */
+@property (nonatomic, readonly) IKUser *user;
+
+/**
+ *  Position of a user in a photo defined by x and y coordinates.
+ */
+@property (nonatomic, readonly) CGPoint position;
+
+
+/**
+ *  Comparing IKUserInPhoto objects.
+ *  @param userInPhoto      A IKUserInPhoto object.
+ *  @return YES if Ids match. Else NO.
+ */
+- (BOOL)isEqualToIKUserInPhoto:(IKUserInPhoto *)userInPhoto;
+
+@end
+
+NS_ASSUME_NONNULL_END

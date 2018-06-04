@@ -42,9 +42,9 @@
 //    XCTestExpectation *expectation = [self expectationWithDescription:@"Test getMedia"];
 //    NSString *testMediaId = @"1032802639895336381_1194245772";
 //    [[InstagramEngine sharedEngine] getMedia:testMediaId
-//              withSuccess:^(InstagramMedia * _Nonnull media) {
+//              withSuccess:^(IKMedia * _Nonnull media) {
 //                  XCTAssertNotNil(media);
-//                  XCTAssertTrue([media isKindOfClass:[InstagramMedia class]]);
+//                  XCTAssertTrue([media isKindOfClass:[IKMedia class]]);
 //                  XCTAssertTrue([media.Id isEqualToString:testMediaId]);
 //                  [expectation fulfill];
 //              }
@@ -66,13 +66,13 @@
 //                              count:testCount
 //                              maxId:nil
 //                           distance:2000
-//                        withSuccess:^(NSArray<InstagramMedia *> * _Nonnull media, IKPaginationInfo * _Nonnull paginationInfo) {
+//                        withSuccess:^(NSArray<IKMedia *> * _Nonnull media, IKPaginationInfo * _Nonnull paginationInfo) {
 //                            XCTAssertNotNil(media);
 //                            XCTAssertTrue([media isKindOfClass:[NSArray class]]);
 //                            
-//                            InstagramMedia *mediaObject = media[0];
+//                            IKMedia *mediaObject = media[0];
 //                            XCTAssertNotNil(mediaObject);
-//                            XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
+//                            XCTAssertTrue([mediaObject isKindOfClass:[IKMedia class]]);
 //                            
 //                            XCTAssertEqual([media count], testCount);
 //                            [expectation fulfill];
@@ -93,13 +93,13 @@
 //    XCTestExpectation *expectation = [self expectationWithDescription:@"Test testGetMediaAtLocationWithId"];
 //    NSString * testLocationId = @"65045";
 //    [[InstagramEngine sharedEngine] getMediaAtLocationWithId:testLocationId
-//                        withSuccess:^(NSArray<InstagramMedia *> * _Nonnull media, IKPaginationInfo * _Nonnull paginationInfo) {
+//                        withSuccess:^(NSArray<IKMedia *> * _Nonnull media, IKPaginationInfo * _Nonnull paginationInfo) {
 //                            XCTAssertNotNil(media);
 //                            XCTAssertTrue([media isKindOfClass:[NSArray class]]);
 //                            
-//                            InstagramMedia *mediaObject = media[0];
+//                            IKMedia *mediaObject = media[0];
 //                            XCTAssertNotNil(mediaObject);
-//                            XCTAssertTrue([mediaObject isKindOfClass:[InstagramMedia class]]);
+//                            XCTAssertTrue([mediaObject isKindOfClass:[IKMedia class]]);
 //                            
 //                            XCTAssertTrue([mediaObject.locationId isEqualToString:testLocationId]);
 //                            [expectation fulfill];

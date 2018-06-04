@@ -19,6 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "IKUser.h"
+#import "IKUserEndpoints.h"
 
 @interface IKUser()
 
@@ -77,11 +78,11 @@
 - (void)loadDetailsWithCompletion:(void (^)(void))success
                           failure:(nullable InstagramFailureBlock)failure
 {
-    [[InstagramEngine sharedEngine] getUserDetails:self.Id
-                                       withSuccess:^(IKUser * _Nonnull userDetail) {
-                                           [self updateDetailsWithUser:userDetail];
-                                           success();
-                                       } failure:failure];
+    [[IKUserEndpoints new] getUserDetails:self.Id
+                              withSuccess:^(IKUser * _Nonnull userDetail) {
+                                  [self updateDetailsWithUser:userDetail];
+                                  success();
+                              } failure:failure];
 }
 
 #pragma mark - Equality

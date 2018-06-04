@@ -17,7 +17,7 @@ Here's a quick example to retrieve trending media on Instagram:
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
 [engine getPopularMediaWithSuccess:^(NSArray *media, IKPaginationInfo *paginationInfo) {
-// media is an array of InstagramMedia objects
+// media is an array of IKMedia objects
 ...
 } failure:^(NSError *error, NSInteger statusCode) {
 ...
@@ -133,7 +133,7 @@ Once you're authenticated and InstagramKit has been provided an `accessToken`, i
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
 [engine getSelfRecentMediaWithSuccess:^(NSArray *media, IKPaginationInfo *paginationInfo) {
-// media is an array of InstagramMedia objects
+// media is an array of IKMedia objects
 ...
 } failure:^(NSError *error, NSInteger statusCode) {
 ...

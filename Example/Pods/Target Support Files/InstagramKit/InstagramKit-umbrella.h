@@ -10,17 +10,27 @@
 #endif
 #endif
 
-#import "InstagramEngine.h"
-#import "InstagramKit.h"
+#import "IKAuthorizationHelper.h"
+#import "IKCredentialsStore.h"
+#import "IKCommentEndpoints.h"
+#import "IKEndpointsBase.h"
+#import "IKLikeEndpoints.h"
+#import "IKLocationEndpoints.h"
+#import "IKMediaEndpoints.h"
+#import "IKRelationshipEndpoints.h"
+#import "IKSelfEndpoints.h"
+#import "IKTagEndpoints.h"
+#import "IKUserEndpoints.h"
 #import "IKConstants.h"
-#import "InstagramComment.h"
-#import "InstagramLocation.h"
-#import "InstagramMedia.h"
-#import "InstagramModel.h"
+#import "InstagramKit.h"
+#import "IKComment.h"
+#import "IKLocation.h"
+#import "IKMedia.h"
+#import "IKModel.h"
 #import "IKPaginationInfo.h"
-#import "InstagramTag.h"
+#import "IKTag.h"
 #import "IKUser.h"
-#import "UserInPhoto.h"
+#import "IKUserInPhoto.h"
 
 FOUNDATION_EXPORT double InstagramKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char InstagramKitVersionString[];

@@ -134,11 +134,11 @@ typedef NS_ENUM(NSInteger, InstagramKitErrorCode)
 
 
 @class IKUser;
-@class InstagramMedia;
-@class InstagramComment;
+@class IKMedia;
+@class IKComment;
 @class IKPaginationInfo;
-@class InstagramTag;
-@class InstagramLocation;
+@class IKTag;
+@class IKLocation;
 @class IKModel;
 
 /**
@@ -159,10 +159,10 @@ typedef void (^InstagramObjectBlock)(id object);
 /**
  *  A callback block providing a collection of Media objects.
  *
- *  @param media            An array of InstagramMedia objects.
+ *  @param media            An array of IKMedia objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramMediaBlock)(NSArray<InstagramMedia *> *media, IKPaginationInfo *paginationInfo);
+typedef void (^IKMediaBlock)(NSArray<IKMedia *> *media, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of User objects.
@@ -175,18 +175,18 @@ typedef void (^IKUsersBlock)(NSArray<IKUser *> *users, IKPaginationInfo *paginat
 /**
  *  A callback block providing a collection of Location objects.
  *
- *  @param locations        An array of InstagramLocation objects.
+ *  @param locations        An array of IKLocation objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramLocationsBlock)(NSArray<InstagramLocation *> *locations, IKPaginationInfo *paginationInfo);
+typedef void (^IKLocationsBlock)(NSArray<IKLocation *> *locations, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of Comment objects.
  *
- *  @param comments         An array of InstagramComment objects.
+ *  @param comments         An array of IKComment objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramCommentsBlock)(NSArray<InstagramComment *> *comments, IKPaginationInfo *paginationInfo);
+typedef void (^IKCommentsBlock)(NSArray<IKComment *> *comments, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of Tag objects.
@@ -194,7 +194,7 @@ typedef void (^InstagramCommentsBlock)(NSArray<InstagramComment *> *comments, IK
  *  @param tags             An array of Tag objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramTagsBlock)(NSArray<InstagramTag *> *tags, IKPaginationInfo *paginationInfo);
+typedef void (^IKTagsBlock)(NSArray<IKTag *> *tags, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a User object.
@@ -208,21 +208,21 @@ typedef void (^IKUserBlock)(IKUser *user);
  *
  *  @param media    An InstagraMedia object.
  */
-typedef void (^InstagramMediaObjectBlock)(InstagramMedia *media);
+typedef void (^IKMediaObjectBlock)(IKMedia *media);
 
 /**
  *  A callback block providing a Tag object.
  *
- *  @param tag An InstagramTag object.
+ *  @param tag An IKTag object.
  */
-typedef void (^InstagramTagBlock)(InstagramTag *tag);
+typedef void (^IKTagBlock)(IKTag *tag);
 
 /**
  *  A callback block providing a Location object.
  *
- *  @param location An InstagramLocation object.
+ *  @param location An IKLocation object.
  */
-typedef void (^InstagramLocationBlock)(InstagramLocation *location);
+typedef void (^IKLocationBlock)(IKLocation *location);
 
 /**
  *  A generic failure block for handling server errors.

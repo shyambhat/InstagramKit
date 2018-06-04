@@ -16,5 +16,8 @@ post_install do |pi|
         t.build_configurations.each do |config|
             config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
         end
+        if t.name == 'InstragramKit'
+            config.build_settings['GCC_WARN_UNDECLARED_SELECTOR'] = 'NO'
+        end
     end
 end
