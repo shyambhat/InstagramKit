@@ -182,7 +182,8 @@ The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is 
 
 ## Author
 
-shyambhat, shyambhat@me.com
+Shyam Bhat, shyambhat@me.com
+Twitter: [@bhatthead](https://twitter.com/bhatthead) 
 
 ## License
 
@@ -191,7 +192,3 @@ InstagramKit is available under the MIT license. See the LICENSE file for more i
 ==================
 
 InstagramKit uses the public Instagram API and is not affiliated with either Instagram or Facebook.
-
-If you're using InstagramKit in your App or intend to, I'd be happy to hear from you.
-
-~ [@bhatthead](https://twitter.com/bhatthead)
