@@ -19,12 +19,12 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "UserInPhoto.h"
-#import "InstagramModel.h"
-#import "InstagramUser.h"
+#import "IKModel.h"
+#import "IKUser.h"
 
 @interface UserInPhoto ()
 
-@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, strong) IKUser *user;
 @property (nonatomic, assign) CGPoint position;
 
 @end
@@ -41,7 +41,7 @@
         position.x = [positionInfo[kX] floatValue];
         position.y = [info[kY] floatValue];
         self.position = position;
-        self.user =  [[InstagramUser alloc] initWithInfo:info[kUser]];
+        self.user =  [[IKUser alloc] initWithInfo:info[kUser]];
     }
     return self;
 }

@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return URL to direct user to Instagram's login screen.
  */
-- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope;
+- (NSURL *)authorizationURLForScope:(IKLoginScope)scope;
 
 
 /**

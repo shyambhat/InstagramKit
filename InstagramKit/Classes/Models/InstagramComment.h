@@ -19,13 +19,13 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "InstagramModel.h"
+#import "IKModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class InstagramUser;
+@class IKUser;
 
-@interface InstagramComment : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+@interface InstagramComment : IKModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  Creation date.
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Creator of the comment.
  */
-@property (nonatomic, readonly) InstagramUser *user;
+@property (nonatomic, readonly) IKUser *user;
 
 /**
  *  Comment text.

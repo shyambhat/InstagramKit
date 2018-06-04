@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getUserDetails:(NSString *)userId
-           withSuccess:(InstagramUserBlock)success
+           withSuccess:(IKUserBlock)success
                failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)searchUsersWithString:(NSString *)name
-                  withSuccess:(InstagramUsersBlock)success
+                  withSuccess:(IKUsersBlock)success
                       failure:(nullable InstagramFailureBlock)failure;
 
 

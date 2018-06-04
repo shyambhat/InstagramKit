@@ -18,10 +18,10 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramPaginationInfo.h"
-#import "InstagramModel.h"
+#import "IKPaginationInfo.h"
+#import "IKModel.h"
 
-@interface InstagramPaginationInfo ()
+@interface IKPaginationInfo ()
 
 @property (nonatomic, strong, nonnull) NSURL* nextURL;
 @property (nonatomic, copy, nonnull) NSString *nextMaxId;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation InstagramPaginationInfo
+@implementation IKPaginationInfo
 
 - (instancetype)initWithInfo:(NSDictionary *)info andObjectType:(Class)type
 {
@@ -67,7 +67,7 @@
 
 #pragma mark - Equality
 
-- (BOOL)isEqualToPaginationInfo:(InstagramPaginationInfo *)paginationInfo {
+- (BOOL)isEqualToPaginationInfo:(IKPaginationInfo *)paginationInfo {
     
     if (self == paginationInfo) {
         return YES;
@@ -106,7 +106,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramPaginationInfo *copy = [[InstagramPaginationInfo allocWithZone:zone] init];
+    IKPaginationInfo *copy = [[IKPaginationInfo allocWithZone:zone] init];
     copy->_nextURL = [self.nextURL copy];
     copy->_nextMaxId = [self.nextMaxId copy];
     copy->_type = [self.type copy];

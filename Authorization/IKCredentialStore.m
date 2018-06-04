@@ -61,7 +61,7 @@
     self.keychainStore[kKeychainTokenKey] = self.accessToken;
 #endif
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:InstagramKitUserAuthenticationChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IKUserAuthenticationChangedNotification object:nil];
 }
 
 

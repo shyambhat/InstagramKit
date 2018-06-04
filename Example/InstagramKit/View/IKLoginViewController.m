@@ -39,7 +39,7 @@
 //
 //    [self.navigationItem.rightBarButtonItem setEnabled:NO];
 //
-//    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:InstagramKitLoginScopePublicContent];
+//    NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:IKLoginScopePublicContent];
 //    NSURLRequest *request = [NSURLRequest requestWithURL:authURL];
 //    [self.view addSubview:webView];
 //    [webView loadRequest:request];

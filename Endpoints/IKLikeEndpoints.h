@@ -33,13 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param failure  Provides an error and a server status code.
  */
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(InstagramUsersBlock)success
+            withSuccess:(IKUsersBlock)success
                 failure:(nullable InstagramFailureBlock)failure;
 
 
 /**
  *  Set a like on this media by the currently authenticated user.
- *  REQUIREMENTS : InstagramKitLoginScopeLikes during authentication.
+ *  REQUIREMENTS : IKLoginScopeLikes during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Remove a like on this media by the currently authenticated user.
- *  REQUIREMENTS : InstagramKitLoginScopeLikes during authentication.
+ *  REQUIREMENTS : IKLoginScopeLikes during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116

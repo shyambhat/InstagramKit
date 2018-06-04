@@ -25,12 +25,12 @@
 
 
 - (void)getLikesOnMedia:(NSString *)mediaId
-            withSuccess:(InstagramUsersBlock)success
+            withSuccess:(IKUsersBlock)success
                 failure:(InstagramFailureBlock)failure
 {
     [self getPaginatedPath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
                 parameters:nil
-             responseModel:[InstagramUser class]
+             responseModel:[IKUser class]
                    success:success
                    failure:failure];
 }

@@ -20,11 +20,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "InstagramModel.h"
+#import "IKModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InstagramUser : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+@interface IKUser : IKModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  User's unique username.
@@ -77,11 +77,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- *  Comparing InstagramUser objects.
- *  @param user An InstagramUser object.
+ *  Comparing IKUser objects.
+ *  @param user An IKUser object.
  *  @return     YES is Ids match. Else NO.
  */
-- (BOOL)isEqualToUser:(InstagramUser *)user;
+- (BOOL)isEqualToUser:(IKUser *)user;
 
 @end
 

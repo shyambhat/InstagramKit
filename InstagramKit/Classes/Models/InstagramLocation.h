@@ -19,12 +19,12 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "InstagramModel.h"
+#import "IKModel.h"
 #import <MapKit/MapKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InstagramLocation : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+@interface InstagramLocation : IKModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  Geographic coordinates if the Location.

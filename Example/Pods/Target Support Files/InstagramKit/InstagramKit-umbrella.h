@@ -17,9 +17,9 @@
 #import "InstagramLocation.h"
 #import "InstagramMedia.h"
 #import "InstagramModel.h"
-#import "InstagramPaginationInfo.h"
+#import "IKPaginationInfo.h"
 #import "InstagramTag.h"
-#import "InstagramUser.h"
+#import "IKUser.h"
 #import "UserInPhoto.h"
 
 FOUNDATION_EXPORT double InstagramKitVersionNumber;

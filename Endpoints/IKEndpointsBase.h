@@ -19,7 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "InstagramPaginationInfo.h"
+#import "IKPaginationInfo.h"
 #import "IKConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success        Provides an array of paginated Objects.
  *  @param failure        Provides an error and a server status code.
  */
-- (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
+- (void)getPaginatedItemsForInfo:(IKPaginationInfo *)paginationInfo
                      withSuccess:(InstagramPaginatiedResponseBlock)success
                          failure:(nullable InstagramFailureBlock)failure;
 

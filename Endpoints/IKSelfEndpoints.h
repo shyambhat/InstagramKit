@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an User object.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getSelfUserDetailsWithSuccess:(InstagramUserBlock)success
+- (void)getSelfUserDetailsWithSuccess:(IKUserBlock)success
                               failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of User objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getUsersFollowedBySelfWithSuccess:(InstagramUsersBlock)success
+- (void)getUsersFollowedBySelfWithSuccess:(IKUsersBlock)success
                                   failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of User objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getFollowersOfSelfWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowersOfSelfWithSuccess:(IKUsersBlock)success
                               failure:(nullable InstagramFailureBlock)failure;
 
 

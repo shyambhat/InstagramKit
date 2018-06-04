@@ -20,7 +20,7 @@
 
 
 #import "InstagramTag.h"
-#import "InstagramModel.h"
+#import "IKModel.h"
 
 @interface InstagramTag()
 

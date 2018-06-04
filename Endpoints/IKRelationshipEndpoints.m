@@ -35,12 +35,12 @@
 }
 
 
-- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowRequestsWithSuccess:(IKUsersBlock)success
                              failure:(InstagramFailureBlock)failure
 {
     [self getPaginatedPath:[NSString stringWithFormat:@"users/self/requested-by"]
                 parameters:nil
-             responseModel:[InstagramUser class]
+             responseModel:[IKUser class]
                    success:success
                    failure:failure];
 }

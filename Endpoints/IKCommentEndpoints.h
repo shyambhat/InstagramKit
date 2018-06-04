@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  - The comment cannot contain more than 1 URL.
  *  - The comment cannot consist of all capital letters.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeComments during authentication.
+ *  REQUIREMENTS : IKLoginScopeComments during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Remove a comment either on the authenticated user's media object
  *  or authored by the authenticated user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeComments during authentication.
+ *  REQUIREMENTS : IKLoginScopeComments during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116

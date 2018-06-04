@@ -18,7 +18,7 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramModel.h"
+#import "IKModel.h"
 
 NSString *const kID = @"id";
 NSString *const kURL = @"url";
@@ -82,13 +82,13 @@ NSString *const kNextMaxLikeId = @"next_max_like_id";
 NSString *const kNextMaxTagId = @"next_max_tag_id";
 NSString *const kNextCursor = @"next_cursor";
 
-@interface InstagramModel ()
+@interface IKModel ()
 
 @property (atomic, copy) NSString *Id;
 
 @end
 
-@implementation InstagramModel
+@implementation IKModel
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
@@ -103,7 +103,7 @@ NSString *const kNextCursor = @"next_cursor";
 
 #pragma mark - Equality
 
-- (BOOL)isEqualToModel:(InstagramModel *)model {
+- (BOOL)isEqualToModel:(IKModel *)model {
     
     if (self == model) {
         return YES;
@@ -138,7 +138,7 @@ NSString *const kNextCursor = @"next_cursor";
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramModel *copy = [[[self class] allocWithZone:zone] init];
+    IKModel *copy = [[[self class] allocWithZone:zone] init];
     copy->_Id = [self.Id copy];
     return copy;
 }

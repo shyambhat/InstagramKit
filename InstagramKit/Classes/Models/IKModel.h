@@ -82,7 +82,7 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
 
-@interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
+@interface IKModel : NSObject <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  The unique identifier for each model object.
@@ -100,7 +100,7 @@ INSTAGRAMKIT_EXTERN NSString *const kLocationName;
  *  @param model A model object.
  *  @return YES is Ids match. Else NO.
  */
-- (BOOL)isEqualToModel:(InstagramModel *)model;
+- (BOOL)isEqualToModel:(IKModel *)model;
 
 @end
 

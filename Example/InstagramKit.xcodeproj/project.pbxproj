@@ -53,9 +53,8 @@
 		1FC61AC620C42134000A8321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1FC61AC820C4413F000A8321 /* InstagramEngineUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineUserTests.m; sourceTree = "<group>"; };
 		1FC61AC920C4413F000A8321 /* InstagramEngineBaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineBaseTests.m; sourceTree = "<group>"; };
-		1FC61ACA20C4413F000A8321 /* InstagramKitTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramKitTestsConstants.h; sourceTree = "<group>"; };
+		1FC61ACA20C4413F000A8321 /* IKTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKTestsConstants.h; sourceTree = "<group>"; };
 		1FC61ACB20C4413F000A8321 /* InstagramEngineMediaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineMediaTests.m; sourceTree = "<group>"; };
-		1FC61ACD20C4413F000A8321 /* InstagramEngine+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InstagramEngine+Internal.h"; sourceTree = "<group>"; };
 		29506CDF26EEB100E281FF84 /* Pods-InstagramKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramKit_Tests/Pods-InstagramKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		32FCFB8010A80F17BD117F8A /* Pods-InstagramKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramKit_Tests/Pods-InstagramKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		412652937AECF47A6710E810 /* InstagramKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = InstagramKit.podspec; path = ../InstagramKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -133,14 +132,6 @@
 			path = "CollectionView Cells";
 			sourceTree = "<group>";
 		};
-		1FC61ACC20C4413F000A8321 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				1FC61ACD20C4413F000A8321 /* InstagramEngine+Internal.h */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -204,8 +195,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				1FC61ACA20C4413F000A8321 /* InstagramKitTestsConstants.h */,
-				1FC61ACC20C4413F000A8321 /* Categories */,
+				1FC61ACA20C4413F000A8321 /* IKTestsConstants.h */,
 				1FC61AC920C4413F000A8321 /* InstagramEngineBaseTests.m */,
 				1FC61ACB20C4413F000A8321 /* InstagramEngineMediaTests.m */,
 				1FC61AC820C4413F000A8321 /* InstagramEngineUserTests.m */,

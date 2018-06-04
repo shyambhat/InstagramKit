@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param success  Provides an array of User objects and Pagination info.
  *  @param failure  Provides an error and a server status code.
  */
-- (void)getFollowRequestsWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowRequestsWithSuccess:(IKUsersBlock)success
                              failure:(nullable InstagramFailureBlock)failure;
 
 
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Follow a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Unfollow a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Block a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Unblock a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Approve a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Modify the relationship between the current user and the target user.
  *  Ignore a user.
  *
- *  REQUIREMENTS : InstagramKitLoginScopeRelationships during authentication.
+ *  REQUIREMENTS : IKLoginScopeRelationships during authentication.
  *
  *  To request access to this endpoint, please complete this form -
  *  https://help.instagram.com/contact/185819881608116

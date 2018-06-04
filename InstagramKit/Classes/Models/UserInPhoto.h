@@ -21,18 +21,18 @@
 #import <Foundation/Foundation.h>
 #include <CoreGraphics/CoreGraphics.h>
 
-#import "InstagramModel.h"
+#import "IKModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class InstagramUser;
+@class IKUser;
 
-@interface UserInPhoto : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+@interface UserInPhoto : IKModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  User in photo.
  */
-@property (nonatomic, readonly) InstagramUser *user;
+@property (nonatomic, readonly) IKUser *user;
 
 /**
  *  Position of a user in a photo defined by x and y coordinates.

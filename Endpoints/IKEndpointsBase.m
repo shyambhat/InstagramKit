@@ -36,7 +36,7 @@
     
     if (self = [super init])
     {
-        NSURL *baseURL = [NSURL URLWithString:kInstagramKitBaseURL];
+        NSURL *baseURL = [NSURL URLWithString:kIKBaseURL];
         self.httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         self.httpManager.responseSerializer = [[AFJSONResponseSerializer alloc] init];
         
@@ -102,7 +102,7 @@
                       NSDictionary *responseDictionary = (NSDictionary *)responseObject;
                       
                       NSDictionary *pInfo = responseDictionary[kPagination];
-                      InstagramPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
+                      IKPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[IKPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
                       
                       NSArray *responseObjects = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
                       NSMutableArray *objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
@@ -163,7 +163,7 @@
 #pragma mark - Pagination -
 
 
-- (void)getPaginatedItemsForInfo:(InstagramPaginationInfo *)paginationInfo
+- (void)getPaginatedItemsForInfo:(IKPaginationInfo *)paginationInfo
                      withSuccess:(InstagramPaginatiedResponseBlock)success
                          failure:(InstagramFailureBlock)failure
 {

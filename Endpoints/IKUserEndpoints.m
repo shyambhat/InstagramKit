@@ -25,11 +25,11 @@
 
 
 - (void)getUserDetails:(NSString *)userId
-           withSuccess:(InstagramUserBlock)success
+           withSuccess:(IKUserBlock)success
                failure:(InstagramFailureBlock)failure
 {
     [super getPath:[NSString stringWithFormat:@"users/%@",userId]
-    responseModel:[InstagramUser class]
+    responseModel:[IKUser class]
           success:success
           failure:failure];
 }
@@ -65,12 +65,12 @@
 
 
 - (void)searchUsersWithString:(NSString *)name
-                  withSuccess:(InstagramUsersBlock)success
+                  withSuccess:(IKUsersBlock)success
                       failure:(InstagramFailureBlock)failure
 {
     [super getPaginatedPath:[NSString stringWithFormat:@"users/search?q=%@",name]
                 parameters:nil
-             responseModel:[InstagramUser class]
+             responseModel:[IKUser class]
                    success:success
                    failure:failure];
 }

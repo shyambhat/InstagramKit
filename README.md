@@ -16,7 +16,7 @@ Here's a quick example to retrieve trending media on Instagram:
 
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
-[engine getPopularMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+[engine getPopularMediaWithSuccess:^(NSArray *media, IKPaginationInfo *paginationInfo) {
 // media is an array of InstagramMedia objects
 ...
 } failure:^(NSError *error, NSInteger statusCode) {
@@ -86,9 +86,9 @@ _For your app to POST or DELETE likes, comments or follows, you must apply to In
 
 ```Objective-C
 // Set scope depending on permissions your App has been granted from Instagram
-// InstagramKitLoginScopeBasic is included by default.
+// IKLoginScopeBasic is included by default.
 
-InstagramKitLoginScope scope = InstagramKitLoginScopeRelationships | InstagramKitLoginScopeComments | InstagramKitLoginScopeLikes; 
+IKLoginScope scope = IKLoginScopeRelationships | IKLoginScopeComments | IKLoginScopeLikes; 
 
 NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope];
 [self.webView loadRequest:[NSURLRequest requestWithURL:authURL]];
@@ -132,7 +132,7 @@ Once you're authenticated and InstagramKit has been provided an `accessToken`, i
 
 ```Objective-C
 InstagramEngine *engine = [InstagramEngine sharedEngine];
-[engine getSelfRecentMediaWithSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) {
+[engine getSelfRecentMediaWithSuccess:^(NSArray *media, IKPaginationInfo *paginationInfo) {
 // media is an array of InstagramMedia objects
 ...
 } failure:^(NSError *error, NSInteger statusCode) {
@@ -141,7 +141,7 @@ InstagramEngine *engine = [InstagramEngine sharedEngine];
 ```
 
 ### Pagination 
-The `InstagramPaginationInfo` object has everything it needs to make your next pagination call. 
+The `IKPaginationInfo` object has everything it needs to make your next pagination call. 
 
 If you need to make fetch a paginated feed of results, use the variation of the method which accepts `count` and `maxId` as parameters.
 For instance, use `getMediaForUser:count:maxId:withSuccess:failure:` passing the next maxID to the `maxId` parameter each time, obtained from `paginationInfo.nextMaxId` of the newest paginationInfo object.
@@ -150,7 +150,7 @@ For instance, use `getMediaForUser:count:maxId:withSuccess:failure:` passing the
 [engine getMediaForUser:user.Id 
 count:15 
 maxId:self.currentPaginationInfo.nextMaxId 
-withSuccess:^(NSArray *media, InstagramPaginationInfo *paginationInfo) 
+withSuccess:^(NSArray *media, IKPaginationInfo *paginationInfo) 
 {
 if (paginationInfo) {
 self.currentPaginationInfo = paginationInfo;

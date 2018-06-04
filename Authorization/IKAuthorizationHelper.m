@@ -49,18 +49,18 @@
 
 - (NSURL *)authorizationURL
 {
-    return [self authorizationURLForScope:InstagramKitLoginScopeBasic];
+    return [self authorizationURLForScope:IKLoginScopeBasic];
 }
 
 
-- (NSURL *)authorizationURLForScope:(InstagramKitLoginScope)scope
+- (NSURL *)authorizationURLForScope:(IKLoginScope)scope
 {
     NSDictionary *parameters = [self authorizationParametersWithScope:scope];
-    NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kInstagramKitAuthorizationURL parameters:parameters error:nil];
+    NSURLRequest *authRequest = (NSURLRequest *)[[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:kIKAuthorizationURL parameters:parameters error:nil];
     return authRequest.URL;
 }
 
-- (NSDictionary *)authorizationParametersWithScope:(InstagramKitLoginScope)scope
+- (NSDictionary *)authorizationParametersWithScope:(IKLoginScope)scope
 {
     NSString *scopeString = [self stringForScope:scope];
     NSDictionary *parameters = @{ @"client_id": self.appClientID,
@@ -71,7 +71,7 @@
 }
 
 
-- (NSString *)stringForScope:(InstagramKitLoginScope)scope
+- (NSString *)stringForScope:(IKLoginScope)scope
 {
     NSArray *typeStrings = @[@"basic", @"comments", @"relationships", @"likes", @"public_content", @"follower_list"];
     

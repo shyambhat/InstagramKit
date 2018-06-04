@@ -18,9 +18,9 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramUser.h"
+#import "IKUser.h"
 
-@interface InstagramUser()
+@interface IKUser()
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *fullName;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation InstagramUser
+@implementation IKUser
 
 - (instancetype)initWithInfo:(NSDictionary *)info
 {
@@ -61,7 +61,7 @@
     }
 }
 
-- (void)updateDetailsWithUser:(InstagramUser *)user
+- (void)updateDetailsWithUser:(IKUser *)user
 {
     self.username = user.username;
     self.fullName = user.fullName;
@@ -78,7 +78,7 @@
                           failure:(nullable InstagramFailureBlock)failure
 {
     [[InstagramEngine sharedEngine] getUserDetails:self.Id
-                                       withSuccess:^(InstagramUser * _Nonnull userDetail) {
+                                       withSuccess:^(IKUser * _Nonnull userDetail) {
                                            [self updateDetailsWithUser:userDetail];
                                            success();
                                        } failure:failure];
@@ -86,7 +86,7 @@
 
 #pragma mark - Equality
 
-- (BOOL)isEqualToUser:(InstagramUser *)user {
+- (BOOL)isEqualToUser:(IKUser *)user {
     return [super isEqualToModel:user];
 }
 
@@ -124,7 +124,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    InstagramUser *copy = [super copyWithZone:zone];
+    IKUser *copy = [super copyWithZone:zone];
     copy->_username = [self.username copy];
     copy->_fullName = [self.fullName copy];
     copy->_profilePictureURL = [self.profilePictureURL copy];

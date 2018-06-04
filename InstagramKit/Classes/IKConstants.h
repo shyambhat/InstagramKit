@@ -35,22 +35,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Configuration Key for the Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURLConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kIKBaseURLConfigurationKey;
 
 /**
  *  Configuration Key for the Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURLConfigurationKey;
+INSTAGRAMKIT_EXTERN NSString *const kIKAuthorizationURLConfigurationKey;
 
 /**
  *  Instagram API's Base URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitBaseURL;
+INSTAGRAMKIT_EXTERN NSString *const kIKBaseURL;
 
 /**
  *  Instagram API's Authorization URL.
  */
-INSTAGRAMKIT_EXTERN NSString *const kInstagramKitAuthorizationURL;
+INSTAGRAMKIT_EXTERN NSString *const kIKAuthorizationURL;
 
 /**
  *  Configuration Key for the Client Id of your App, registered with Instagram.
@@ -74,27 +74,27 @@ INSTAGRAMKIT_EXTERN NSString *const kInstagramAppRedirectURLConfigurationKey;
  https://instagram.com/developer/authentication/#scope
  
  */
-typedef NS_OPTIONS(NSUInteger, InstagramKitLoginScope)
+typedef NS_OPTIONS(NSUInteger, IKLoginScope)
 {
     /*! Indicates permission to read data on a user’s behalf, e.g. recent media, following lists (granted by default) */
-    InstagramKitLoginScopeBasic = 0,
+    IKLoginScopeBasic = 0,
     /*! Indicates permission to create or delete comments on a user’s behalf */
-    InstagramKitLoginScopeComments = 1<<1,
+    IKLoginScopeComments = 1<<1,
     /*! Indicates permission to follow and unfollow accounts on a user’s behalf */
-    InstagramKitLoginScopeRelationships = 1<<2,
+    IKLoginScopeRelationships = 1<<2,
     /*! Indicates permission to like and unlike media on a user’s behalf */
-    InstagramKitLoginScopeLikes = 1<<3,
+    IKLoginScopeLikes = 1<<3,
     /*! Indicates permission to read any public profile info and media on a user’s behalf */
-    InstagramKitLoginScopePublicContent = 1<<4,
+    IKLoginScopePublicContent = 1<<4,
     /*! Indicates permission to read the list of followers and followed-by users */
-    InstagramKitLoginScopeFollowerList = 1<<5
+    IKLoginScopeFollowerList = 1<<5
 };
 
 
 /*!
  @abstract      The notification posted on changing the authentication token.
  */
-INSTAGRAMKIT_EXTERN NSString *const InstagramKitUserAuthenticationChangedNotification;
+INSTAGRAMKIT_EXTERN NSString *const IKUserAuthenticationChangedNotification;
 
 
 /*!
@@ -133,13 +133,13 @@ typedef NS_ENUM(NSInteger, InstagramKitErrorCode)
 };
 
 
-@class InstagramUser;
+@class IKUser;
 @class InstagramMedia;
 @class InstagramComment;
-@class InstagramPaginationInfo;
+@class IKPaginationInfo;
 @class InstagramTag;
 @class InstagramLocation;
-@class InstagramModel;
+@class IKModel;
 
 /**
  *  A generic block used as a callback for receiving a collection of objects.
@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger, InstagramKitErrorCode)
  *  @param paginatedObjects Array of Instagram model objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramPaginatiedResponseBlock)(NSArray<InstagramModel *> *paginatedObjects, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramPaginatiedResponseBlock)(NSArray<IKModel *> *paginatedObjects, IKPaginationInfo *paginationInfo);
 
 /**
  *  A generic block used as a callback for receiving a single object.
@@ -162,7 +162,7 @@ typedef void (^InstagramObjectBlock)(id object);
  *  @param media            An array of InstagramMedia objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramMediaBlock)(NSArray<InstagramMedia *> *media, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramMediaBlock)(NSArray<InstagramMedia *> *media, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of User objects.
@@ -170,7 +170,7 @@ typedef void (^InstagramMediaBlock)(NSArray<InstagramMedia *> *media, InstagramP
  *  @param users            An array of User objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramUsersBlock)(NSArray<InstagramUser *> *users, InstagramPaginationInfo *paginationInfo);
+typedef void (^IKUsersBlock)(NSArray<IKUser *> *users, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of Location objects.
@@ -178,7 +178,7 @@ typedef void (^InstagramUsersBlock)(NSArray<InstagramUser *> *users, InstagramPa
  *  @param locations        An array of InstagramLocation objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramLocationsBlock)(NSArray<InstagramLocation *> *locations, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramLocationsBlock)(NSArray<InstagramLocation *> *locations, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of Comment objects.
@@ -186,7 +186,7 @@ typedef void (^InstagramLocationsBlock)(NSArray<InstagramLocation *> *locations,
  *  @param comments         An array of InstagramComment objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramCommentsBlock)(NSArray<InstagramComment *> *comments, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramCommentsBlock)(NSArray<InstagramComment *> *comments, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a collection of Tag objects.
@@ -194,14 +194,14 @@ typedef void (^InstagramCommentsBlock)(NSArray<InstagramComment *> *comments, In
  *  @param tags             An array of Tag objects.
  *  @param paginationInfo   A PaginationInfo object.
  */
-typedef void (^InstagramTagsBlock)(NSArray<InstagramTag *> *tags, InstagramPaginationInfo *paginationInfo);
+typedef void (^InstagramTagsBlock)(NSArray<InstagramTag *> *tags, IKPaginationInfo *paginationInfo);
 
 /**
  *  A callback block providing a User object.
  *
- *  @param user     An InstagramUser object.
+ *  @param user     An IKUser object.
  */
-typedef void (^InstagramUserBlock)(InstagramUser *user);
+typedef void (^IKUserBlock)(IKUser *user);
 
 /**
  *  A callback block providing a Media object.

@@ -21,21 +21,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "InstagramModel.h"
+#import "IKModel.h"
 
-@class InstagramUser;
+@class IKUser;
 @class InstagramComment;
 @class UserInPhoto;
 @class InstagramLocation;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InstagramMedia : InstagramModel <NSCopying, NSSecureCoding, NSObject>
+@interface InstagramMedia : IKModel <NSCopying, NSSecureCoding, NSObject>
 
 /**
  *  Creator of the Media.
  */
-@property (nonatomic, readonly) InstagramUser *user;
+@property (nonatomic, readonly) IKUser *user;
 
 /**
  *  Is Media liked by the authenticated user.
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  List of users who have liked the Media.
  */
-@property (nonatomic, readonly, nullable) NSArray <InstagramUser *> *likes;
+@property (nonatomic, readonly, nullable) NSArray <IKUser *> *likes;
 
 /**
  *  Number of comments on the Media.

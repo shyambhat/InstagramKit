@@ -19,12 +19,12 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramComment.h"
-#import "InstagramUser.h"
+#import "IKUser.h"
 
 @interface InstagramComment ()
 
 @property (nonatomic, strong) NSDate *createdDate;
-@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, strong) IKUser *user;
 @property (nonatomic, copy) NSString *text;
 
 @end
@@ -35,7 +35,7 @@
 {
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
-        self.user = IKNotNull(info[kCreator]) ? [[InstagramUser alloc] initWithInfo:info[kCreator]] : nil;
+        self.user = IKNotNull(info[kCreator]) ? [[IKUser alloc] initWithInfo:info[kCreator]] : nil;
         self.text = IKNotNull(info[kText]) ? [[NSString alloc] initWithString:info[kText]] : nil;
         self.createdDate = IKNotNull(info[kCreatedDate]) ? [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]] : nil;
     }
@@ -58,7 +58,7 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        self.user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kCreator];
+        self.user = [decoder decodeObjectOfClass:[IKUser class] forKey:kCreator];
         self.text = [decoder decodeObjectOfClass:[NSString class] forKey:kText];
         self.createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
     }

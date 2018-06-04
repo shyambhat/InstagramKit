@@ -19,7 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "InstagramMedia.h"
-#import "InstagramUser.h"
+#import "IKUser.h"
 #import "InstagramComment.h"
 #import "UserInPhoto.h"
 #import "InstagramLocation.h"
@@ -31,7 +31,7 @@
 
 @interface InstagramMedia ()
 
-@property (nonatomic, strong) InstagramUser *user;
+@property (nonatomic, strong) IKUser *user;
 @property (nonatomic, assign) BOOL userHasLiked;
 @property (nonatomic, strong) NSDate *createdDate;
 @property (nonatomic, copy) NSString *link;
@@ -67,7 +67,7 @@
     self = [super initWithInfo:info];
     if (self && IKNotNull(info)) {
         
-        self.user = IKNotNull(info[kUser]) ? [[InstagramUser alloc] initWithInfo:info[kUser]] : nil;
+        self.user = IKNotNull(info[kUser]) ? [[IKUser alloc] initWithInfo:info[kUser]] : nil;
         self.userHasLiked = [info[kUserHasLiked] boolValue];
         self.createdDate = IKNotNull(info[kCreatedDate]) ? [[NSDate alloc] initWithTimeIntervalSince1970:[info[kCreatedDate] doubleValue]] : nil;
         self.link = IKNotNull(info[kLink]) ? [[NSString alloc] initWithString:info[kLink]] : nil;
@@ -77,7 +77,7 @@
         if ([likesDictionary isKindOfClass:[NSDictionary class]]) {
             NSMutableArray *mLikes = [[NSMutableArray alloc] init];
             for (NSDictionary *userInfo in likesDictionary[kData]) {
-                InstagramUser *user = [[InstagramUser alloc] initWithInfo:userInfo];
+                IKUser *user = [[IKUser alloc] initWithInfo:userInfo];
                 [mLikes addObject:user];
             }
             self.likes = [NSArray arrayWithArray:mLikes];
@@ -168,7 +168,7 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if ((self = [super initWithCoder:decoder])) {
-        self.user = [decoder decodeObjectOfClass:[InstagramUser class] forKey:kUser];
+        self.user = [decoder decodeObjectOfClass:[IKUser class] forKey:kUser];
         self.userHasLiked = [decoder decodeBoolForKey:kUserHasLiked];
         self.createdDate = [decoder decodeObjectOfClass:[NSDate class] forKey:kCreatedDate];
         self.link = [decoder decodeObjectOfClass:[NSString class] forKey:kLink];

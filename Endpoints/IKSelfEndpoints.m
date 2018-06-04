@@ -24,11 +24,11 @@
 @implementation IKSelfEndpoints
 
 
-- (void)getSelfUserDetailsWithSuccess:(InstagramUserBlock)success
+- (void)getSelfUserDetailsWithSuccess:(IKUserBlock)success
                               failure:(InstagramFailureBlock)failure
 {
     [self getPath:@"users/self"
-    responseModel:[InstagramUser class]
+    responseModel:[IKUser class]
           success:success
           failure:failure];
 }
@@ -85,22 +85,22 @@
 }
 
 
-- (void)getUsersFollowedBySelfWithSuccess:(InstagramUsersBlock)success
+- (void)getUsersFollowedBySelfWithSuccess:(IKUsersBlock)success
                                   failure:(InstagramFailureBlock)failure
 {
     [self getPaginatedPath:[NSString stringWithFormat:@"users/self/follows"]
                 parameters:nil
-             responseModel:[InstagramUser class]
+             responseModel:[IKUser class]
                    success:success
                    failure:failure];
 }
 
-- (void)getFollowersOfSelfWithSuccess:(InstagramUsersBlock)success
+- (void)getFollowersOfSelfWithSuccess:(IKUsersBlock)success
                               failure:(InstagramFailureBlock)failure
 {
     [self getPaginatedPath:[NSString stringWithFormat:@"users/self/followed-by"]
                 parameters:nil
-             responseModel:[InstagramUser class]
+             responseModel:[IKUser class]
                    success:success
                    failure:failure];
 }

@@ -18,42 +18,42 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramEngine.h"
+#import <Foundation/Foundation.h>
 
-@interface InstagramEngine (Internal)
+NS_ASSUME_NONNULL_BEGIN
 
-- (BOOL)validAccessTokenFromURL:(NSURL *)url
-                appRedirectPath:(NSString *)appRedirectPath
-                          error:(NSError *__autoreleasing *)error;
+@interface IKPaginationInfo : NSObject <NSCopying, NSSecureCoding, NSObject>
 
-- (NSString *)stringForScope:(InstagramKitLoginScope)scope;
+/**
+ *  URL to receive next set of paginated items.
+ */
+@property (nonatomic, readonly) NSURL* nextURL;
 
-- (NSDictionary *)queryStringParametersFromString:(NSString*)string;
+/**
+ *  Offset from which the next paginated Media is to be received.
+ */
+@property (nonatomic, readonly, copy) NSString *nextMaxId;
 
+/**
+ *  Class of Objects which are being paginated.
+ */
+@property (nonatomic, readonly, nullable) Class type;
 
+/**
+ *  Initializes a new IKPaginationInfo object.
+ *
+ *  @param info Received JSON dictionary.
+ *  @param type Class of Objects which are being paginated.
+ */
+- (instancetype)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
 
-- (void)getPath:(NSString *)path
-  responseModel:(Class)modelClass
-        success:(InstagramObjectBlock)success
-        failure:(InstagramFailureBlock)failure;
-
-
-- (void)getPaginatedPath:(NSString *)path
-              parameters:(NSDictionary *)parameters
-           responseModel:(Class)modelClass
-                 success:(InstagramPaginatiedResponseBlock)success
-                 failure:(InstagramFailureBlock)failure;
-
-
-- (void)postPath:(NSString *)path
-      parameters:(NSDictionary *)parameters
-         success:(InstagramResponseBlock)success
-         failure:(InstagramFailureBlock)failure;
-
-
-- (void)deletePath:(NSString *)path
-           success:(InstagramResponseBlock)success
-           failure:(InstagramFailureBlock)failure;
-
+/**
+ *  Comparing IKPaginationInfo objects.
+ *  @param paginationInfo   An IKPaginationInfo object.
+ *  @return                 YES is nextURLs match. Else NO.
+ */
+- (BOOL)isEqualToPaginationInfo:(IKPaginationInfo *)paginationInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

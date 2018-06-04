@@ -20,7 +20,7 @@
 
 #import "InstagramComment.h"
 #import "InstagramMedia.h"
-#import "InstagramUser.h"
+#import "IKUser.h"
 #import "InstagramTag.h"
-#import "InstagramPaginationInfo.h"
+#import "IKPaginationInfo.h"
 #import "InstagramLocation.h"
