@@ -254,16 +254,13 @@ INSTAGRAMKIT_EXTERN NSString *const kNextMaxLikeId;
 INSTAGRAMKIT_EXTERN NSString *const kNextMaxTagId;
 INSTAGRAMKIT_EXTERN NSString *const kNextCursor;
 
-INSTAGRAMKIT_EXTERN NSString *const kMaxId;
-INSTAGRAMKIT_EXTERN NSString *const kMaxLikeId;
-INSTAGRAMKIT_EXTERN NSString *const kMaxTagId;
-INSTAGRAMKIT_EXTERN NSString *const kCursor;
-
 INSTAGRAMKIT_EXTERN NSString *const kPagination;
 INSTAGRAMKIT_EXTERN NSString *const kPaginationKeyMaxId;
 INSTAGRAMKIT_EXTERN NSString *const kPaginationKeyMaxLikeId;
 INSTAGRAMKIT_EXTERN NSString *const kPaginationKeyMaxTagId;
 INSTAGRAMKIT_EXTERN NSString *const kPaginationKeyCursor;
+INSTAGRAMKIT_EXTERN NSString *const kData;
+INSTAGRAMKIT_EXTERN NSString *const kCount;
 
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionKey;
 INSTAGRAMKIT_EXTERN NSString *const kRelationshipActionFollow;

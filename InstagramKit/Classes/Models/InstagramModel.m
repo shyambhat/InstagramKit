@@ -21,7 +21,6 @@
 #import "InstagramModel.h"
 
 NSString *const kID = @"id";
-NSString *const kCount = @"count";
 NSString *const kURL = @"url";
 NSString *const kHeight = @"height";
 NSString *const kWidth = @"width";
@@ -82,11 +81,6 @@ NSString *const kNextMaxId = @"next_max_id";
 NSString *const kNextMaxLikeId = @"next_max_like_id";
 NSString *const kNextMaxTagId = @"next_max_tag_id";
 NSString *const kNextCursor = @"next_cursor";
-
-NSString *const kMaxId = @"max_id";
-NSString *const kMaxLikeId = @"max_like_id";
-NSString *const kMaxTagId = @"max_tag_id";
-NSString *const kCursor = @"cursor";
 
 @interface InstagramModel ()
 

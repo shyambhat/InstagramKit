@@ -18,7 +18,7 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "InstagramKitConstants.h"
+#import "IKConstants.h"
 
 NSString *const kInstagramKitBaseURLConfigurationKey = @"InstagramKitBaseUrl";
 NSString *const kInstagramKitAuthorizationURLConfigurationKey = @"InstagramKitAuthorizationUrl";
@@ -41,6 +41,8 @@ NSString *const kPaginationKeyMaxId = @"max_id";
 NSString *const kPaginationKeyMaxLikeId = @"max_like_id";
 NSString *const kPaginationKeyMaxTagId = @"max_tag_id";
 NSString *const kPaginationKeyCursor = @"cursor";
+NSString *const kData = @"data";
+NSString *const kCount = @"count";
 
 NSString *const kRelationshipActionKey = @"action";
 NSString *const kRelationshipActionFollow = @"follow";

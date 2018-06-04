@@ -12,7 +12,7 @@
 
 #import "InstagramEngine.h"
 #import "InstagramKit.h"
-#import "InstagramKitConstants.h"
+#import "IKConstants.h"
 #import "InstagramComment.h"
 #import "InstagramLocation.h"
 #import "InstagramMedia.h"

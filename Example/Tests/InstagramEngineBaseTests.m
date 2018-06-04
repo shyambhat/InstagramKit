@@ -30,14 +30,6 @@
 
 @implementation InstagramEngineBaseTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-}
-
-
 - (void)testInitialization {
     
     InstagramEngine *testEngine = [InstagramEngine sharedEngine];

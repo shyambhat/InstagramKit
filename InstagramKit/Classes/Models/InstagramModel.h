@@ -19,7 +19,7 @@
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "InstagramKitConstants.h"
+#import "IKConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,11 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  JSON keys as string constants.
  */
 INSTAGRAMKIT_EXTERN NSString *const kID;
-INSTAGRAMKIT_EXTERN NSString *const kCount;
 INSTAGRAMKIT_EXTERN NSString *const kURL;
 INSTAGRAMKIT_EXTERN NSString *const kHeight;
 INSTAGRAMKIT_EXTERN NSString *const kWidth;
-INSTAGRAMKIT_EXTERN NSString *const kData;
 
 INSTAGRAMKIT_EXTERN NSString *const kThumbnail;
 INSTAGRAMKIT_EXTERN NSString *const kLowResolution;

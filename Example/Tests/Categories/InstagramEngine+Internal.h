@@ -1,5 +1,5 @@
 //
-//    Copyright (c) 2015 Shyam Bhat
+//    Copyright (c) 2018 Shyam Bhat
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy of
 //    this software and associated documentation files (the "Software"), to deal in
@@ -33,7 +33,6 @@
 
 
 - (void)getPath:(NSString *)path
-     parameters:(NSDictionary *)parameters
   responseModel:(Class)modelClass
         success:(InstagramObjectBlock)success
         failure:(InstagramFailureBlock)failure;
@@ -48,14 +47,11 @@
 
 - (void)postPath:(NSString *)path
       parameters:(NSDictionary *)parameters
-   responseModel:(Class)modelClass
          success:(InstagramResponseBlock)success
          failure:(InstagramFailureBlock)failure;
 
 
 - (void)deletePath:(NSString *)path
-        parameters:(NSDictionary *)parameters
-     responseModel:(Class)modelClass
            success:(InstagramResponseBlock)success
            failure:(InstagramFailureBlock)failure;
 
