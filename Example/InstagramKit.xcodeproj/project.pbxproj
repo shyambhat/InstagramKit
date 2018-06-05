@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1FC61AC120C4202B000A8321 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61ABA20C4202B000A8321 /* IKMediaViewController.m */; };
-		1FC61AC220C4202B000A8321 /* IKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61ABC20C4202B000A8321 /* IKCell.m */; };
-		1FC61AC320C4202B000A8321 /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61ABE20C4202B000A8321 /* IKLoginViewController.m */; };
-		1FC61AC420C4202B000A8321 /* IKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61ABF20C4202B000A8321 /* IKCollectionViewController.m */; };
 		1FC61AC720C42135000A8321 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC61AC520C42134000A8321 /* LaunchScreen.xib */; };
 		1FC61ACE20C4413F000A8321 /* InstagramEngineUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61AC820C4413F000A8321 /* InstagramEngineUserTests.m */; };
 		1FC61ACF20C4413F000A8321 /* InstagramEngineBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61AC920C4413F000A8321 /* InstagramEngineBaseTests.m */; };
 		1FC61AD020C4413F000A8321 /* InstagramEngineMediaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC61ACB20C4413F000A8321 /* InstagramEngineMediaTests.m */; };
+		1FCA2FDD20C5E1B900DB3D79 /* IKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCA2FD520C5E1B900DB3D79 /* IKCell.m */; };
+		1FCA2FDE20C5E1B900DB3D79 /* IKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCA2FD820C5E1B900DB3D79 /* IKCollectionViewController.m */; };
+		1FCA2FDF20C5E1B900DB3D79 /* IKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCA2FDA20C5E1B900DB3D79 /* IKLoginViewController.m */; };
+		1FCA2FE020C5E1B900DB3D79 /* IKMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCA2FDC20C5E1B900DB3D79 /* IKMediaViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -42,20 +42,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1FC61AB820C4202B000A8321 /* IKCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCollectionViewController.h; sourceTree = "<group>"; };
-		1FC61AB920C4202B000A8321 /* IKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKLoginViewController.h; sourceTree = "<group>"; };
-		1FC61ABA20C4202B000A8321 /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMediaViewController.m; sourceTree = "<group>"; };
-		1FC61ABC20C4202B000A8321 /* IKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCell.m; sourceTree = "<group>"; };
-		1FC61ABD20C4202B000A8321 /* IKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCell.h; sourceTree = "<group>"; };
-		1FC61ABE20C4202B000A8321 /* IKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKLoginViewController.m; sourceTree = "<group>"; };
-		1FC61ABF20C4202B000A8321 /* IKCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCollectionViewController.m; sourceTree = "<group>"; };
-		1FC61AC020C4202B000A8321 /* IKMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMediaViewController.h; sourceTree = "<group>"; };
 		1FC61AC620C42134000A8321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1FC61AC820C4413F000A8321 /* InstagramEngineUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineUserTests.m; sourceTree = "<group>"; };
 		1FC61AC920C4413F000A8321 /* InstagramEngineBaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineBaseTests.m; sourceTree = "<group>"; };
 		1FC61ACA20C4413F000A8321 /* InstagramKitTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramKitTestsConstants.h; sourceTree = "<group>"; };
 		1FC61ACB20C4413F000A8321 /* InstagramEngineMediaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramEngineMediaTests.m; sourceTree = "<group>"; };
 		1FC61ACD20C4413F000A8321 /* InstagramEngine+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InstagramEngine+Internal.h"; sourceTree = "<group>"; };
+		1FCA2FD520C5E1B900DB3D79 /* IKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCell.m; sourceTree = "<group>"; };
+		1FCA2FD620C5E1B900DB3D79 /* IKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCell.h; sourceTree = "<group>"; };
+		1FCA2FD720C5E1B900DB3D79 /* IKMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IKMediaViewController.h; path = Classes/IKMediaViewController.h; sourceTree = "<group>"; };
+		1FCA2FD820C5E1B900DB3D79 /* IKCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IKCollectionViewController.m; path = Classes/IKCollectionViewController.m; sourceTree = "<group>"; };
+		1FCA2FD920C5E1B900DB3D79 /* IKCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IKCollectionViewController.h; path = Classes/IKCollectionViewController.h; sourceTree = "<group>"; };
+		1FCA2FDA20C5E1B900DB3D79 /* IKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IKLoginViewController.m; path = Classes/IKLoginViewController.m; sourceTree = "<group>"; };
+		1FCA2FDB20C5E1B900DB3D79 /* IKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IKLoginViewController.h; path = Classes/IKLoginViewController.h; sourceTree = "<group>"; };
+		1FCA2FDC20C5E1B900DB3D79 /* IKMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IKMediaViewController.m; path = Classes/IKMediaViewController.m; sourceTree = "<group>"; };
 		29506CDF26EEB100E281FF84 /* Pods-InstagramKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramKit_Tests/Pods-InstagramKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		32FCFB8010A80F17BD117F8A /* Pods-InstagramKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramKit_Tests/Pods-InstagramKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		412652937AECF47A6710E810 /* InstagramKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = InstagramKit.podspec; path = ../InstagramKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -110,35 +110,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1FC61AB720C4202B000A8321 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1FC61AB820C4202B000A8321 /* IKCollectionViewController.h */,
-				1FC61ABF20C4202B000A8321 /* IKCollectionViewController.m */,
-				1FC61AC020C4202B000A8321 /* IKMediaViewController.h */,
-				1FC61ABA20C4202B000A8321 /* IKMediaViewController.m */,
-				1FC61AB920C4202B000A8321 /* IKLoginViewController.h */,
-				1FC61ABE20C4202B000A8321 /* IKLoginViewController.m */,
-				1FC61ABB20C4202B000A8321 /* CollectionView Cells */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		1FC61ABB20C4202B000A8321 /* CollectionView Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1FC61ABD20C4202B000A8321 /* IKCell.h */,
-				1FC61ABC20C4202B000A8321 /* IKCell.m */,
-			);
-			path = "CollectionView Cells";
-			sourceTree = "<group>";
-		};
 		1FC61ACC20C4413F000A8321 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				1FC61ACD20C4413F000A8321 /* InstagramEngine+Internal.h */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		1FCA2FD420C5E1B900DB3D79 /* CollectionView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1FCA2FD520C5E1B900DB3D79 /* IKCell.m */,
+				1FCA2FD620C5E1B900DB3D79 /* IKCell.h */,
+			);
+			name = "CollectionView Cells";
+			path = "Classes/CollectionView Cells";
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
@@ -180,7 +167,13 @@
 			children = (
 				6003F59C195388D20070C39A /* IKAppDelegate.h */,
 				6003F59D195388D20070C39A /* IKAppDelegate.m */,
-				1FC61AB720C4202B000A8321 /* View */,
+				1FCA2FD420C5E1B900DB3D79 /* CollectionView Cells */,
+				1FCA2FD920C5E1B900DB3D79 /* IKCollectionViewController.h */,
+				1FCA2FD820C5E1B900DB3D79 /* IKCollectionViewController.m */,
+				1FCA2FDB20C5E1B900DB3D79 /* IKLoginViewController.h */,
+				1FCA2FDA20C5E1B900DB3D79 /* IKLoginViewController.m */,
+				1FCA2FD720C5E1B900DB3D79 /* IKMediaViewController.h */,
+				1FCA2FDC20C5E1B900DB3D79 /* IKMediaViewController.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				1FC61AC520C42134000A8321 /* LaunchScreen.xib */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -459,12 +452,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FC61AC420C4202B000A8321 /* IKCollectionViewController.m in Sources */,
 				6003F59E195388D20070C39A /* IKAppDelegate.m in Sources */,
-				1FC61AC320C4202B000A8321 /* IKLoginViewController.m in Sources */,
+				1FCA2FDF20C5E1B900DB3D79 /* IKLoginViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				1FC61AC120C4202B000A8321 /* IKMediaViewController.m in Sources */,
-				1FC61AC220C4202B000A8321 /* IKCell.m in Sources */,
+				1FCA2FDE20C5E1B900DB3D79 /* IKCollectionViewController.m in Sources */,
+				1FCA2FDD20C5E1B900DB3D79 /* IKCell.m in Sources */,
+				1FCA2FE020C5E1B900DB3D79 /* IKMediaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

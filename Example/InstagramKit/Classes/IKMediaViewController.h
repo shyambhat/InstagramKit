@@ -18,10 +18,12 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+@class IKMedia;
 
-@property (strong, nonatomic) UIWindow *window;
+@interface IKMediaViewController : UIViewController
+
+- (void)setMedia:(IKMedia *)media;
 
 @end

@@ -18,10 +18,37 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import "IKModel.h"
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@class IKUser;
+
+@interface IKComment : IKModel <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  Creation date.
+ */
+@property (nonatomic, readonly) NSDate *createdDate;
+
+/**
+ *  Creator of the comment.
+ */
+@property (nonatomic, readonly) IKUser *user;
+
+/**
+ *  Comment text.
+ */
+@property (nonatomic, copy, readonly) NSString *text;
+
+/**
+ *  Comparing IKComment objects.
+ *  @param comment  An IKComment object.
+ *  @return         YES is Ids match. Else NO.
+ */
+- (BOOL)isEqualToComment:(IKComment *)comment;
 
 @end
+
+NS_ASSUME_NONNULL_END

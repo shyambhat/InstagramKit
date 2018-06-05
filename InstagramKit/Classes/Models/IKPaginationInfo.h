@@ -18,10 +18,42 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import <Foundation/Foundation.h>
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@interface IKPaginationInfo : NSObject <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  URL to receive next set of paginated items.
+ */
+@property (nonatomic, readonly) NSURL* nextURL;
+
+/**
+ *  Offset from which the next paginated Media is to be received.
+ */
+@property (nonatomic, readonly, copy) NSString *nextMaxId;
+
+/**
+ *  Class of Objects which are being paginated.
+ */
+@property (nonatomic, readonly, nullable) Class type;
+
+/**
+ *  Initializes a new IKPaginationInfo object.
+ *
+ *  @param info Received JSON dictionary.
+ *  @param type Class of Objects which are being paginated.
+ */
+- (instancetype)initWithInfo:(NSDictionary *)info andObjectType:(Class)type;
+
+/**
+ *  Comparing IKPaginationInfo objects.
+ *  @param paginationInfo   An IKPaginationInfo object.
+ *  @return                 YES is nextURLs match. Else NO.
+ */
+- (BOOL)isEqualToPaginationInfo:(IKPaginationInfo *)paginationInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

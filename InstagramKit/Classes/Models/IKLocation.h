@@ -18,10 +18,31 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import "IKModel.h"
+#import <MapKit/MapKit.h>
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@interface IKLocation : IKModel <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  Geographic coordinates if the Location.
+ */
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinates;
+
+/**
+ *  Location name as provided by the API.
+ */
+@property (nonatomic, copy, readonly, nullable) NSString *name;
+
+/**
+ *  Comparing IKLocation objects.
+ *  @param location An IKLocation object.
+ *  @return         YES is Ids match. Else NO.
+ */
+- (BOOL)isEqualToLocation:(IKLocation *)location;
 
 @end
+
+NS_ASSUME_NONNULL_END

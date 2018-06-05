@@ -18,10 +18,30 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+#import <Foundation/Foundation.h>
 
-@property (strong, nonatomic) UIWindow *window;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface IKTag : NSObject <NSCopying, NSSecureCoding, NSObject>
+
+/**
+ *  Tag name
+ */
+@property (nonatomic, readonly, copy) NSString *name;
+
+/**
+ *  Number of Media tagged by this Tag.
+ */
+@property (nonatomic, readonly) NSInteger mediaCount;
+
+/**
+ *  Comparing IKTag objects.
+ *  @param tag  An IKTag object.
+ *  @return     YES is tag names match. Else NO.
+ */
+- (BOOL)isEqualToTag:(IKTag *)tag;
 
 @end
+
+NS_ASSUME_NONNULL_END

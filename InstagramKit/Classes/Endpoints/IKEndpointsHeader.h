@@ -18,10 +18,12 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
-
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
-@end
+#import "IKUserEndpoints.h"
+#import "IKSelfEndpoints.h"
+#import "IKUserEndpoints.h"
+#import "IKMediaEndpoints.h"
+#import "IKCommentEndpoints.h"
+#import "IKLikeEndpoints.h"
+#import "IKTagEndpoints.h"
+#import "IKLocationEndpoints.h"
+#import "IKRelationshipEndpoints.h"

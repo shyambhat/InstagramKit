@@ -18,10 +18,26 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import "IKCell.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+@interface IKCell ()
 
-@property (strong, nonatomic) UIWindow *window;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@end
+
+@implementation IKCell
+
+- (void)setImageUrl:(NSURL *)imageURL
+{
+    [self.imageView setImageWithURL:imageURL];
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self.imageView setImage:nil];
+}
 
 @end

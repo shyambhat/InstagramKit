@@ -18,10 +18,43 @@
 //    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@import UIKit;
+#import "IKLikeEndpoints.h"
+#import "IKModelsHeader.h"
 
-@interface IKAppDelegate : UIResponder <UIApplicationDelegate>
+@implementation IKLikeEndpoints
 
-@property (strong, nonatomic) UIWindow *window;
+
+- (void)getLikesOnMedia:(NSString *)mediaId
+            withSuccess:(IKUsersBlock)success
+                failure:(InstagramFailureBlock)failure
+{
+    [self getPaginatedPath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
+                parameters:nil
+             responseModel:[IKUser class]
+                   success:success
+                   failure:failure];
+}
+
+
+- (void)likeMedia:(NSString *)mediaId
+      withSuccess:(InstagramResponseBlock)success
+          failure:(InstagramFailureBlock)failure
+{
+    [self postPath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
+        parameters:nil
+           success:success
+           failure:failure];
+}
+
+
+- (void)unlikeMedia:(NSString *)mediaId
+        withSuccess:(InstagramResponseBlock)success
+            failure:(InstagramFailureBlock)failure
+{
+    [self deletePath:[NSString stringWithFormat:@"media/%@/likes",mediaId]
+             success:success
+             failure:failure];
+}
+
 
 @end
