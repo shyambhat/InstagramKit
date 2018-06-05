@@ -35,6 +35,18 @@
 }
 
 
+- (void)updateUserDetails:(IKUser *)user
+              withSuccess:(IKUserBlock)success
+                  failure:(InstagramFailureBlock)failure
+{
+    
+    [[IKUserEndpoints new] getUserDetails:user.Id
+                              withSuccess:^(IKUser * _Nonnull userDetail) {
+                                  [user updateDetailsWithUserObject:userDetail];
+                                  success(user);
+                              } failure:failure];
+}
+
 - (void)getMediaForUser:(NSString *)userId
             withSuccess:(IKMediaBlock)success
                 failure:(InstagramFailureBlock)failure

@@ -70,18 +70,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger followedByCount;
 
 /**
- *  Convenience method to load details and update object.
- */
-- (void)loadDetailsWithCompletion:(void (^)(void))success
-                          failure:(nullable InstagramFailureBlock)failure;
-
-
-/**
  *  Comparing IKUser objects.
  *  @param user An IKUser object.
  *  @return     YES is Ids match. Else NO.
  */
 - (BOOL)isEqualToUser:(IKUser *)user;
+
+/**
+ *  Update user object with details.
+ *  Designed for use with `updateUserDetails:` in IKUserEndpoints
+ */
+- (void)updateDetailsWithUserObject:(IKUser *)user;
 
 @end
 

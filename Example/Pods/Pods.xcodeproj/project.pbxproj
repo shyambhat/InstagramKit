@@ -423,8 +423,8 @@
 				1FCA2FE620C6769C00DB3D79 /* IKAuthorizationHeader.h */,
 				1FCA2FAA20C5E13400DB3D79 /* IKAuthorizationHelper.h */,
 				1FCA2FA720C5E13400DB3D79 /* IKAuthorizationHelper.m */,
-				1FCA2FA820C5E13400DB3D79 /* IKCredentialsStore.m */,
 				1FCA2FA920C5E13400DB3D79 /* IKCredentialsStore.h */,
+				1FCA2FA820C5E13400DB3D79 /* IKCredentialsStore.m */,
 			);
 			name = Authorization;
 			path = InstagramKit/Classes/Authorization;

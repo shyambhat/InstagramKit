@@ -62,7 +62,7 @@
     }
 }
 
-- (void)updateDetailsWithUser:(IKUser *)user
+- (void)updateDetailsWithUserObject:(IKUser *)user
 {
     self.username = user.username;
     self.fullName = user.fullName;
@@ -72,17 +72,6 @@
     self.mediaCount = user.mediaCount;
     self.followsCount = user.followsCount;
     self.followedByCount = user.followedByCount;
-}
-
-
-- (void)loadDetailsWithCompletion:(void (^)(void))success
-                          failure:(nullable InstagramFailureBlock)failure
-{
-    [[IKUserEndpoints new] getUserDetails:self.Id
-                              withSuccess:^(IKUser * _Nonnull userDetail) {
-                                  [self updateDetailsWithUser:userDetail];
-                                  success();
-                              } failure:failure];
 }
 
 #pragma mark - Equality
