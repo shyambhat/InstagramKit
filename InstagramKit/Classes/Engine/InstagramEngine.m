@@ -365,7 +365,11 @@
 - (NSDictionary *)serializedResponseDataFromError:(NSError *)error
 {
     NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-    return [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+    if (errorData != nil) {
+      return [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+    } else {
+      return nil;
+    }
 }
 
 
