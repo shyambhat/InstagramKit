@@ -58,10 +58,9 @@ Head over to http://instagram.com/developer/clients/manage/ to register your app
 The redirect URI specifies where Instagram should redirect users after they have chosen whether or not to authenticate your application. 
 
 ## Instagram Platform Updates
-http://developers.instagram.com/post/133424514006/instagram-platform-update
-
-Due to Instagram's recent update to it's API, new Apps will no longer be able to access unauthenticated requests and a few other endpoints supported by InstagramKit. An update to InstagramKit to support these changes is on it's way. 
-You may refer to Instagram's API changelog here - https://www.instagram.com/developer/changelog/
+Instagram frequently updates its APIs and deprecates endpoints that are in use. 
+If you see a 400 or other strange errors from the server response, please check on Instagram's API changelog and create an issue with your findings. 
+https://www.instagram.com/developer/changelog/
 
 
 ## Usage
@@ -183,7 +182,8 @@ The [Instagram API Documentation](http://instagram.com/developer/endpoints/) is 
 
 ## Author
 
-shyambhat, shyambhat@me.com
+Shyam Bhat, shyambhat@me.com
+Twitter: [@bhatthead](https://twitter.com/bhatthead) 
 
 ## License
 
@@ -192,7 +192,3 @@ InstagramKit is available under the MIT license. See the LICENSE file for more i
 ==================
 
 InstagramKit uses the public Instagram API and is not affiliated with either Instagram or Facebook.
-
-If you're using InstagramKit in your App or intend to, I'd be happy to hear from you.
-
-~ [@bhatthead](https://twitter.com/bhatthead)

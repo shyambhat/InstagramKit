@@ -3,8 +3,14 @@ All notable changes to this project will be documented in this file.
 `InstagramKit` adheres to [Semantic Versioning](http://semver.org/).
 
 ---
+## [4.1] - 2018-06-20
 
-## [4.0]
+- [#280](https://github.com/shyambhat/InstagramKit/pull/280) Avoid crash when AFNetworkingOperationFailingURLResponseDataErrorKey is not present. By [@mercadodiego](https://github.com/mercadodiego)
+- [#255](https://github.com/shyambhat/InstagramKit/pull/255) InstagramMedia get comments count returns zero. By [@vigneshuvi](https://github.com/vigneshuvi)
+- [#221](https://github.com/shyambhat/InstagramKit/pull/221) Removed deprecated Popular Media endpoints. By [@shyambhat](https://github.com/shyambhat)
+
+
+## [4.0] - 2018-06-03
 - [#221](https://github.com/shyambhat/InstagramKit/pull/221) Support for Instagram Platform updates.
 - [#254](https://github.com/shyambhat/InstagramKit/pull/254) Up to date with modify APIs from Instagram. By [@ht22pt](https://github.com/ht22pt) 
 - [#218]( https://github.com/shyambhat/InstagramKit/pull/218) Update + new functionalities for InstagramKit-Example. By [@marcgovi](https://github.com/marcgovi)
