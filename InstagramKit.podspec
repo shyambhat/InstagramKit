@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'InstagramKit'
-  s.version          = '4.0'
+  s.version          = '4.1'
   s.summary          = 'Instagram iOS SDK.'
   s.description      = <<-DESC
 An extensive Objective C SDK for the Instagram API.
