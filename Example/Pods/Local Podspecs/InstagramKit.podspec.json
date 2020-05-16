@@ -1,6 +1,6 @@
 {
   "name": "InstagramKit",
-  "version": "4.0",
+  "version": "4.1",
   "summary": "Instagram iOS SDK.",
   "description": "An extensive Objective C SDK for the Instagram API.",
   "homepage": "https://github.com/shyambhat/InstagramKit",
@@ -13,15 +13,15 @@
   },
   "source": {
     "git": "https://github.com/shyambhat/InstagramKit.git",
-    "tag": "4.0"
+    "tag": "4.1"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "11.0"
   },
   "source_files": "InstagramKit/Classes/**/*",
   "dependencies": {
     "AFNetworking": [
-      "~>3.0"
+
     ]
   },
   "default_subspecs": "InstagramKit-without-UICKeyChainStore",

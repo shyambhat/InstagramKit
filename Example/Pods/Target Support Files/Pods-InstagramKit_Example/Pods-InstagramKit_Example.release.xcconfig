@@ -1,9 +1,11 @@
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking" "${PODS_CONFIGURATION_BUILD_DIR}/InstagramKit" "${PODS_CONFIGURATION_BUILD_DIR}/UICKeyChainStore"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/InstagramKit/InstagramKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/UICKeyChainStore/UICKeyChainStore.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -INSTAGRAMKIT_INCLUDE_UICKEYCHAINSTORE $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/InstagramKit/InstagramKit.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/UICKeyChainStore/UICKeyChainStore.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "InstagramKit" -framework "UICKeyChainStore"
+OTHER_CFLAGS = $(inherited) -INSTAGRAMKIT_INCLUDE_UICKEYCHAINSTORE
+OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "InstagramKit" -framework "Security" -framework "UICKeyChainStore"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
