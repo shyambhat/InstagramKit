@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  A convenience method to extract and save the access code from an URL received in
- *  UIWebView's delegate method - webView: shouldStartLoadWithRequest: navigationType:
+ *  delegate method - webView: shouldStartLoadWithRequest: navigationType:
  *  @param url   URL from the request object.
  *  @param error Error in extracting token, if any.
  *

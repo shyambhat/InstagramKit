@@ -97,18 +97,6 @@ NSURL *authURL = [[InstagramEngine sharedEngine] authorizationURLForScope:scope]
 Once the user grants your app permission, they will be redirected to a url in the form of something like ```http://localhost/#access_token=[access_token]``` and ```[access_token]``` will be split by a period like ```[userID].[rest of access token]```. 
 InstagramEngine includes a helper method to validate this token.
 
-##### UIWebView
-```Objective-C
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-NSError *error;
-if ([[InstagramEngine sharedEngine] receivedValidAccessTokenFromURL:request.URL error:&error]) {
-// success!
-...
-}
-return YES;
-}
 ```
 
 ##### WKWebView
