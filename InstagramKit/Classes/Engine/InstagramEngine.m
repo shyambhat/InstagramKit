@@ -276,19 +276,15 @@
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
     NSString *percentageEscapedPath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-    [self.httpManager GET:percentageEscapedPath
-               parameters:params
-                 progress:nil
-                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                      if (!success) return;
-                      NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                      NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
-                      id modelObject =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
-                      success(modelObject);
-                  }
-                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
-                  }];
+    [self.httpManager GET:percentageEscapedPath parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (!success) return;
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        NSDictionary *dataDictionary = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
+        id modelObject =  (modelClass == [NSDictionary class]) ? [dataDictionary copy] : [[modelClass alloc] initWithInfo:dataDictionary];
+        success(modelObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
+    }];
 }
 
 
@@ -300,31 +296,28 @@
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
     NSString *percentageEscapedPath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-    [self.httpManager GET:percentageEscapedPath
-               parameters:params
-                 progress:nil
-                  success:^(NSURLSessionDataTask *task, id responseObject) {
-                      if (!success) return;
-                      NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-                      
-                      NSDictionary *pInfo = responseDictionary[kPagination];
-                      InstagramPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
-                      
-                      NSArray *responseObjects = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
-                      NSMutableArray *objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
-                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                          [responseObjects enumerateObjectsUsingBlock:^(NSDictionary * dataDictionary, NSUInteger idx, BOOL *stop) {
-                              id modelObject = [[modelClass alloc] initWithInfo:dataDictionary];
-                              [objects addObject:modelObject];
-                          }];
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                              success([objects copy], paginationInfo);
-                          });
-                      });
-                  }
-                  failure:^(NSURLSessionDataTask *task, NSError *error) {
-                      (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
-                  }];
+    
+    [self.httpManager GET:percentageEscapedPath parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (!success) return;
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        
+        NSDictionary *pInfo = responseDictionary[kPagination];
+        InstagramPaginationInfo *paginationInfo = IKNotNull(pInfo)?[[InstagramPaginationInfo alloc] initWithInfo:pInfo andObjectType:modelClass]: nil;
+        
+        NSArray *responseObjects = IKNotNull(responseDictionary[kData]) ? responseDictionary[kData] : nil;
+        NSMutableArray *objects = [NSMutableArray arrayWithCapacity:responseObjects.count];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [responseObjects enumerateObjectsUsingBlock:^(NSDictionary * dataDictionary, NSUInteger idx, BOOL *stop) {
+                id modelObject = [[modelClass alloc] initWithInfo:dataDictionary];
+                [objects addObject:modelObject];
+            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success([objects copy], paginationInfo);
+            });
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
+    }];
 }
 
 - (void)postPath:(NSString *)path
@@ -333,15 +326,12 @@
          failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
-    [self.httpManager POST:path
-                parameters:params
-                  progress:nil
-                   success:^(NSURLSessionDataTask *task, id responseObject) {
-                       (success)? success((NSDictionary *)responseObject) : 0;
-                   }
-                   failure:^(NSURLSessionDataTask *task, NSError *error) {
-                       (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
-                   }];
+    
+    [self.httpManager POST:path parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        (success)? success((NSDictionary *)responseObject) : 0;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
+    }];
 }
 
 
@@ -351,14 +341,14 @@
            failure:(InstagramFailureBlock)failure
 {
     NSDictionary *params = [self dictionaryWithAccessTokenAndParameters:parameters];
-    [self.httpManager DELETE:path
-                  parameters:params
-                     success:^(NSURLSessionDataTask *task, id responseObject) {
-                         (success)? success((NSDictionary *)responseObject) : 0;
-                     }
-                     failure:^(NSURLSessionDataTask *task, NSError *error) {
-                         (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
-                     }];
+    
+    [self.httpManager DELETE:path parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        (success)? success((NSDictionary *)responseObject) : 0;
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        (failure) ? failure(error,((NSHTTPURLResponse*)[task response]).statusCode, [self serializedResponseDataFromError:error]) : 0;
+
+    }];
 }
 
 
